@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Tags on 0x0f0f0f</title>
+    <link>https://0x0f0f0f.github.io/tags/</link>
+    <description>Recent content in Tags on 0x0f0f0f</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>© 2019 — 0x0f0f0f — All rights reserved.</copyright>
+    <lastBuildDate>Wed, 30 Jan 2019 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://0x0f0f0f.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Blog</title>
+      <link>https://0x0f0f0f.github.io/tags/blog/</link>
+      <pubDate>Wed, 30 Jan 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://0x0f0f0f.github.io/tags/blog/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Dwm</title>
+      <link>https://0x0f0f0f.github.io/tags/dwm/</link>
+      <pubDate>Wed, 30 Jan 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://0x0f0f0f.github.io/tags/dwm/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Suckless</title>
+      <link>https://0x0f0f0f.github.io/tags/suckless/</link>
+      <pubDate>Wed, 30 Jan 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://0x0f0f0f.github.io/tags/suckless/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Void Rice</title>
+      <link>https://0x0f0f0f.github.io/tags/void-rice/</link>
+      <pubDate>Wed, 30 Jan 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://0x0f0f0f.github.io/tags/void-rice/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

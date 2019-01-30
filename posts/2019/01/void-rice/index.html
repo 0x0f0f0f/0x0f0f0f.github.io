@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>void-rice | 0x0f0f0f</title>
+
+    <style>body{margin:40px auto;max-width:650px;line-height:1.6;font-size:18px;color:#444;padding:0 10px}h1,h2,h3{line-height:1.2}div.header h1{padding-top:0;padding-bottom:8px;margin-bottom:24px;font-size:18px;font-weight:400;border-bottom:1px solid}.header-menu{float:right}ul.pagination{list-style-type:none;text-align:center;padding:0}ul.pagination>li{padding:0 8px;display:inline-block}div.footer{border-top:1px solid;text-align:center}img{max-width:100%;max-height:100%;display:block;margin-left:auto;margin-right:auto}</style>
+
+    
+</head>
+
+<body>
+<div class="header">
+    <h1>
+        <a href="/">0x0f0f0f</a>
+        <div class="header-menu">
+            <a href="/posts/">blog</a>
+            <a href="/about/">about</a>
+            <a href="/contact/">contact</a>
+        </div>
+    </h1>
+</div>
+<div id="content">
+
+<header>
+    <h1>void-rice</h1>
+    
+
+<div class="post-meta">
+    Date &#x5b;
+    <time datetime="2019-01-30">Jan 30, 2019</time>
+    &#x5d;
+    Tags &#x5b;
+    <a href="https://0x0f0f0f.github.io/tags/blog/">blog</a>
+    <a href="https://0x0f0f0f.github.io/tags/void-rice/">void-rice</a>
+    <a href="https://0x0f0f0f.github.io/tags/dwm/">dwm</a>
+    <a href="https://0x0f0f0f.github.io/tags/suckless/">suckless</a>
+    &#x5d;
+</div>
+</header>
+<article>
+    
+
+<p>Hello world.</p>
+
+<p>I&rsquo;ve decided to upload my <a href="https://suckless.org">suckless</a> tools to github, so here&rsquo;s <a href="https://github.com/0x0f0f0f/void-rice">void-rice</a>.
+It can be barely called a <em>desktop environment</em>, but it features most things you need after a fresh install of <a href="https://voidlinux.org">Void Linux</a>.</p>
+
+<p><a href="https://github.com/0x0f0f0f/void-rice"><img src="https://raw.githubusercontent.com/0x0f0f0f/void-rice/master/screenshot.png" alt="Screenshot of void-rice" /></a></p>
+
+<p>I&rsquo;ve been using this setup for the last months and I&rsquo;m really pleased by the native multihead (monitor) support with xrandr.
+<strong>void-rice</strong> features a custom patched version of the <a href="https://dwm.suckless.org">dwm</a> window manager with system tray support and sane
+keybindings, <a href="https://tools.suckless.org/dmenu/">dmenu</a>,
+<a href="https://github.com/drkhsh/slstatus">slstatus</a> for the statusbar info and a patched <a href="https://st.suckless.org/">st</a> terminal emulator.
+It also includes multiple <a href="https://github.com/WernerFP/Shades-of-gray-theme">GTK themes</a> and sane dependencies.</p>
+
+<h2 id="installing">Installing</h2>
+
+<p>The automated install script is made for <a href="https://voidlinux.org/">Void Linux</a> but <strong>void-rice</strong> can be built on most linux distributions by
+installing the corresponding dependencies and manually building and installing each <em>suckless</em> tool.</p>
+
+<p><strong>NOTE</strong>: If the network info is not displayed correctly in the status bar you may need to replace <code>wlan0</code> with your network interface in
+<code>software/slstatus/config.h</code>, rebuild slstatus and restart dwm.</p>
+
+<p>The <code>build.sh</code> script just runs <code>make clean &amp;&amp; make</code> in each one of the directories under &ldquo;software/&rdquo;, while <code>install.sh</code> just runs <code>make 
+install</code> as root.</p>
+
+<p>I will probably remove <code>vpm</code> from the next release to make the <code>install.sh</code> script portable, and I&rsquo;m thinking about packaging this as a Void
+Linux metapackage.</p>
+
+<h2 id="customizing">Customizing</h2>
+
+<p>Simply edit <code>config.h</code> in each program&rsquo;s directory in <code>software/</code></p>
+
+<h2 id="contributing">Contributing</h2>
+
+<p>Feel free to open PRs if you have any improvement in mind!</p>
+
+</article>
+
+
+    </div>
+<div class="footer">
+    
+    
+    <div class="footer-links">
+        <a href="https://github.com/0x0f0f0f">GitHub</a>
+        <a href="/posts/index.xml">RSS</a>
+        <a href="mailto:foo@bar.com">Contact</a>
+        
+    </div>
+    
+
+    
+    
+    <div class="copyright">© 2019 — 0x0f0f0f — All rights reserved.</div>
+    
+</div>
+</body>
+
+</html>
