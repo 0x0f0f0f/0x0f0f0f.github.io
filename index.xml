@@ -7,10 +7,21 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>© 2019 — 0x0f0f0f — All rights reserved.</copyright>
-    <lastBuildDate>Wed, 30 Jan 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 31 Jan 2019 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://0x0f0f0f.github.io/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>darkhttpd : you&#39;ll love static</title>
+      <link>https://0x0f0f0f.github.io/posts/2019/01/darkhttpd-youll-love-static/</link>
+      <pubDate>Thu, 31 Jan 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://0x0f0f0f.github.io/posts/2019/01/darkhttpd-youll-love-static/</guid>
+      <description>darkhttpd - wiki is my favorite web server. It does one thing and it does it good: serve static files correctly.
+The overall best feature I&amp;rsquo;ve found in darkhttpd is that it is configured via command line arguments, so you can wrap the configuration of each one of your web servers into it&amp;rsquo;s runit/OpenRC service!
+Running a static webserver will help you reduce overhead and lets you reduce the resource usage of your services.</description>
+    </item>
     
     <item>
       <title>void-rice</title>

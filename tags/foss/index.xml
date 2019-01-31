@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Posts on 0x0f0f0f</title>
-    <link>https://0x0f0f0f.github.io/posts/</link>
-    <description>Recent content in Posts on 0x0f0f0f</description>
+    <title>Foss on 0x0f0f0f</title>
+    <link>https://0x0f0f0f.github.io/tags/foss/</link>
+    <description>Recent content in Foss on 0x0f0f0f</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>© 2019 — 0x0f0f0f — All rights reserved.</copyright>
     <lastBuildDate>Thu, 31 Jan 2019 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="https://0x0f0f0f.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://0x0f0f0f.github.io/tags/foss/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
