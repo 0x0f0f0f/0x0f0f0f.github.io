@@ -5,6 +5,16 @@
   <url>
     <loc>https://0x0f0f0f.github.io/</loc>
     <lastmod>2019-01-31T00:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="fr"
+                href="https://0x0f0f0f.github.io/fr/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://0x0f0f0f.github.io/"
+                />
   </url>
   
   <url>
@@ -17,6 +27,16 @@
     <loc>https://0x0f0f0f.github.io/tags/</loc>
     <lastmod>2019-01-31T00:00:00+00:00</lastmod>
     <priority>0</priority>
+    <xhtml:link
+                rel="alternate"
+                hreflang="fr"
+                href="https://0x0f0f0f.github.io/fr/tags/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://0x0f0f0f.github.io/tags/"
+                />
   </url>
   
   <url>
@@ -56,6 +76,16 @@
   <url>
     <loc>https://0x0f0f0f.github.io/index.html</loc>
     <priority>0</priority>
+    <xhtml:link
+                rel="alternate"
+                hreflang="fr"
+                href="https://0x0f0f0f.github.io/fr/index.html"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://0x0f0f0f.github.io/index.html"
+                />
   </url>
   
   <url>
@@ -63,7 +93,7 @@
   </url>
   
   <url>
-    <loc>https://0x0f0f0f.github.io/posts/1/01/learning-haskell-by-writing-a-scheme/</loc>
+    <loc>https://0x0f0f0f.github.io/contact/</loc>
   </url>
   
 </urlset>

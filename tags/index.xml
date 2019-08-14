@@ -6,14 +6,13 @@
     <description>Recent content in Tags on 0x0f0f0f</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <copyright>© 2019 — 0x0f0f0f — All rights reserved.</copyright>
     <lastBuildDate>Thu, 31 Jan 2019 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://0x0f0f0f.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
-      <title>Foss</title>
+      <title>foss</title>
       <link>https://0x0f0f0f.github.io/tags/foss/</link>
       <pubDate>Thu, 31 Jan 2019 00:00:00 +0000</pubDate>
       
@@ -22,7 +21,7 @@
     </item>
     
     <item>
-      <title>Good Stuff</title>
+      <title>good-stuff</title>
       <link>https://0x0f0f0f.github.io/tags/good-stuff/</link>
       <pubDate>Thu, 31 Jan 2019 00:00:00 +0000</pubDate>
       
@@ -31,7 +30,7 @@
     </item>
     
     <item>
-      <title>Linux</title>
+      <title>linux</title>
       <link>https://0x0f0f0f.github.io/tags/linux/</link>
       <pubDate>Wed, 30 Jan 2019 00:00:00 +0000</pubDate>
       
@@ -40,20 +39,11 @@
     </item>
     
     <item>
-      <title>Suckless</title>
+      <title>suckless</title>
       <link>https://0x0f0f0f.github.io/tags/suckless/</link>
       <pubDate>Wed, 30 Jan 2019 00:00:00 +0000</pubDate>
       
       <guid>https://0x0f0f0f.github.io/tags/suckless/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Void Rice</title>
-      <link>https://0x0f0f0f.github.io/tags/void-rice/</link>
-      <pubDate>Wed, 30 Jan 2019 00:00:00 +0000</pubDate>
-      
-      <guid>https://0x0f0f0f.github.io/tags/void-rice/</guid>
       <description></description>
     </item>
     
