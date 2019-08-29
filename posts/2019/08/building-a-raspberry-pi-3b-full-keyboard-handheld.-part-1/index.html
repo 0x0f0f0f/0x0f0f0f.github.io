@@ -1,22 +1,134 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-    <channel>
-        <title>Posts on 0x0f0f0f</title>
-        <link>https://0x0f0f0f.github.io/posts/</link>
-        <description>Recent content in Posts on 0x0f0f0f</description>
-        <generator>Hugo -- gohugo.io</generator>
-        <language>en-us</language>
-        <lastBuildDate>Wed, 28 Aug 2019 00:00:00 +0000</lastBuildDate>
-        <atom:link href="https://0x0f0f0f.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="author"
+    content="archetypes false false false true content © 2019 — 0x0f0f0f — All rights reserved. data layouts Alessandro C. public true true monokai 20 ">
+<meta name="description"
+    content="Not really surprisingly, it is quite hard to get a mobile Linux handheld device in 2019. You either have to build your own or try to get your hands on the (discontinued) obscure ones. Would computer manufacturers sell you a device that lasts you 10 years? It is not really profitable from the seller&amp;rsquo;s viewpoint.
+Owning a Linux handheld computer can you detox from harmful Social Media experiences; using FOSS also means getting rid of bloatware or walled gardens like Android, iOS, MacOS or Windows." />
+<meta name="keywords" content="" />
+<meta name="robots" content="noodp" />
+<link rel="canonical" href="https://0x0f0f0f.github.io/posts/2019/08/building-a-raspberry-pi-3b-full-keyboard-handheld.-part-1/" />
+
+
+<title>
+    
+    Building a Raspberry Pi 3B&#43; full keyboard handheld. Part 1 :: 0x0f0f0f 
+    
+</title>
+
+
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.2.1/css/flag-icon.min.css" rel="stylesheet"
+    type="text/css">
+
+
+
+<link rel="stylesheet" href="/main.min.0d47b4686e972122bd29f0c1e3dd024a2d541cd8b1b543622520822ea6f4238a.css">
+
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/site.webmanifest">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#252627">
+<link rel="shortcut icon" href="/favicon.ico">
+<meta name="theme-color" content="#252627"><meta itemprop="name" content="Building a Raspberry Pi 3B&#43; full keyboard handheld. Part 1">
+<meta itemprop="description" content="Not really surprisingly, it is quite hard to get a mobile Linux handheld device in 2019. You either have to build your own or try to get your hands on the (discontinued) obscure ones. Would computer manufacturers sell you a device that lasts you 10 years? It is not really profitable from the seller&rsquo;s viewpoint.
+Owning a Linux handheld computer can you detox from harmful Social Media experiences; using FOSS also means getting rid of bloatware or walled gardens like Android, iOS, MacOS or Windows.">
+
+
+<meta itemprop="datePublished" content="2019-08-28T00:00:00&#43;00:00" />
+<meta itemprop="dateModified" content="2019-08-28T00:00:00&#43;00:00" />
+<meta itemprop="wordCount" content="1034">
+
+
+
+<meta itemprop="keywords" content="" />
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://0x0f0f0f.github.io"/>
+
+<meta name="twitter:title" content="Building a Raspberry Pi 3B&#43; full keyboard handheld. Part 1"/>
+<meta name="twitter:description" content="Not really surprisingly, it is quite hard to get a mobile Linux handheld device in 2019. You either have to build your own or try to get your hands on the (discontinued) obscure ones. Would computer manufacturers sell you a device that lasts you 10 years? It is not really profitable from the seller&rsquo;s viewpoint.
+Owning a Linux handheld computer can you detox from harmful Social Media experiences; using FOSS also means getting rid of bloatware or walled gardens like Android, iOS, MacOS or Windows."/>
+
+
+
+
+<meta property="article:published_time" content="2019-08-28 00:00:00 &#43;0000 UTC" />
+
+
+
+
+
+
+
+    </head>
+
+    <body class="dark-theme">
+        <div class="container">
+            <header class="header">
+    <span class="header__inner">
+        <a href="/" style="text-decoration: none;">
+    <div class="logo">
         
-        <item>
-            <title>Building a Raspberry Pi 3B&#43; full keyboard handheld. Part 1</title>
-            <link>https://0x0f0f0f.github.io/posts/2019/08/building-a-raspberry-pi-3b-full-keyboard-handheld.-part-1/</link>
-            <pubDate>Wed, 28 Aug 2019 00:00:00 +0000</pubDate>
+            <span class="logo__mark">></span>
+            <span class="logo__text">$ cd /home/</span>
+            <span class="logo__cursor"></span>
+        
+    </div>
+</a>
+
+
+        <span class="header__right">
             
-            <guid>https://0x0f0f0f.github.io/posts/2019/08/building-a-raspberry-pi-3b-full-keyboard-handheld.-part-1/</guid>
-            <description>Not really surprisingly, it is quite hard to get a mobile Linux handheld device in 2019. You either have to build your own or try to get your hands on the (discontinued) obscure ones. Would computer manufacturers sell you a device that lasts you 10 years? It is not really profitable from the seller&amp;rsquo;s viewpoint.
-Owning a Linux handheld computer can you detox from harmful Social Media experiences; using FOSS also means getting rid of bloatware or walled gardens like Android, iOS, MacOS or Windows.</description>
-            <content type="html"><![CDATA[
+                <nav class="menu">
+    <ul class="menu__inner"><li><a href="https://0x0f0f0f.github.io/about/">About</a></li><li><a href="https://0x0f0f0f.github.io/posts/">Posts</a></li>
+    </ul>
+</nav>
+
+                <span class="menu-trigger">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path d="M0 0h24v24H0z" fill="none"/>
+                        <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/>
+                    </svg>
+                </span>
+            
+
+            <span class="theme-toggle"><svg class="theme-toggler" width="24" height="24" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="M22 41C32.4934 41 41 32.4934 41 22C41 11.5066 32.4934 3 22
+  3C11.5066 3 3 11.5066 3 22C3 32.4934 11.5066 41 22 41ZM7 22C7
+  13.7157 13.7157 7 22 7V37C13.7157 37 7 30.2843 7 22Z"/>
+</svg>
+</span>
+        </span>
+    </span>
+</header>
+
+
+            <div class="content">
+                
+    <main class="post">
+
+        <div class="post-info">
+            <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-clock"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>5 minutes
+
+            
+
+            </p>
+        </div>
+
+        <article>
+            <h1 class="post-title"><a href="https://0x0f0f0f.github.io/posts/2019/08/building-a-raspberry-pi-3b-full-keyboard-handheld.-part-1/">Building a Raspberry Pi 3B+ full keyboard handheld. Part 1</a></h1>
+
+            
+
+            <div class="post-content">
+                
 
 <p>Not really surprisingly, it is quite hard to get a mobile Linux handheld device in 2019.
 You either have to build your own or try to get your hands on the (discontinued) <a href="https://www.reddit.com/r/linux/comments/4biamr/a_list_of_handheldpocket_linux_computers/" target="_blank">obscure ones</a>.
@@ -182,89 +294,82 @@ Xorg will crash if you forget to remove the instructions from <code>99-calibrati
 <li>Talk about software you can run on the handheld</li>
 <li>Add the official RPI camera, a speaker and a microphone</li>
 </ul>
-]]></content>
-        </item>
+
+            </div>
+        </article>
+
+        <hr />
+
+        <div class="post-info">
+
+            <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>1034 Words</p>
+
+            <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>2019-08-28 02:00 &#43;0200</p>
+        </div>
+
         
-        <item>
-            <title>darkhttpd : you&#39;ll love static</title>
-            <link>https://0x0f0f0f.github.io/posts/2019/01/darkhttpd-youll-love-static/</link>
-            <pubDate>Thu, 31 Jan 2019 00:00:00 +0000</pubDate>
+            <div class="pagination">
+                <div class="pagination__title">
+                    <span class="pagination__title-h"></span>
+                    <hr />
+                </div>
+
+                <div class="pagination__buttons">
+                    
+
+                    
+                        <span class="button next">
+                            <a href="https://0x0f0f0f.github.io/posts/2019/01/darkhttpd-youll-love-static/">
+                                <span class="button__text">darkhttpd : you&#39;ll love static</span>
+                                <span class="button__icon">→</span>
+                            </a>
+                        </span>
+                    
+                </div>
+            </div>
+        
+
+        
+    </main>
+
+            </div>
+
             
-            <guid>https://0x0f0f0f.github.io/posts/2019/01/darkhttpd-youll-love-static/</guid>
-            <description>darkhttpd - wiki is my favorite web server. It does one thing and it does it good: serve static files correctly.
-The overall best feature I&amp;rsquo;ve found in darkhttpd is that it is configured via command line arguments, so you can wrap the configuration of each one of your web servers into it&amp;rsquo;s runit/OpenRC service!
-Running a static webserver will help you reduce overhead and lets you reduce the resource usage of your services.</description>
-            <content type="html"><![CDATA[<p><a href="https://unix4lyfe.org/darkhttpd/" target="_blank">darkhttpd</a> - <a href="https://wiki.alpinelinux.org/wiki/Darkhttpd" target="_blank">wiki</a> is my
-favorite web server. It does one thing and it does it good: serve static files correctly.</p>
-
-<p>The overall best feature I&rsquo;ve found in <strong>darkhttpd</strong> is that it is configured via command line arguments, so you can wrap
-the configuration of each one of your web servers into it&rsquo;s <strong>runit/OpenRC</strong> service!</p>
-
-<p>Running a static webserver will help you reduce overhead and lets you reduce the resource usage of your services.</p>
-
-<p>You can easily install it by running:</p>
-
-<p><strong>In <a href="https://voidlinux.org" target="_blank">Void Linux</a>:</strong></p>
-
-<pre><code># xbps-install -S darkhttpd
-</code></pre>
-
-<p><strong>In <a href="https://alpinelinux.org" target="_blank">Alpine Linux</a>:</strong></p>
-
-<pre><code># apk add darkhttpd
-</code></pre>
-]]></content>
-        </item>
-        
-        <item>
-            <title>void-rice</title>
-            <link>https://0x0f0f0f.github.io/posts/2019/01/void-rice/</link>
-            <pubDate>Wed, 30 Jan 2019 00:00:00 +0000</pubDate>
+                <footer class="footer">
+    <div class="footer__inner">
+        <div class="footer__content">
+            <span>&copy; 2019</span>
             
-            <guid>https://0x0f0f0f.github.io/posts/2019/01/void-rice/</guid>
-            <description>Hello world.
-I&amp;rsquo;ve decided to upload my suckless tools to github, so here&amp;rsquo;s void-rice. It can be barely called a desktop environment, but it features most things you need after a fresh install of Void Linux.
- 
-I&amp;rsquo;ve been using this setup for the last months and I&amp;rsquo;m really pleased by the native multihead (monitor) support with xrandr. void-rice features a custom patched version of the dwm window manager with system tray support and sane keybindings, dmenu, slstatus for the statusbar info and a patched st terminal emulator.</description>
-            <content type="html"><![CDATA[
+                <span><a href="https://0x0f0f0f.github.io">Alessandro C.</a></span>
+            
+            <span></span>
+            <span> <a href="https://0x0f0f0f.github.io/posts/index.xml" target="_blank" title="rss"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-rss"><path d="M4 11a9 9 0 0 1 9 9"></path><path d="M4 4a16 16 0 0 1 16 16"></path><circle cx="5" cy="19" r="1"></circle></svg></a></span>
+        </div>
+    </div>
+    <div class="footer__inner">
+        <div class="footer__content">
 
-<p>Hello world.</p>
+        </div>
+    </div>
+    <div class="footer__inner">
+        <div class="footer__content">
+            <span>Powered by <a href="http://gohugo.io">Hugo</a></span>
+            <span>Made with &#10084; by <a href="https://github.com/rhazdon">rhazdon</a></span>
+        </div>
+    </div>
+</footer>
 
-<p>I&rsquo;ve decided to upload my <a href="https://suckless.org" target="_blank">suckless</a> tools to github, so here&rsquo;s <a href="https://github.com/0x0f0f0f/void-rice" target="_blank">void-rice</a>.
-It can be barely called a <em>desktop environment</em>, but it features most things you need after a fresh install of <a href="https://voidlinux.org" target="_blank">Void Linux</a>.</p>
+            
+        </div>
 
-<p><a href="https://github.com/0x0f0f0f/void-rice" target="_blank"><img src="https://raw.githubusercontent.com/0x0f0f0f/void-rice/master/screenshots/01.png" alt="Screenshot of void-rice" /></a>
-<a href="https://github.com/0x0f0f0f/void-rice" target="_blank"><img src="https://raw.githubusercontent.com/0x0f0f0f/void-rice/master/screenshots/02.png" alt="Screenshot of void-rice" /></a></p>
-
-<p>I&rsquo;ve been using this setup for the last months and I&rsquo;m really pleased by the native multihead (monitor) support with xrandr.
-<strong>void-rice</strong> features a custom patched version of the <a href="https://dwm.suckless.org" target="_blank">dwm</a> window manager with system tray support and sane
-keybindings, <a href="https://tools.suckless.org/dmenu/" target="_blank">dmenu</a>,
-<a href="https://github.com/drkhsh/slstatus" target="_blank">slstatus</a> for the statusbar info and a patched <a href="https://st.suckless.org/" target="_blank">st</a> terminal emulator.
-It also includes multiple <a href="https://github.com/WernerFP/Shades-of-gray-theme" target="_blank">GTK themes</a> and sane dependencies.</p>
-
-<h2 id="installing">Installing</h2>
-
-<p>The automated install script is made for <a href="https://voidlinux.org/" target="_blank">Void Linux</a> but <strong>void-rice</strong> can be built on most linux distributions by
-installing the corresponding dependencies and manually building and installing each <em>suckless</em> tool.</p>
-
-<p><strong>NOTE</strong>: If the network info is not displayed correctly in the status bar you may need to replace <code>wlan0</code> with your network interface in
-<code>software/slstatus/config.h</code>, rebuild slstatus and restart dwm.</p>
-
-<p>The <code>build.sh</code> script just runs <code>make clean &amp;&amp; make</code> under each program&rsquo;s directory, while <code>install.sh</code> just runs <code>make 
-install</code> as root.</p>
-
-<p>I will probably remove <code>vpm</code> from the next release to make the <code>install.sh</code> script portable, and I&rsquo;m thinking about packaging this as a Void
-Linux metapackage.</p>
-
-<h2 id="customizing">Customizing</h2>
-
-<p>Simply edit <code>config.h</code> in each program&rsquo;s directory.</p>
-
-<h2 id="contributing">Contributing</h2>
-
-<p>Feel free to open PRs if you have any improvement in mind!</p>
-]]></content>
-        </item>
         
-    </channel>
-</rss>
+
+
+
+
+<script type="text/javascript" src="/bundle.min.4c3fb12a087ceed4a52cb5d57068a9795c7069617a01ca70f788052ad66e1791779e6c72686e1dc0ca13dc03b0203204b6566bb0dd1ee80de2b7ff4d8fe53db2.js" integrity="sha512-TD&#43;xKgh87tSlLLXVcGipeVxwaWF6Acpw94gFKtZuF5F3nmxyaG4dwMoT3AOwIDIEtlZrsN0e6A3it/9Nj&#43;U9sg=="></script>
+
+
+
+    </body>
+</html>

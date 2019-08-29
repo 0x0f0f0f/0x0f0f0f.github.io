@@ -1,15 +1,28 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>986895 on 0x0f0f0f</title>
-    <link>https://0x0f0f0f.github.io/</link>
-    <description>Recent content in 986895 on 0x0f0f0f</description>
+    <title>0x0f0f0f</title>
+    <link>https://0x0f0f0f.github.io/index.html</link>
+    <description>Recent content on 0x0f0f0f</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 31 Jan 2019 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://0x0f0f0f.github.io/index.xml" rel="self" type="application/rss+xml" />
     
+    
+  </channel>
+</rss>x.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Building a Raspberry Pi 3B&#43; full keyboard handheld. Part 1</title>
+      <link>https://0x0f0f0f.github.io/posts/2019/08/building-a-raspberry-pi-3b-full-keyboard-handheld.-part-1/</link>
+      <pubDate>Wed, 28 Aug 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://0x0f0f0f.github.io/posts/2019/08/building-a-raspberry-pi-3b-full-keyboard-handheld.-part-1/</guid>
+      <description>Not really surprisingly, it is quite hard to get a mobile Linux handheld device in 2019. You either have to build your own or try to get your hands on the (discontinued) obscure ones. Would computer manufacturers sell you a device that lasts you 10 years? It is not really profitable from the seller&amp;rsquo;s viewpoint.
+Owning a Linux handheld computer can you detox from harmful Social Media experiences; using FOSS also means getting rid of bloatware or walled gardens like Android, iOS, MacOS or Windows.</description>
+    </item>
     
     <item>
       <title>darkhttpd : you&#39;ll love static</title>
