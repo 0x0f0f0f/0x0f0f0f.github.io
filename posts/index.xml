@@ -216,55 +216,5 @@ the configuration of each one of your web servers into it&rsquo;s <strong>runit/
 ]]></content>
         </item>
         
-        <item>
-            <title>void-rice</title>
-            <link>https://0x0f0f0f.github.io/posts/2019/01/void-rice/</link>
-            <pubDate>Wed, 30 Jan 2019 00:00:00 +0000</pubDate>
-            
-            <guid>https://0x0f0f0f.github.io/posts/2019/01/void-rice/</guid>
-            <description>Hello world.
-I&amp;rsquo;ve decided to upload my suckless tools to github, so here&amp;rsquo;s void-rice. It can be barely called a desktop environment, but it features most things you need after a fresh install of Void Linux.
- 
-I&amp;rsquo;ve been using this setup for the last months and I&amp;rsquo;m really pleased by the native multihead (monitor) support with xrandr. void-rice features a custom patched version of the dwm window manager with system tray support and sane keybindings, dmenu, slstatus for the statusbar info and a patched st terminal emulator.</description>
-            <content type="html"><![CDATA[
-
-<p>Hello world.</p>
-
-<p>I&rsquo;ve decided to upload my <a href="https://suckless.org" target="_blank">suckless</a> tools to github, so here&rsquo;s <a href="https://github.com/0x0f0f0f/void-rice" target="_blank">void-rice</a>.
-It can be barely called a <em>desktop environment</em>, but it features most things you need after a fresh install of <a href="https://voidlinux.org" target="_blank">Void Linux</a>.</p>
-
-<p><a href="https://github.com/0x0f0f0f/void-rice" target="_blank"><img src="https://raw.githubusercontent.com/0x0f0f0f/void-rice/master/screenshots/01.png" alt="Screenshot of void-rice" /></a>
-<a href="https://github.com/0x0f0f0f/void-rice" target="_blank"><img src="https://raw.githubusercontent.com/0x0f0f0f/void-rice/master/screenshots/02.png" alt="Screenshot of void-rice" /></a></p>
-
-<p>I&rsquo;ve been using this setup for the last months and I&rsquo;m really pleased by the native multihead (monitor) support with xrandr.
-<strong>void-rice</strong> features a custom patched version of the <a href="https://dwm.suckless.org" target="_blank">dwm</a> window manager with system tray support and sane
-keybindings, <a href="https://tools.suckless.org/dmenu/" target="_blank">dmenu</a>,
-<a href="https://github.com/drkhsh/slstatus" target="_blank">slstatus</a> for the statusbar info and a patched <a href="https://st.suckless.org/" target="_blank">st</a> terminal emulator.
-It also includes multiple <a href="https://github.com/WernerFP/Shades-of-gray-theme" target="_blank">GTK themes</a> and sane dependencies.</p>
-
-<h2 id="installing">Installing</h2>
-
-<p>The automated install script is made for <a href="https://voidlinux.org/" target="_blank">Void Linux</a> but <strong>void-rice</strong> can be built on most linux distributions by
-installing the corresponding dependencies and manually building and installing each <em>suckless</em> tool.</p>
-
-<p><strong>NOTE</strong>: If the network info is not displayed correctly in the status bar you may need to replace <code>wlan0</code> with your network interface in
-<code>software/slstatus/config.h</code>, rebuild slstatus and restart dwm.</p>
-
-<p>The <code>build.sh</code> script just runs <code>make clean &amp;&amp; make</code> under each program&rsquo;s directory, while <code>install.sh</code> just runs <code>make 
-install</code> as root.</p>
-
-<p>I will probably remove <code>vpm</code> from the next release to make the <code>install.sh</code> script portable, and I&rsquo;m thinking about packaging this as a Void
-Linux metapackage.</p>
-
-<h2 id="customizing">Customizing</h2>
-
-<p>Simply edit <code>config.h</code> in each program&rsquo;s directory.</p>
-
-<h2 id="contributing">Contributing</h2>
-
-<p>Feel free to open PRs if you have any improvement in mind!</p>
-]]></content>
-        </item>
-        
     </channel>
 </rss>

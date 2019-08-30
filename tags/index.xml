@@ -29,23 +29,5 @@
       <description></description>
     </item>
     
-    <item>
-      <title>linux</title>
-      <link>https://0x0f0f0f.github.io/tags/linux/</link>
-      <pubDate>Wed, 30 Jan 2019 00:00:00 +0000</pubDate>
-      
-      <guid>https://0x0f0f0f.github.io/tags/linux/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>suckless</title>
-      <link>https://0x0f0f0f.github.io/tags/suckless/</link>
-      <pubDate>Wed, 30 Jan 2019 00:00:00 +0000</pubDate>
-      
-      <guid>https://0x0f0f0f.github.io/tags/suckless/</guid>
-      <description></description>
-    </item>
-    
   </channel>
 </rss>

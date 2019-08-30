@@ -33,18 +33,6 @@ Running a static webserver will help you reduce overhead and lets you reduce the
     </item>
     
     <item>
-      <title>void-rice</title>
-      <link>https://0x0f0f0f.github.io/posts/2019/01/void-rice/</link>
-      <pubDate>Wed, 30 Jan 2019 00:00:00 +0000</pubDate>
-      
-      <guid>https://0x0f0f0f.github.io/posts/2019/01/void-rice/</guid>
-      <description>Hello world.
-I&amp;rsquo;ve decided to upload my suckless tools to github, so here&amp;rsquo;s void-rice. It can be barely called a desktop environment, but it features most things you need after a fresh install of Void Linux.
- 
-I&amp;rsquo;ve been using this setup for the last months and I&amp;rsquo;m really pleased by the native multihead (monitor) support with xrandr. void-rice features a custom patched version of the dwm window manager with system tray support and sane keybindings, dmenu, slstatus for the statusbar info and a patched st terminal emulator.</description>
-    </item>
-    
-    <item>
       <title>About</title>
       <link>https://0x0f0f0f.github.io/about/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
