@@ -1,14 +1,26 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>0x0f0f0f</title>
-    <link>https://0x0f0f0f.github.io/index.html</link>
-    <description>Recent content on 0x0f0f0f</description>
+    <title>986895 on 0x0f0f0f</title>
+    <link>https://0x0f0f0f.github.io/</link>
+    <description>Recent content in 986895 on 0x0f0f0f</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     
 	<atom:link href="https://0x0f0f0f.github.io/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>About</title>
+      <link>https://0x0f0f0f.github.io/about/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://0x0f0f0f.github.io/about/</guid>
+      <description>0x0f0f0f I&amp;rsquo;m Alessandro, Computer Science student and programmer.
+I&amp;rsquo;ve worked to some full stack projects using different stacks, but I mostly use Node.JS for REST APIs. I&amp;rsquo;ve made some arcade games and I tinker a lot with anything UNIX. Right now I&amp;rsquo;m learning Haskell and I&amp;rsquo;m making a small LISP interpreter.
+Find my code at github.com/0x0f0f0f
+You can send me an email any time at sudo-woodo3 AT protonmail DOT com</description>
+    </item>
     
   </channel>
 </rss>
