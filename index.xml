@@ -6,9 +6,42 @@
     <description>Recent content in 986895 on 0x0f0f0f</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
+    <lastBuildDate>Wed, 28 Aug 2019 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://0x0f0f0f.github.io/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Building a Raspberry Pi 3B&#43; full keyboard handheld. Part 1</title>
+      <link>https://0x0f0f0f.github.io/posts/2019/08/building-a-raspberry-pi-3b-full-keyboard-handheld.-part-1/</link>
+      <pubDate>Wed, 28 Aug 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://0x0f0f0f.github.io/posts/2019/08/building-a-raspberry-pi-3b-full-keyboard-handheld.-part-1/</guid>
+      <description>Not really surprisingly, it is quite hard to get a mobile Linux handheld device in 2019. You either have to build your own or try to get your hands on the (discontinued) obscure ones. Would computer manufacturers sell you a device that lasts you 10 years? It is not really profitable from the seller&amp;rsquo;s point of view.
+Owning a Linux handheld computer can help you detox from harmful Social Media experiences; using FOSS also means getting rid of bloatware or walled gardens like Android, iOS, MacOS or Windows.</description>
+    </item>
+    
+    <item>
+      <title>Building a Raspberry Pi 3B&#43; full keyboard handheld. Part 2</title>
+      <link>https://0x0f0f0f.github.io/posts/2019/08/building-a-raspberry-pi-3b-full-keyboard-handheld.-part-2/</link>
+      <pubDate>Wed, 28 Aug 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://0x0f0f0f.github.io/posts/2019/08/building-a-raspberry-pi-3b-full-keyboard-handheld.-part-2/</guid>
+      <description>After the first write-up encountered discrete success on hackernews, The Raspberry Pi 3B+ full keyboard handheld is finally ready! (A premise: it is really ugly)
+Huge thanks to Anthony DiGirolamo for providing us with the Open Sourced case and keyboard PCB ❤️
+Completing the build What was left to do in Part 1 was assembling all the components together inside the 3D-printed case. I&amp;rsquo;ve used M2.5 screws to secure all the parts together and I had to solder the wires connecting the keyboard and Adafruit Powerboost to the Pi.</description>
+    </item>
+    
+    <item>
+      <title>darkhttpd : you&#39;ll love static</title>
+      <link>https://0x0f0f0f.github.io/posts/2019/01/darkhttpd-youll-love-static/</link>
+      <pubDate>Thu, 31 Jan 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://0x0f0f0f.github.io/posts/2019/01/darkhttpd-youll-love-static/</guid>
+      <description>darkhttpd - wiki is my favorite web server. It does one thing and it does it good: serve static files correctly.
+The overall best feature I&amp;rsquo;ve found in darkhttpd is that it is configured via command line arguments, so you can wrap the configuration of each one of your web servers into it&amp;rsquo;s runit/OpenRC service!
+Running a static webserver will help you reduce overhead and lets you reduce the resource usage of your services.</description>
+    </item>
     
     <item>
       <title>About</title>
