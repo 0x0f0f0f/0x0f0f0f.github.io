@@ -14,13 +14,13 @@
             <pubDate>Fri, 27 Sep 2019 00:00:00 +0000</pubDate>
             
             <guid>https://0x0f0f0f.github.io/posts/2019/09/building-a-raspberry-pi-3b-full-keyboard-handheld.-part-2/</guid>
-            <description>After the first write-up encountered discrete success on hackernews, The Raspberry Pi 3B+ full keyboard handheld is finally ready! (A premise: it is really ugly)
+            <description>After the first write-up encountered discrete success on hackernews, The Raspberry Pi 3B+ full keyboard handheld is finally ready! (A premise: it is really ugly).
 Huge thanks to Anthony DiGirolamo for providing us with the Open Sourced case and keyboard PCB ❤️
 Completing the build What was left to do in Part 1 was assembling all the components together inside the 3D-printed case. I&amp;rsquo;ve used M2.5 screws to secure all the parts together and I had to solder the wires connecting the keyboard and Adafruit Powerboost to the Pi.</description>
             <content type="html"><![CDATA[
 
 <p>After the <a href="/posts/2019/08/building-a-raspberry-pi-3b-full-keyboard-handheld.-part-1/">first write-up</a>
-encountered discrete success on <a href="https://news.ycombinator.com/item?id=20830037" target="_blank">hackernews</a>, The Raspberry Pi 3B+ full keyboard handheld is finally ready! (A premise: it is <strong>really</strong> ugly)</p>
+encountered discrete success on <a href="https://news.ycombinator.com/item?id=20830037" target="_blank">hackernews</a>, The Raspberry Pi 3B+ full keyboard handheld is finally ready! (A premise: it is <strong>really</strong> ugly).</p>
 
 <p>Huge thanks to Anthony DiGirolamo for providing us with the <strong>Open Sourced</strong> <a href="https://github.com/AnthonyDiGirolamo/teensy-thumb-keyboard" target="_blank">case and keyboard PCB</a> ❤️</p>
 
