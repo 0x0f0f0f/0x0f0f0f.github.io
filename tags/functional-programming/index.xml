@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>functional programming on 0x0f0f0f</title>
+    <link>https://0x0f0f0f.github.io/tags/functional-programming/</link>
+    <description>Recent content in functional programming on 0x0f0f0f</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sat, 28 Sep 2019 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://0x0f0f0f.github.io/tags/functional-programming/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Learn Functional Programming by writing a Scheme in Haskell</title>
+      <link>https://0x0f0f0f.github.io/posts/2019/09/learn-functional-programming-by-writing-a-scheme-in-haskell/</link>
+      <pubDate>Sat, 28 Sep 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://0x0f0f0f.github.io/posts/2019/09/learn-functional-programming-by-writing-a-scheme-in-haskell/</guid>
+      <description>How to make your first functional programming language. A book review. After taking an introductory functional programming course last year I have decided to dive into Functional Programming in a challenging way.
+At the beginning of the summer I&amp;rsquo;ve asked an experienced friend some ideas for a summer project. He suggested me to implement R5RS Scheme (Revised(5) Report on the Algorithmic Language Scheme) in Haskell. Scheme is called a dialect of LISP (LIst PRocessor), a family of programming languages with a long history, famous for its fully parenthesized prefix notation.</description>
+    </item>
+    
+  </channel>
+</rss>

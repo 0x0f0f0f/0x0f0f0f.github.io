@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="author"
+    content="archetypes false false false true content © 2019 — 0x0f0f0f — All rights reserved. data layouts Alessandro C. public true true monokai 20 ">
+<meta name="description"
+    content="How to make your first functional programming language. A book review. After taking an introductory functional programming course last year I have decided to dive into Functional Programming in a challenging way.
+At the beginning of the summer I&amp;rsquo;ve asked an experienced friend some ideas for a summer project. He suggested me to implement R5RS Scheme (Revised(5) Report on the Algorithmic Language Scheme) in Haskell. Scheme is called a dialect of LISP (LIst PRocessor), a family of programming languages with a long history, famous for its fully parenthesized prefix notation." />
+<meta name="keywords" content="" />
+<meta name="robots" content="noodp" />
+<link rel="canonical" href="https://0x0f0f0f.github.io/posts/2019/09/learn-functional-programming-by-writing-a-scheme-in-haskell/" />
+
+
+<title>
+    
+    Learn Functional Programming by writing a Scheme in Haskell :: 0x0f0f0f 
+    
+</title>
+
+
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.2.1/css/flag-icon.min.css" rel="stylesheet"
+    type="text/css">
+
+
+
+<link rel="stylesheet" href="/main.min.0d47b4686e972122bd29f0c1e3dd024a2d541cd8b1b543622520822ea6f4238a.css">
+
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/site.webmanifest">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#252627">
+<link rel="shortcut icon" href="/favicon.ico">
+<meta name="theme-color" content="#252627"><meta itemprop="name" content="Learn Functional Programming by writing a Scheme in Haskell">
+<meta itemprop="description" content="How to make your first functional programming language. A book review. After taking an introductory functional programming course last year I have decided to dive into Functional Programming in a challenging way.
+At the beginning of the summer I&rsquo;ve asked an experienced friend some ideas for a summer project. He suggested me to implement R5RS Scheme (Revised(5) Report on the Algorithmic Language Scheme) in Haskell. Scheme is called a dialect of LISP (LIst PRocessor), a family of programming languages with a long history, famous for its fully parenthesized prefix notation.">
+
+
+<meta itemprop="datePublished" content="2019-09-28T00:00:00&#43;00:00" />
+<meta itemprop="dateModified" content="2019-09-28T00:00:00&#43;00:00" />
+<meta itemprop="wordCount" content="1031">
+
+
+
+<meta itemprop="keywords" content="functional programming," />
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://0x0f0f0f.github.io"/>
+
+<meta name="twitter:title" content="Learn Functional Programming by writing a Scheme in Haskell"/>
+<meta name="twitter:description" content="How to make your first functional programming language. A book review. After taking an introductory functional programming course last year I have decided to dive into Functional Programming in a challenging way.
+At the beginning of the summer I&rsquo;ve asked an experienced friend some ideas for a summer project. He suggested me to implement R5RS Scheme (Revised(5) Report on the Algorithmic Language Scheme) in Haskell. Scheme is called a dialect of LISP (LIst PRocessor), a family of programming languages with a long history, famous for its fully parenthesized prefix notation."/>
+
+
+
+
+<meta property="article:published_time" content="2019-09-28 00:00:00 &#43;0000 UTC" />
+
+
+
+
+
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({
+          google_ad_client: "ca-pub-8568271456731999",
+          enable_page_level_ads: true
+     });
+</script>
+
+    </head>
+
+    <body class="dark-theme">
+        <div class="container">
+            <header class="header">
+    <span class="header__inner">
+        <a href="/" style="text-decoration: none;">
+    <div class="logo">
+        
+            <span class="logo__mark">></span>
+            <span class="logo__text">$ 0x0f0f0f</span>
+            <span class="logo__cursor"></span>
+        
+    </div>
+</a>
+
+
+        <span class="header__right">
+            
+                <nav class="menu">
+    <ul class="menu__inner"><li><a href="https://0x0f0f0f.github.io/about/">About</a></li><li><a href="https://0x0f0f0f.github.io/posts/">Posts</a></li>
+    </ul>
+</nav>
+
+                <span class="menu-trigger">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path d="M0 0h24v24H0z" fill="none"/>
+                        <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/>
+                    </svg>
+                </span>
+            
+
+            <span class="theme-toggle unselectable"><svg class="theme-toggler" width="24" height="24" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="M22 41C32.4934 41 41 32.4934 41 22C41 11.5066 32.4934 3 22
+  3C11.5066 3 3 11.5066 3 22C3 32.4934 11.5066 41 22 41ZM7 22C7
+  13.7157 13.7157 7 22 7V37C13.7157 37 7 30.2843 7 22Z"/>
+</svg>
+</span>
+        </span>
+    </span>
+</header>
+
+
+            <div class="content">
+                
+    <main class="post">
+
+        <div class="post-info">
+            <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-clock"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>5 minutes
+
+            
+
+            </p>
+        </div>
+
+        <article>
+            <h1 class="post-title"><a href="https://0x0f0f0f.github.io/posts/2019/09/learn-functional-programming-by-writing-a-scheme-in-haskell/">Learn Functional Programming by writing a Scheme in Haskell</a></h1>
+
+            
+
+            <div class="post-content">
+                
+
+<h2 id="how-to-make-your-first-functional-programming-language-a-book-review">How to make your first functional programming language. A book review.</h2>
+
+<p>After taking an introductory functional programming course last year I have decided to dive into Functional Programming in a challenging way.</p>
+
+<p>At the beginning of the summer I&rsquo;ve asked an experienced friend some ideas for a summer project. He suggested me to implement <strong>R5RS Scheme</strong> (Revised(5) Report on the Algorithmic Language Scheme) in Haskell. Scheme is called a dialect of LISP (<strong>LI</strong>st <strong>PR</strong>ocessor), a family of programming languages with a long history, famous for its fully parenthesized <a href="https://en.wikipedia.org/wiki/Polish_notation" target="_blank">prefix notation</a>. LISP  showed computer scientists in the 60s the importance of <a href="https://en.wikipedia.org/wiki/Lambda_calculus" target="_blank">λ (lambda) calculus</a> and was originally specified in 1958 by John McCarthy, one of the founders of the Stanford AI Laboratory.</p>
+
+<p>I&rsquo;ve decided to call my Scheme implementation <strong>yasih</strong>, or <strong>Y</strong>et <strong>A</strong>nother <strong>S</strong>cheme <strong>I</strong>n <strong>H</strong>askell, since implementing a Scheme in Haskell is a popular exercise alongwise Computer Scientists. You can find the code in the <a href="https://github.com/0x0f0f0f/yasih" target="_blank">yasih repository</a> on my GitHub profile.</p>
+
+<p>At the time I only knew a little bit of OCaML and had some basic knowledge about λ-calculus and LISP, but I was itching for more knowledge about the internals and the history of functional programming. After a bit of googling I&rsquo;ve stumbled into the excellent book <a href="https://en.wikibooks.org/wiki/Write_Yourself_a_Scheme_in_48_Hours/" target="_blank">Write Yourself a Scheme in 48 Hours</a> and started diving into it.</p>
+
+<p>The book is raw, it was refined by the WikiBooks community after the original version was open sourced, hence it is still incomplete. Each chapter explains the interpreter code step by step and also presents you with some exercises. At the beginning, it goes straight to parsing and assumes that you have some (basic) functional programming background.</p>
+
+<p>Some Haskell concepts aren&rsquo;t explained clearly, while Scheme concepts are explained in much more detail. I had to do a lot of googling while reading each chapter. I also followed the <a href="https://groups.csail.mit.edu/mac/ftpdir/scheme-reports/r5rs-html/r5rs_toc.html" target="_blank">MIT R5RS spec</a> and the <a href="https://www.gnu.org/software/guile/docs/docs-1.6/guile-ref/R5RS-Index.html" target="_blank">Guile Scheme reference manual</a>. <a href="https://www.gnu.org/software/guile/" target="_blank">Guile</a> is the official scripting language of the GNU project and is a really great and fast implementation of the Scheme language. I&rsquo;ve used it in parallel to my Scheme to test the correctness of the primitives I&rsquo;ve implemented in my Scheme.</p>
+
+<p>A simple LISP interpreter is composed by 3 components:</p>
+
+<p>The first one, the <strong>parser</strong> is the section of interpreter that is responsible of reading each character, line-by-line, of a text file received in input (the program) and transform it into an <strong>AST</strong> (Abstract Syntax Tree). The parser also performs some syntactical correctness checks.
+Here&rsquo;s an example of parsing a typical LISP parenthesized expression using the Parsec parser combinator library in Haskell:</p>
+
+<pre><code class="language-haskell">parseExpr :: Parser LispVal
+parseExpr = do
+    expr &lt;- try parseComplex
+        &lt;|&gt; try parseRatio
+        &lt;|&gt; try parseFloat
+        &lt;|&gt; try parseNumber
+        &lt;|&gt; try parseAtom
+        &lt;|&gt; parseString
+        &lt;|&gt; try parseBool
+        &lt;|&gt; try parseCharacter
+        &lt;|&gt; try parseQuoted
+        &lt;|&gt; try parseQuasiQuoted
+        &lt;|&gt; try parseUnQuote
+        &lt;|&gt; try parseVector
+        &lt;|&gt; try parseParens
+    skipMany parseComment
+    return expr
+</code></pre>
+
+<p>The <strong>AST</strong> then gets evalauted by the <strong>Evaluator</strong>. The <strong>Evaluator</strong> receives in input an <strong>AST</strong> from the parser, executes semantical correctness checks (malformed forms, wrong argument numbers, unbound variables) and then recursively applies form evaluation and function calls, &ldquo;executing&rdquo; the AST expression and returning a value. Evaluation steps in λ-calculus are called β-reduction (applying functions to their arguments) and η-conversion (two functions are the same if and only if they give the same result for all arguments).</p>
+
+<p>(The <a href="https://www.flickr.com/photos/71827087@N00/124183635/" target="_blank">April 1985 issue</a> of &ldquo;bit&rdquo;, a Japanese computer science magazine, which an introduction to Common Lisp.)</p>
+
+<p><img src="/posts/images/bitcover.jpg" alt="Bit 1985 Cover" /></p>
+
+<p>An interesting fact about the classical untyped λ-calculus is that it provides a <a href="https://en.wikipedia.org/wiki/Fixed-point_combinator" target="_blank">fixed-point combinator</a> called an <strong>Y-Combinator</strong> that can be used to implement <a href="https://en.wikipedia.org/wiki/Curry%27s_paradox" target="_blank">Curry&rsquo;s Paradox</a>. It was first implemented by the logician <strong>Haskell Curry</strong> (which Haskell took its name from).</p>
+
+<p>Here&rsquo;s the Y-Combinator in pure lambda calculus notation. You can read more about <a href="https://sookocheff.com/post/fp/recursive-lambda-functions/" target="_blank">Recursion in λ-calculus</a>.</p>
+
+<pre><code>λf.(λx.(f (x x)) λx.(f (x x)))
+</code></pre>
+
+<p>Here&rsquo;s the Y-Combinator in the Scheme language</p>
+
+<pre><code class="language-lisp">(lambda (f) ((lambda (g) (g g)) 
+    (lambda (g) (f (lambda a (apply (g g) a))))))) 
+</code></pre>
+
+<p>From Wikipedia: &ldquo;Applied to a function with one variable the Y combinator usually does not terminate. More interesting results are obtained by applying the Y combinator to functions of two or more variables. The second variable may be used as a counter, or index. The resulting function behaves like a while or a for loop in an imperative language.</p>
+
+<p>Used in this way the Y combinator implements simple recursion. In the lambda calculus it is not possible to refer to the definition of a function in a function body. Recursion may only be achieved by passing in a function as a parameter. The Y combinator demonstrates this style of programming.&rdquo;</p>
+
+<p>(Fun fact: <a href="https://news.ycombinator.com/" target="_blank">Hacker News</a> is run by Paul Graham&rsquo;s investment fund and startup incubator, Y Combinator, that takes the name from Curry&rsquo;s paradoxical Y-Combinator)</p>
+
+<p>The final part of the interpreter, the <strong>REPL</strong> (Read Eval Print Loop) is the glue between the user and the interpreter. It is a simple program that reads line by line from a file or a terminal interface and evaluates each statement, prints a result and loops back to reading.</p>
+
+<p>Writing and making the evaluator was (and still is) the hardest part of making yasih Scheme. While testing a simple program, I&rsquo;ve encountered a cryptical error:</p>
+
+<pre><code>unbound variable: if
+</code></pre>
+
+<p>After hours of debugging I&rsquo;ve discovered that the error was originating from the fact that I was mishandling evaluation of the <code>if</code> form, and I was lacking an <code>eval</code> pattern matching case to evaluate an <code>if</code> expression without the <code>else</code> branch.</p>
+
+<p><strong>yasih</strong> is not ready for production at all. On the roadmap there&rsquo;s finishing implementing the R5RS standard, which includes adding <code>defmacro</code>, hygienic macros and some fixes related to character and REPL line parsing.
+Here are some of the first examples I tested as soon as yasih reached a working status.</p>
+
+<p>Fibonacci Number</p>
+
+<pre><code class="language-lisp">(define (fib-rec n)
+  (if (&lt; n 2)
+      n
+      (+ (fib-rec (- n 1))
+         (fib-rec (- n 2)))))
+</code></pre>
+
+<p>Hanoi Tower Algorithm</p>
+
+<pre><code class="language-lisp">(define (hanoi n a b c)
+  (if (&gt; n 0)
+    (begin
+      (hanoi (- n 1) a c b)
+      (display &quot;Move disk from pole &quot;)
+      (display a)
+      (display &quot; to pole &quot;)
+      (display b)
+      (newline)
+      (hanoi (- n 1) c b a))))
+
+(hanoi 4 1 2 3)
+</code></pre>
+
+            </div>
+        </article>
+
+        <hr />
+
+        <div class="post-info">
+                <p>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tag meta-icon"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7" y2="7"></line></svg><span class="tag"><a href="https://0x0f0f0f.github.io/tags/functional-programming">functional programming</a></span>
+                </p>
+
+            <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>1031 Words</p>
+
+            <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>2019-09-28 02:00 &#43;0200</p>
+        </div>
+
+        
+            <div class="pagination">
+                <div class="pagination__title">
+                    <span class="pagination__title-h"></span>
+                    <hr />
+                </div>
+
+                <div class="pagination__buttons">
+                    
+
+                    
+                        <span class="button next">
+                            <a href="https://0x0f0f0f.github.io/posts/2019/09/building-a-raspberry-pi-3b-full-keyboard-handheld.-part-2/">
+                                <span class="button__text">Building a Raspberry Pi 3B&#43; full keyboard handheld. Part 2</span>
+                                <span class="button__icon">→</span>
+                            </a>
+                        </span>
+                    
+                </div>
+            </div>
+        
+
+        
+    </main>
+
+            </div>
+
+            
+                <footer class="footer">
+    <div class="footer__inner">
+        <div class="footer__content">
+            <span>&copy; 2019</span>
+            
+                <span><a href="https://0x0f0f0f.github.io">Alessandro C.</a></span>
+            
+            <span></span>
+            <span> <a href="https://0x0f0f0f.github.io/posts/index.xml" target="_blank" title="rss"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-rss"><path d="M4 11a9 9 0 0 1 9 9"></path><path d="M4 4a16 16 0 0 1 16 16"></path><circle cx="5" cy="19" r="1"></circle></svg></a></span>
+        </div>
+    </div>
+    <div class="footer__inner">
+        <div class="footer__content">
+
+        </div>
+    </div>
+    <div class="footer__inner">
+        <div class="footer__content">
+            <span>Powered by <a href="http://gohugo.io">Hugo</a></span>
+            <span>Made with &#10084; by <a href="https://github.com/rhazdon">rhazdon</a></span>
+        </div>
+    </div>
+</footer>
+
+            
+        </div>
+
+        
+
+
+
+
+<script type="text/javascript" src="/bundle.min.4c3fb12a087ceed4a52cb5d57068a9795c7069617a01ca70f788052ad66e1791779e6c72686e1dc0ca13dc03b0203204b6566bb0dd1ee80de2b7ff4d8fe53db2.js" integrity="sha512-TD&#43;xKgh87tSlLLXVcGipeVxwaWF6Acpw94gFKtZuF5F3nmxyaG4dwMoT3AOwIDIEtlZrsN0e6A3it/9Nj&#43;U9sg=="></script>
+    <script>
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+        ga('create', 'UA-106198734-2', 'auto');
+        ga('send', 'pageview');
+    </script>
+
+
+
+    </body>
+</html>

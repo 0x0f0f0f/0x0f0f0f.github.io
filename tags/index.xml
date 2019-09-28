@@ -6,10 +6,19 @@
     <description>Recent content in Tags on 0x0f0f0f</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 31 Jan 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 28 Sep 2019 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://0x0f0f0f.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>functional programming</title>
+      <link>https://0x0f0f0f.github.io/tags/functional-programming/</link>
+      <pubDate>Sat, 28 Sep 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://0x0f0f0f.github.io/tags/functional-programming/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>foss</title>
