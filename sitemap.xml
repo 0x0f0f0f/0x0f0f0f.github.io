@@ -8,11 +8,6 @@
   </url>
   
   <url>
-    <loc>https://0x0f0f0f.github.io/tags/functional-programming/</loc>
-    <lastmod>2019-09-28T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
     <loc>https://0x0f0f0f.github.io/posts/2019/09/learn-functional-programming-by-writing-a-scheme-in-haskell/</loc>
     <lastmod>2019-09-28T00:00:00+00:00</lastmod>
   </url>
@@ -20,11 +15,19 @@
   <url>
     <loc>https://0x0f0f0f.github.io/posts/</loc>
     <lastmod>2019-09-28T00:00:00+00:00</lastmod>
+    <priority>0</priority>
   </url>
   
   <url>
     <loc>https://0x0f0f0f.github.io/tags/</loc>
     <lastmod>2019-09-28T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://0x0f0f0f.github.io/tags/functional-programming/</loc>
+    <lastmod>2019-09-28T00:00:00+00:00</lastmod>
+    <priority>0</priority>
   </url>
   
   <url>
@@ -45,11 +48,13 @@
   <url>
     <loc>https://0x0f0f0f.github.io/tags/foss/</loc>
     <lastmod>2019-01-31T00:00:00+00:00</lastmod>
+    <priority>0</priority>
   </url>
   
   <url>
     <loc>https://0x0f0f0f.github.io/tags/good-stuff/</loc>
     <lastmod>2019-01-31T00:00:00+00:00</lastmod>
+    <priority>0</priority>
   </url>
   
   <url>
@@ -58,6 +63,7 @@
   
   <url>
     <loc>https://0x0f0f0f.github.io/categories/</loc>
+    <priority>0</priority>
   </url>
   
 </urlset>
