@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>haskell on 0x0f0f0f</title>
+    <link>https://0x0f0f0f.github.io/tags/haskell/</link>
+    <description>Recent content in haskell on 0x0f0f0f</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 31 Oct 2019 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://0x0f0f0f.github.io/tags/haskell/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Adding a macro parser to my Scheme implementation</title>
+      <link>https://0x0f0f0f.github.io/posts/2019/10/adding-a-macro-parser-to-my-scheme-implementation/</link>
+      <pubDate>Thu, 31 Oct 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://0x0f0f0f.github.io/posts/2019/10/adding-a-macro-parser-to-my-scheme-implementation/</guid>
+      <description>Happy Halloween everybody, here&amp;rsquo;s a little report on how I&amp;rsquo;ve added a macro parser to yasih (Yet Another Scheme in Haskell), my own R5RS Scheme implementation written in Haskell.
+At first I&amp;rsquo;ve had to define parsers for quote, quasiquote, and unquote and add them to the expression parser. You can learn more about how scheme quoting works in the MIT-scheme documentation.
+-- |Parse a Quoted Expression &#39;a parseQuoted :: Parser LispVal parseQuoted = do char &#39;\&#39;&#39; x &amp;lt;- parseExpr return $ List [Atom &amp;quot;quote&amp;quot;, x] -- |Parse a QuasiQuoted Expression -- See https://schemers.</description>
+    </item>
+    
+  </channel>
+</rss>

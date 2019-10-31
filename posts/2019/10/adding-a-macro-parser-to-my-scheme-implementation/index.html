@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="author"
+    content="archetypes false false false true content © 2019 — 0x0f0f0f — All rights reserved. data layouts Alessandro C. public true true monokai 20 ">
+<meta name="description"
+    content="Happy Halloween everybody, here&amp;rsquo;s a little report on how I&amp;rsquo;ve added a macro parser to yasih (Yet Another Scheme in Haskell), my own R5RS Scheme implementation written in Haskell.
+At first I&amp;rsquo;ve had to define parsers for quote, quasiquote, and unquote and add them to the expression parser. You can learn more about how scheme quoting works in the MIT-scheme documentation.
+-- |Parse a Quoted Expression &#39;a parseQuoted :: Parser LispVal parseQuoted = do char &#39;\&#39;&#39; x &amp;lt;- parseExpr return $ List [Atom &amp;quot;quote&amp;quot;, x] -- |Parse a QuasiQuoted Expression -- See https://schemers." />
+<meta name="keywords" content="" />
+<meta name="robots" content="noodp" />
+<link rel="canonical" href="https://0x0f0f0f.github.io/posts/2019/10/adding-a-macro-parser-to-my-scheme-implementation/" />
+
+
+<title>
+    
+    Adding a macro parser to my Scheme implementation :: 0x0f0f0f 
+    
+</title>
+
+
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.2.1/css/flag-icon.min.css" rel="stylesheet"
+    type="text/css">
+
+
+
+<link rel="stylesheet" href="/main.min.0d47b4686e972122bd29f0c1e3dd024a2d541cd8b1b543622520822ea6f4238a.css">
+
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/site.webmanifest">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#252627">
+<link rel="shortcut icon" href="/favicon.ico">
+<meta name="theme-color" content="#252627"><meta itemprop="name" content="Adding a macro parser to my Scheme implementation">
+<meta itemprop="description" content="Happy Halloween everybody, here&rsquo;s a little report on how I&rsquo;ve added a macro parser to yasih (Yet Another Scheme in Haskell), my own R5RS Scheme implementation written in Haskell.
+At first I&rsquo;ve had to define parsers for quote, quasiquote, and unquote and add them to the expression parser. You can learn more about how scheme quoting works in the MIT-scheme documentation.
+-- |Parse a Quoted Expression &#39;a parseQuoted :: Parser LispVal parseQuoted = do char &#39;\&#39;&#39; x &lt;- parseExpr return $ List [Atom &quot;quote&quot;, x] -- |Parse a QuasiQuoted Expression -- See https://schemers.">
+
+
+<meta itemprop="datePublished" content="2019-10-31T00:00:00&#43;00:00" />
+<meta itemprop="dateModified" content="2019-10-31T00:00:00&#43;00:00" />
+<meta itemprop="wordCount" content="1039">
+
+
+
+<meta itemprop="keywords" content="functional programming,haskell,lisp,yasih," />
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://0x0f0f0f.github.io"/>
+
+<meta name="twitter:title" content="Adding a macro parser to my Scheme implementation"/>
+<meta name="twitter:description" content="Happy Halloween everybody, here&rsquo;s a little report on how I&rsquo;ve added a macro parser to yasih (Yet Another Scheme in Haskell), my own R5RS Scheme implementation written in Haskell.
+At first I&rsquo;ve had to define parsers for quote, quasiquote, and unquote and add them to the expression parser. You can learn more about how scheme quoting works in the MIT-scheme documentation.
+-- |Parse a Quoted Expression &#39;a parseQuoted :: Parser LispVal parseQuoted = do char &#39;\&#39;&#39; x &lt;- parseExpr return $ List [Atom &quot;quote&quot;, x] -- |Parse a QuasiQuoted Expression -- See https://schemers."/>
+
+
+
+
+<meta property="article:published_time" content="2019-10-31 00:00:00 &#43;0000 UTC" />
+
+
+
+
+
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({
+          google_ad_client: "ca-pub-8568271456731999",
+          enable_page_level_ads: true
+     });
+</script>
+
+    </head>
+
+    <body class="dark-theme">
+        <div class="container">
+            <header class="header">
+    <span class="header__inner">
+        <a href="/" style="text-decoration: none;">
+    <div class="logo">
+        
+            <span class="logo__mark">></span>
+            <span class="logo__text">$ 0x0f0f0f</span>
+            <span class="logo__cursor"></span>
+        
+    </div>
+</a>
+
+
+        <span class="header__right">
+            
+                <nav class="menu">
+    <ul class="menu__inner"><li><a href="https://0x0f0f0f.github.io/about/">About</a></li><li><a href="https://0x0f0f0f.github.io/posts/">Posts</a></li>
+    </ul>
+</nav>
+
+                <span class="menu-trigger">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path d="M0 0h24v24H0z" fill="none"/>
+                        <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/>
+                    </svg>
+                </span>
+            
+
+            <span class="theme-toggle unselectable"><svg class="theme-toggler" width="24" height="24" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="M22 41C32.4934 41 41 32.4934 41 22C41 11.5066 32.4934 3 22
+  3C11.5066 3 3 11.5066 3 22C3 32.4934 11.5066 41 22 41ZM7 22C7
+  13.7157 13.7157 7 22 7V37C13.7157 37 7 30.2843 7 22Z"/>
+</svg>
+</span>
+        </span>
+    </span>
+</header>
+
+
+            <div class="content">
+                
+    <main class="post">
+
+        <div class="post-info">
+            <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-clock"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>5 minutes
+
+            
+
+            </p>
+        </div>
+
+        <article>
+            <h1 class="post-title"><a href="https://0x0f0f0f.github.io/posts/2019/10/adding-a-macro-parser-to-my-scheme-implementation/">Adding a macro parser to my Scheme implementation</a></h1>
+
+            
+
+            <div class="post-content">
+                
+
+<p>Happy Halloween everybody, here&rsquo;s a little report on how I&rsquo;ve added a
+macro parser to <a href="https://github.com/0x0f0f0f/yasih" target="_blank">yasih</a> (Yet Another Scheme in Haskell),
+my own R5RS Scheme implementation written in Haskell.</p>
+
+<p>At first I&rsquo;ve had to define parsers for <code>quote</code>, <code>quasiquote</code>, and <code>unquote</code> and add them to the expression parser.
+You can learn more about how scheme quoting works <a href="https://www.gnu.org/software/mit-scheme/documentation/mit-scheme-ref/Quoting.html" target="_blank">in the MIT-scheme documentation</a>.</p>
+
+<pre><code class="language-haskell">-- |Parse a Quoted Expression 'a
+parseQuoted :: Parser LispVal
+parseQuoted = do
+    char '\''
+    x &lt;- parseExpr
+    return $ List [Atom &quot;quote&quot;, x]
+
+-- |Parse a QuasiQuoted Expression
+-- See https://schemers.org/Documents/Standards/R5RS/HTML/r5rs-Z-H-7.html#%_sec_4.2.6
+parseQuasiQuoted :: Parser LispVal
+parseQuasiQuoted = do
+    char '`'
+    x &lt;- parseExpr
+    return $ List [Atom &quot;quasiquote&quot;, x]
+
+parseUnQuote :: Parser LispVal
+parseUnQuote = do
+    char ','
+    x &lt;- parseExpr
+    return $ List [Atom &quot;unquote&quot;, x]
+</code></pre>
+
+<p>Expression parser:</p>
+
+<pre><code class="language-haskell">-- |Parse an Expression
+parseExpr :: Parser LispVal
+parseExpr = try parseComplex
+        &lt;|&gt; try parseRatio
+        &lt;|&gt; try parseFloat
+        &lt;|&gt; try parseNumber
+        &lt;|&gt; try parseAtom
+        &lt;|&gt; parseString
+        &lt;|&gt; try parseBool
+        &lt;|&gt; try parseCharacter
+        &lt;|&gt; try parseQuoted
+        &lt;|&gt; try parseQuasiQuoted
+        &lt;|&gt; try parseUnQuote
+        &lt;|&gt; try parseVector
+        &lt;|&gt; try parseParens
+</code></pre>
+
+<p>The symbols <code>'expr</code>, <code>`expr</code>, and <code>,expr</code> are shorthands and are
+correspondingly transformed by the parser into the
+AST equivalent of the expressions:
+<code>(quote expr)</code>, <code>(quasiquote expr)</code> and <code>(unquote expr)</code>.
+In fact, the shorthand and list syntaxes are interchangeable. <code>unquote</code> makes sense only inside a <code>quasiquote</code>d block</p>
+
+<p>After defining the parsing rules for quoting and unquoting, it is time to define
+the corresponding evaluation rules as <code>eval</code> pattern matching cases:</p>
+
+<pre><code class="language-haskell">-- Evalaute a quoted expression, just return the value.
+eval env (List [Atom &quot;quote&quot;, val]) = return val
+-- ...
+
+-- Evaluate quasiquotation. AKA macro expander.
+-- Recursively evaluate unquote forms, or just return the items if not unquoted
+eval env (List [Atom &quot;quasiquote&quot;, form]) =
+    evalUnquotes form
+    where evalUnquotes form =
+            case form of
+                List [Atom &quot;unquote&quot;, form] -&gt; eval env form
+                List items -&gt; do
+                    results &lt;- traverse evalUnquotes items
+                    return $ List results
+                _ -&gt; return form
+</code></pre>
+
+<p>Here&rsquo;s an example, showing what happens when entering quoted expressions
+in <strong>yasih</strong>&rsquo;s REPL.</p>
+
+<pre><code class="language-scheme">λ&gt; ; here, the evaluator tries to apply
+λ&gt; (1 2 3) ; 2 and 3 as arguments to a function &quot;1&quot;
+Not a function: : &quot;1&quot;
+λ&gt; ; the result is clearly not a function
+λ&gt; ; the list here is now quoted and will be treated as a literal value
+λ&gt; '(1 2 3)
+(1 2 3)
+λ&gt; `(1 2 3) ; same here but using quasiquote
+(1 2 3)
+λ&gt; `(1 2 ,(+ 4 5)) ; the unquoted expression is evaluated! (un-quoted)!
+(1 2 9)
+</code></pre>
+
+<p>After we have working quotation and quasiquotation it is time to add actual macros to the interpreter.
+I had to change the expression data type by adding an <code>isMacro</code> field.</p>
+
+<pre><code class="language-haskell">-- |Lisp Value data type
+data LispVal =
+    -- Other data types here...
+    | Func {
+        isMacro :: Bool,
+        params :: [String], -- Parameters name
+        vararg :: Maybe String, -- name of a variable-length argument list
+        body :: [LispVal], -- list of expressions
+        closure :: Env -- the environment where the function was created
+        }
+    | IOFunc ([LispVal] -&gt; IOThrowsError LispVal) -- A dirty function that performs IO
+    | Port Handle -- Represents input and output devices
+</code></pre>
+
+<p>The important bit was changing <code>eval</code>&rsquo;s function application clause by
+checking if a called function is a macro, and if so changing
+from eager evaluation order of the arguments to a normal-order evaluation.
+Read more about evaluation models <a href="https://cs.stackexchange.com/questions/54000/is-applicative-order-and-normal-order-evaluation-models-definition-contradictor" target="_blank">here</a> (huge thanks to Rei for the link).</p>
+
+<pre><code class="language-haskell">-- Function application clause
+-- Run eval recursively over args then apply func over the resulting list
+eval env (List (function : args)) = do
+    func &lt;- eval env function
+    case func of
+        Func {isMacro = True} -&gt; apply func args &gt;&gt;= eval env
+        _ -&gt; mapM (eval env) args &gt;&gt;= apply func
+</code></pre>
+
+<p>You can see that if the applied function is a macro, then <code>eval env</code> is not called over the arguments.
+Minor changes were needed also in <code>apply</code>, just adding an <code>isMacro</code> deconstructor to the case where <code>Func</code>
+is passed as an argument. It is not needed by now inside <code>apply</code>&rsquo;s body.</p>
+
+<pre><code class="language-haskell">apply (Func isMacro params varargs body closure) args =
+    -- more code...
+</code></pre>
+
+<p>Now, it&rsquo;s time to add some helper functions in <code>Environment.hs</code> to make a macro</p>
+
+<pre><code class="language-haskell">-- |Helper functions to create function objects in IOThrowsError monad
+makeFunc :: Bool -&gt; Maybe String -&gt; Env -&gt; [LispVal] -&gt; [LispVal] -&gt; IOThrowsError LispVal
+makeFunc isMacro varargs env params body = return $ Func isMacro (map showVal params) varargs body env
+makeNormalFunc = makeFunc False Nothing
+makeVarargs = makeFunc False . Just . showVal
+makeMacro = makeFunc True Nothing
+</code></pre>
+
+<p>Finally, a <code>define-syntax</code> form can be defined to make macros.
+I have not yet implemented <code>syntax-rules</code> but i surely will in the next <strong>yasih</strong> updates.</p>
+
+<pre><code class="language-haskell">-- Define a macro
+eval env (List (Atom &quot;define-syntax&quot; : List (Atom var : params) : body)) =
+    makeMacro env params body &gt;&gt;= defineVar env var
+</code></pre>
+
+<p>Here&rsquo;s an example on how you can make a macro and use it as a practical construct
+for a programming language.
+Here, the <code>let</code> statement is defined as a macro that will expand to an anonymous function
+(lambda) application, in this way a closure will be made and lexical scoping will be respected,
+correctly reaching the <code>let</code> statement&rsquo;s goals. The implementation is a little sketchy and
+will surely get better as <code>syntax-rules</code> gets implemented.</p>
+
+<pre><code class="language-scheme">(define-syntax (bind-vars bindings)
+    `(map car bindings))
+
+(define-syntax (bind-vals bindings)
+    `(map cadr bindings))
+
+(define-syntax (let bindings body)
+    `(apply (lambda ,(bind-vars bindings) ,body) ',(bind-vals bindings)))
+</code></pre>
+
+<pre><code class="language-scheme">(let ((x 1) (y 4)) (- (* y y) (+ 1 x)))
+; will expand to
+((lambda (x y) (- (* y y) (+ 1 x))) 1 4)
+; before being executed
+</code></pre>
+
+<p>This practice is called <code>let-over-lambda</code>.
+Some modern functional programming languages like OCaml, directly create a closure instead of
+creating an anonymous function for <code>let</code> statements;
+that practice is fairly more performant, but the execution result is identical.</p>
+
+<h2 id="some-updates-on-yasih-s-development">Some updates on yasih&rsquo;s development.</h2>
+
+<p>A sketchy complete R5RS implementation is almost done.
+Some primitives are still missing and I will work on them in the next updates, in which I will also
+focus on adding additional features like string interpolation, stack tracing, and probably
+optimization features like a garbage collector.</p>
+
+            </div>
+        </article>
+
+        <hr />
+
+        <div class="post-info">
+                <p>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tag meta-icon"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7" y2="7"></line></svg><span class="tag"><a href="https://0x0f0f0f.github.io/tags/functional-programming">functional programming</a></span><span class="tag"><a href="https://0x0f0f0f.github.io/tags/haskell">haskell</a></span><span class="tag"><a href="https://0x0f0f0f.github.io/tags/lisp">lisp</a></span><span class="tag"><a href="https://0x0f0f0f.github.io/tags/yasih">yasih</a></span>
+                </p>
+
+            <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>1039 Words</p>
+
+            <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>2019-10-31 01:00 &#43;0100</p>
+        </div>
+
+        
+            <div class="pagination">
+                <div class="pagination__title">
+                    <span class="pagination__title-h"></span>
+                    <hr />
+                </div>
+
+                <div class="pagination__buttons">
+                    
+
+                    
+                        <span class="button next">
+                            <a href="https://0x0f0f0f.github.io/posts/2019/09/learn-functional-programming-by-writing-a-scheme-in-haskell/">
+                                <span class="button__text">Learn Functional Programming by writing a Scheme in Haskell</span>
+                                <span class="button__icon">→</span>
+                            </a>
+                        </span>
+                    
+                </div>
+            </div>
+        
+
+        
+    </main>
+
+            </div>
+
+            
+                <footer class="footer">
+    <div class="footer__inner">
+        <div class="footer__content">
+            <span>&copy; 2019</span>
+            
+                <span><a href="https://0x0f0f0f.github.io">Alessandro C.</a></span>
+            
+            <span></span>
+            <span> <a href="https://0x0f0f0f.github.io/posts/index.xml" target="_blank" title="rss"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-rss"><path d="M4 11a9 9 0 0 1 9 9"></path><path d="M4 4a16 16 0 0 1 16 16"></path><circle cx="5" cy="19" r="1"></circle></svg></a></span>
+        </div>
+    </div>
+    <div class="footer__inner">
+        <div class="footer__content">
+
+        </div>
+    </div>
+    <div class="footer__inner">
+        <div class="footer__content">
+            <span>Powered by <a href="http://gohugo.io">Hugo</a></span>
+            <span>Made with &#10084; by <a href="https://github.com/rhazdon">rhazdon</a></span>
+        </div>
+    </div>
+</footer>
+
+            
+        </div>
+
+        
+
+
+
+
+<script type="text/javascript" src="/bundle.min.4c3fb12a087ceed4a52cb5d57068a9795c7069617a01ca70f788052ad66e1791779e6c72686e1dc0ca13dc03b0203204b6566bb0dd1ee80de2b7ff4d8fe53db2.js" integrity="sha512-TD&#43;xKgh87tSlLLXVcGipeVxwaWF6Acpw94gFKtZuF5F3nmxyaG4dwMoT3AOwIDIEtlZrsN0e6A3it/9Nj&#43;U9sg=="></script>
+    <script>
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+        ga('create', 'UA-106198734-2', 'auto');
+        ga('send', 'pageview');
+    </script>
+
+
+
+    </body>
+</html>

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>986895 on 0x0f0f0f</title>
@@ -6,10 +6,21 @@
     <description>Recent content in 986895 on 0x0f0f0f</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 28 Sep 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 31 Oct 2019 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://0x0f0f0f.github.io/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Adding a macro parser to my Scheme implementation</title>
+      <link>https://0x0f0f0f.github.io/posts/2019/10/adding-a-macro-parser-to-my-scheme-implementation/</link>
+      <pubDate>Thu, 31 Oct 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://0x0f0f0f.github.io/posts/2019/10/adding-a-macro-parser-to-my-scheme-implementation/</guid>
+      <description>Happy Halloween everybody, here&amp;rsquo;s a little report on how I&amp;rsquo;ve added a macro parser to yasih (Yet Another Scheme in Haskell), my own R5RS Scheme implementation written in Haskell.
+At first I&amp;rsquo;ve had to define parsers for quote, quasiquote, and unquote and add them to the expression parser. You can learn more about how scheme quoting works in the MIT-scheme documentation.
+-- |Parse a Quoted Expression &#39;a parseQuoted :: Parser LispVal parseQuoted = do char &#39;\&#39;&#39; x &amp;lt;- parseExpr return $ List [Atom &amp;quot;quote&amp;quot;, x] -- |Parse a QuasiQuoted Expression -- See https://schemers.</description>
+    </item>
     
     <item>
       <title>Learn Functional Programming by writing a Scheme in Haskell</title>
@@ -59,10 +70,9 @@ Running a static webserver will help you reduce overhead and lets you reduce the
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://0x0f0f0f.github.io/about/</guid>
-      <description>0x0f0f0f I&amp;rsquo;m Alessandro, Computer Science student and programmer.
-I&amp;rsquo;ve worked to some full stack projects using different stacks, but I mostly use Node.JS for REST APIs. I&amp;rsquo;ve made some arcade games and I tinker a lot with anything UNIX. Right now I&amp;rsquo;m learning Haskell and I&amp;rsquo;m making a small LISP interpreter.
-Find my code at github.com/0x0f0f0f
-You can send me an email any time at sudo-woodo3 AT protonmail DOT com</description>
+      <description>I&amp;rsquo;m Alessandro, Computer Science student and programmer.
+I&amp;rsquo;ve worked to some full stack projects using different stacks, but I&amp;rsquo;ve mostly used Node.JS for REST API back-ends and JAMstack front-ends. I&amp;rsquo;ve made some arcade games and I tinker a lot with anything UNIX and electronics.
+My interests lie within Operating Systems, Logic, Functional Programming and Programming Language Theory. I&amp;rsquo;m attracted to topics like Lambda Calculus, Category Theory, Group Theory, Type Theory and Human-Machine Interfaces.</description>
     </item>
     
   </channel>

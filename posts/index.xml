@@ -5,8 +5,203 @@
         <description>Recent content in Posts on 0x0f0f0f</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>en-us</language>
-        <lastBuildDate>Sat, 28 Sep 2019 00:00:00 +0000</lastBuildDate>
+        <lastBuildDate>Thu, 31 Oct 2019 00:00:00 +0000</lastBuildDate>
         <atom:link href="https://0x0f0f0f.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+        
+        <item>
+            <title>Adding a macro parser to my Scheme implementation</title>
+            <link>https://0x0f0f0f.github.io/posts/2019/10/adding-a-macro-parser-to-my-scheme-implementation/</link>
+            <pubDate>Thu, 31 Oct 2019 00:00:00 +0000</pubDate>
+            
+            <guid>https://0x0f0f0f.github.io/posts/2019/10/adding-a-macro-parser-to-my-scheme-implementation/</guid>
+            <description>Happy Halloween everybody, here&amp;rsquo;s a little report on how I&amp;rsquo;ve added a macro parser to yasih (Yet Another Scheme in Haskell), my own R5RS Scheme implementation written in Haskell.
+At first I&amp;rsquo;ve had to define parsers for quote, quasiquote, and unquote and add them to the expression parser. You can learn more about how scheme quoting works in the MIT-scheme documentation.
+-- |Parse a Quoted Expression &#39;a parseQuoted :: Parser LispVal parseQuoted = do char &#39;\&#39;&#39; x &amp;lt;- parseExpr return $ List [Atom &amp;quot;quote&amp;quot;, x] -- |Parse a QuasiQuoted Expression -- See https://schemers.</description>
+            <content type="html"><![CDATA[
+
+<p>Happy Halloween everybody, here&rsquo;s a little report on how I&rsquo;ve added a
+macro parser to <a href="https://github.com/0x0f0f0f/yasih" target="_blank">yasih</a> (Yet Another Scheme in Haskell),
+my own R5RS Scheme implementation written in Haskell.</p>
+
+<p>At first I&rsquo;ve had to define parsers for <code>quote</code>, <code>quasiquote</code>, and <code>unquote</code> and add them to the expression parser.
+You can learn more about how scheme quoting works <a href="https://www.gnu.org/software/mit-scheme/documentation/mit-scheme-ref/Quoting.html" target="_blank">in the MIT-scheme documentation</a>.</p>
+
+<pre><code class="language-haskell">-- |Parse a Quoted Expression 'a
+parseQuoted :: Parser LispVal
+parseQuoted = do
+    char '\''
+    x &lt;- parseExpr
+    return $ List [Atom &quot;quote&quot;, x]
+
+-- |Parse a QuasiQuoted Expression
+-- See https://schemers.org/Documents/Standards/R5RS/HTML/r5rs-Z-H-7.html#%_sec_4.2.6
+parseQuasiQuoted :: Parser LispVal
+parseQuasiQuoted = do
+    char '`'
+    x &lt;- parseExpr
+    return $ List [Atom &quot;quasiquote&quot;, x]
+
+parseUnQuote :: Parser LispVal
+parseUnQuote = do
+    char ','
+    x &lt;- parseExpr
+    return $ List [Atom &quot;unquote&quot;, x]
+</code></pre>
+
+<p>Expression parser:</p>
+
+<pre><code class="language-haskell">-- |Parse an Expression
+parseExpr :: Parser LispVal
+parseExpr = try parseComplex
+        &lt;|&gt; try parseRatio
+        &lt;|&gt; try parseFloat
+        &lt;|&gt; try parseNumber
+        &lt;|&gt; try parseAtom
+        &lt;|&gt; parseString
+        &lt;|&gt; try parseBool
+        &lt;|&gt; try parseCharacter
+        &lt;|&gt; try parseQuoted
+        &lt;|&gt; try parseQuasiQuoted
+        &lt;|&gt; try parseUnQuote
+        &lt;|&gt; try parseVector
+        &lt;|&gt; try parseParens
+</code></pre>
+
+<p>The symbols <code>'expr</code>, <code>`expr</code>, and <code>,expr</code> are shorthands and are
+correspondingly transformed by the parser into the
+AST equivalent of the expressions:
+<code>(quote expr)</code>, <code>(quasiquote expr)</code> and <code>(unquote expr)</code>.
+In fact, the shorthand and list syntaxes are interchangeable. <code>unquote</code> makes sense only inside a <code>quasiquote</code>d block</p>
+
+<p>After defining the parsing rules for quoting and unquoting, it is time to define
+the corresponding evaluation rules as <code>eval</code> pattern matching cases:</p>
+
+<pre><code class="language-haskell">-- Evalaute a quoted expression, just return the value.
+eval env (List [Atom &quot;quote&quot;, val]) = return val
+-- ...
+
+-- Evaluate quasiquotation. AKA macro expander.
+-- Recursively evaluate unquote forms, or just return the items if not unquoted
+eval env (List [Atom &quot;quasiquote&quot;, form]) =
+    evalUnquotes form
+    where evalUnquotes form =
+            case form of
+                List [Atom &quot;unquote&quot;, form] -&gt; eval env form
+                List items -&gt; do
+                    results &lt;- traverse evalUnquotes items
+                    return $ List results
+                _ -&gt; return form
+</code></pre>
+
+<p>Here&rsquo;s an example, showing what happens when entering quoted expressions
+in <strong>yasih</strong>&rsquo;s REPL.</p>
+
+<pre><code class="language-scheme">λ&gt; ; here, the evaluator tries to apply
+λ&gt; (1 2 3) ; 2 and 3 as arguments to a function &quot;1&quot;
+Not a function: : &quot;1&quot;
+λ&gt; ; the result is clearly not a function
+λ&gt; ; the list here is now quoted and will be treated as a literal value
+λ&gt; '(1 2 3)
+(1 2 3)
+λ&gt; `(1 2 3) ; same here but using quasiquote
+(1 2 3)
+λ&gt; `(1 2 ,(+ 4 5)) ; the unquoted expression is evaluated! (un-quoted)!
+(1 2 9)
+</code></pre>
+
+<p>After we have working quotation and quasiquotation it is time to add actual macros to the interpreter.
+I had to change the expression data type by adding an <code>isMacro</code> field.</p>
+
+<pre><code class="language-haskell">-- |Lisp Value data type
+data LispVal =
+    -- Other data types here...
+    | Func {
+        isMacro :: Bool,
+        params :: [String], -- Parameters name
+        vararg :: Maybe String, -- name of a variable-length argument list
+        body :: [LispVal], -- list of expressions
+        closure :: Env -- the environment where the function was created
+        }
+    | IOFunc ([LispVal] -&gt; IOThrowsError LispVal) -- A dirty function that performs IO
+    | Port Handle -- Represents input and output devices
+</code></pre>
+
+<p>The important bit was changing <code>eval</code>&rsquo;s function application clause by
+checking if a called function is a macro, and if so changing
+from eager evaluation order of the arguments to a normal-order evaluation.
+Read more about evaluation models <a href="https://cs.stackexchange.com/questions/54000/is-applicative-order-and-normal-order-evaluation-models-definition-contradictor" target="_blank">here</a> (huge thanks to Rei for the link).</p>
+
+<pre><code class="language-haskell">-- Function application clause
+-- Run eval recursively over args then apply func over the resulting list
+eval env (List (function : args)) = do
+    func &lt;- eval env function
+    case func of
+        Func {isMacro = True} -&gt; apply func args &gt;&gt;= eval env
+        _ -&gt; mapM (eval env) args &gt;&gt;= apply func
+</code></pre>
+
+<p>You can see that if the applied function is a macro, then <code>eval env</code> is not called over the arguments.
+Minor changes were needed also in <code>apply</code>, just adding an <code>isMacro</code> deconstructor to the case where <code>Func</code>
+is passed as an argument. It is not needed by now inside <code>apply</code>&rsquo;s body.</p>
+
+<pre><code class="language-haskell">apply (Func isMacro params varargs body closure) args =
+    -- more code...
+</code></pre>
+
+<p>Now, it&rsquo;s time to add some helper functions in <code>Environment.hs</code> to make a macro</p>
+
+<pre><code class="language-haskell">-- |Helper functions to create function objects in IOThrowsError monad
+makeFunc :: Bool -&gt; Maybe String -&gt; Env -&gt; [LispVal] -&gt; [LispVal] -&gt; IOThrowsError LispVal
+makeFunc isMacro varargs env params body = return $ Func isMacro (map showVal params) varargs body env
+makeNormalFunc = makeFunc False Nothing
+makeVarargs = makeFunc False . Just . showVal
+makeMacro = makeFunc True Nothing
+</code></pre>
+
+<p>Finally, a <code>define-syntax</code> form can be defined to make macros.
+I have not yet implemented <code>syntax-rules</code> but i surely will in the next <strong>yasih</strong> updates.</p>
+
+<pre><code class="language-haskell">-- Define a macro
+eval env (List (Atom &quot;define-syntax&quot; : List (Atom var : params) : body)) =
+    makeMacro env params body &gt;&gt;= defineVar env var
+</code></pre>
+
+<p>Here&rsquo;s an example on how you can make a macro and use it as a practical construct
+for a programming language.
+Here, the <code>let</code> statement is defined as a macro that will expand to an anonymous function
+(lambda) application, in this way a closure will be made and lexical scoping will be respected,
+correctly reaching the <code>let</code> statement&rsquo;s goals. The implementation is a little sketchy and
+will surely get better as <code>syntax-rules</code> gets implemented.</p>
+
+<pre><code class="language-scheme">(define-syntax (bind-vars bindings)
+    `(map car bindings))
+
+(define-syntax (bind-vals bindings)
+    `(map cadr bindings))
+
+(define-syntax (let bindings body)
+    `(apply (lambda ,(bind-vars bindings) ,body) ',(bind-vals bindings)))
+</code></pre>
+
+<pre><code class="language-scheme">(let ((x 1) (y 4)) (- (* y y) (+ 1 x)))
+; will expand to
+((lambda (x y) (- (* y y) (+ 1 x))) 1 4)
+; before being executed
+</code></pre>
+
+<p>This practice is called <code>let-over-lambda</code>.
+Some modern functional programming languages like OCaml, directly create a closure instead of
+creating an anonymous function for <code>let</code> statements;
+that practice is fairly more performant, but the execution result is identical.</p>
+
+<h2 id="some-updates-on-yasih-s-development">Some updates on yasih&rsquo;s development.</h2>
+
+<p>A sketchy complete R5RS implementation is almost done.
+Some primitives are still missing and I will work on them in the next updates, in which I will also
+focus on adding additional features like string interpolation, stack tracing, and probably
+optimization features like a garbage collector.</p>
+]]></content>
+        </item>
         
         <item>
             <title>Learn Functional Programming by writing a Scheme in Haskell</title>

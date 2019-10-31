@@ -1,29 +1,49 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
     <loc>https://0x0f0f0f.github.io/</loc>
-    <lastmod>2019-09-28T00:00:00+00:00</lastmod>
+    <lastmod>2019-10-31T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://0x0f0f0f.github.io/posts/2019/10/adding-a-macro-parser-to-my-scheme-implementation/</loc>
+    <lastmod>2019-10-31T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>https://0x0f0f0f.github.io/tags/functional-programming/</loc>
-    <lastmod>2019-09-28T00:00:00+00:00</lastmod>
+    <lastmod>2019-10-31T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://0x0f0f0f.github.io/posts/2019/09/learn-functional-programming-by-writing-a-scheme-in-haskell/</loc>
-    <lastmod>2019-09-28T00:00:00+00:00</lastmod>
+    <loc>https://0x0f0f0f.github.io/tags/haskell/</loc>
+    <lastmod>2019-10-31T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://0x0f0f0f.github.io/tags/lisp/</loc>
+    <lastmod>2019-10-31T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>https://0x0f0f0f.github.io/posts/</loc>
-    <lastmod>2019-09-28T00:00:00+00:00</lastmod>
+    <lastmod>2019-10-31T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>https://0x0f0f0f.github.io/tags/</loc>
+    <lastmod>2019-10-31T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://0x0f0f0f.github.io/tags/yasih/</loc>
+    <lastmod>2019-10-31T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://0x0f0f0f.github.io/posts/2019/09/learn-functional-programming-by-writing-a-scheme-in-haskell/</loc>
     <lastmod>2019-09-28T00:00:00+00:00</lastmod>
   </url>
   

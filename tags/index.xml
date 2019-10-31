@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Tags on 0x0f0f0f</title>
@@ -6,7 +6,7 @@
     <description>Recent content in Tags on 0x0f0f0f</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 28 Sep 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 31 Oct 2019 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://0x0f0f0f.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
     
@@ -14,9 +14,36 @@
     <item>
       <title>functional programming</title>
       <link>https://0x0f0f0f.github.io/tags/functional-programming/</link>
-      <pubDate>Sat, 28 Sep 2019 00:00:00 +0000</pubDate>
+      <pubDate>Thu, 31 Oct 2019 00:00:00 +0000</pubDate>
       
       <guid>https://0x0f0f0f.github.io/tags/functional-programming/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>haskell</title>
+      <link>https://0x0f0f0f.github.io/tags/haskell/</link>
+      <pubDate>Thu, 31 Oct 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://0x0f0f0f.github.io/tags/haskell/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>lisp</title>
+      <link>https://0x0f0f0f.github.io/tags/lisp/</link>
+      <pubDate>Thu, 31 Oct 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://0x0f0f0f.github.io/tags/lisp/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>yasih</title>
+      <link>https://0x0f0f0f.github.io/tags/yasih/</link>
+      <pubDate>Thu, 31 Oct 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://0x0f0f0f.github.io/tags/yasih/</guid>
       <description></description>
     </item>
     
