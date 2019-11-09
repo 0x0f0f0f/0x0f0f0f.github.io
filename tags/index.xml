@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Tags on 0x0f0f0f</title>
@@ -6,10 +6,46 @@
     <description>Recent content in Tags on 0x0f0f0f</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 31 Oct 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 09 Nov 2019 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://0x0f0f0f.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>haskell</title>
+      <link>https://0x0f0f0f.github.io/tags/haskell/</link>
+      <pubDate>Sat, 09 Nov 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://0x0f0f0f.github.io/tags/haskell/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>markov-chains</title>
+      <link>https://0x0f0f0f.github.io/tags/markov-chains/</link>
+      <pubDate>Sat, 09 Nov 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://0x0f0f0f.github.io/tags/markov-chains/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>probability</title>
+      <link>https://0x0f0f0f.github.io/tags/probability/</link>
+      <pubDate>Sat, 09 Nov 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://0x0f0f0f.github.io/tags/probability/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>shell</title>
+      <link>https://0x0f0f0f.github.io/tags/shell/</link>
+      <pubDate>Sat, 09 Nov 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://0x0f0f0f.github.io/tags/shell/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>functional programming</title>
@@ -17,15 +53,6 @@
       <pubDate>Thu, 31 Oct 2019 00:00:00 +0000</pubDate>
       
       <guid>https://0x0f0f0f.github.io/tags/functional-programming/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>haskell</title>
-      <link>https://0x0f0f0f.github.io/tags/haskell/</link>
-      <pubDate>Thu, 31 Oct 2019 00:00:00 +0000</pubDate>
-      
-      <guid>https://0x0f0f0f.github.io/tags/haskell/</guid>
       <description></description>
     </item>
     

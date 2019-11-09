@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="author"
+    content="archetypes false false false true content © 2019 — 0x0f0f0f — All rights reserved. data layouts Alessandro C. public true true monokai 20 ">
+<meta name="description"
+    content="Some days ago, driven by boredom, I implemented my own Markov chains in Haskell by following this great tutorial. Markov chains can be a way of implementing really fun &amp;ldquo;dumb&amp;rdquo; group chat bots, that can generate new random messages that sound realistic based on the previous history of the chat. From Wikipedia:
+ A Markov chain is a stochastic model describing a sequence of possible events in which the probability of each event depends only on the state attained in the previous event." />
+<meta name="keywords" content="" />
+<meta name="robots" content="noodp" />
+<link rel="canonical" href="https://0x0f0f0f.github.io/posts/2019/11/really-fast-markov-chains-in-~20-lines-of-sh-grep-cut-and-awk/" />
+
+
+<title>
+    
+    Really fast Markov chains in ~20 lines of sh, grep, cut and awk :: 0x0f0f0f 
+    
+</title>
+
+
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.2.1/css/flag-icon.min.css" rel="stylesheet"
+    type="text/css">
+
+
+
+<link rel="stylesheet" href="/main.min.0d47b4686e972122bd29f0c1e3dd024a2d541cd8b1b543622520822ea6f4238a.css">
+
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/site.webmanifest">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#252627">
+<link rel="shortcut icon" href="/favicon.ico">
+<meta name="theme-color" content="#252627"><meta itemprop="name" content="Really fast Markov chains in ~20 lines of sh, grep, cut and awk">
+<meta itemprop="description" content="Some days ago, driven by boredom, I implemented my own Markov chains in Haskell by following this great tutorial. Markov chains can be a way of implementing really fun &ldquo;dumb&rdquo; group chat bots, that can generate new random messages that sound realistic based on the previous history of the chat. From Wikipedia:
+ A Markov chain is a stochastic model describing a sequence of possible events in which the probability of each event depends only on the state attained in the previous event.">
+
+
+<meta itemprop="datePublished" content="2019-11-09T00:00:00&#43;00:00" />
+<meta itemprop="dateModified" content="2019-11-09T00:00:00&#43;00:00" />
+<meta itemprop="wordCount" content="1024">
+
+
+
+<meta itemprop="keywords" content="markov-chains,probability,haskell,shell," />
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://0x0f0f0f.github.io"/>
+
+<meta name="twitter:title" content="Really fast Markov chains in ~20 lines of sh, grep, cut and awk"/>
+<meta name="twitter:description" content="Some days ago, driven by boredom, I implemented my own Markov chains in Haskell by following this great tutorial. Markov chains can be a way of implementing really fun &ldquo;dumb&rdquo; group chat bots, that can generate new random messages that sound realistic based on the previous history of the chat. From Wikipedia:
+ A Markov chain is a stochastic model describing a sequence of possible events in which the probability of each event depends only on the state attained in the previous event."/>
+
+
+
+
+<meta property="article:published_time" content="2019-11-09 00:00:00 &#43;0000 UTC" />
+
+
+
+
+
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({
+          google_ad_client: "ca-pub-8568271456731999",
+          enable_page_level_ads: true
+     });
+</script>
+
+    </head>
+
+    <body class="dark-theme">
+        <div class="container">
+            <header class="header">
+    <span class="header__inner">
+        <a href="/" style="text-decoration: none;">
+    <div class="logo">
+        
+            <span class="logo__mark">></span>
+            <span class="logo__text">$ 0x0f0f0f</span>
+            <span class="logo__cursor"></span>
+        
+    </div>
+</a>
+
+
+        <span class="header__right">
+            
+                <nav class="menu">
+    <ul class="menu__inner"><li><a href="https://0x0f0f0f.github.io/about/">About</a></li><li><a href="https://0x0f0f0f.github.io/posts/">Posts</a></li>
+    </ul>
+</nav>
+
+                <span class="menu-trigger">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path d="M0 0h24v24H0z" fill="none"/>
+                        <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/>
+                    </svg>
+                </span>
+            
+
+            <span class="theme-toggle"><svg class="theme-toggler" width="24" height="24" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="M22 41C32.4934 41 41 32.4934 41 22C41 11.5066 32.4934 3 22
+  3C11.5066 3 3 11.5066 3 22C3 32.4934 11.5066 41 22 41ZM7 22C7
+  13.7157 13.7157 7 22 7V37C13.7157 37 7 30.2843 7 22Z"/>
+</svg>
+</span>
+        </span>
+    </span>
+</header>
+
+
+            <div class="content">
+                
+    <main class="post">
+
+        <div class="post-info">
+            <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-clock"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>5 minutes
+
+            
+
+            </p>
+        </div>
+
+        <article>
+            <h1 class="post-title"><a href="https://0x0f0f0f.github.io/posts/2019/11/really-fast-markov-chains-in-~20-lines-of-sh-grep-cut-and-awk/">Really fast Markov chains in ~20 lines of sh, grep, cut and awk</a></h1>
+
+            
+
+            <div class="post-content">
+                
+
+<p>Some days ago, driven by boredom, I implemented my own Markov chains in Haskell by following this great <a href="https://dschrempf.github.io/coding/2018-02-10-markov-chains-in-haskell/" target="_blank">tutorial</a>. Markov chains can be a way of implementing really fun &ldquo;dumb&rdquo; group chat bots, that can generate new random messages that sound realistic based on the previous history of the chat. From Wikipedia:</p>
+
+<blockquote>
+<p>A Markov chain is a stochastic model describing a sequence of possible events in which the probability of each event depends only on the state attained in the previous event.</p>
+</blockquote>
+
+<p>Here&rsquo;s a <a href="http://setosa.io/ev/markov-chains/" target="_blank">great article</a> introducing the concept of Markov chains. In the case of a group chat bot, each state (or node of the graph) is one of the words that was previously sent in the messages, and each probability of transition towards another state (word) is based on the frequency of the first word (transition&rsquo;s source state) being followed by the second one (the transition&rsquo;s destination state).</p>
+
+<p>After coding a simple Markov chain on words in Haskell, I&rsquo;ve noticed that it was really slow and resource intensive even on a few thousand of messages. This was because the model was calculated by summing the frequency of word pairs and it was kept in memory inside of a <code>Data.Map</code> structure.</p>
+
+<p>Although the Haskell implementation can get much faster if optimized, my friend <a href="https://github.com/Francesco149" target="_blank">Francesco</a> showed me his amazing implementation of Markov chains on words made <strong>in plain sh and awk</strong>, in ~20 lines of code.</p>
+
+<h3 id="markov-sh-https-github-com-francesco149-markov-sh"><a href="https://github.com/Francesco149/markov.sh" target="_blank">markov.sh</a></h3>
+
+<p>His project is split in 2 programs. The first one, <code>mrkfeed.awk</code> is a really simple <code>awk</code> program that separates words on a line into pairs of words, separated line by line.</p>
+
+<pre><code class="language-awk">#!/usr/bin/awk -f
+
+{
+  for (i = 1; i &lt; NF; i++) {
+    print $i,$(i+1)
+  }
+  print $i
+}
+</code></pre>
+
+<p>For example, let&rsquo;s take this simple chat log (referred to as <code>chatlog.txt</code>):</p>
+
+<pre><code>hello everybody
+hi people
+hello people
+how are you
+how are things going
+</code></pre>
+
+<p>The first step is creating a model for the Markov chain. Here&rsquo;s what will be into the model file when we run <code>./mrkfeed.awk &lt; chatlog.txt &gt;&gt; model.mrkdb</code>,  (piped into <code>sort</code> for readability)</p>
+
+<pre><code>are things
+are you
+everybody
+going
+hello everybody
+hello people
+hi people
+how are
+how are
+people
+people
+things going
+you
+</code></pre>
+
+<p>The next step is generating a new random message with <code>./mrkwords.sh model.mrkdb 50 | tr '\n' ' ' &amp;&amp; echo</code></p>
+
+<p>At first, <code>mrkwords.sh</code> will pick a random line from the model and pick the first word of the pair as the first word of our output message. After this, it will filter the model to find what word pairs start with the first word it picked. Let&rsquo;s say it picked the word <code>hello</code> as the first word of the message. It will then randomly choose the second word of the message from the second word of a pair in the model that starts with the first word it chose. It then repeats this progress by forcing the last word it chose as the first word to choose. It may be even easier to understand in terms of code than in plain words.</p>
+
+<p>The presence of duplicate lines in the model is what gives it the power of weighed probability perfectly and in fact makes the generated models Markov chains. Although Markov chains are often considered complex, this small shell program shines in showing the real underlying simplicity.</p>
+
+<p>Here&rsquo;s a commented version of <code>./mrkwords.sh</code></p>
+
+<pre><code class="language-bash">#!/bin/sh
+
+# choose the first argument as the model file or try to open '.mrkdb'
+file=&quot;${1:-~/.mrkdb}&quot;
+
+# $n is the maximum number of remaining words (iterations)
+# it is the 2nd argument of this program
+n=&quot;${2:-1}&quot;
+
+# if present, use $key (3rd argument) to find pairs starting
+# with it in the model, you may use this to force a
+# word as the first word of the message
+key=&quot;$3&quot;
+
+# if $key is set print it
+[ ! -z &quot;$key&quot; ] &amp;&amp; echo &quot;$key&quot;
+
+# the max remaining number of words cannot be equal or less to 0
+[ &quot;$n&quot; -le 0 ] &amp;&amp; exit
+
+# if key is not set, set the chosen word to the first element
+# of a random pair in the model
+if [ -z &quot;$key&quot; ]; then
+  word=$(shuf -n 1 &lt; &quot;$file&quot; | cut -d' ' -f1)
+
+# otherwise (key is set)
+else
+    # step 1, filter the model to find lines containing $key
+    # step 2, use awk to get only the lines in the model
+    # beginning with $key (the first element of the pairs)
+    # step 3, after filtering out the model, pick the second element of
+    # a random pair and set it as the value of the variable $word
+  word=$(grep -Fw &quot;$key&quot; &lt; &quot;$file&quot; |
+    awk -v key=&quot;$key&quot; '$1 == key { print $0 }' |
+    shuf -n 1 | awk '{ print $2 }') || exit
+
+    # if $word is empty then exit this iteration
+    # this may also mean that the randomized step picked
+    # a line in the model containing only the first element
+    # (signaling the end of the process)
+  [ -z &quot;$word&quot; ] &amp;&amp; exit
+fi
+
+# the real magic happens here. this last step is similar
+# to a recursive function call in most programming languages
+# it runs this program again, with $n decremented by 1
+# and with the chosen $word as the next iteration's $key
+exec &quot;$0&quot; &quot;$file&quot; &quot;$(( n - 1 ))&quot; &quot;$word&quot;
+</code></pre>
+
+<p>In this example it generates a random fortune, modeled from the <code>goedel</code> fortunes contained in the famous <code>fortune-mod</code> package.</p>
+
+<pre><code class="language-bash"># remove the % delimiter in the fortune file and save it as a .txt
+sed -e '/^%$/d' &lt; /usr/share/fortunes/goedel &gt;&gt; goedel.txt
+# generate the model
+./mrkfeed.awk &lt; goedel.txt &gt;&gt; goedelmodel.mrkdb
+# get a random fortune!
+./mrkwords.sh goedelmodel.mrkdb 50 | tr '\n' ' '
+the dimensionality of computerized fortune-tellers!
+# again!
+./mrkwords.sh goedelmodel.mrkdb 50 | tr '\n' ' '
+the thoughts of metalanguage are still free.
+# again!
+./mrkwords.sh goedelmodel.mrkdb 50 | tr '\n' ' '
+# let's change the model by using all fortunes this time
+./mrkwords.sh fortunesmodel.mrkdb 50 | tr '\n' ' '
+low taste, and goin' insane,
+</code></pre>
+
+<p><code>markov.sh</code> is extremely fast, even on relatively large data sets (millions of lines).</p>
+
+            </div>
+        </article>
+
+        <hr />
+
+        <div class="post-info">
+                <p>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tag meta-icon"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7" y2="7"></line></svg><span class="tag"><a href="https://0x0f0f0f.github.io/tags/markov-chains">markov-chains</a></span><span class="tag"><a href="https://0x0f0f0f.github.io/tags/probability">probability</a></span><span class="tag"><a href="https://0x0f0f0f.github.io/tags/haskell">haskell</a></span><span class="tag"><a href="https://0x0f0f0f.github.io/tags/shell">shell</a></span>
+                </p>
+
+            <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>1024 Words</p>
+
+            <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>2019-11-09 01:00 &#43;0100</p>
+        </div>
+
+        
+            <div class="pagination">
+                <div class="pagination__title">
+                    <span class="pagination__title-h"></span>
+                    <hr />
+                </div>
+
+                <div class="pagination__buttons">
+                    
+
+                    
+                        <span class="button next">
+                            <a href="https://0x0f0f0f.github.io/posts/2019/10/adding-a-macro-parser-to-my-scheme-implementation/">
+                                <span class="button__text">Adding a macro parser to my Scheme implementation</span>
+                                <span class="button__icon">→</span>
+                            </a>
+                        </span>
+                    
+                </div>
+            </div>
+        
+
+        
+    </main>
+
+            </div>
+
+            
+                <footer class="footer">
+    <div class="footer__inner">
+        <div class="footer__content">
+            <span>&copy; 2019</span>
+            
+                <span><a href="https://0x0f0f0f.github.io">Alessandro C.</a></span>
+            
+            <span></span>
+            <span> <a href="https://0x0f0f0f.github.io/posts/index.xml" target="_blank" title="rss"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-rss"><path d="M4 11a9 9 0 0 1 9 9"></path><path d="M4 4a16 16 0 0 1 16 16"></path><circle cx="5" cy="19" r="1"></circle></svg></a></span>
+        </div>
+    </div>
+    <div class="footer__inner">
+        <div class="footer__content">
+
+        </div>
+    </div>
+    <div class="footer__inner">
+        <div class="footer__content">
+            <span>Powered by <a href="http://gohugo.io">Hugo</a></span>
+            <span>Made with &#10084; by <a href="https://github.com/rhazdon">rhazdon</a></span>
+        </div>
+    </div>
+</footer>
+
+            
+        </div>
+
+        
+
+
+
+
+<script type="text/javascript" src="/bundle.min.4c3fb12a087ceed4a52cb5d57068a9795c7069617a01ca70f788052ad66e1791779e6c72686e1dc0ca13dc03b0203204b6566bb0dd1ee80de2b7ff4d8fe53db2.js" integrity="sha512-TD&#43;xKgh87tSlLLXVcGipeVxwaWF6Acpw94gFKtZuF5F3nmxyaG4dwMoT3AOwIDIEtlZrsN0e6A3it/9Nj&#43;U9sg=="></script>
+    <script>
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+        ga('create', 'UA-106198734-2', 'auto');
+        ga('send', 'pageview');
+    </script>
+
+
+
+    </body>
+</html>

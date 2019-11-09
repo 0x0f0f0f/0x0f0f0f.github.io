@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>probability on 0x0f0f0f</title>
+    <link>https://0x0f0f0f.github.io/tags/probability/</link>
+    <description>Recent content in probability on 0x0f0f0f</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sat, 09 Nov 2019 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://0x0f0f0f.github.io/tags/probability/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Really fast Markov chains in ~20 lines of sh, grep, cut and awk</title>
+      <link>https://0x0f0f0f.github.io/posts/2019/11/really-fast-markov-chains-in-~20-lines-of-sh-grep-cut-and-awk/</link>
+      <pubDate>Sat, 09 Nov 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://0x0f0f0f.github.io/posts/2019/11/really-fast-markov-chains-in-~20-lines-of-sh-grep-cut-and-awk/</guid>
+      <description>Some days ago, driven by boredom, I implemented my own Markov chains in Haskell by following this great tutorial. Markov chains can be a way of implementing really fun &amp;ldquo;dumb&amp;rdquo; group chat bots, that can generate new random messages that sound realistic based on the previous history of the chat. From Wikipedia:
+ A Markov chain is a stochastic model describing a sequence of possible events in which the probability of each event depends only on the state attained in the previous event.</description>
+    </item>
+    
+  </channel>
+</rss>
