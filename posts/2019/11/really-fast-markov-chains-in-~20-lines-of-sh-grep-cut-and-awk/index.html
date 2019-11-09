@@ -44,7 +44,7 @@
 
 <meta itemprop="datePublished" content="2019-11-09T00:00:00&#43;00:00" />
 <meta itemprop="dateModified" content="2019-11-09T00:00:00&#43;00:00" />
-<meta itemprop="wordCount" content="1050">
+<meta itemprop="wordCount" content="1085">
 
 
 
@@ -121,7 +121,7 @@
     <main class="post">
 
         <div class="post-info">
-            <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-clock"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>5 minutes
+            <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-clock"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>6 minutes
 
             
 
@@ -191,8 +191,10 @@ you
 <p>The next step is generating a new random message with <code>./mrkwords.sh model.mrkdb 50 | tr '\n' ' ' &amp;&amp; echo</code></p>
 
 <p>At first, <code>mrkwords.sh</code> will pick a random line from the model and pick the first word of the pair as the first word of our output message. After this, it will filter the model to find what word pairs start with the first word it picked. Let&rsquo;s say it picked the word <code>hello</code> as the first word of the message. It will then randomly choose the second word of the message from the second element of a pair in the model that starts with the first word it chose. In this case, since it picked <code>hello</code> as the first word, it may pick one between <code>everybody</code> and <code>people</code> as the next word.
-It then repeats this process by passing the last word it chose as the word to choose in the next iteration. It may be even easier to understand in terms of code than in plain words.
-The presence of duplicate lines in the model is what gives it the power of weighed probability perfectly and in fact makes the generated models Markov chains. Although Markov chains are often considered complex, this small shell program shines in showing the real underlying simplicity.</p>
+It then repeats this process by passing the last word it chose as the word to choose in the next iteration. It may be even easier to understand in terms of code than in plain words.</p>
+
+<p>The presence of duplicate lines in the model is what gives it the power of weighed probability, perfectly modeling the process of random extraction, making the generated models real Markov chains.
+Doing this with plain unix tools makes <code>markov.sh</code> incredibly fast, because it is sacrificing disk space by storing duplicates in exchange for a huge improvement in the complexity of the computations. Although Markov chains are often considered complex, this small shell program shines in showing the real underlying simplicity.</p>
 
 <p>Here&rsquo;s a commented version of <code>./mrkwords.sh</code></p>
 
@@ -277,7 +279,7 @@ low taste, and goin' insane,
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tag meta-icon"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7" y2="7"></line></svg><span class="tag"><a href="https://0x0f0f0f.github.io/tags/markov-chains">markov-chains</a></span><span class="tag"><a href="https://0x0f0f0f.github.io/tags/probability">probability</a></span><span class="tag"><a href="https://0x0f0f0f.github.io/tags/haskell">haskell</a></span><span class="tag"><a href="https://0x0f0f0f.github.io/tags/shell">shell</a></span>
                 </p>
 
-            <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>1050 Words</p>
+            <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>1085 Words</p>
 
             <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>2019-11-09 01:00 &#43;0100</p>
         </div>
