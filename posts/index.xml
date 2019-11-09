@@ -72,9 +72,9 @@ you
 
 <p>The next step is generating a new random message with <code>./mrkwords.sh model.mrkdb 50 | tr '\n' ' ' &amp;&amp; echo</code></p>
 
-<p>At first, <code>mrkwords.sh</code> will pick a random line from the model and pick the first word of the pair as the first word of our output message. After this, it will filter the model to find what word pairs start with the first word it picked. Let&rsquo;s say it picked the word <code>hello</code> as the first word of the message. It will then randomly choose the second word of the message from the second word of a pair in the model that starts with the first word it chose. It then repeats this progress by forcing the last word it chose as the first word to choose. It may be even easier to understand in terms of code than in plain words.</p>
-
-<p>The presence of duplicate lines in the model is what gives it the power of weighed probability perfectly and in fact makes the generated models Markov chains. Although Markov chains are often considered complex, this small shell program shines in showing the real underlying simplicity.</p>
+<p>At first, <code>mrkwords.sh</code> will pick a random line from the model and pick the first word of the pair as the first word of our output message. After this, it will filter the model to find what word pairs start with the first word it picked. Let&rsquo;s say it picked the word <code>hello</code> as the first word of the message. It will then randomly choose the second word of the message from the second element of a pair in the model that starts with the first word it chose. In this case, since it picked <code>hello</code> as the first word, it may pick one between <code>everybody</code> and <code>people</code> as the next word.
+It then repeats this process by passing the last word it chose as the word to choose in the next iteration. It may be even easier to understand in terms of code than in plain words.
+The presence of duplicate lines in the model is what gives it the power of weighed probability perfectly and in fact makes the generated models Markov chains. Although Markov chains are often considered complex, this small shell program shines in showing the real underlying simplicity.</p>
 
 <p>Here&rsquo;s a commented version of <code>./mrkwords.sh</code></p>
 
