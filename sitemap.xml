@@ -1,16 +1,60 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
     <loc>https://0x0f0f0f.github.io/</loc>
-    <lastmod>2019-11-09T00:00:00+00:00</lastmod>
+    <lastmod>2019-11-20T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://0x0f0f0f.github.io/tags/git/</loc>
+    <lastmod>2019-11-20T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://0x0f0f0f.github.io/tags/linux/</loc>
+    <lastmod>2019-11-20T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>https://0x0f0f0f.github.io/posts/</loc>
+    <lastmod>2019-11-20T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://0x0f0f0f.github.io/tags/</loc>
+    <lastmod>2019-11-20T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://0x0f0f0f.github.io/tags/video/</loc>
+    <lastmod>2019-11-20T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://0x0f0f0f.github.io/posts/2019/11/visualizing-11-years-of-contributions-to-void-linux-in-7-minutes/</loc>
+    <lastmod>2019-11-20T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://0x0f0f0f.github.io/tags/void/</loc>
+    <lastmod>2019-11-20T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://0x0f0f0f.github.io/tags/haskell/</loc>
     <lastmod>2019-11-09T00:00:00+00:00</lastmod>
-    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://0x0f0f0f.github.io/tags/markov-chains/</loc>
+    <lastmod>2019-11-09T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://0x0f0f0f.github.io/tags/probability/</loc>
+    <lastmod>2019-11-09T00:00:00+00:00</lastmod>
   </url>
   
   <url>
@@ -19,33 +63,8 @@
   </url>
   
   <url>
-    <loc>https://0x0f0f0f.github.io/tags/</loc>
-    <lastmod>2019-11-09T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://0x0f0f0f.github.io/tags/haskell/</loc>
-    <lastmod>2019-11-09T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://0x0f0f0f.github.io/tags/markov-chains/</loc>
-    <lastmod>2019-11-09T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://0x0f0f0f.github.io/tags/probability/</loc>
-    <lastmod>2019-11-09T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
     <loc>https://0x0f0f0f.github.io/tags/shell/</loc>
     <lastmod>2019-11-09T00:00:00+00:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
@@ -56,19 +75,16 @@
   <url>
     <loc>https://0x0f0f0f.github.io/tags/functional-programming/</loc>
     <lastmod>2019-10-31T00:00:00+00:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
     <loc>https://0x0f0f0f.github.io/tags/lisp/</loc>
     <lastmod>2019-10-31T00:00:00+00:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
     <loc>https://0x0f0f0f.github.io/tags/yasih/</loc>
     <lastmod>2019-10-31T00:00:00+00:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
@@ -94,13 +110,11 @@
   <url>
     <loc>https://0x0f0f0f.github.io/tags/foss/</loc>
     <lastmod>2019-01-31T00:00:00+00:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
     <loc>https://0x0f0f0f.github.io/tags/good-stuff/</loc>
     <lastmod>2019-01-31T00:00:00+00:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
@@ -109,7 +123,6 @@
   
   <url>
     <loc>https://0x0f0f0f.github.io/categories/</loc>
-    <priority>0</priority>
   </url>
   
 </urlset>

@@ -5,8 +5,34 @@
         <description>Recent content in Posts on 0x0f0f0f</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>en-us</language>
-        <lastBuildDate>Sat, 09 Nov 2019 00:00:00 +0000</lastBuildDate>
+        <lastBuildDate>Wed, 20 Nov 2019 00:00:00 +0000</lastBuildDate>
         <atom:link href="https://0x0f0f0f.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+        
+        <item>
+            <title>Visualizing 11 years of contributions to Void Linux in 7 minutes</title>
+            <link>https://0x0f0f0f.github.io/posts/2019/11/visualizing-11-years-of-contributions-to-void-linux-in-7-minutes/</link>
+            <pubDate>Wed, 20 Nov 2019 00:00:00 +0000</pubDate>
+            
+            <guid>https://0x0f0f0f.github.io/posts/2019/11/visualizing-11-years-of-contributions-to-void-linux-in-7-minutes/</guid>
+            <description>A few days ago I&amp;rsquo;ve stumbled into an excellent package called gource. To test it out I&amp;rsquo;ve decided to make an animated video of all the contributions that have been made since 26 September 2008 in the void-packages repository. You can see how it starts to gain traction after ~2013, and how it quickly evolves to look like a living cell. I pop out somewhere around the middle of 2019.</description>
+            <content type="html"><![CDATA[
+
+<p>A few days ago I&rsquo;ve stumbled into an excellent package called <a href="https://gource.io/" target="_blank">gource</a>.
+To test it out I&rsquo;ve decided to make an animated video of all the contributions that have been made since
+26 September 2008 in the <a href="https://github.com/void-linux/void-packages/" target="_blank">void-packages</a> repository.
+You can see how it starts to gain traction after ~2013, and how it quickly evolves to look like a living cell. I pop out somewhere around the middle of 2019.
+<a href="https://voidlinux.org/" target="_blank">Void Linux</a> is an awesome, solid and lightweight indipendent distribution that uses the excellent XBPS package manager. What makes it so awesome, is that it is actively mantained thanks by countless users&rsquo; contributions.
+If you&rsquo;d like to read more about the history of Void Linux you can check out <a href="https://xtraeme.blogspot.com/" target="_blank">xtraeme&rsquo;s blog</a>.</p>
+
+<h2 id="thanks-to-all-the-void-contributors">Thanks to all the Void contributors!</h2>
+
+
+<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+  <iframe src="https://www.youtube.com/embed/y1rnHd5ARdk" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" allowfullscreen title="YouTube Video"></iframe>
+</div>
+
+]]></content>
+        </item>
         
         <item>
             <title>Really fast Markov chains in ~20 lines of sh, grep, cut and awk</title>
