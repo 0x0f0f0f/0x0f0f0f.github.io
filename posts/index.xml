@@ -5,8 +5,85 @@
         <description>Recent content in Posts on 0x0f0f0f</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>en-us</language>
-        <lastBuildDate>Wed, 20 Nov 2019 00:00:00 +0000</lastBuildDate>
+        <lastBuildDate>Wed, 04 Dec 2019 00:00:00 +0000</lastBuildDate>
         <atom:link href="https://0x0f0f0f.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+        
+        <item>
+            <title>minicaml, a didactical OCaml-like functional programming language.</title>
+            <link>https://0x0f0f0f.github.io/posts/2019/12/minicaml-a-didactical-ocaml-like-functional-programming-language./</link>
+            <pubDate>Wed, 04 Dec 2019 00:00:00 +0000</pubDate>
+            
+            <guid>https://0x0f0f0f.github.io/posts/2019/12/minicaml-a-didactical-ocaml-like-functional-programming-language./</guid>
+            <description>minicaml is a small, purely functional interpreted programming language with a didactical purpose. I wrote minicaml for the Programming 2 course at the University of Pisa, taught by Professors Gianluigi Ferrari and Francesca Levi. It is based on the teachers&amp;rsquo; minicaml, an evaluation example to show how interpreters work. It is an interpreted subset of Caml, with eager evaluation and only local (let-in) declaration statements. I have added a simple parser and lexer made with menhir and ocamllex (learn more).</description>
+            <content type="html"><![CDATA[
+
+<p><strong><a href="https://github.com/0x0f0f0f/minicaml" target="_blank">minicaml</a></strong> is a small, purely functional interpreted programming language with
+a didactical purpose. I wrote <strong><a href="https://github.com/0x0f0f0f/minicaml" target="_blank">minicaml</a></strong> for the <strong>Programming 2</strong> course at
+the University of Pisa, taught by Professors Gianluigi Ferrari and Francesca
+Levi. It is based on the teachers&rsquo;
+<a href="http://pages.di.unipi.it/levi/codice-18/evalFunEnvFull.ml" target="_blank">minicaml</a>, an
+evaluation example to show how interpreters work. It is an interpreted subset of
+Caml, with eager evaluation and only local (<code>let-in</code>) declaration statements. I
+have added a simple parser and lexer made with menhir and ocamllex (<a href="https://v1.realworldocaml.org/v1/en/html/parsing-with-ocamllex-and-menhir.html" target="_blank">learn
+more</a>).
+I have also added a simple REPL that shows each reduction step that is done in
+evaluating an expression. I&rsquo;d also like to implement a simple compiler and abstract
+machine for this project.</p>
+
+<p><strong><a href="https://github.com/0x0f0f0f/minicaml" target="_blank">minicaml</a></strong> only implements basic data types (integers and booleans) and will
+never be a full programming language intended for real world usage. <strong><a href="https://github.com/0x0f0f0f/minicaml" target="_blank">minicaml</a>&rsquo;s only
+purpose is to help students get a grasp of how interpreters and programming
+languages work</strong>.</p>
+
+<p><img src="/posts/images/minicaml.png" alt="minicaml" /></p>
+
+<h2 id="features">Features</h2>
+
+<ul>
+<li>Show the AST of each expression</li>
+<li>Only boolean and integer types</li>
+<li>Pretty color REPL showing every step made in evaluating a program</li>
+<li>Only local declaration statements</li>
+<li>Recursive functions and closures</li>
+<li>ocamllex and menhir lexer and parser</li>
+<li>Extensible with ease</li>
+</ul>
+
+<h2 id="installation">Installation</h2>
+
+<p>I will release a binary file (no need to compile) in the near future. To
+install, you need to have <code>opam</code> (OCaml&rsquo;s package manager) and a recent OCaml
+distribution installed on your system.
+<a href="https://github.com/hanslub42/rlwrap" target="_blank">rlwrap</a> is suggested for a readline-like
+(bash-like) keyboard interface.</p>
+
+<pre><code class="language-bash"># clone the repository
+git clone https://github.com/0x0f0f0f/minicaml
+# cd into it
+cd minicaml
+# install dependencies
+opam install dune menhir ANSITerminal
+# compile
+make
+# run
+make run
+# rlwrap is suggested
+rlwrap make run
+# you can install minicaml with
+make install
+# run again
+rlwrap minicaml
+</code></pre>
+
+<h2 id="usage">Usage</h2>
+
+<p>Run <code>make run</code> to run a REPL. The REPL shows the AST equivalentof each submitted
+expression, and each reduction step in the evaluation is shown. It also signals
+syntactical and semantical errors.</p>
+
+<p>Please let me know if you find bugs or have any improvement in mind!</p>
+]]></content>
+        </item>
         
         <item>
             <title>Visualizing 11 years of contributions to Void Linux in 7 minutes</title>

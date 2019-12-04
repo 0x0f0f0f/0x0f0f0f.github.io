@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>ocaml on 0x0f0f0f</title>
+    <link>https://0x0f0f0f.github.io/tags/ocaml/</link>
+    <description>Recent content in ocaml on 0x0f0f0f</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 04 Dec 2019 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://0x0f0f0f.github.io/tags/ocaml/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>minicaml, a didactical OCaml-like functional programming language.</title>
+      <link>https://0x0f0f0f.github.io/posts/2019/12/minicaml-a-didactical-ocaml-like-functional-programming-language./</link>
+      <pubDate>Wed, 04 Dec 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://0x0f0f0f.github.io/posts/2019/12/minicaml-a-didactical-ocaml-like-functional-programming-language./</guid>
+      <description>minicaml is a small, purely functional interpreted programming language with a didactical purpose. I wrote minicaml for the Programming 2 course at the University of Pisa, taught by Professors Gianluigi Ferrari and Francesca Levi. It is based on the teachers&amp;rsquo; minicaml, an evaluation example to show how interpreters work. It is an interpreted subset of Caml, with eager evaluation and only local (let-in) declaration statements. I have added a simple parser and lexer made with menhir and ocamllex (learn more).</description>
+    </item>
+    
+  </channel>
+</rss>
