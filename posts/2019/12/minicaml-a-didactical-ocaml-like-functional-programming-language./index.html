@@ -38,16 +38,14 @@
 <link rel="shortcut icon" href="/favicon.ico">
 <meta name="theme-color" content="#252627"><meta itemprop="name" content="minicaml, a didactical OCaml-like functional programming language.">
 <meta itemprop="description" content="minicaml is a small, purely functional interpreted programming language with a didactical purpose. I wrote minicaml for the Programming 2 course at the University of Pisa, taught by Professors Gianluigi Ferrari and Francesca Levi. It is based on the teachers&rsquo; minicaml, an evaluation example to show how interpreters work. It is an interpreted subset of Caml, with eager evaluation and only local (let-in) declaration statements. I have added a simple parser and lexer made with menhir and ocamllex (learn more).">
-
-
 <meta itemprop="datePublished" content="2019-12-04T00:00:00&#43;00:00" />
 <meta itemprop="dateModified" content="2019-12-04T00:00:00&#43;00:00" />
 <meta itemprop="wordCount" content="330">
+<meta itemprop="image" content="https://0x0f0f0f.github.io"/>
 
 
 
-<meta itemprop="keywords" content="functional programming,ocaml,minicaml," />
-<meta name="twitter:card" content="summary_large_image"/>
+<meta itemprop="keywords" content="functional programming,ocaml,minicaml," /><meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://0x0f0f0f.github.io"/>
 
 <meta name="twitter:title" content="minicaml, a didactical OCaml-like functional programming language."/>
@@ -126,30 +124,24 @@
             
 
             <div class="post-content">
-                
-
-<p><strong><a href="https://github.com/0x0f0f0f/minicaml" target="_blank">minicaml</a></strong> is a small, purely functional interpreted programming language with
-a didactical purpose. I wrote <strong><a href="https://github.com/0x0f0f0f/minicaml" target="_blank">minicaml</a></strong> for the <strong>Programming 2</strong> course at
+                <p><strong><a href="https://github.com/0x0f0f0f/minicaml">minicaml</a></strong> is a small, purely functional interpreted programming language with
+a didactical purpose. I wrote <strong><a href="https://github.com/0x0f0f0f/minicaml">minicaml</a></strong> for the <strong>Programming 2</strong> course at
 the University of Pisa, taught by Professors Gianluigi Ferrari and Francesca
 Levi. It is based on the teachers&rsquo;
-<a href="http://pages.di.unipi.it/levi/codice-18/evalFunEnvFull.ml" target="_blank">minicaml</a>, an
+<a href="http://pages.di.unipi.it/levi/codice-18/evalFunEnvFull.ml">minicaml</a>, an
 evaluation example to show how interpreters work. It is an interpreted subset of
 Caml, with eager evaluation and only local (<code>let-in</code>) declaration statements. I
-have added a simple parser and lexer made with menhir and ocamllex (<a href="https://v1.realworldocaml.org/v1/en/html/parsing-with-ocamllex-and-menhir.html" target="_blank">learn
+have added a simple parser and lexer made with menhir and ocamllex (<a href="https://v1.realworldocaml.org/v1/en/html/parsing-with-ocamllex-and-menhir.html">learn
 more</a>).
 I have also added a simple REPL that shows each reduction step that is done in
-evaluating an expression. I&rsquo;d also like to implement a simple compiler and abstract
+evaluating an expression. I'd also like to implement a simple compiler and abstract
 machine for this project.</p>
-
-<p><strong><a href="https://github.com/0x0f0f0f/minicaml" target="_blank">minicaml</a></strong> only implements basic data types (integers and booleans) and will
-never be a full programming language intended for real world usage. <strong><a href="https://github.com/0x0f0f0f/minicaml" target="_blank">minicaml</a>&rsquo;s only
+<p><strong><a href="https://github.com/0x0f0f0f/minicaml">minicaml</a></strong> only implements basic data types (integers and booleans) and will
+never be a full programming language intended for real world usage. <strong><a href="https://github.com/0x0f0f0f/minicaml">minicaml</a>&lsquo;s only
 purpose is to help students get a grasp of how interpreters and programming
 languages work</strong>.</p>
-
-<p><img src="/posts/images/minicaml.png" alt="minicaml" /></p>
-
+<p><img src="/posts/images/minicaml.png" alt="minicaml"></p>
 <h2 id="features">Features</h2>
-
 <ul>
 <li>Show the AST of each expression</li>
 <li>Only boolean and integer types</li>
@@ -159,39 +151,32 @@ languages work</strong>.</p>
 <li>ocamllex and menhir lexer and parser</li>
 <li>Extensible with ease</li>
 </ul>
-
 <h2 id="installation">Installation</h2>
-
 <p>I will release a binary file (no need to compile) in the near future. To
-install, you need to have <code>opam</code> (OCaml&rsquo;s package manager) and a recent OCaml
+install, you need to have <code>opam</code> (OCaml's package manager) and a recent OCaml
 distribution installed on your system.
-<a href="https://github.com/hanslub42/rlwrap" target="_blank">rlwrap</a> is suggested for a readline-like
+<a href="https://github.com/hanslub42/rlwrap">rlwrap</a> is suggested for a readline-like
 (bash-like) keyboard interface.</p>
-
-<pre><code class="language-bash"># clone the repository
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># clone the repository</span>
 git clone https://github.com/0x0f0f0f/minicaml
-# cd into it
+<span style="color:#75715e"># cd into it</span>
 cd minicaml
-# install dependencies
+<span style="color:#75715e"># install dependencies</span>
 opam install dune menhir ANSITerminal
-# compile
+<span style="color:#75715e"># compile</span>
 make
-# run
+<span style="color:#75715e"># run</span>
 make run
-# rlwrap is suggested
+<span style="color:#75715e"># rlwrap is suggested</span>
 rlwrap make run
-# you can install minicaml with
+<span style="color:#75715e"># you can install minicaml with</span>
 make install
-# run again
+<span style="color:#75715e"># run again</span>
 rlwrap minicaml
-</code></pre>
-
-<h2 id="usage">Usage</h2>
-
+</code></pre></div><h2 id="usage">Usage</h2>
 <p>Run <code>make run</code> to run a REPL. The REPL shows the AST equivalentof each submitted
 expression, and each reduction step in the evaluation is shown. It also signals
 syntactical and semantical errors.</p>
-
 <p>Please let me know if you find bugs or have any improvement in mind!</p>
 
             </div>
@@ -217,6 +202,13 @@ syntactical and semantical errors.</p>
                 </div>
 
                 <div class="pagination__buttons">
+                    
+                        <span class="button previous">
+                            <a href="https://0x0f0f0f.github.io/posts/2019/12/latex-notetaking-texstudio-vs.-latex-workshop-for-vs-code/">
+                                <span class="button__icon">←</span>
+                                <span class="button__text">LaTeX notetaking: TeXStudio VS. LaTeX Workshop for VS Code</span>
+                            </a>
+                        </span>
                     
 
                     

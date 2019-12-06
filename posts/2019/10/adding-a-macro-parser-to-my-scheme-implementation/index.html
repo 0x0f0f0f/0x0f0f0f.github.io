@@ -7,9 +7,9 @@
 <meta name="author"
     content="archetypes false false false true content © 2019 — 0x0f0f0f — All rights reserved. data layouts Alessandro Cheli public true true monokai 20 ">
 <meta name="description"
-    content="Happy Halloween everybody, here&amp;rsquo;s a little report on how I&amp;rsquo;ve added a macro parser to yasih (Yet Another Scheme in Haskell), my own R5RS Scheme implementation written in Haskell.
-At first I&amp;rsquo;ve had to define parsers for quote, quasiquote, and unquote and add them to the expression parser. You can learn more about how scheme quoting works in the MIT-scheme documentation.
--- |Parse a Quoted Expression &#39;a parseQuoted :: Parser LispVal parseQuoted = do char &#39;\&#39;&#39; x &amp;lt;- parseExpr return $ List [Atom &amp;quot;quote&amp;quot;, x] -- |Parse a QuasiQuoted Expression -- See https://schemers." />
+    content="Happy Halloween everybody, here&#39;s a little report on how I&#39;ve added a macro parser to yasih (Yet Another Scheme in Haskell), my own R5RS Scheme implementation written in Haskell.
+At first I&#39;ve had to define parsers for quote, quasiquote, and unquote and add them to the expression parser. You can learn more about how scheme quoting works in the MIT-scheme documentation.
+-- |Parse a Quoted Expression &amp;#39;a parseQuoted :: Parser LispVal parseQuoted = do char &amp;#39;\&amp;#39;&amp;#39; x &amp;lt;- parseExpr return $ List [Atom &amp;#34;quote&amp;#34;, x] -- |Parse a QuasiQuoted Expression -- See https://schemers." />
 <meta name="keywords" content="" />
 <meta name="robots" content="noodp" />
 <link rel="canonical" href="https://0x0f0f0f.github.io/posts/2019/10/adding-a-macro-parser-to-my-scheme-implementation/" />
@@ -39,25 +39,23 @@ At first I&amp;rsquo;ve had to define parsers for quote, quasiquote, and unquote
 <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#252627">
 <link rel="shortcut icon" href="/favicon.ico">
 <meta name="theme-color" content="#252627"><meta itemprop="name" content="Adding a macro parser to my Scheme implementation">
-<meta itemprop="description" content="Happy Halloween everybody, here&rsquo;s a little report on how I&rsquo;ve added a macro parser to yasih (Yet Another Scheme in Haskell), my own R5RS Scheme implementation written in Haskell.
-At first I&rsquo;ve had to define parsers for quote, quasiquote, and unquote and add them to the expression parser. You can learn more about how scheme quoting works in the MIT-scheme documentation.
--- |Parse a Quoted Expression &#39;a parseQuoted :: Parser LispVal parseQuoted = do char &#39;\&#39;&#39; x &lt;- parseExpr return $ List [Atom &quot;quote&quot;, x] -- |Parse a QuasiQuoted Expression -- See https://schemers.">
-
-
+<meta itemprop="description" content="Happy Halloween everybody, here&#39;s a little report on how I&#39;ve added a macro parser to yasih (Yet Another Scheme in Haskell), my own R5RS Scheme implementation written in Haskell.
+At first I&#39;ve had to define parsers for quote, quasiquote, and unquote and add them to the expression parser. You can learn more about how scheme quoting works in the MIT-scheme documentation.
+-- |Parse a Quoted Expression &#39;a parseQuoted :: Parser LispVal parseQuoted = do char &#39;\&#39;&#39; x &lt;- parseExpr return $ List [Atom &#34;quote&#34;, x] -- |Parse a QuasiQuoted Expression -- See https://schemers.">
 <meta itemprop="datePublished" content="2019-10-31T00:00:00&#43;00:00" />
 <meta itemprop="dateModified" content="2019-10-31T00:00:00&#43;00:00" />
 <meta itemprop="wordCount" content="1039">
+<meta itemprop="image" content="https://0x0f0f0f.github.io"/>
 
 
 
-<meta itemprop="keywords" content="functional programming,haskell,lisp,yasih," />
-<meta name="twitter:card" content="summary_large_image"/>
+<meta itemprop="keywords" content="functional programming,haskell,lisp,yasih," /><meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://0x0f0f0f.github.io"/>
 
 <meta name="twitter:title" content="Adding a macro parser to my Scheme implementation"/>
-<meta name="twitter:description" content="Happy Halloween everybody, here&rsquo;s a little report on how I&rsquo;ve added a macro parser to yasih (Yet Another Scheme in Haskell), my own R5RS Scheme implementation written in Haskell.
-At first I&rsquo;ve had to define parsers for quote, quasiquote, and unquote and add them to the expression parser. You can learn more about how scheme quoting works in the MIT-scheme documentation.
--- |Parse a Quoted Expression &#39;a parseQuoted :: Parser LispVal parseQuoted = do char &#39;\&#39;&#39; x &lt;- parseExpr return $ List [Atom &quot;quote&quot;, x] -- |Parse a QuasiQuoted Expression -- See https://schemers."/>
+<meta name="twitter:description" content="Happy Halloween everybody, here&#39;s a little report on how I&#39;ve added a macro parser to yasih (Yet Another Scheme in Haskell), my own R5RS Scheme implementation written in Haskell.
+At first I&#39;ve had to define parsers for quote, quasiquote, and unquote and add them to the expression parser. You can learn more about how scheme quoting works in the MIT-scheme documentation.
+-- |Parse a Quoted Expression &#39;a parseQuoted :: Parser LispVal parseQuoted = do char &#39;\&#39;&#39; x &lt;- parseExpr return $ List [Atom &#34;quote&#34;, x] -- |Parse a QuasiQuoted Expression -- See https://schemers."/>
 
 
 
@@ -132,185 +130,147 @@ At first I&rsquo;ve had to define parsers for quote, quasiquote, and unquote and
             
 
             <div class="post-content">
-                
-
-<p>Happy Halloween everybody, here&rsquo;s a little report on how I&rsquo;ve added a
-macro parser to <a href="https://github.com/0x0f0f0f/yasih" target="_blank">yasih</a> (Yet Another Scheme in Haskell),
+                <p>Happy Halloween everybody, here's a little report on how I've added a
+macro parser to <a href="https://github.com/0x0f0f0f/yasih">yasih</a> (Yet Another Scheme in Haskell),
 my own R5RS Scheme implementation written in Haskell.</p>
+<p>At first I've had to define parsers for <code>quote</code>, <code>quasiquote</code>, and <code>unquote</code> and add them to the expression parser.
+You can learn more about how scheme quoting works <a href="https://www.gnu.org/software/mit-scheme/documentation/mit-scheme-ref/Quoting.html">in the MIT-scheme documentation</a>.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-haskell" data-lang="haskell"><span style="color:#75715e">-- |Parse a Quoted Expression &#39;a</span>
+<span style="color:#a6e22e">parseQuoted</span> <span style="color:#f92672">::</span> <span style="color:#66d9ef">Parser</span> <span style="color:#66d9ef">LispVal</span>
+<span style="color:#a6e22e">parseQuoted</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">do</span>
+    char <span style="color:#e6db74">&#39;</span><span style="color:#ae81ff">\</span><span style="color:#ae81ff">&#39;</span><span style="color:#e6db74">&#39;</span>
+    x <span style="color:#f92672">&lt;-</span> parseExpr
+    return <span style="color:#f92672">$</span> <span style="color:#66d9ef">List</span> [<span style="color:#66d9ef">Atom</span> <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">quote</span><span style="color:#e6db74">&#34;</span>, x]
 
-<p>At first I&rsquo;ve had to define parsers for <code>quote</code>, <code>quasiquote</code>, and <code>unquote</code> and add them to the expression parser.
-You can learn more about how scheme quoting works <a href="https://www.gnu.org/software/mit-scheme/documentation/mit-scheme-ref/Quoting.html" target="_blank">in the MIT-scheme documentation</a>.</p>
+<span style="color:#75715e">-- |Parse a QuasiQuoted Expression</span>
+<span style="color:#75715e">-- See https://schemers.org/Documents/Standards/R5RS/HTML/r5rs-Z-H-7.html#%_sec_4.2.6</span>
+<span style="color:#a6e22e">parseQuasiQuoted</span> <span style="color:#f92672">::</span> <span style="color:#66d9ef">Parser</span> <span style="color:#66d9ef">LispVal</span>
+<span style="color:#a6e22e">parseQuasiQuoted</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">do</span>
+    char <span style="color:#e6db74">&#39;`&#39;</span>
+    x <span style="color:#f92672">&lt;-</span> parseExpr
+    return <span style="color:#f92672">$</span> <span style="color:#66d9ef">List</span> [<span style="color:#66d9ef">Atom</span> <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">quasiquote</span><span style="color:#e6db74">&#34;</span>, x]
 
-<pre><code class="language-haskell">-- |Parse a Quoted Expression 'a
-parseQuoted :: Parser LispVal
-parseQuoted = do
-    char '\''
-    x &lt;- parseExpr
-    return $ List [Atom &quot;quote&quot;, x]
-
--- |Parse a QuasiQuoted Expression
--- See https://schemers.org/Documents/Standards/R5RS/HTML/r5rs-Z-H-7.html#%_sec_4.2.6
-parseQuasiQuoted :: Parser LispVal
-parseQuasiQuoted = do
-    char '`'
-    x &lt;- parseExpr
-    return $ List [Atom &quot;quasiquote&quot;, x]
-
-parseUnQuote :: Parser LispVal
-parseUnQuote = do
-    char ','
-    x &lt;- parseExpr
-    return $ List [Atom &quot;unquote&quot;, x]
-</code></pre>
-
-<p>Expression parser:</p>
-
-<pre><code class="language-haskell">-- |Parse an Expression
-parseExpr :: Parser LispVal
-parseExpr = try parseComplex
-        &lt;|&gt; try parseRatio
-        &lt;|&gt; try parseFloat
-        &lt;|&gt; try parseNumber
-        &lt;|&gt; try parseAtom
-        &lt;|&gt; parseString
-        &lt;|&gt; try parseBool
-        &lt;|&gt; try parseCharacter
-        &lt;|&gt; try parseQuoted
-        &lt;|&gt; try parseQuasiQuoted
-        &lt;|&gt; try parseUnQuote
-        &lt;|&gt; try parseVector
-        &lt;|&gt; try parseParens
-</code></pre>
-
-<p>The symbols <code>'expr</code>, <code>`expr</code>, and <code>,expr</code> are shorthands and are
+<span style="color:#a6e22e">parseUnQuote</span> <span style="color:#f92672">::</span> <span style="color:#66d9ef">Parser</span> <span style="color:#66d9ef">LispVal</span>
+<span style="color:#a6e22e">parseUnQuote</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">do</span>
+    char <span style="color:#e6db74">&#39;,&#39;</span>
+    x <span style="color:#f92672">&lt;-</span> parseExpr
+    return <span style="color:#f92672">$</span> <span style="color:#66d9ef">List</span> [<span style="color:#66d9ef">Atom</span> <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">unquote</span><span style="color:#e6db74">&#34;</span>, x]
+</code></pre></div><p>Expression parser:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-haskell" data-lang="haskell"><span style="color:#75715e">-- |Parse an Expression</span>
+<span style="color:#a6e22e">parseExpr</span> <span style="color:#f92672">::</span> <span style="color:#66d9ef">Parser</span> <span style="color:#66d9ef">LispVal</span>
+<span style="color:#a6e22e">parseExpr</span> <span style="color:#f92672">=</span> try parseComplex
+        <span style="color:#f92672">&lt;|&gt;</span> try parseRatio
+        <span style="color:#f92672">&lt;|&gt;</span> try parseFloat
+        <span style="color:#f92672">&lt;|&gt;</span> try parseNumber
+        <span style="color:#f92672">&lt;|&gt;</span> try parseAtom
+        <span style="color:#f92672">&lt;|&gt;</span> parseString
+        <span style="color:#f92672">&lt;|&gt;</span> try parseBool
+        <span style="color:#f92672">&lt;|&gt;</span> try parseCharacter
+        <span style="color:#f92672">&lt;|&gt;</span> try parseQuoted
+        <span style="color:#f92672">&lt;|&gt;</span> try parseQuasiQuoted
+        <span style="color:#f92672">&lt;|&gt;</span> try parseUnQuote
+        <span style="color:#f92672">&lt;|&gt;</span> try parseVector
+        <span style="color:#f92672">&lt;|&gt;</span> try parseParens
+</code></pre></div><p>The symbols <code>'expr</code>, <code> `expr</code>, and <code>,expr</code> are shorthands and are
 correspondingly transformed by the parser into the
 AST equivalent of the expressions:
 <code>(quote expr)</code>, <code>(quasiquote expr)</code> and <code>(unquote expr)</code>.
 In fact, the shorthand and list syntaxes are interchangeable. <code>unquote</code> makes sense only inside a <code>quasiquote</code>d block</p>
-
 <p>After defining the parsing rules for quoting and unquoting, it is time to define
 the corresponding evaluation rules as <code>eval</code> pattern matching cases:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-haskell" data-lang="haskell"><span style="color:#75715e">-- Evalaute a quoted expression, just return the value.</span>
+<span style="color:#a6e22e">eval</span> env (<span style="color:#66d9ef">List</span> [<span style="color:#66d9ef">Atom</span> <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">quote</span><span style="color:#e6db74">&#34;</span>, val]) <span style="color:#f92672">=</span> return val
+<span style="color:#75715e">-- ...</span>
 
-<pre><code class="language-haskell">-- Evalaute a quoted expression, just return the value.
-eval env (List [Atom &quot;quote&quot;, val]) = return val
--- ...
-
--- Evaluate quasiquotation. AKA macro expander.
--- Recursively evaluate unquote forms, or just return the items if not unquoted
-eval env (List [Atom &quot;quasiquote&quot;, form]) =
+<span style="color:#75715e">-- Evaluate quasiquotation. AKA macro expander.</span>
+<span style="color:#75715e">-- Recursively evaluate unquote forms, or just return the items if not unquoted</span>
+<span style="color:#a6e22e">eval</span> env (<span style="color:#66d9ef">List</span> [<span style="color:#66d9ef">Atom</span> <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">quasiquote</span><span style="color:#e6db74">&#34;</span>, form]) <span style="color:#f92672">=</span>
     evalUnquotes form
-    where evalUnquotes form =
-            case form of
-                List [Atom &quot;unquote&quot;, form] -&gt; eval env form
-                List items -&gt; do
-                    results &lt;- traverse evalUnquotes items
-                    return $ List results
-                _ -&gt; return form
-</code></pre>
-
-<p>Here&rsquo;s an example, showing what happens when entering quoted expressions
-in <strong>yasih</strong>&rsquo;s REPL.</p>
-
-<pre><code class="language-scheme">λ&gt; ; here, the evaluator tries to apply
-λ&gt; (1 2 3) ; 2 and 3 as arguments to a function &quot;1&quot;
-Not a function: : &quot;1&quot;
-λ&gt; ; the result is clearly not a function
-λ&gt; ; the list here is now quoted and will be treated as a literal value
-λ&gt; '(1 2 3)
-(1 2 3)
-λ&gt; `(1 2 3) ; same here but using quasiquote
-(1 2 3)
-λ&gt; `(1 2 ,(+ 4 5)) ; the unquoted expression is evaluated! (un-quoted)!
-(1 2 9)
-</code></pre>
-
-<p>After we have working quotation and quasiquotation it is time to add actual macros to the interpreter.
+    <span style="color:#66d9ef">where</span> evalUnquotes form <span style="color:#f92672">=</span>
+            <span style="color:#66d9ef">case</span> form <span style="color:#66d9ef">of</span>
+                <span style="color:#66d9ef">List</span> [<span style="color:#66d9ef">Atom</span> <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">unquote</span><span style="color:#e6db74">&#34;</span>, form] <span style="color:#f92672">-&gt;</span> eval env form
+                <span style="color:#66d9ef">List</span> items <span style="color:#f92672">-&gt;</span> <span style="color:#66d9ef">do</span>
+                    results <span style="color:#f92672">&lt;-</span> traverse evalUnquotes items
+                    return <span style="color:#f92672">$</span> <span style="color:#66d9ef">List</span> results
+                <span style="color:#66d9ef">_</span> <span style="color:#f92672">-&gt;</span> return form
+</code></pre></div><p>Here's an example, showing what happens when entering quoted expressions
+in <strong>yasih</strong>&lsquo;s REPL.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scheme" data-lang="scheme">λ&gt; <span style="color:#75715e">; here, the evaluator tries to apply</span>
+λ&gt; (<span style="color:#ae81ff">1</span> <span style="color:#ae81ff">2</span> <span style="color:#ae81ff">3</span>) <span style="color:#75715e">; 2 and 3 as arguments to a function &#34;1&#34;</span>
+Not a function: : <span style="color:#e6db74">&#34;1&#34;</span>
+λ&gt; <span style="color:#75715e">; the result is clearly not a function</span>
+λ&gt; <span style="color:#75715e">; the list here is now quoted and will be treated as a literal value</span>
+λ&gt; <span style="color:#f92672">&#39;</span>(<span style="color:#ae81ff">1</span> <span style="color:#ae81ff">2</span> <span style="color:#ae81ff">3</span>)
+(<span style="color:#ae81ff">1</span> <span style="color:#ae81ff">2</span> <span style="color:#ae81ff">3</span>)
+λ&gt; <span style="color:#f92672">`</span>(<span style="color:#ae81ff">1</span> <span style="color:#ae81ff">2</span> <span style="color:#ae81ff">3</span>) <span style="color:#75715e">; same here but using quasiquote</span>
+(<span style="color:#ae81ff">1</span> <span style="color:#ae81ff">2</span> <span style="color:#ae81ff">3</span>)
+λ&gt; <span style="color:#f92672">`</span>(<span style="color:#ae81ff">1</span> <span style="color:#ae81ff">2</span> <span style="color:#f92672">,</span>(+ <span style="color:#ae81ff">4</span> <span style="color:#ae81ff">5</span>)) <span style="color:#75715e">; the unquoted expression is evaluated! (un-quoted)!</span>
+(<span style="color:#ae81ff">1</span> <span style="color:#ae81ff">2</span> <span style="color:#ae81ff">9</span>)
+</code></pre></div><p>After we have working quotation and quasiquotation it is time to add actual macros to the interpreter.
 I had to change the expression data type by adding an <code>isMacro</code> field.</p>
-
-<pre><code class="language-haskell">-- |Lisp Value data type
-data LispVal =
-    -- Other data types here...
-    | Func {
-        isMacro :: Bool,
-        params :: [String], -- Parameters name
-        vararg :: Maybe String, -- name of a variable-length argument list
-        body :: [LispVal], -- list of expressions
-        closure :: Env -- the environment where the function was created
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-haskell" data-lang="haskell"><span style="color:#75715e">-- |Lisp Value data type</span>
+<span style="color:#66d9ef">data</span> <span style="color:#66d9ef">LispVal</span> <span style="color:#f92672">=</span>
+    <span style="color:#75715e">-- Other data types here...</span>
+    <span style="color:#f92672">|</span> <span style="color:#66d9ef">Func</span> {
+        isMacro <span style="color:#f92672">::</span> <span style="color:#66d9ef">Bool</span>,
+        params <span style="color:#f92672">::</span> [<span style="color:#66d9ef">String</span>], <span style="color:#75715e">-- Parameters name</span>
+        vararg <span style="color:#f92672">::</span> <span style="color:#66d9ef">Maybe</span> <span style="color:#66d9ef">String</span>, <span style="color:#75715e">-- name of a variable-length argument list</span>
+        body <span style="color:#f92672">::</span> [<span style="color:#66d9ef">LispVal</span>], <span style="color:#75715e">-- list of expressions</span>
+        closure <span style="color:#f92672">::</span> <span style="color:#66d9ef">Env</span> <span style="color:#75715e">-- the environment where the function was created</span>
         }
-    | IOFunc ([LispVal] -&gt; IOThrowsError LispVal) -- A dirty function that performs IO
-    | Port Handle -- Represents input and output devices
-</code></pre>
-
-<p>The important bit was changing <code>eval</code>&rsquo;s function application clause by
+    <span style="color:#f92672">|</span> <span style="color:#66d9ef">IOFunc</span> ([<span style="color:#66d9ef">LispVal</span>] <span style="color:#f92672">-&gt;</span> <span style="color:#66d9ef">IOThrowsError</span> <span style="color:#66d9ef">LispVal</span>) <span style="color:#75715e">-- A dirty function that performs IO</span>
+    <span style="color:#f92672">|</span> <span style="color:#66d9ef">Port</span> <span style="color:#66d9ef">Handle</span> <span style="color:#75715e">-- Represents input and output devices</span>
+</code></pre></div><p>The important bit was changing <code>eval</code>'s function application clause by
 checking if a called function is a macro, and if so changing
 from eager evaluation order of the arguments to a normal-order evaluation.
-Read more about evaluation models <a href="https://cs.stackexchange.com/questions/54000/is-applicative-order-and-normal-order-evaluation-models-definition-contradictor" target="_blank">here</a> (huge thanks to Rei for the link).</p>
-
-<pre><code class="language-haskell">-- Function application clause
--- Run eval recursively over args then apply func over the resulting list
-eval env (List (function : args)) = do
-    func &lt;- eval env function
-    case func of
-        Func {isMacro = True} -&gt; apply func args &gt;&gt;= eval env
-        _ -&gt; mapM (eval env) args &gt;&gt;= apply func
-</code></pre>
-
-<p>You can see that if the applied function is a macro, then <code>eval env</code> is not called over the arguments.
+Read more about evaluation models <a href="https://cs.stackexchange.com/questions/54000/is-applicative-order-and-normal-order-evaluation-models-definition-contradictor">here</a> (huge thanks to Rei for the link).</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-haskell" data-lang="haskell"><span style="color:#75715e">-- Function application clause</span>
+<span style="color:#75715e">-- Run eval recursively over args then apply func over the resulting list</span>
+<span style="color:#a6e22e">eval</span> env (<span style="color:#66d9ef">List</span> (function <span style="color:#66d9ef">:</span> args)) <span style="color:#f92672">=</span> <span style="color:#66d9ef">do</span>
+    func <span style="color:#f92672">&lt;-</span> eval env function
+    <span style="color:#66d9ef">case</span> func <span style="color:#66d9ef">of</span>
+        <span style="color:#66d9ef">Func</span> {isMacro <span style="color:#f92672">=</span> <span style="color:#66d9ef">True</span>} <span style="color:#f92672">-&gt;</span> apply func args <span style="color:#f92672">&gt;&gt;=</span> eval env
+        <span style="color:#66d9ef">_</span> <span style="color:#f92672">-&gt;</span> mapM (eval env) args <span style="color:#f92672">&gt;&gt;=</span> apply func
+</code></pre></div><p>You can see that if the applied function is a macro, then <code>eval env</code> is not called over the arguments.
 Minor changes were needed also in <code>apply</code>, just adding an <code>isMacro</code> deconstructor to the case where <code>Func</code>
-is passed as an argument. It is not needed by now inside <code>apply</code>&rsquo;s body.</p>
-
-<pre><code class="language-haskell">apply (Func isMacro params varargs body closure) args =
-    -- more code...
-</code></pre>
-
-<p>Now, it&rsquo;s time to add some helper functions in <code>Environment.hs</code> to make a macro</p>
-
-<pre><code class="language-haskell">-- |Helper functions to create function objects in IOThrowsError monad
-makeFunc :: Bool -&gt; Maybe String -&gt; Env -&gt; [LispVal] -&gt; [LispVal] -&gt; IOThrowsError LispVal
-makeFunc isMacro varargs env params body = return $ Func isMacro (map showVal params) varargs body env
-makeNormalFunc = makeFunc False Nothing
-makeVarargs = makeFunc False . Just . showVal
-makeMacro = makeFunc True Nothing
-</code></pre>
-
-<p>Finally, a <code>define-syntax</code> form can be defined to make macros.
+is passed as an argument. It is not needed by now inside <code>apply</code>'s body.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-haskell" data-lang="haskell"><span style="color:#a6e22e">apply</span> (<span style="color:#66d9ef">Func</span> isMacro params varargs body closure) args <span style="color:#f92672">=</span>
+    <span style="color:#75715e">-- more code...</span>
+</code></pre></div><p>Now, it's time to add some helper functions in <code>Environment.hs</code> to make a macro</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-haskell" data-lang="haskell"><span style="color:#75715e">-- |Helper functions to create function objects in IOThrowsError monad</span>
+<span style="color:#a6e22e">makeFunc</span> <span style="color:#f92672">::</span> <span style="color:#66d9ef">Bool</span> <span style="color:#f92672">-&gt;</span> <span style="color:#66d9ef">Maybe</span> <span style="color:#66d9ef">String</span> <span style="color:#f92672">-&gt;</span> <span style="color:#66d9ef">Env</span> <span style="color:#f92672">-&gt;</span> [<span style="color:#66d9ef">LispVal</span>] <span style="color:#f92672">-&gt;</span> [<span style="color:#66d9ef">LispVal</span>] <span style="color:#f92672">-&gt;</span> <span style="color:#66d9ef">IOThrowsError</span> <span style="color:#66d9ef">LispVal</span>
+<span style="color:#a6e22e">makeFunc</span> isMacro varargs env params body <span style="color:#f92672">=</span> return <span style="color:#f92672">$</span> <span style="color:#66d9ef">Func</span> isMacro (map showVal params) varargs body env
+<span style="color:#a6e22e">makeNormalFunc</span> <span style="color:#f92672">=</span> makeFunc <span style="color:#66d9ef">False</span> <span style="color:#66d9ef">Nothing</span>
+<span style="color:#a6e22e">makeVarargs</span> <span style="color:#f92672">=</span> makeFunc <span style="color:#66d9ef">False</span> <span style="color:#f92672">.</span> <span style="color:#66d9ef">Just</span> <span style="color:#f92672">.</span> showVal
+<span style="color:#a6e22e">makeMacro</span> <span style="color:#f92672">=</span> makeFunc <span style="color:#66d9ef">True</span> <span style="color:#66d9ef">Nothing</span>
+</code></pre></div><p>Finally, a <code>define-syntax</code> form can be defined to make macros.
 I have not yet implemented <code>syntax-rules</code> but i surely will in the next <strong>yasih</strong> updates.</p>
-
-<pre><code class="language-haskell">-- Define a macro
-eval env (List (Atom &quot;define-syntax&quot; : List (Atom var : params) : body)) =
-    makeMacro env params body &gt;&gt;= defineVar env var
-</code></pre>
-
-<p>Here&rsquo;s an example on how you can make a macro and use it as a practical construct
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-haskell" data-lang="haskell"><span style="color:#75715e">-- Define a macro</span>
+<span style="color:#a6e22e">eval</span> env (<span style="color:#66d9ef">List</span> (<span style="color:#66d9ef">Atom</span> <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">define-syntax</span><span style="color:#e6db74">&#34;</span> <span style="color:#66d9ef">:</span> <span style="color:#66d9ef">List</span> (<span style="color:#66d9ef">Atom</span> var <span style="color:#66d9ef">:</span> params) <span style="color:#66d9ef">:</span> body)) <span style="color:#f92672">=</span>
+    makeMacro env params body <span style="color:#f92672">&gt;&gt;=</span> defineVar env var
+</code></pre></div><p>Here's an example on how you can make a macro and use it as a practical construct
 for a programming language.
 Here, the <code>let</code> statement is defined as a macro that will expand to an anonymous function
 (lambda) application, in this way a closure will be made and lexical scoping will be respected,
-correctly reaching the <code>let</code> statement&rsquo;s goals. The implementation is a little sketchy and
+correctly reaching the <code>let</code> statement's goals. The implementation is a little sketchy and
 will surely get better as <code>syntax-rules</code> gets implemented.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scheme" data-lang="scheme">(<span style="color:#66d9ef">define-syntax </span>(<span style="color:#a6e22e">bind-vars</span> bindings)
+    <span style="color:#f92672">`</span>(map car bindings))
 
-<pre><code class="language-scheme">(define-syntax (bind-vars bindings)
-    `(map car bindings))
+(<span style="color:#66d9ef">define-syntax </span>(<span style="color:#a6e22e">bind-vals</span> bindings)
+    <span style="color:#f92672">`</span>(map cadr bindings))
 
-(define-syntax (bind-vals bindings)
-    `(map cadr bindings))
-
-(define-syntax (let bindings body)
-    `(apply (lambda ,(bind-vars bindings) ,body) ',(bind-vals bindings)))
-</code></pre>
-
-<pre><code class="language-scheme">(let ((x 1) (y 4)) (- (* y y) (+ 1 x)))
-; will expand to
-((lambda (x y) (- (* y y) (+ 1 x))) 1 4)
-; before being executed
-</code></pre>
-
-<p>This practice is called <code>let-over-lambda</code>.
+(<span style="color:#66d9ef">define-syntax </span>(<span style="color:#66d9ef">let </span>bindings body)
+    <span style="color:#f92672">`</span>(apply (<span style="color:#66d9ef">lambda </span><span style="color:#f92672">,</span>(<span style="color:#a6e22e">bind-vars</span> bindings) <span style="color:#f92672">,</span>body) <span style="color:#e6db74">&#39;,</span>(<span style="color:#a6e22e">bind-vals</span> bindings)))
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scheme" data-lang="scheme">(<span style="color:#66d9ef">let </span>((<span style="color:#a6e22e">x</span> <span style="color:#ae81ff">1</span>) (<span style="color:#a6e22e">y</span> <span style="color:#ae81ff">4</span>)) (- (* y y) (+ <span style="color:#ae81ff">1</span> x)))
+<span style="color:#75715e">; will expand to</span>
+((<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">x</span> y) (- (* y y) (+ <span style="color:#ae81ff">1</span> x))) <span style="color:#ae81ff">1</span> <span style="color:#ae81ff">4</span>)
+<span style="color:#75715e">; before being executed</span>
+</code></pre></div><p>This practice is called <code>let-over-lambda</code>.
 Some modern functional programming languages like OCaml, directly create a closure instead of
 creating an anonymous function for <code>let</code> statements;
 that practice is fairly more performant, but the execution result is identical.</p>
-
-<h2 id="some-updates-on-yasih-s-development">Some updates on yasih&rsquo;s development.</h2>
-
+<h2 id="some-updates-on-yasihs-development">Some updates on yasih's development.</h2>
 <p>A sketchy complete R5RS implementation is almost done.
 Some primitives are still missing and I will work on them in the next updates, in which I will also
 focus on adding additional features like string interpolation, stack tracing, and probably

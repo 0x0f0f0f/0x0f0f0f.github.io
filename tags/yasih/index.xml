@@ -17,9 +17,9 @@
       <pubDate>Thu, 31 Oct 2019 00:00:00 +0000</pubDate>
       
       <guid>https://0x0f0f0f.github.io/posts/2019/10/adding-a-macro-parser-to-my-scheme-implementation/</guid>
-      <description>Happy Halloween everybody, here&amp;rsquo;s a little report on how I&amp;rsquo;ve added a macro parser to yasih (Yet Another Scheme in Haskell), my own R5RS Scheme implementation written in Haskell.
-At first I&amp;rsquo;ve had to define parsers for quote, quasiquote, and unquote and add them to the expression parser. You can learn more about how scheme quoting works in the MIT-scheme documentation.
--- |Parse a Quoted Expression &#39;a parseQuoted :: Parser LispVal parseQuoted = do char &#39;\&#39;&#39; x &amp;lt;- parseExpr return $ List [Atom &amp;quot;quote&amp;quot;, x] -- |Parse a QuasiQuoted Expression -- See https://schemers.</description>
+      <description>Happy Halloween everybody, here&#39;s a little report on how I&#39;ve added a macro parser to yasih (Yet Another Scheme in Haskell), my own R5RS Scheme implementation written in Haskell.
+At first I&#39;ve had to define parsers for quote, quasiquote, and unquote and add them to the expression parser. You can learn more about how scheme quoting works in the MIT-scheme documentation.
+-- |Parse a Quoted Expression &amp;#39;a parseQuoted :: Parser LispVal parseQuoted = do char &amp;#39;\&amp;#39;&amp;#39; x &amp;lt;- parseExpr return $ List [Atom &amp;#34;quote&amp;#34;, x] -- |Parse a QuasiQuoted Expression -- See https://schemers.</description>
     </item>
     
     <item>
@@ -29,7 +29,7 @@ At first I&amp;rsquo;ve had to define parsers for quote, quasiquote, and unquote
       
       <guid>https://0x0f0f0f.github.io/posts/2019/09/learn-functional-programming-by-writing-a-scheme-in-haskell/</guid>
       <description>How to make your first functional programming language. A book review. After taking an introductory functional programming course last year I have decided to dive into Functional Programming in a challenging way.
-At the beginning of the summer I&amp;rsquo;ve asked an experienced friend some ideas for a summer project. He suggested me to implement R5RS Scheme (Revised(5) Report on the Algorithmic Language Scheme) in Haskell. Scheme is called a dialect of LISP (LIst PRocessor), a family of programming languages with a long history, famous for its fully parenthesized prefix notation.</description>
+At the beginning of the summer I&#39;ve asked an experienced friend some ideas for a summer project. He suggested me to implement R5RS Scheme (Revised(5) Report on the Algorithmic Language Scheme) in Haskell. Scheme is called a dialect of LISP (LIst PRocessor), a family of programming languages with a long history, famous for its fully parenthesized prefix notation.</description>
     </item>
     
   </channel>

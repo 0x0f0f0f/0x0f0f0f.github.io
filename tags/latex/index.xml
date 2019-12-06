@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>latex on 0x0f0f0f</title>
+    <link>https://0x0f0f0f.github.io/tags/latex/</link>
+    <description>Recent content in latex on 0x0f0f0f</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 06 Dec 2019 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://0x0f0f0f.github.io/tags/latex/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>LaTeX notetaking: TeXStudio VS. LaTeX Workshop for VS Code</title>
+      <link>https://0x0f0f0f.github.io/posts/2019/12/latex-notetaking-texstudio-vs.-latex-workshop-for-vs-code/</link>
+      <pubDate>Fri, 06 Dec 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://0x0f0f0f.github.io/posts/2019/12/latex-notetaking-texstudio-vs.-latex-workshop-for-vs-code/</guid>
+      <description>LaTeX in brief LaTeX is the most used document preparation system in the academia world, derived from the TeX typesetting system, first written by the Legendary Donald Knuth. It is a textual markup language for producing digitally distributed files, ready to be printed. In this article I will not cover the basics of LaTeX. If you want to learn more, you can head over to the excellent WikiBook. If you have any questions you can query the huge database of answered questions at Tex Stack Exchange</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -5,8 +5,355 @@
         <description>Recent content in Posts on 0x0f0f0f</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>en-us</language>
-        <lastBuildDate>Wed, 04 Dec 2019 00:00:00 +0000</lastBuildDate>
+        <lastBuildDate>Fri, 06 Dec 2019 00:00:00 +0000</lastBuildDate>
         <atom:link href="https://0x0f0f0f.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+        
+        <item>
+            <title>LaTeX notetaking: TeXStudio VS. LaTeX Workshop for VS Code</title>
+            <link>https://0x0f0f0f.github.io/posts/2019/12/latex-notetaking-texstudio-vs.-latex-workshop-for-vs-code/</link>
+            <pubDate>Fri, 06 Dec 2019 00:00:00 +0000</pubDate>
+            
+            <guid>https://0x0f0f0f.github.io/posts/2019/12/latex-notetaking-texstudio-vs.-latex-workshop-for-vs-code/</guid>
+            <description>LaTeX in brief LaTeX is the most used document preparation system in the academia world, derived from the TeX typesetting system, first written by the Legendary Donald Knuth. It is a textual markup language for producing digitally distributed files, ready to be printed. In this article I will not cover the basics of LaTeX. If you want to learn more, you can head over to the excellent WikiBook. If you have any questions you can query the huge database of answered questions at Tex Stack Exchange</description>
+            <content type="html"><![CDATA[<h2 id="latex-in-brief">LaTeX in brief</h2>
+<p><strong><a href="https://en.wikipedia.org/wiki/LaTeX">LaTeX</a></strong> is the most used document
+preparation system in the academia world, derived from the <em>TeX</em> typesetting
+system, first written by the Legendary <a href="https://en.wikipedia.org/wiki/Donald_Knuth">Donald
+Knuth</a>. It is a textual markup
+language for producing digitally distributed files, ready to be printed. In this
+article I will not cover the basics of LaTeX. If you want to learn more, you can
+head over to the excellent <a href="https://en.wikibooks.org/wiki/LaTeX">WikiBook</a>.
+If you have any questions you can query the huge database of answered
+questions at <a href="https://tex.stackexchange.com/">Tex Stack Exchange</a></p>
+<p>I first stumbled into LaTeX as a first year computer science student, I was
+taking lecture notes in markdown and I wanted to include mathematical notation
+in them. At first, I've started using <a href="https://www.mathjax.org/">MathJax</a>, a
+cross-browser JavaScript library used to display mathematical notation in
+browsers; I didn't know anything about the TeX world yet, except that it was the
+standard for writing books and scientific papers. I kept taking notes in
+markdown for a couple of months while thinking that LaTeX was somehow
+complicated and esoteric, until one day. I was in my discrete maths and linear
+algebra Professor's office to ask some questions related to the courses. Prof.
+Berarducci, always eager to answer his students&rsquo; questions,
+noticed that I was making a mess by mixing up markdown and LaTeX.
+He began to show me how he writes notes, slides and papers using <strong>TeXStudio</strong>,
+and he showed me some tips and tricks to write
+<a href="https://www.overleaf.com/learn/latex/Multi-file_LaTeX_projects">preludes</a> for
+projects that make use of a lot of mathematical notation. This is how I've got
+introduced to the world of writing LaTeX. In less than half an hour I had the
+knowledge to write not perfect, but at least readable lecture notes in a basic
+Mathematics course.</p>
+<h2 id="texstudio-the-good-and-the-bad">TeXStudio, the good and the bad.</h2>
+<p><a href="http://www.texstudio.org/">TeXStudio</a> is a cross-platform open-source LaTeX
+editor and IDE. It is a great TeX writing environment if it is your first time
+approaching LaTeX. The UX is fine, what you have is an almost WYSIWYG editor
+written in C++ using the Qt GUI toolkit. There are configurable shortcuts for
+almost everything, from inserting environments to handling tables and files.
+What you have is also a nicely documented set of menus and buttons, that help you
+format and insert symbols, graphics, figures, environments into your documents.
+I've installed TeXStudio from
+<a href="https://flathub.org/apps/details/org.texstudio.TeXstudio">flatpak</a>, the package
+already contains a LaTeX distribution to compile your documents, which is not
+included if you install TeXStudio manually on your system. Flatpak-ed
+applications also have their own advantages and downsides, but I will not focus
+on discussing them this time.</p>
+<p><img src="/posts/images/texstudio.png" alt="A screenshot of TeXStudio"></p>
+<p>The downsides of TeXStudio are many. The first one is that it is configured in
+a single <code>.ini</code> file, making it quite annoying to configure if not from the
+graphical interface. This also makes it hard to sync TeXStudio settings across
+different machines. The themes are not so great looking and the PDF viewer has
+some noteworthy bugs. Another downside is that when you first <em>level up</em> from
+discovering LaTeX, and begin to take lecture notes in the editor, the default
+keyboard shortcuts are not friendly for <em>sped up</em> typing. The flatpak install is
+also quite bulky (1.8 GB since it includes a full LaTeX compiler distribution).</p>
+<h2 id="migrating-to-visual-studio-code">Migrating to Visual Studio Code</h2>
+<p>If I have to write code or text for small projects, I use the amazing
+<a href="https://kakoune.org/">kakoune</a> editor, if I'm working on big projects where
+advanced code linting, autocompletion and IDE features are needed <a href="https://code.visualstudio.com/">Visual Studio
+Code</a> is my editor of choice. The editor itself
+is great. There is a <a href="https://github.com/viatsko/awesome-vscode">good set</a> of
+available extensions that you can install with a click, it is relatively fast
+and it provides everything you may need for working with version control in your
+repositories. There is also support for external debuggers, a full-screen zen
+mode and it is configured with JSON files (more on configuration in the next
+paragraphs). A noticeable downside is that it is written in Electron, and here
+why <a href="https://drewdevault.com/2016/11/24/Electron-considered-harmful.html">Electron is considered
+harmful</a>
+(but VSCode is still a great text editor).</p>
+<p>For my LaTeX documents, I've migrated from TeXStudio to VSCode because I want to
+use a single text editor for all of my projects. You need to have a working LaTeX
+distribution with the <code>tlmgr</code> package manager to install the packages that you
+are going to include in your files.</p>
+<h2 id="here-are-the-extension-and-config-files-im-using-for-texing-in-vscode">Here are the extension and config files I'm using for TeX-ing in VSCode:</h2>
+<h3 id="extensions">Extensions:</h3>
+<ol>
+<li><a href="https://marketplace.visualstudio.com/items?itemName=James-Yu.latex-workshop">LaTeX Workshop</a>:
+An extension that boosts LaTeX typesetting efficiency with preview, compile,
+autocomplete, colorize, and more.</li>
+<li><a href="https://marketplace.visualstudio.com/items?itemName=stkb.rewrap">Rewrap</a>:
+Re-wraps comments and other text to a given line length.</li>
+<li><a href="https://marketplace.visualstudio.com/items?itemName=Shan.code-settings-sync">Settings Sync</a>:
+Synchronize Settings, Snippets, Themes, File Icons, Launch, Keybindings,
+Workspaces and Extensions Across Multiple Machines Using GitHub Gist.</li>
+<li><a href="https://marketplace.visualstudio.com/items?itemName=Gruntfuggly.todo-tree">Todo Tree</a>:
+Show a tree of comments containing <code>TODO</code> in your code project. Really helpful to get stuff done!</li>
+<li><a href="https://marketplace.visualstudio.com/items?itemName=siegebell.prettify-symbols-mode">Prettify Symbols Mode</a>:
+Displays identifiers &amp; symbols using more aesthetically pleasing symbols.</li>
+<li>The <a href="https://marketplace.visualstudio.com/items?itemName=srcery-colors.srcery-colors">Srcery color scheme</a></li>
+</ol>
+<h3 id="writing-computer-architecture-notes-in-zenmode-vscode">Writing Computer Architecture Notes in zen-mode VSCode:</h3>
+<p><img src="/posts/images/vscodetex1.png" alt="Writing Computer Architecture Notes in VSCode"></p>
+<h3 id="writing-probability-notes-in-zenmode-vscode">Writing Probability Notes in zen-mode VSCode:</h3>
+<p><img src="/posts/images/vscodetex2.png" alt="Writing Probability Notes in VSCode"></p>
+<h3 id="configuration-files">Configuration Files:</h3>
+<p>Here is my <code>settings.json</code> file, with the most important section being <code>prettifySymbolsMode.substitutions</code>.
+In that sections you can specify which identifiers are to be substituted by the
+&ldquo;<em>pretty</em>&rdquo; symbols by the <strong>Prettify Symbols Mode</strong> extension. When your cursor
+falls on the prettified symbol, the &ldquo;real&rdquo; (ugly) text will be displayed. This
+is a really useful feature for writing LaTeX because you can replace an ugly command like
+<code>\alpha</code> with the human readable Unicode character counterpart <code>α</code> in the source
+code. This make editing mathematical formulas a lot more pleasing than, let's
+say, writing them in TeXStudio.
+My settings file contains <strong>LaTeX</strong>, Haskell and OCaml identifiers with their pretty substitutions.</p>
+<p>Find the configuration files in this <a href="https://gist.github.com/0x0f0f0f/fb9d1b950587e32f650cd01d7328b5b1">Github
+Gist</a>.</p>
+<p><code>settings.json</code></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{
+    <span style="color:#f92672">&#34;window.zoomLevel&#34;</span>: <span style="color:#ae81ff">0</span>,
+    <span style="color:#f92672">&#34;editor.suggestSelection&#34;</span>: <span style="color:#e6db74">&#34;first&#34;</span>,
+    <span style="color:#f92672">&#34;vsintellicode.modify.editor.suggestSelection&#34;</span>: <span style="color:#e6db74">&#34;automaticallyOverrodeDefaultValue&#34;</span>,
+    <span style="color:#f92672">&#34;latex-workshop.chktex.enabled&#34;</span>: <span style="color:#66d9ef">true</span>,
+    <span style="color:#f92672">&#34;latex-workshop.synctex.afterBuild.enabled&#34;</span>: <span style="color:#66d9ef">true</span>,
+    <span style="color:#f92672">&#34;latex-workshop.view.pdf.viewer&#34;</span>: <span style="color:#e6db74">&#34;tab&#34;</span>,
+    <span style="color:#f92672">&#34;editor.fontSize&#34;</span>: <span style="color:#ae81ff">12</span>,
+    <span style="color:#f92672">&#34;prettifySymbolsMode.revealOn&#34;</span>: <span style="color:#e6db74">&#34;cursor&#34;</span>,
+    <span style="color:#f92672">&#34;prettifySymbolsMode.adjustCursorMovement&#34;</span>: <span style="color:#66d9ef">false</span>,
+    <span style="color:#f92672">&#34;prettifySymbolsMode.substitutions&#34;</span>: [{
+      <span style="color:#f92672">&#34;language&#34;</span>: <span style="color:#e6db74">&#34;latex&#34;</span>,
+      <span style="color:#f92672">&#34;revealOn&#34;</span>: <span style="color:#e6db74">&#34;selection&#34;</span>,
+      <span style="color:#f92672">&#34;substitutions&#34;</span>: [
+        { <span style="color:#f92672">&#34;ugly&#34;</span>: <span style="color:#e6db74">&#34;\\\\alpha&#34;</span>,      <span style="color:#f92672">&#34;pretty&#34;</span>: <span style="color:#e6db74">&#34;α&#34;</span> },
+        { <span style="color:#f92672">&#34;ugly&#34;</span>: <span style="color:#e6db74">&#34;\\\\beta&#34;</span>,       <span style="color:#f92672">&#34;pretty&#34;</span>: <span style="color:#e6db74">&#34;β&#34;</span> },
+        { <span style="color:#f92672">&#34;ugly&#34;</span>: <span style="color:#e6db74">&#34;\\\\gamma&#34;</span>,      <span style="color:#f92672">&#34;pretty&#34;</span>: <span style="color:#e6db74">&#34;γ&#34;</span> },
+        { <span style="color:#f92672">&#34;ugly&#34;</span>: <span style="color:#e6db74">&#34;\\\\delta&#34;</span>,      <span style="color:#f92672">&#34;pretty&#34;</span>: <span style="color:#e6db74">&#34;δ&#34;</span> },
+        { <span style="color:#f92672">&#34;ugly&#34;</span>: <span style="color:#e6db74">&#34;\\\\epsilon&#34;</span>,    <span style="color:#f92672">&#34;pretty&#34;</span>: <span style="color:#e6db74">&#34;ε&#34;</span> },
+        { <span style="color:#f92672">&#34;ugly&#34;</span>: <span style="color:#e6db74">&#34;\\\\zeta&#34;</span>,       <span style="color:#f92672">&#34;pretty&#34;</span>: <span style="color:#e6db74">&#34;ζ&#34;</span> },
+        { <span style="color:#f92672">&#34;ugly&#34;</span>: <span style="color:#e6db74">&#34;\\\\eta&#34;</span>,        <span style="color:#f92672">&#34;pretty&#34;</span>: <span style="color:#e6db74">&#34;η&#34;</span> },
+        { <span style="color:#f92672">&#34;ugly&#34;</span>: <span style="color:#e6db74">&#34;\\\\theta&#34;</span>,      <span style="color:#f92672">&#34;pretty&#34;</span>: <span style="color:#e6db74">&#34;θ&#34;</span> },
+        { <span style="color:#f92672">&#34;ugly&#34;</span>: <span style="color:#e6db74">&#34;\\\\iota&#34;</span>,       <span style="color:#f92672">&#34;pretty&#34;</span>: <span style="color:#e6db74">&#34;ι&#34;</span> },
+        { <span style="color:#f92672">&#34;ugly&#34;</span>: <span style="color:#e6db74">&#34;\\\\kappa&#34;</span>,      <span style="color:#f92672">&#34;pretty&#34;</span>: <span style="color:#e6db74">&#34;κ&#34;</span> },
+        { <span style="color:#f92672">&#34;ugly&#34;</span>: <span style="color:#e6db74">&#34;\\\\lambda&#34;</span>,     <span style="color:#f92672">&#34;pretty&#34;</span>: <span style="color:#e6db74">&#34;λ&#34;</span> },
+        { <span style="color:#f92672">&#34;ugly&#34;</span>: <span style="color:#e6db74">&#34;\\\\mu&#34;</span>,         <span style="color:#f92672">&#34;pretty&#34;</span>: <span style="color:#e6db74">&#34;μ&#34;</span> },
+        { <span style="color:#f92672">&#34;ugly&#34;</span>: <span style="color:#e6db74">&#34;\\\\nu&#34;</span>,         <span style="color:#f92672">&#34;pretty&#34;</span>: <span style="color:#e6db74">&#34;ν&#34;</span> },
+        { <span style="color:#f92672">&#34;ugly&#34;</span>: <span style="color:#e6db74">&#34;\\\\xi&#34;</span>,         <span style="color:#f92672">&#34;pretty&#34;</span>: <span style="color:#e6db74">&#34;ξ&#34;</span> },
+        { <span style="color:#f92672">&#34;ugly&#34;</span>: <span style="color:#e6db74">&#34;\\\\omikron&#34;</span>,    <span style="color:#f92672">&#34;pretty&#34;</span>: <span style="color:#e6db74">&#34;o&#34;</span> },
+        { <span style="color:#f92672">&#34;ugly&#34;</span>: <span style="color:#e6db74">&#34;\\\\pi&#34;</span>,         <span style="color:#f92672">&#34;pretty&#34;</span>: <span style="color:#e6db74">&#34;π&#34;</span> },
+        { <span style="color:#f92672">&#34;ugly&#34;</span>: <span style="color:#e6db74">&#34;\\\\rho&#34;</span>,        <span style="color:#f92672">&#34;pretty&#34;</span>: <span style="color:#e6db74">&#34;ρ&#34;</span> },
+        { <span style="color:#f92672">&#34;ugly&#34;</span>: <span style="color:#e6db74">&#34;\\\\sigma&#34;</span>,      <span style="color:#f92672">&#34;pretty&#34;</span>: <span style="color:#e6db74">&#34;σ&#34;</span> },
+        { <span style="color:#f92672">&#34;ugly&#34;</span>: <span style="color:#e6db74">&#34;\\\\tau&#34;</span>,        <span style="color:#f92672">&#34;pretty&#34;</span>: <span style="color:#e6db74">&#34;τ&#34;</span> },
+        { <span style="color:#f92672">&#34;ugly&#34;</span>: <span style="color:#e6db74">&#34;\\\\upsilon&#34;</span>,    <span style="color:#f92672">&#34;pretty&#34;</span>: <span style="color:#e6db74">&#34;υ&#34;</span> },
+        { <span style="color:#f92672">&#34;ugly&#34;</span>: <span style="color:#e6db74">&#34;\\\\phi&#34;</span>,        <span style="color:#f92672">&#34;pretty&#34;</span>: <span style="color:#e6db74">&#34;φ&#34;</span> },
+        { <span style="color:#f92672">&#34;ugly&#34;</span>: <span style="color:#e6db74">&#34;\\\\chi&#34;</span>,        <span style="color:#f92672">&#34;pretty&#34;</span>: <span style="color:#e6db74">&#34;χ&#34;</span> },
+        { <span style="color:#f92672">&#34;ugly&#34;</span>: <span style="color:#e6db74">&#34;\\\\psi&#34;</span>,        <span style="color:#f92672">&#34;pretty&#34;</span>: <span style="color:#e6db74">&#34;ψ&#34;</span> },
+        { <span style="color:#f92672">&#34;ugly&#34;</span>: <span style="color:#e6db74">&#34;\\\\omega&#34;</span>,      <span style="color:#f92672">&#34;pretty&#34;</span>: <span style="color:#e6db74">&#34;ω&#34;</span> },
+        { <span style="color:#f92672">&#34;ugly&#34;</span>: <span style="color:#e6db74">&#34;\\\\Alpha&#34;</span>,      <span style="color:#f92672">&#34;pretty&#34;</span>: <span style="color:#e6db74">&#34;Α&#34;</span> },
+        { <span style="color:#f92672">&#34;ugly&#34;</span>: <span style="color:#e6db74">&#34;\\\\Beta&#34;</span>,       <span style="color:#f92672">&#34;pretty&#34;</span>: <span style="color:#e6db74">&#34;Β&#34;</span> },
+        { <span style="color:#f92672">&#34;ugly&#34;</span>: <span style="color:#e6db74">&#34;\\\\Gamma&#34;</span>,      <span style="color:#f92672">&#34;pretty&#34;</span>: <span style="color:#e6db74">&#34;Γ&#34;</span> },
+        { <span style="color:#f92672">&#34;ugly&#34;</span>: <span style="color:#e6db74">&#34;\\\\Delta&#34;</span>,      <span style="color:#f92672">&#34;pretty&#34;</span>: <span style="color:#e6db74">&#34;Δ&#34;</span> },
+        { <span style="color:#f92672">&#34;ugly&#34;</span>: <span style="color:#e6db74">&#34;\\\\Epsilon&#34;</span>,    <span style="color:#f92672">&#34;pretty&#34;</span>: <span style="color:#e6db74">&#34;Ε&#34;</span> },
+        { <span style="color:#f92672">&#34;ugly&#34;</span>: <span style="color:#e6db74">&#34;\\\\Zeta&#34;</span>,       <span style="color:#f92672">&#34;pretty&#34;</span>: <span style="color:#e6db74">&#34;Ζ&#34;</span> },
+        { <span style="color:#f92672">&#34;ugly&#34;</span>: <span style="color:#e6db74">&#34;\\\\Eta&#34;</span>,        <span style="color:#f92672">&#34;pretty&#34;</span>: <span style="color:#e6db74">&#34;Η&#34;</span> },
+        { <span style="color:#f92672">&#34;ugly&#34;</span>: <span style="color:#e6db74">&#34;\\\\Theta&#34;</span>,      <span style="color:#f92672">&#34;pretty&#34;</span>: <span style="color:#e6db74">&#34;Θ&#34;</span> },
+        { <span style="color:#f92672">&#34;ugly&#34;</span>: <span style="color:#e6db74">&#34;\\\\Iota&#34;</span>,       <span style="color:#f92672">&#34;pretty&#34;</span>: <span style="color:#e6db74">&#34;Ι&#34;</span> },
+        { <span style="color:#f92672">&#34;ugly&#34;</span>: <span style="color:#e6db74">&#34;\\\\Kappa&#34;</span>,      <span style="color:#f92672">&#34;pretty&#34;</span>: <span style="color:#e6db74">&#34;Κ&#34;</span> },
+        { <span style="color:#f92672">&#34;ugly&#34;</span>: <span style="color:#e6db74">&#34;\\\\Lambda&#34;</span>,     <span style="color:#f92672">&#34;pretty&#34;</span>: <span style="color:#e6db74">&#34;Λ&#34;</span> },
+        { <span style="color:#f92672">&#34;ugly&#34;</span>: <span style="color:#e6db74">&#34;\\\\Mu&#34;</span>,         <span style="color:#f92672">&#34;pretty&#34;</span>: <span style="color:#e6db74">&#34;Μ&#34;</span> },
+        { <span style="color:#f92672">&#34;ugly&#34;</span>: <span style="color:#e6db74">&#34;\\\\Nu&#34;</span>,         <span style="color:#f92672">&#34;pretty&#34;</span>: <span style="color:#e6db74">&#34;Ν&#34;</span> },
+        { <span style="color:#f92672">&#34;ugly&#34;</span>: <span style="color:#e6db74">&#34;\\\\Xi&#34;</span>,         <span style="color:#f92672">&#34;pretty&#34;</span>: <span style="color:#e6db74">&#34;Ξ&#34;</span> },
+        { <span style="color:#f92672">&#34;ugly&#34;</span>: <span style="color:#e6db74">&#34;\\\\Omikron&#34;</span>,    <span style="color:#f92672">&#34;pretty&#34;</span>: <span style="color:#e6db74">&#34;O&#34;</span> },
+        { <span style="color:#f92672">&#34;ugly&#34;</span>: <span style="color:#e6db74">&#34;\\\\Pi&#34;</span>,         <span style="color:#f92672">&#34;pretty&#34;</span>: <span style="color:#e6db74">&#34;Π&#34;</span> },
+        { <span style="color:#f92672">&#34;ugly&#34;</span>: <span style="color:#e6db74">&#34;\\\\Rho&#34;</span>,        <span style="color:#f92672">&#34;pretty&#34;</span>: <span style="color:#e6db74">&#34;Ρ&#34;</span> },
+        { <span style="color:#f92672">&#34;ugly&#34;</span>: <span style="color:#e6db74">&#34;\\\\Sigma&#34;</span>,      <span style="color:#f92672">&#34;pretty&#34;</span>: <span style="color:#e6db74">&#34;Σ&#34;</span> },
+        { <span style="color:#f92672">&#34;ugly&#34;</span>: <span style="color:#e6db74">&#34;\\\\Tau&#34;</span>,        <span style="color:#f92672">&#34;pretty&#34;</span>: <span style="color:#e6db74">&#34;Τ&#34;</span> },
+        { <span style="color:#f92672">&#34;ugly&#34;</span>: <span style="color:#e6db74">&#34;\\\\Upsilon&#34;</span>,    <span style="color:#f92672">&#34;pretty&#34;</span>: <span style="color:#e6db74">&#34;Υ&#34;</span> },
+        { <span style="color:#f92672">&#34;ugly&#34;</span>: <span style="color:#e6db74">&#34;\\\\Phi&#34;</span>,        <span style="color:#f92672">&#34;pretty&#34;</span>: <span style="color:#e6db74">&#34;Φ&#34;</span> },
+        { <span style="color:#f92672">&#34;ugly&#34;</span>: <span style="color:#e6db74">&#34;\\\\Chi&#34;</span>,        <span style="color:#f92672">&#34;pretty&#34;</span>: <span style="color:#e6db74">&#34;Χ&#34;</span> },
+        { <span style="color:#f92672">&#34;ugly&#34;</span>: <span style="color:#e6db74">&#34;\\\\Psi&#34;</span>,        <span style="color:#f92672">&#34;pretty&#34;</span>: <span style="color:#e6db74">&#34;Ψ&#34;</span> },
+        { <span style="color:#f92672">&#34;ugly&#34;</span>: <span style="color:#e6db74">&#34;\\\\Omega&#34;</span>,      <span style="color:#f92672">&#34;pretty&#34;</span>: <span style="color:#e6db74">&#34;Ω&#34;</span> },
+        { <span style="color:#f92672">&#34;ugly&#34;</span>: <span style="color:#e6db74">&#34;\\\\rightarrow&#34;</span>,   <span style="color:#f92672">&#34;pretty&#34;</span>: <span style="color:#e6db74">&#34;→&#34;</span> },
+        { <span style="color:#f92672">&#34;ugly&#34;</span>: <span style="color:#e6db74">&#34;\\\\equiv&#34;</span>,      <span style="color:#f92672">&#34;pretty&#34;</span>: <span style="color:#e6db74">&#34;≡&#34;</span> },
+        { <span style="color:#f92672">&#34;ugly&#34;</span>: <span style="color:#e6db74">&#34;\\\\forall&#34;</span>,     <span style="color:#f92672">&#34;pretty&#34;</span>: <span style="color:#e6db74">&#34;∀&#34;</span> },
+        { <span style="color:#f92672">&#34;ugly&#34;</span>: <span style="color:#e6db74">&#34;\\\\lnot&#34;</span>,       <span style="color:#f92672">&#34;pretty&#34;</span>: <span style="color:#e6db74">&#34;¬&#34;</span> },
+        { <span style="color:#f92672">&#34;ugly&#34;</span>: <span style="color:#e6db74">&#34;\\\\sum&#34;</span>,        <span style="color:#f92672">&#34;pretty&#34;</span>: <span style="color:#e6db74">&#34;Σ&#34;</span> },
+        { <span style="color:#f92672">&#34;ugly&#34;</span>: <span style="color:#e6db74">&#34;\\\\implies&#34;</span>,    <span style="color:#f92672">&#34;pretty&#34;</span>: <span style="color:#e6db74">&#34;⇒&#34;</span> },
+        { <span style="color:#f92672">&#34;ugly&#34;</span>: <span style="color:#e6db74">&#34;\\\\iff&#34;</span>,        <span style="color:#f92672">&#34;pretty&#34;</span>: <span style="color:#e6db74">&#34;⇔&#34;</span> },
+        { <span style="color:#f92672">&#34;ugly&#34;</span>: <span style="color:#e6db74">&#34;\\\\emptyset&#34;</span>,   <span style="color:#f92672">&#34;pretty&#34;</span>: <span style="color:#e6db74">&#34;∅&#34;</span> },
+        { <span style="color:#f92672">&#34;ugly&#34;</span>: <span style="color:#e6db74">&#34;\\\\in&#34;</span>,         <span style="color:#f92672">&#34;pretty&#34;</span>: <span style="color:#e6db74">&#34;∈&#34;</span>, <span style="color:#f92672">&#34;post&#34;</span>: <span style="color:#e6db74">&#34;(?!\\w)|$&#34;</span> },
+        { <span style="color:#f92672">&#34;ugly&#34;</span>: <span style="color:#e6db74">&#34;\\\\subset&#34;</span>,     <span style="color:#f92672">&#34;pretty&#34;</span>: <span style="color:#e6db74">&#34;⊂&#34;</span>, <span style="color:#f92672">&#34;post&#34;</span>: <span style="color:#e6db74">&#34;(?!\\w)|$&#34;</span> },
+        { <span style="color:#f92672">&#34;ugly&#34;</span>: <span style="color:#e6db74">&#34;\\\\cup&#34;</span>,        <span style="color:#f92672">&#34;pretty&#34;</span>: <span style="color:#e6db74">&#34;∪&#34;</span>, <span style="color:#f92672">&#34;post&#34;</span>: <span style="color:#e6db74">&#34;(?!\\w)|$&#34;</span> },
+        { <span style="color:#f92672">&#34;ugly&#34;</span>: <span style="color:#e6db74">&#34;\\\\cap&#34;</span>,        <span style="color:#f92672">&#34;pretty&#34;</span>: <span style="color:#e6db74">&#34;∩&#34;</span>, <span style="color:#f92672">&#34;post&#34;</span>: <span style="color:#e6db74">&#34;(?!\\w)|$&#34;</span> },
+        { <span style="color:#f92672">&#34;ugly&#34;</span>: <span style="color:#e6db74">&#34;\\\\subseteq&#34;</span>,   <span style="color:#f92672">&#34;pretty&#34;</span>: <span style="color:#e6db74">&#34;⊆&#34;</span> },
+        { <span style="color:#f92672">&#34;ugly&#34;</span>: <span style="color:#e6db74">&#34;\\\\neq&#34;</span>,        <span style="color:#f92672">&#34;pretty&#34;</span>: <span style="color:#e6db74">&#34;≠&#34;</span> },
+        { <span style="color:#f92672">&#34;ugly&#34;</span>: <span style="color:#e6db74">&#34;\\\\exists&#34;</span>,     <span style="color:#f92672">&#34;pretty&#34;</span>: <span style="color:#e6db74">&#34;∃&#34;</span> },
+        { <span style="color:#f92672">&#34;ugly&#34;</span>: <span style="color:#e6db74">&#34;\\\\mid&#34;</span>,        <span style="color:#f92672">&#34;pretty&#34;</span>: <span style="color:#e6db74">&#34;|&#34;</span> },
+        { <span style="color:#f92672">&#34;ugly&#34;</span>: <span style="color:#e6db74">&#34;\\\\land&#34;</span>,       <span style="color:#f92672">&#34;pretty&#34;</span>: <span style="color:#e6db74">&#34;∧&#34;</span> },
+        { <span style="color:#f92672">&#34;ugly&#34;</span>: <span style="color:#e6db74">&#34;\\\\lor&#34;</span>,        <span style="color:#f92672">&#34;pretty&#34;</span>: <span style="color:#e6db74">&#34;∨&#34;</span> },
+        { <span style="color:#f92672">&#34;ugly&#34;</span>: <span style="color:#e6db74">&#34;\\\\cdot&#34;</span>,       <span style="color:#f92672">&#34;pretty&#34;</span>: <span style="color:#e6db74">&#34;·&#34;</span> },
+        { <span style="color:#f92672">&#34;ugly&#34;</span>: <span style="color:#e6db74">&#34;\\\\to&#34;</span>,         <span style="color:#f92672">&#34;pretty&#34;</span>: <span style="color:#e6db74">&#34;→&#34;</span> },
+        { <span style="color:#f92672">&#34;ugly&#34;</span>: <span style="color:#e6db74">&#34;\\\\left\\(&#34;</span>,    <span style="color:#f92672">&#34;pretty&#34;</span>: <span style="color:#e6db74">&#34;(&#34;</span> },
+        { <span style="color:#f92672">&#34;ugly&#34;</span>: <span style="color:#e6db74">&#34;\\\\left\\[&#34;</span>,    <span style="color:#f92672">&#34;pretty&#34;</span>: <span style="color:#e6db74">&#34;[&#34;</span> },
+        { <span style="color:#f92672">&#34;ugly&#34;</span>: <span style="color:#e6db74">&#34;\\\\left\\{&#34;</span>,    <span style="color:#f92672">&#34;pretty&#34;</span>: <span style="color:#e6db74">&#34;{&#34;</span> },
+        { <span style="color:#f92672">&#34;ugly&#34;</span>: <span style="color:#e6db74">&#34;\\\\right\\)&#34;</span>,   <span style="color:#f92672">&#34;pretty&#34;</span>: <span style="color:#e6db74">&#34;)&#34;</span> },
+        { <span style="color:#f92672">&#34;ugly&#34;</span>: <span style="color:#e6db74">&#34;\\\\right\\]&#34;</span>,   <span style="color:#f92672">&#34;pretty&#34;</span>: <span style="color:#e6db74">&#34;]&#34;</span> },
+        { <span style="color:#f92672">&#34;ugly&#34;</span>: <span style="color:#e6db74">&#34;\\\\right\\}&#34;</span>,   <span style="color:#f92672">&#34;pretty&#34;</span>: <span style="color:#e6db74">&#34;}&#34;</span> },
+        { <span style="color:#f92672">&#34;ugly&#34;</span>: <span style="color:#e6db74">&#34;\\\\infty&#34;</span>,      <span style="color:#f92672">&#34;pretty&#34;</span>: <span style="color:#e6db74">&#34;∞&#34;</span> },
+        { <span style="color:#f92672">&#34;ugly&#34;</span>: <span style="color:#e6db74">&#34;\\\\geq&#34;</span>,        <span style="color:#f92672">&#34;pretty&#34;</span>: <span style="color:#e6db74">&#34;≥&#34;</span> },
+        { <span style="color:#f92672">&#34;ugly&#34;</span>: <span style="color:#e6db74">&#34;\\\\leq&#34;</span>,        <span style="color:#f92672">&#34;pretty&#34;</span>: <span style="color:#e6db74">&#34;≤&#34;</span> },
+        { <span style="color:#f92672">&#34;ugly&#34;</span>: <span style="color:#e6db74">&#34;\\\\int&#34;</span>,        <span style="color:#f92672">&#34;pretty&#34;</span>: <span style="color:#e6db74">&#34;∫&#34;</span> },
+        { <span style="color:#f92672">&#34;ugly&#34;</span>: <span style="color:#e6db74">&#34;\\\\iint&#34;</span>,        <span style="color:#f92672">&#34;pretty&#34;</span>: <span style="color:#e6db74">&#34;∫∫&#34;</span> },
+        { <span style="color:#f92672">&#34;ugly&#34;</span>: <span style="color:#e6db74">&#34;\\\\C&#34;</span>,        <span style="color:#f92672">&#34;pretty&#34;</span>: <span style="color:#e6db74">&#34;ℂ&#34;</span>, <span style="color:#f92672">&#34;post&#34;</span>: <span style="color:#e6db74">&#34;(?!\\w)|$&#34;</span> },
+        { <span style="color:#f92672">&#34;ugly&#34;</span>: <span style="color:#e6db74">&#34;\\\\R&#34;</span>,        <span style="color:#f92672">&#34;pretty&#34;</span>: <span style="color:#e6db74">&#34;ℝ&#34;</span>, <span style="color:#f92672">&#34;post&#34;</span>: <span style="color:#e6db74">&#34;(?!\\w)|$&#34;</span> },
+        { <span style="color:#f92672">&#34;ugly&#34;</span>: <span style="color:#e6db74">&#34;\\\\N&#34;</span>,        <span style="color:#f92672">&#34;pretty&#34;</span>: <span style="color:#e6db74">&#34;ℕ&#34;</span>, <span style="color:#f92672">&#34;post&#34;</span>: <span style="color:#e6db74">&#34;(?!\\w)|$&#34;</span> },
+        { <span style="color:#f92672">&#34;ugly&#34;</span>: <span style="color:#e6db74">&#34;\\\\Q&#34;</span>,        <span style="color:#f92672">&#34;pretty&#34;</span>: <span style="color:#e6db74">&#34;ℚ&#34;</span>, <span style="color:#f92672">&#34;post&#34;</span>: <span style="color:#e6db74">&#34;(?!\\w)|$&#34;</span> },
+        { <span style="color:#f92672">&#34;ugly&#34;</span>: <span style="color:#e6db74">&#34;\\\\Z&#34;</span>,        <span style="color:#f92672">&#34;pretty&#34;</span>: <span style="color:#e6db74">&#34;ℤ&#34;</span>, <span style="color:#f92672">&#34;post&#34;</span>: <span style="color:#e6db74">&#34;(?!\\w)|$&#34;</span> },
+        { <span style="color:#f92672">&#34;ugly&#34;</span>: <span style="color:#e6db74">&#34;\\\\mathbb\\{C\\}&#34;</span>,        <span style="color:#f92672">&#34;pretty&#34;</span>: <span style="color:#e6db74">&#34;ℂ&#34;</span>, <span style="color:#f92672">&#34;post&#34;</span>: <span style="color:#e6db74">&#34;(?!\\w)|$&#34;</span> },
+        { <span style="color:#f92672">&#34;ugly&#34;</span>: <span style="color:#e6db74">&#34;\\\\mathbb\\{R\\}&#34;</span>,        <span style="color:#f92672">&#34;pretty&#34;</span>: <span style="color:#e6db74">&#34;ℝ&#34;</span>, <span style="color:#f92672">&#34;post&#34;</span>: <span style="color:#e6db74">&#34;(?!\\w)|$&#34;</span> },
+        { <span style="color:#f92672">&#34;ugly&#34;</span>: <span style="color:#e6db74">&#34;\\\\mathbb\\{N\\}&#34;</span>,        <span style="color:#f92672">&#34;pretty&#34;</span>: <span style="color:#e6db74">&#34;ℕ&#34;</span>, <span style="color:#f92672">&#34;post&#34;</span>: <span style="color:#e6db74">&#34;(?!\\w)|$&#34;</span> },
+        { <span style="color:#f92672">&#34;ugly&#34;</span>: <span style="color:#e6db74">&#34;\\\\mathbb\\{Q\\}&#34;</span>,        <span style="color:#f92672">&#34;pretty&#34;</span>: <span style="color:#e6db74">&#34;ℚ&#34;</span>, <span style="color:#f92672">&#34;post&#34;</span>: <span style="color:#e6db74">&#34;(?!\\w)|$&#34;</span> },
+        { <span style="color:#f92672">&#34;ugly&#34;</span>: <span style="color:#e6db74">&#34;\\\\mathbb\\{Z\\}&#34;</span>,        <span style="color:#f92672">&#34;pretty&#34;</span>: <span style="color:#e6db74">&#34;ℤ&#34;</span>, <span style="color:#f92672">&#34;post&#34;</span>: <span style="color:#e6db74">&#34;(?!\\w)|$&#34;</span> }
+      ]}, {
+        <span style="color:#f92672">&#34;language&#34;</span>: [<span style="color:#e6db74">&#34;lisp&#34;</span>, <span style="color:#e6db74">&#34;scheme&#34;</span>],
+        <span style="color:#f92672">&#34;revealOn&#34;</span>: <span style="color:#e6db74">&#34;selection&#34;</span>,
+        <span style="color:#f92672">&#34;substitutions&#34;</span>: [
+          { <span style="color:#f92672">&#34;ugly&#34;</span>: <span style="color:#e6db74">&#34;lambda&#34;</span>,   <span style="color:#f92672">&#34;pretty&#34;</span>: <span style="color:#e6db74">&#34;λ&#34;</span> },
+        ]}, {
+      <span style="color:#f92672">&#34;language&#34;</span>: <span style="color:#e6db74">&#34;haskell&#34;</span>,
+      <span style="color:#f92672">&#34;revealOn&#34;</span>: <span style="color:#e6db74">&#34;selection&#34;</span>,
+      <span style="color:#f92672">&#34;substitutions&#34;</span>: [
+        { <span style="color:#f92672">&#34;ugly&#34;</span>: <span style="color:#e6db74">&#34;\\\\&#34;</span>,     <span style="color:#f92672">&#34;pretty&#34;</span>: <span style="color:#e6db74">&#34;λ&#34;</span>, <span style="color:#f92672">&#34;post&#34;</span>: <span style="color:#e6db74">&#34;\\s*(?:\\w|_).*?\\s*-&gt;&#34;</span> },
+        { <span style="color:#f92672">&#34;ugly&#34;</span>: <span style="color:#e6db74">&#34;-&gt;&#34;</span>,       <span style="color:#f92672">&#34;pretty&#34;</span>: <span style="color:#e6db74">&#34;→&#34;</span> },
+        { <span style="color:#f92672">&#34;ugly&#34;</span>: <span style="color:#e6db74">&#34;&lt;-&#34;</span>,       <span style="color:#f92672">&#34;pretty&#34;</span>: <span style="color:#e6db74">&#34;←&#34;</span> },
+        { <span style="color:#f92672">&#34;ugly&#34;</span>: <span style="color:#e6db74">&#34;&amp;&amp;&#34;</span>,       <span style="color:#f92672">&#34;pretty&#34;</span>: <span style="color:#e6db74">&#34;∧&#34;</span> },
+        { <span style="color:#f92672">&#34;ugly&#34;</span>: <span style="color:#e6db74">&#34;||&#34;</span>,       <span style="color:#f92672">&#34;pretty&#34;</span>: <span style="color:#e6db74">&#34;∨&#34;</span> },
+        { <span style="color:#f92672">&#34;ugly&#34;</span>: <span style="color:#e6db74">&#34;\\.&#34;</span>,        <span style="color:#f92672">&#34;pretty&#34;</span>: <span style="color:#e6db74">&#34;∘&#34;</span>,  <span style="color:#f92672">&#34;pre&#34;</span>: <span style="color:#e6db74">&#34;\\s&#34;</span>},
+        { <span style="color:#f92672">&#34;ugly&#34;</span>: <span style="color:#e6db74">&#34;==&#34;</span>,       <span style="color:#f92672">&#34;pretty&#34;</span>: <span style="color:#e6db74">&#34;≡&#34;</span> },
+        { <span style="color:#f92672">&#34;ugly&#34;</span>: <span style="color:#e6db74">&#34;forall&#34;</span>,   <span style="color:#f92672">&#34;pretty&#34;</span>: <span style="color:#e6db74">&#34;∀&#34;</span>, <span style="color:#f92672">&#34;pre&#34;</span>: <span style="color:#e6db74">&#34;\\b&#34;</span>, <span style="color:#f92672">&#34;post&#34;</span>: <span style="color:#e6db74">&#34;\\b&#34;</span> },
+        { <span style="color:#f92672">&#34;ugly&#34;</span>: <span style="color:#e6db74">&#34;not\\s?&#34;</span>,  <span style="color:#f92672">&#34;pretty&#34;</span>: <span style="color:#e6db74">&#34;¬&#34;</span>, <span style="color:#f92672">&#34;pre&#34;</span>: <span style="color:#e6db74">&#34;\\b&#34;</span>, <span style="color:#f92672">&#34;post&#34;</span>: <span style="color:#e6db74">&#34;\\b&#34;</span> },
+        { <span style="color:#f92672">&#34;ugly&#34;</span>: <span style="color:#e6db74">&#34;&gt;&#34;</span>,        <span style="color:#f92672">&#34;pretty&#34;</span>: <span style="color:#e6db74">&#34;&gt;&#34;</span>, <span style="color:#f92672">&#34;pre&#34;</span>: <span style="color:#e6db74">&#34;[^=\\-&lt;&gt;]|^&#34;</span>, <span style="color:#f92672">&#34;post&#34;</span>: <span style="color:#e6db74">&#34;[^=\\-&lt;&gt;]|$&#34;</span> },
+        { <span style="color:#f92672">&#34;ugly&#34;</span>: <span style="color:#e6db74">&#34;&lt;&#34;</span>,        <span style="color:#f92672">&#34;pretty&#34;</span>: <span style="color:#e6db74">&#34;&lt;&#34;</span>, <span style="color:#f92672">&#34;pre&#34;</span>: <span style="color:#e6db74">&#34;[^=\\-&lt;&gt;]|^&#34;</span>, <span style="color:#f92672">&#34;post&#34;</span>: <span style="color:#e6db74">&#34;[^=\\-&lt;&gt;]|$&#34;</span> },
+        { <span style="color:#f92672">&#34;ugly&#34;</span>: <span style="color:#e6db74">&#34;&gt;=&#34;</span>,       <span style="color:#f92672">&#34;pretty&#34;</span>: <span style="color:#e6db74">&#34;≥&#34;</span>, <span style="color:#f92672">&#34;pre&#34;</span>: <span style="color:#e6db74">&#34;[^=\\-&lt;&gt;]|^&#34;</span>, <span style="color:#f92672">&#34;post&#34;</span>: <span style="color:#e6db74">&#34;[^=\\-&lt;&gt;]|$&#34;</span> },
+        { <span style="color:#f92672">&#34;ugly&#34;</span>: <span style="color:#e6db74">&#34;&lt;=&#34;</span>,       <span style="color:#f92672">&#34;pretty&#34;</span>: <span style="color:#e6db74">&#34;≤&#34;</span>, <span style="color:#f92672">&#34;pre&#34;</span>: <span style="color:#e6db74">&#34;[^=\\-&lt;&gt;]|^&#34;</span>, <span style="color:#f92672">&#34;post&#34;</span>: <span style="color:#e6db74">&#34;[^=\\-&lt;&gt;]|$&#34;</span> }
+      ]},{
+      <span style="color:#f92672">&#34;language&#34;</span>: <span style="color:#e6db74">&#34;ocaml&#34;</span>,
+      <span style="color:#f92672">&#34;revealOn&#34;</span>: <span style="color:#e6db74">&#34;selection&#34;</span>,
+      <span style="color:#f92672">&#34;adjustCursorMovement&#34;</span>: <span style="color:#66d9ef">true</span>,
+      <span style="color:#f92672">&#34;substitutions&#34;</span>: [
+        { <span style="color:#f92672">&#34;ugly&#34;</span>: <span style="color:#e6db74">&#34;fun&#34;</span>,            <span style="color:#f92672">&#34;pretty&#34;</span>: <span style="color:#e6db74">&#34;λ&#34;</span>, <span style="color:#f92672">&#34;pre&#34;</span>: <span style="color:#e6db74">&#34;\\b&#34;</span>, <span style="color:#f92672">&#34;post&#34;</span>: <span style="color:#e6db74">&#34;\\b&#34;</span> },
+        { <span style="color:#f92672">&#34;ugly&#34;</span>: <span style="color:#e6db74">&#34;-&gt;&#34;</span>,             <span style="color:#f92672">&#34;pretty&#34;</span>: <span style="color:#e6db74">&#34;→&#34;</span>, <span style="color:#f92672">&#34;pre&#34;</span>: <span style="color:#e6db74">&#34;[^-&gt;]&#34;</span>, <span style="color:#f92672">&#34;post&#34;</span>: <span style="color:#e6db74">&#34;[^-&gt;]&#34;</span> },
+        { <span style="color:#f92672">&#34;ugly&#34;</span>: <span style="color:#e6db74">&#34;List[.]for_all&#34;</span>, <span style="color:#f92672">&#34;pretty&#34;</span>: <span style="color:#e6db74">&#34;∀&#34;</span>, <span style="color:#f92672">&#34;pre&#34;</span>: <span style="color:#e6db74">&#34;\\b&#34;</span>, <span style="color:#f92672">&#34;post&#34;</span>: <span style="color:#e6db74">&#34;\\b&#34;</span> },
+        { <span style="color:#f92672">&#34;ugly&#34;</span>: <span style="color:#e6db74">&#34;List[.]exists&#34;</span>,  <span style="color:#f92672">&#34;pretty&#34;</span>: <span style="color:#e6db74">&#34;∃&#34;</span>, <span style="color:#f92672">&#34;pre&#34;</span>: <span style="color:#e6db74">&#34;\\b&#34;</span>, <span style="color:#f92672">&#34;post&#34;</span>: <span style="color:#e6db74">&#34;\\b&#34;</span> },
+        { <span style="color:#f92672">&#34;ugly&#34;</span>: <span style="color:#e6db74">&#34;List[.]mem&#34;</span>,     <span style="color:#f92672">&#34;pretty&#34;</span>: <span style="color:#e6db74">&#34;∈&#34;</span>, <span style="color:#f92672">&#34;pre&#34;</span>: <span style="color:#e6db74">&#34;\\b&#34;</span>, <span style="color:#f92672">&#34;post&#34;</span>: <span style="color:#e6db74">&#34;\\b&#34;</span> },
+        { <span style="color:#f92672">&#34;ugly&#34;</span>: <span style="color:#e6db74">&#34;\\|&#34;</span>,            <span style="color:#f92672">&#34;pretty&#34;</span>: <span style="color:#e6db74">&#34;|&#34;</span>, <span style="color:#f92672">&#34;pre&#34;</span>: <span style="color:#e6db74">&#34;^\\s+&#34;</span> }
+      ]},{
+      <span style="color:#f92672">&#34;language&#34;</span>: <span style="color:#e6db74">&#34;fsharp&#34;</span>,
+      <span style="color:#f92672">&#34;substitutions&#34;</span>: [
+        { <span style="color:#f92672">&#34;ugly&#34;</span>: <span style="color:#e6db74">&#34;fun&#34;</span>,           <span style="color:#f92672">&#34;pretty&#34;</span>: <span style="color:#e6db74">&#34;λ&#34;</span>, <span style="color:#f92672">&#34;pre&#34;</span>: <span style="color:#e6db74">&#34;\\b&#34;</span>, <span style="color:#f92672">&#34;post&#34;</span>: <span style="color:#e6db74">&#34;\\b&#34;</span> },
+        { <span style="color:#f92672">&#34;ugly&#34;</span>: <span style="color:#e6db74">&#34;-&gt;&#34;</span>,            <span style="color:#f92672">&#34;pretty&#34;</span>: <span style="color:#e6db74">&#34;→&#34;</span>, <span style="color:#f92672">&#34;pre&#34;</span>: <span style="color:#e6db74">&#34;[^-&gt;]&#34;</span>, <span style="color:#f92672">&#34;post&#34;</span>: <span style="color:#e6db74">&#34;[^-&gt;]&#34;</span> },
+        { <span style="color:#f92672">&#34;ugly&#34;</span>: <span style="color:#e6db74">&#34;List[.]forall&#34;</span>, <span style="color:#f92672">&#34;pretty&#34;</span>: <span style="color:#e6db74">&#34;∀&#34;</span>, <span style="color:#f92672">&#34;pre&#34;</span>: <span style="color:#e6db74">&#34;\\b&#34;</span>, <span style="color:#f92672">&#34;post&#34;</span>: <span style="color:#e6db74">&#34;\\b&#34;</span> },
+        { <span style="color:#f92672">&#34;ugly&#34;</span>: <span style="color:#e6db74">&#34;List[.]exists&#34;</span>, <span style="color:#f92672">&#34;pretty&#34;</span>: <span style="color:#e6db74">&#34;∃&#34;</span>, <span style="color:#f92672">&#34;pre&#34;</span>: <span style="color:#e6db74">&#34;\\b&#34;</span>, <span style="color:#f92672">&#34;post&#34;</span>: <span style="color:#e6db74">&#34;\\b&#34;</span> },
+        { <span style="color:#f92672">&#34;ugly&#34;</span>: <span style="color:#e6db74">&#34;&gt;&gt;&#34;</span>,            <span style="color:#f92672">&#34;pretty&#34;</span>: <span style="color:#e6db74">&#34;≫&#34;</span>, <span style="color:#f92672">&#34;pre&#34;</span>: <span style="color:#e6db74">&#34;[^=&lt;&gt;]|^&#34;</span>, <span style="color:#f92672">&#34;post&#34;</span>: <span style="color:#e6db74">&#34;[^=&lt;&gt;]|$&#34;</span> },
+        { <span style="color:#f92672">&#34;ugly&#34;</span>: <span style="color:#e6db74">&#34;&lt;&lt;&#34;</span>,            <span style="color:#f92672">&#34;pretty&#34;</span>: <span style="color:#e6db74">&#34;≪&#34;</span>, <span style="color:#f92672">&#34;pre&#34;</span>: <span style="color:#e6db74">&#34;[^=&lt;&gt;]|^&#34;</span>, <span style="color:#f92672">&#34;post&#34;</span>: <span style="color:#e6db74">&#34;[^=&lt;&gt;]|$&#34;</span> },
+        { <span style="color:#f92672">&#34;ugly&#34;</span>: <span style="color:#e6db74">&#34;\\|&#34;</span>,           <span style="color:#f92672">&#34;pretty&#34;</span>: <span style="color:#e6db74">&#34;║&#34;</span>, <span style="color:#f92672">&#34;pre&#34;</span>: <span style="color:#e6db74">&#34;^\\s+&#34;</span> }
+      ]
+    }
+  ],  <span style="color:#f92672">&#34;debug.console.fontSize&#34;</span>: <span style="color:#ae81ff">12</span>,
+  <span style="color:#f92672">&#34;terminal.integrated.fontSize&#34;</span>: <span style="color:#ae81ff">12</span>,
+  <span style="color:#f92672">&#34;workbench.iconTheme&#34;</span>: <span style="color:#e6db74">&#34;vs-minimal&#34;</span>,
+  <span style="color:#f92672">&#34;editor.minimap.enabled&#34;</span>: <span style="color:#66d9ef">false</span>,
+  <span style="color:#f92672">&#34;editor.wordWrap&#34;</span>: <span style="color:#e6db74">&#34;wordWrapColumn&#34;</span>,
+  <span style="color:#f92672">&#34;breadcrumbs.enabled&#34;</span>: <span style="color:#66d9ef">true</span>,
+  <span style="color:#f92672">&#34;editor.renderControlCharacters&#34;</span>: <span style="color:#66d9ef">true</span>,
+  <span style="color:#f92672">&#34;zenMode.hideLineNumbers&#34;</span>: <span style="color:#66d9ef">false</span>,
+  <span style="color:#f92672">&#34;workbench.colorTheme&#34;</span>: <span style="color:#e6db74">&#34;Srcery-gagbo&#34;</span>
+}
+</code></pre></div><p>Here are some useful snippets (LaTeX Workshop already has a <a href="https://github.com/James-Yu/LaTeX-Workshop/wiki/Snippets">ton of useful
+snippets</a>!) that you
+can use.</p>
+<p><code>latex.json</code> (Edit with <code>Preferences: Configure User Snippets</code>)</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{
+	<span style="color:#f92672">&#34;definition&#34;</span>: {
+		<span style="color:#f92672">&#34;prefix&#34;</span>: <span style="color:#e6db74">&#34;DEF&#34;</span>,
+		<span style="color:#f92672">&#34;body&#34;</span>: [
+			<span style="color:#e6db74">&#34;\\begin{defn}&#34;</span>,
+			<span style="color:#e6db74">&#34;\t\\textbf{$1} \\\\\\&#34;</span>,
+			<span style="color:#e6db74">&#34;\t$2&#34;</span>,
+			<span style="color:#e6db74">&#34;\\end{defn}&#34;</span>,
+			<span style="color:#e6db74">&#34;$2&#34;</span>
+		]
+	},
+	<span style="color:#f92672">&#34;proof&#34;</span>: {
+		<span style="color:#f92672">&#34;prefix&#34;</span>: <span style="color:#e6db74">&#34;PROOF&#34;</span>,
+		<span style="color:#f92672">&#34;body&#34;</span>: [
+			<span style="color:#e6db74">&#34;\\begin{proof}&#34;</span>,
+			<span style="color:#e6db74">&#34;\t$1&#34;</span>,
+			<span style="color:#e6db74">&#34;\\end{proof}&#34;</span>,
+			<span style="color:#e6db74">&#34;$2&#34;</span>
+		]
+	},
+	<span style="color:#f92672">&#34;example&#34;</span>: {
+		<span style="color:#f92672">&#34;prefix&#34;</span>: <span style="color:#e6db74">&#34;EXMP&#34;</span>,
+		<span style="color:#f92672">&#34;body&#34;</span>: [
+			<span style="color:#e6db74">&#34;\\begin{exmp}&#34;</span>,
+			<span style="color:#e6db74">&#34;\t$1&#34;</span>,
+			<span style="color:#e6db74">&#34;\\end{exmp}&#34;</span>,
+			<span style="color:#e6db74">&#34;$2&#34;</span>
+		]
+	},
+	<span style="color:#f92672">&#34;exercise&#34;</span>: {
+		<span style="color:#f92672">&#34;prefix&#34;</span>: <span style="color:#e6db74">&#34;EXRC&#34;</span>,
+		<span style="color:#f92672">&#34;body&#34;</span>: [
+			<span style="color:#e6db74">&#34;\\begin{exrc}&#34;</span>,
+			<span style="color:#e6db74">&#34;\t$1&#34;</span>,
+			<span style="color:#e6db74">&#34;\\end{exrc}&#34;</span>,
+			<span style="color:#e6db74">&#34;$2&#34;</span>
+		]
+	},
+	<span style="color:#f92672">&#34;alignedequation&#34;</span> : {
+		<span style="color:#f92672">&#34;prefix&#34;</span>: <span style="color:#e6db74">&#34;BEQAL&#34;</span>,
+		<span style="color:#f92672">&#34;body&#34;</span>: [
+			<span style="color:#e6db74">&#34;\\begin{equation*}&#34;</span>,
+			<span style="color:#e6db74">&#34;\t\\begin{aligned}&#34;</span>,
+			<span style="color:#e6db74">&#34;\t\t$1&#34;</span>,
+			<span style="color:#e6db74">&#34;\t\\end{aligned}&#34;</span>,
+			<span style="color:#e6db74">&#34;\\end{equation*}&#34;</span>
+		]
+	}
+}
+</code></pre></div><h2 id="other-valid-alternatives">Other valid alternatives</h2>
+<p>If you don't like Visual Studio Code (for ethical or practical causes), or you
+use another editor you can take a look at other great LaTeX plugins/writing
+environments:</p>
+<ul>
+<li><a href="https://www.gnu.org/s/auctex/">AUCTeX</a>, an extensible package for writing and
+formatting TeX files in GNU <strong>Emacs</strong>. It is used by a lot of UNIX veterans
+equipped with ancient wizardry.</li>
+<li>If you need to do real time collaborations or you do not want to install
+additional software on you machine,
+<a href="https://www.overleaf.com/learn/latex/Multi-file_LaTeX_projects">Overleaf</a> is
+the best choice. Albeit quite slow (because it resides in the browser), it is
+a fully fledged TeX editor that makes a good choice, especially for large
+collaborative projects.</li>
+</ul>
+<h2 id="huge-thanks-to">Huge Thanks to:</h2>
+<ul>
+<li><a href="https://scholar.google.it/citations?user=OcKbCO0AAAAJ">Alessandro Berarducci</a>
+for introducing me to the world of LaTeX and TeXstudio</li>
+<li><a href="http://github.com/loures">loures</a> for giving me useful advice on how to
+format my notes.</li>
+<li><a href="http://stellameravigliosa.io/">rei</a> a powerful ancient wizard.</li>
+</ul>
+]]></content>
+        </item>
         
         <item>
             <title>minicaml, a didactical OCaml-like functional programming language.</title>
@@ -15,30 +362,24 @@
             
             <guid>https://0x0f0f0f.github.io/posts/2019/12/minicaml-a-didactical-ocaml-like-functional-programming-language./</guid>
             <description>minicaml is a small, purely functional interpreted programming language with a didactical purpose. I wrote minicaml for the Programming 2 course at the University of Pisa, taught by Professors Gianluigi Ferrari and Francesca Levi. It is based on the teachers&amp;rsquo; minicaml, an evaluation example to show how interpreters work. It is an interpreted subset of Caml, with eager evaluation and only local (let-in) declaration statements. I have added a simple parser and lexer made with menhir and ocamllex (learn more).</description>
-            <content type="html"><![CDATA[
-
-<p><strong><a href="https://github.com/0x0f0f0f/minicaml" target="_blank">minicaml</a></strong> is a small, purely functional interpreted programming language with
-a didactical purpose. I wrote <strong><a href="https://github.com/0x0f0f0f/minicaml" target="_blank">minicaml</a></strong> for the <strong>Programming 2</strong> course at
+            <content type="html"><![CDATA[<p><strong><a href="https://github.com/0x0f0f0f/minicaml">minicaml</a></strong> is a small, purely functional interpreted programming language with
+a didactical purpose. I wrote <strong><a href="https://github.com/0x0f0f0f/minicaml">minicaml</a></strong> for the <strong>Programming 2</strong> course at
 the University of Pisa, taught by Professors Gianluigi Ferrari and Francesca
 Levi. It is based on the teachers&rsquo;
-<a href="http://pages.di.unipi.it/levi/codice-18/evalFunEnvFull.ml" target="_blank">minicaml</a>, an
+<a href="http://pages.di.unipi.it/levi/codice-18/evalFunEnvFull.ml">minicaml</a>, an
 evaluation example to show how interpreters work. It is an interpreted subset of
 Caml, with eager evaluation and only local (<code>let-in</code>) declaration statements. I
-have added a simple parser and lexer made with menhir and ocamllex (<a href="https://v1.realworldocaml.org/v1/en/html/parsing-with-ocamllex-and-menhir.html" target="_blank">learn
+have added a simple parser and lexer made with menhir and ocamllex (<a href="https://v1.realworldocaml.org/v1/en/html/parsing-with-ocamllex-and-menhir.html">learn
 more</a>).
 I have also added a simple REPL that shows each reduction step that is done in
-evaluating an expression. I&rsquo;d also like to implement a simple compiler and abstract
+evaluating an expression. I'd also like to implement a simple compiler and abstract
 machine for this project.</p>
-
-<p><strong><a href="https://github.com/0x0f0f0f/minicaml" target="_blank">minicaml</a></strong> only implements basic data types (integers and booleans) and will
-never be a full programming language intended for real world usage. <strong><a href="https://github.com/0x0f0f0f/minicaml" target="_blank">minicaml</a>&rsquo;s only
+<p><strong><a href="https://github.com/0x0f0f0f/minicaml">minicaml</a></strong> only implements basic data types (integers and booleans) and will
+never be a full programming language intended for real world usage. <strong><a href="https://github.com/0x0f0f0f/minicaml">minicaml</a>&lsquo;s only
 purpose is to help students get a grasp of how interpreters and programming
 languages work</strong>.</p>
-
-<p><img src="/posts/images/minicaml.png" alt="minicaml" /></p>
-
+<p><img src="/posts/images/minicaml.png" alt="minicaml"></p>
 <h2 id="features">Features</h2>
-
 <ul>
 <li>Show the AST of each expression</li>
 <li>Only boolean and integer types</li>
@@ -48,39 +389,32 @@ languages work</strong>.</p>
 <li>ocamllex and menhir lexer and parser</li>
 <li>Extensible with ease</li>
 </ul>
-
 <h2 id="installation">Installation</h2>
-
 <p>I will release a binary file (no need to compile) in the near future. To
-install, you need to have <code>opam</code> (OCaml&rsquo;s package manager) and a recent OCaml
+install, you need to have <code>opam</code> (OCaml's package manager) and a recent OCaml
 distribution installed on your system.
-<a href="https://github.com/hanslub42/rlwrap" target="_blank">rlwrap</a> is suggested for a readline-like
+<a href="https://github.com/hanslub42/rlwrap">rlwrap</a> is suggested for a readline-like
 (bash-like) keyboard interface.</p>
-
-<pre><code class="language-bash"># clone the repository
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># clone the repository</span>
 git clone https://github.com/0x0f0f0f/minicaml
-# cd into it
+<span style="color:#75715e"># cd into it</span>
 cd minicaml
-# install dependencies
+<span style="color:#75715e"># install dependencies</span>
 opam install dune menhir ANSITerminal
-# compile
+<span style="color:#75715e"># compile</span>
 make
-# run
+<span style="color:#75715e"># run</span>
 make run
-# rlwrap is suggested
+<span style="color:#75715e"># rlwrap is suggested</span>
 rlwrap make run
-# you can install minicaml with
+<span style="color:#75715e"># you can install minicaml with</span>
 make install
-# run again
+<span style="color:#75715e"># run again</span>
 rlwrap minicaml
-</code></pre>
-
-<h2 id="usage">Usage</h2>
-
+</code></pre></div><h2 id="usage">Usage</h2>
 <p>Run <code>make run</code> to run a REPL. The REPL shows the AST equivalentof each submitted
 expression, and each reduction step in the evaluation is shown. It also signals
 syntactical and semantical errors.</p>
-
 <p>Please let me know if you find bugs or have any improvement in mind!</p>
 ]]></content>
         </item>
@@ -91,29 +425,22 @@ syntactical and semantical errors.</p>
             <pubDate>Wed, 20 Nov 2019 00:00:00 +0000</pubDate>
             
             <guid>https://0x0f0f0f.github.io/posts/2019/11/visualizing-11-years-of-contributions-to-void-linux-in-7-minutes/</guid>
-            <description>A few days ago I&amp;rsquo;ve stumbled into an excellent package called gource. To test it out I&amp;rsquo;ve decided to make an animated video of all the contributions that have been made since 26 September 2008 in the void-packages repository. You can see how it starts to gain traction after ~2013, and how it quickly evolves to look like a living cell. I pop out somewhere around the middle of 2019.</description>
-            <content type="html"><![CDATA[
-
-<p>A few days ago I&rsquo;ve stumbled into an excellent package called <a href="https://gource.io/" target="_blank">gource</a>.
-To test it out I&rsquo;ve decided to make an animated video of all the contributions that have been made since
-26 September 2008 in the <a href="https://github.com/void-linux/void-packages/" target="_blank">void-packages</a> repository.
+            <description>A few days ago I&#39;ve stumbled into an excellent package called gource. To test it out I&#39;ve decided to make an animated video of all the contributions that have been made since 26 September 2008 in the void-packages repository. You can see how it starts to gain traction after ~2013, and how it quickly evolves to look like a living cell. I pop out somewhere around the middle of 2019. Void Linux is an awesome, solid and lightweight indipendent distribution that uses the excellent XBPS package manager.</description>
+            <content type="html"><![CDATA[<p>A few days ago I've stumbled into an excellent package called <a href="https://gource.io/">gource</a>.
+To test it out I've decided to make an animated video of all the contributions that have been made since
+26 September 2008 in the <a href="https://github.com/void-linux/void-packages/">void-packages</a> repository.
 You can see how it starts to gain traction after ~2013, and how it quickly evolves to look like a living cell. I pop out somewhere around the middle of 2019.
-<a href="https://voidlinux.org/" target="_blank">Void Linux</a> is an awesome, solid and lightweight indipendent distribution that uses the excellent XBPS package manager. What makes it so awesome, is that it is actively mantained thanks to countless users&rsquo; contributions.
-If you&rsquo;d like to read more about the history of Void Linux you can check out <a href="https://xtraeme.blogspot.com/" target="_blank">xtraeme&rsquo;s blog</a>.</p>
-
+<a href="https://voidlinux.org/">Void Linux</a> is an awesome, solid and lightweight indipendent distribution that uses the excellent XBPS package manager. What makes it so awesome, is that it is actively mantained thanks to countless users&rsquo; contributions.
+If you'd like to read more about the history of Void Linux you can check out <a href="https://xtraeme.blogspot.com/">xtraeme's blog</a>.</p>
 <h2 id="thanks-to-all-the-void-contributors">Thanks to all the Void contributors!</h2>
-
 
 <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
   <iframe src="https://www.youtube.com/embed/y1rnHd5ARdk" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" allowfullscreen title="YouTube Video"></iframe>
 </div>
 
-
-<hr />
-
+<hr>
 <h2 id="a-side-announcement">A side announcement</h2>
-
-<p>To keep my blog transparent and free of malicious advertising I&rsquo;ve decided to set up a Github Sponsors profile on my <a href="https://github.com/0x0f0f0f" target="_blank">GitHub profile</a>. You can help me keep making quality content and contribute to open source software in my free time without cluttering my blog with annoying and tracking advertising. With the $40 tier I will include your logo in a dedicated sponsors section in the home page and each blog post.</p>
+<p>To keep my blog transparent and free of malicious advertising I've decided to set up a Github Sponsors profile on my <a href="https://github.com/0x0f0f0f">GitHub profile</a>. You can help me keep making quality content and contribute to open source software in my free time without cluttering my blog with annoying and tracking advertising. With the $40 tier I will include your logo in a dedicated sponsors section in the home page and each blog post.</p>
 ]]></content>
         </item>
         
@@ -125,45 +452,30 @@ If you&rsquo;d like to read more about the history of Void Linux you can check o
             <guid>https://0x0f0f0f.github.io/posts/2019/11/really-fast-markov-chains-in-~20-lines-of-sh-grep-cut-and-awk/</guid>
             <description>Some days ago, driven by boredom, I implemented my own Markov chains in Haskell by following this great tutorial. Markov chains can be a way of implementing really fun &amp;ldquo;dumb&amp;rdquo; group chat bots, that can generate new random messages that sound realistic based on the previous history of the chat. From Wikipedia:
  A Markov chain is a stochastic model describing a sequence of possible events in which the probability of each event depends only on the state attained in the previous event.</description>
-            <content type="html"><![CDATA[
-
-<p>Some days ago, driven by boredom, I implemented my own Markov chains in Haskell by following this great <a href="https://dschrempf.github.io/coding/2018-02-10-markov-chains-in-haskell/" target="_blank">tutorial</a>. Markov chains can be a way of implementing really fun &ldquo;dumb&rdquo; group chat bots, that can generate new random messages that sound realistic based on the previous history of the chat. From Wikipedia:</p>
-
+            <content type="html"><![CDATA[<p>Some days ago, driven by boredom, I implemented my own Markov chains in Haskell by following this great <a href="https://dschrempf.github.io/coding/2018-02-10-markov-chains-in-haskell/">tutorial</a>. Markov chains can be a way of implementing really fun &ldquo;dumb&rdquo; group chat bots, that can generate new random messages that sound realistic based on the previous history of the chat. From Wikipedia:</p>
 <blockquote>
 <p>A Markov chain is a stochastic model describing a sequence of possible events in which the probability of each event depends only on the state attained in the previous event.</p>
 </blockquote>
-
-<p>Here&rsquo;s a <a href="http://setosa.io/ev/markov-chains/" target="_blank">great article</a> introducing the concept of Markov chains. In the case of a group chat bot, each state (or node of the graph) is one of the words that was previously sent in the messages, and each probability of transition towards another state (word) is based on the frequency of the first word (transition&rsquo;s source state) being followed by the second one (the transition&rsquo;s destination state).</p>
-
-<p>After coding a simple Markov chain on words in Haskell, I&rsquo;ve noticed that it was really slow and resource intensive even on a few thousand of messages. This was because the model was calculated by summing the frequency of word pairs and it was kept in memory inside of a <code>Data.Map</code> structure.</p>
-
-<p>Although the Haskell implementation can get much faster if optimized, my friend <a href="https://github.com/Francesco149" target="_blank">Francesco</a> showed me his amazing implementation of Markov chains on words made <strong>in plain sh and awk</strong>, in ~20 lines of code.</p>
-
-<h3 id="markov-sh-https-github-com-francesco149-markov-sh"><a href="https://github.com/Francesco149/markov.sh" target="_blank">markov.sh</a></h3>
-
+<p>Here's a <a href="http://setosa.io/ev/markov-chains/">great article</a> introducing the concept of Markov chains. In the case of a group chat bot, each state (or node of the graph) is one of the words that was previously sent in the messages, and each probability of transition towards another state (word) is based on the frequency of the first word (transition's source state) being followed by the second one (the transition's destination state).</p>
+<p>After coding a simple Markov chain on words in Haskell, I've noticed that it was really slow and resource intensive even on a few thousand of messages. This was because the model was calculated by summing the frequency of word pairs and it was kept in memory inside of a <code>Data.Map</code> structure.</p>
+<p>Although the Haskell implementation can get much faster if optimized, my friend <a href="https://github.com/Francesco149">Francesco</a> showed me his amazing implementation of Markov chains on words made <strong>in plain sh and awk</strong>, in ~20 lines of code.\</p>
+<h3 id="markovshhttpsgithubcomfrancesco149markovsh"><a href="https://github.com/Francesco149/markov.sh">markov.sh</a></h3>
 <p>His project is split in 2 programs. The first one, <code>mrkfeed.awk</code> is a really simple <code>awk</code> program that separates words on a line into pairs of words, separated line by line.</p>
-
-<pre><code class="language-awk">#!/usr/bin/awk -f
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-awk" data-lang="awk"><span style="color:#75715e">#!/usr/bin/awk -f</span>
 
 {
-  for (i = 1; i &lt; NF; i++) {
-    print $i,$(i+1)
+  <span style="color:#66d9ef">for</span> (<span style="color:#a6e22e">i</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>; <span style="color:#a6e22e">i</span> <span style="color:#f92672">&lt;</span> NF; <span style="color:#a6e22e">i</span><span style="color:#f92672">++</span>) {
+    <span style="color:#66d9ef">print</span> <span style="color:#f92672">$</span><span style="color:#a6e22e">i</span>,<span style="color:#f92672">$</span>(<span style="color:#a6e22e">i</span><span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>)
   }
-  print $i
+  <span style="color:#66d9ef">print</span> <span style="color:#f92672">$</span><span style="color:#a6e22e">i</span>
 }
-</code></pre>
-
-<p>For example, let&rsquo;s take this simple chat log (referred to as <code>chatlog.txt</code>):</p>
-
+</code></pre></div><p>For example, let's take this simple chat log (referred to as <code>chatlog.txt</code>):</p>
 <pre><code>hello everybody
 hi people
 hello people
 how are you
 how are things going
-</code></pre>
-
-<p>The first step is creating a model for the Markov chain. Here&rsquo;s what will be into the model file when we run <code>./mrkfeed.awk &lt; chatlog.txt &gt;&gt; model.mrkdb</code>,  (piped into <code>sort</code> for readability)</p>
-
+</code></pre><p>The first step is creating a model for the Markov chain. Here's what will be into the model file when we run <code>./mrkfeed.awk &lt; chatlog.txt &gt;&gt; model.mrkdb</code>,  (piped into <code>sort</code> for readability)</p>
 <pre><code>are things
 are you
 everybody
@@ -177,88 +489,77 @@ people
 people
 things going
 you
-</code></pre>
-
-<p>The next step is generating a new random message with <code>./mrkwords.sh model.mrkdb 50 | tr '\n' ' ' &amp;&amp; echo</code></p>
-
-<p>At first, <code>mrkwords.sh</code> will pick a random line from the model and pick the first word of the pair as the first word of our output message. After this, it will filter the model to find what word pairs start with the first word it picked. Let&rsquo;s say it picked the word <code>hello</code> as the first word of the message. It will then randomly choose the second word of the message from the second element of a pair in the model that starts with the first word it chose. In this case, since it picked <code>hello</code> as the first word, it may pick one between <code>everybody</code> and <code>people</code> as the next word.
+</code></pre><p>The next step is generating a new random message with <code>./mrkwords.sh model.mrkdb 50 | tr '\n' ' ' &amp;&amp; echo</code></p>
+<p>At first, <code>mrkwords.sh</code> will pick a random line from the model and pick the first word of the pair as the first word of our output message. After this, it will filter the model to find what word pairs start with the first word it picked. Let's say it picked the word <code>hello</code> as the first word of the message. It will then randomly choose the second word of the message from the second element of a pair in the model that starts with the first word it chose. In this case, since it picked <code>hello</code> as the first word, it may pick one between <code>everybody</code> and <code>people</code> as the next word.
 It then repeats this process by passing the last word it chose as the word to choose in the next iteration. It may be even easier to understand in terms of code than in plain words.</p>
-
 <p>The presence of duplicate lines in the model is what gives it the power of weighed probability, perfectly modeling the process of random extraction, making the generated models real Markov chains.
 Doing this with plain unix tools makes <code>markov.sh</code> incredibly fast, because it is sacrificing disk space by storing duplicates in exchange for a huge improvement in the complexity of the computations. Although Markov chains are often considered complex, this small shell program shines in showing the real underlying simplicity.</p>
+<p>Here's a commented version of <code>./mrkwords.sh</code></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e">#!/bin/sh
+</span><span style="color:#75715e"></span>
+<span style="color:#75715e"># choose the first argument as the model file or try to open &#39;.mrkdb&#39;</span>
+file<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>1<span style="color:#66d9ef">:-</span>~/.mrkdb<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>
 
-<p>Here&rsquo;s a commented version of <code>./mrkwords.sh</code></p>
+<span style="color:#75715e"># $n is the maximum number of remaining words (iterations)</span>
+<span style="color:#75715e"># it is the 2nd argument of this program</span>
+n<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>2<span style="color:#66d9ef">:-</span>1<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>
 
-<pre><code class="language-bash">#!/bin/sh
+<span style="color:#75715e"># if present, use $key (3rd argument) to find pairs starting</span>
+<span style="color:#75715e"># with it in the model, you may use this to force a</span>
+<span style="color:#75715e"># word as the first word of the message</span>
+key<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;</span>$3<span style="color:#e6db74">&#34;</span>
 
-# choose the first argument as the model file or try to open '.mrkdb'
-file=&quot;${1:-~/.mrkdb}&quot;
+<span style="color:#75715e"># if $key is set print it</span>
+<span style="color:#f92672">[</span> ! -z <span style="color:#e6db74">&#34;</span>$key<span style="color:#e6db74">&#34;</span> <span style="color:#f92672">]</span> <span style="color:#f92672">&amp;&amp;</span> echo <span style="color:#e6db74">&#34;</span>$key<span style="color:#e6db74">&#34;</span>
 
-# $n is the maximum number of remaining words (iterations)
-# it is the 2nd argument of this program
-n=&quot;${2:-1}&quot;
+<span style="color:#75715e"># the max remaining number of words cannot be equal or less to 0</span>
+<span style="color:#f92672">[</span> <span style="color:#e6db74">&#34;</span>$n<span style="color:#e6db74">&#34;</span> -le <span style="color:#ae81ff">0</span> <span style="color:#f92672">]</span> <span style="color:#f92672">&amp;&amp;</span> exit
 
-# if present, use $key (3rd argument) to find pairs starting
-# with it in the model, you may use this to force a
-# word as the first word of the message
-key=&quot;$3&quot;
+<span style="color:#75715e"># if key is not set, set the chosen word to the first element</span>
+<span style="color:#75715e"># of a random pair in the model</span>
+<span style="color:#66d9ef">if</span> <span style="color:#f92672">[</span> -z <span style="color:#e6db74">&#34;</span>$key<span style="color:#e6db74">&#34;</span> <span style="color:#f92672">]</span>; <span style="color:#66d9ef">then</span>
+  word<span style="color:#f92672">=</span><span style="color:#66d9ef">$(</span>shuf -n <span style="color:#ae81ff">1</span> &lt; <span style="color:#e6db74">&#34;</span>$file<span style="color:#e6db74">&#34;</span> | cut -d<span style="color:#e6db74">&#39; &#39;</span> -f1<span style="color:#66d9ef">)</span>
 
-# if $key is set print it
-[ ! -z &quot;$key&quot; ] &amp;&amp; echo &quot;$key&quot;
+<span style="color:#75715e"># otherwise (key is set)</span>
+<span style="color:#66d9ef">else</span>
+    <span style="color:#75715e"># step 1, filter the model to find lines containing $key</span>
+    <span style="color:#75715e"># step 2, use awk to get only the lines in the model</span>
+    <span style="color:#75715e"># beginning with $key (the first element of the pairs)</span>
+    <span style="color:#75715e"># step 3, after filtering out the model, pick the second element of</span>
+    <span style="color:#75715e"># a random pair and set it as the value of the variable $word</span>
+  word<span style="color:#f92672">=</span><span style="color:#66d9ef">$(</span>grep -Fw <span style="color:#e6db74">&#34;</span>$key<span style="color:#e6db74">&#34;</span> &lt; <span style="color:#e6db74">&#34;</span>$file<span style="color:#e6db74">&#34;</span> |
+    awk -v key<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;</span>$key<span style="color:#e6db74">&#34;</span> <span style="color:#e6db74">&#39;$1 == key { print $0 }&#39;</span> |
+    shuf -n <span style="color:#ae81ff">1</span> | awk <span style="color:#e6db74">&#39;{ print $2 }&#39;</span><span style="color:#66d9ef">)</span> <span style="color:#f92672">||</span> exit
 
-# the max remaining number of words cannot be equal or less to 0
-[ &quot;$n&quot; -le 0 ] &amp;&amp; exit
+    <span style="color:#75715e"># if $word is empty then exit this iteration</span>
+    <span style="color:#75715e"># this may also mean that the randomized step picked</span>
+    <span style="color:#75715e"># a line in the model containing only the first element</span>
+    <span style="color:#75715e"># (signaling the end of the process)</span>
+  <span style="color:#f92672">[</span> -z <span style="color:#e6db74">&#34;</span>$word<span style="color:#e6db74">&#34;</span> <span style="color:#f92672">]</span> <span style="color:#f92672">&amp;&amp;</span> exit
+<span style="color:#66d9ef">fi</span>
 
-# if key is not set, set the chosen word to the first element
-# of a random pair in the model
-if [ -z &quot;$key&quot; ]; then
-  word=$(shuf -n 1 &lt; &quot;$file&quot; | cut -d' ' -f1)
-
-# otherwise (key is set)
-else
-    # step 1, filter the model to find lines containing $key
-    # step 2, use awk to get only the lines in the model
-    # beginning with $key (the first element of the pairs)
-    # step 3, after filtering out the model, pick the second element of
-    # a random pair and set it as the value of the variable $word
-  word=$(grep -Fw &quot;$key&quot; &lt; &quot;$file&quot; |
-    awk -v key=&quot;$key&quot; '$1 == key { print $0 }' |
-    shuf -n 1 | awk '{ print $2 }') || exit
-
-    # if $word is empty then exit this iteration
-    # this may also mean that the randomized step picked
-    # a line in the model containing only the first element
-    # (signaling the end of the process)
-  [ -z &quot;$word&quot; ] &amp;&amp; exit
-fi
-
-# the real magic happens here. this last step is similar
-# to a recursive function call in most programming languages
-# it runs this program again, with $n decremented by 1
-# and with the chosen $word as the next iteration's $key
-exec &quot;$0&quot; &quot;$file&quot; &quot;$(( n - 1 ))&quot; &quot;$word&quot;
-</code></pre>
-
-<p>In this example it generates a random fortune, modeled from the <code>goedel</code> fortunes contained in the famous <code>fortune-mod</code> package.</p>
-
-<pre><code class="language-bash"># remove the % delimiter in the fortune file and save it as a .txt
-sed -e '/^%$/d' &lt; /usr/share/fortunes/goedel &gt;&gt; goedel.txt
-# generate the model
+<span style="color:#75715e"># the real magic happens here. this last step is similar</span>
+<span style="color:#75715e"># to a recursive function call in most programming languages</span>
+<span style="color:#75715e"># it runs this program again, with $n decremented by 1</span>
+<span style="color:#75715e"># and with the chosen $word as the next iteration&#39;s $key</span>
+exec <span style="color:#e6db74">&#34;</span>$0<span style="color:#e6db74">&#34;</span> <span style="color:#e6db74">&#34;</span>$file<span style="color:#e6db74">&#34;</span> <span style="color:#e6db74">&#34;</span><span style="color:#66d9ef">$((</span> n <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span> <span style="color:#66d9ef">))</span><span style="color:#e6db74">&#34;</span> <span style="color:#e6db74">&#34;</span>$word<span style="color:#e6db74">&#34;</span>
+</code></pre></div><p>In this example it generates a random fortune, modeled from the <code>goedel</code> fortunes contained in the famous <code>fortune-mod</code> package.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># remove the % delimiter in the fortune file and save it as a .txt</span>
+sed -e <span style="color:#e6db74">&#39;/^%$/d&#39;</span> &lt; /usr/share/fortunes/goedel &gt;&gt; goedel.txt
+<span style="color:#75715e"># generate the model</span>
 ./mrkfeed.awk &lt; goedel.txt &gt;&gt; goedelmodel.mrkdb
-# get a random fortune!
-./mrkwords.sh goedelmodel.mrkdb 50 | tr '\n' ' '
+<span style="color:#75715e"># get a random fortune!</span>
+./mrkwords.sh goedelmodel.mrkdb <span style="color:#ae81ff">50</span> | tr <span style="color:#e6db74">&#39;\n&#39;</span> <span style="color:#e6db74">&#39; &#39;</span>
 the dimensionality of computerized fortune-tellers!
-# again!
-./mrkwords.sh goedelmodel.mrkdb 50 | tr '\n' ' '
+<span style="color:#75715e"># again!</span>
+./mrkwords.sh goedelmodel.mrkdb <span style="color:#ae81ff">50</span> | tr <span style="color:#e6db74">&#39;\n&#39;</span> <span style="color:#e6db74">&#39; &#39;</span>
 the thoughts of metalanguage are still free.
-# again!
-./mrkwords.sh goedelmodel.mrkdb 50 | tr '\n' ' '
-# let's change the model by using all fortunes this time
-./mrkwords.sh fortunesmodel.mrkdb 50 | tr '\n' ' '
-low taste, and goin' insane,
-</code></pre>
-
-<p><code>markov.sh</code> is extremely fast, even on relatively large data sets (millions of lines).</p>
+<span style="color:#75715e"># again!</span>
+./mrkwords.sh goedelmodel.mrkdb <span style="color:#ae81ff">50</span> | tr <span style="color:#e6db74">&#39;\n&#39;</span> <span style="color:#e6db74">&#39; &#39;</span>
+<span style="color:#75715e"># let&#39;s change the model by using all fortunes this time</span>
+./mrkwords.sh fortunesmodel.mrkdb <span style="color:#ae81ff">50</span> | tr <span style="color:#e6db74">&#39;\n&#39;</span> <span style="color:#e6db74">&#39; &#39;</span>
+low taste, and goin<span style="color:#960050;background-color:#1e0010">&#39;</span> insane,
+</code></pre></div><p><code>markov.sh</code> is extremely fast, even on relatively large data sets (millions of lines).</p>
 ]]></content>
         </item>
         
@@ -268,188 +569,150 @@ low taste, and goin' insane,
             <pubDate>Thu, 31 Oct 2019 00:00:00 +0000</pubDate>
             
             <guid>https://0x0f0f0f.github.io/posts/2019/10/adding-a-macro-parser-to-my-scheme-implementation/</guid>
-            <description>Happy Halloween everybody, here&amp;rsquo;s a little report on how I&amp;rsquo;ve added a macro parser to yasih (Yet Another Scheme in Haskell), my own R5RS Scheme implementation written in Haskell.
-At first I&amp;rsquo;ve had to define parsers for quote, quasiquote, and unquote and add them to the expression parser. You can learn more about how scheme quoting works in the MIT-scheme documentation.
--- |Parse a Quoted Expression &#39;a parseQuoted :: Parser LispVal parseQuoted = do char &#39;\&#39;&#39; x &amp;lt;- parseExpr return $ List [Atom &amp;quot;quote&amp;quot;, x] -- |Parse a QuasiQuoted Expression -- See https://schemers.</description>
-            <content type="html"><![CDATA[
-
-<p>Happy Halloween everybody, here&rsquo;s a little report on how I&rsquo;ve added a
-macro parser to <a href="https://github.com/0x0f0f0f/yasih" target="_blank">yasih</a> (Yet Another Scheme in Haskell),
+            <description>Happy Halloween everybody, here&#39;s a little report on how I&#39;ve added a macro parser to yasih (Yet Another Scheme in Haskell), my own R5RS Scheme implementation written in Haskell.
+At first I&#39;ve had to define parsers for quote, quasiquote, and unquote and add them to the expression parser. You can learn more about how scheme quoting works in the MIT-scheme documentation.
+-- |Parse a Quoted Expression &amp;#39;a parseQuoted :: Parser LispVal parseQuoted = do char &amp;#39;\&amp;#39;&amp;#39; x &amp;lt;- parseExpr return $ List [Atom &amp;#34;quote&amp;#34;, x] -- |Parse a QuasiQuoted Expression -- See https://schemers.</description>
+            <content type="html"><![CDATA[<p>Happy Halloween everybody, here's a little report on how I've added a
+macro parser to <a href="https://github.com/0x0f0f0f/yasih">yasih</a> (Yet Another Scheme in Haskell),
 my own R5RS Scheme implementation written in Haskell.</p>
+<p>At first I've had to define parsers for <code>quote</code>, <code>quasiquote</code>, and <code>unquote</code> and add them to the expression parser.
+You can learn more about how scheme quoting works <a href="https://www.gnu.org/software/mit-scheme/documentation/mit-scheme-ref/Quoting.html">in the MIT-scheme documentation</a>.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-haskell" data-lang="haskell"><span style="color:#75715e">-- |Parse a Quoted Expression &#39;a</span>
+<span style="color:#a6e22e">parseQuoted</span> <span style="color:#f92672">::</span> <span style="color:#66d9ef">Parser</span> <span style="color:#66d9ef">LispVal</span>
+<span style="color:#a6e22e">parseQuoted</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">do</span>
+    char <span style="color:#e6db74">&#39;</span><span style="color:#ae81ff">\</span><span style="color:#ae81ff">&#39;</span><span style="color:#e6db74">&#39;</span>
+    x <span style="color:#f92672">&lt;-</span> parseExpr
+    return <span style="color:#f92672">$</span> <span style="color:#66d9ef">List</span> [<span style="color:#66d9ef">Atom</span> <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">quote</span><span style="color:#e6db74">&#34;</span>, x]
 
-<p>At first I&rsquo;ve had to define parsers for <code>quote</code>, <code>quasiquote</code>, and <code>unquote</code> and add them to the expression parser.
-You can learn more about how scheme quoting works <a href="https://www.gnu.org/software/mit-scheme/documentation/mit-scheme-ref/Quoting.html" target="_blank">in the MIT-scheme documentation</a>.</p>
+<span style="color:#75715e">-- |Parse a QuasiQuoted Expression</span>
+<span style="color:#75715e">-- See https://schemers.org/Documents/Standards/R5RS/HTML/r5rs-Z-H-7.html#%_sec_4.2.6</span>
+<span style="color:#a6e22e">parseQuasiQuoted</span> <span style="color:#f92672">::</span> <span style="color:#66d9ef">Parser</span> <span style="color:#66d9ef">LispVal</span>
+<span style="color:#a6e22e">parseQuasiQuoted</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">do</span>
+    char <span style="color:#e6db74">&#39;`&#39;</span>
+    x <span style="color:#f92672">&lt;-</span> parseExpr
+    return <span style="color:#f92672">$</span> <span style="color:#66d9ef">List</span> [<span style="color:#66d9ef">Atom</span> <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">quasiquote</span><span style="color:#e6db74">&#34;</span>, x]
 
-<pre><code class="language-haskell">-- |Parse a Quoted Expression 'a
-parseQuoted :: Parser LispVal
-parseQuoted = do
-    char '\''
-    x &lt;- parseExpr
-    return $ List [Atom &quot;quote&quot;, x]
-
--- |Parse a QuasiQuoted Expression
--- See https://schemers.org/Documents/Standards/R5RS/HTML/r5rs-Z-H-7.html#%_sec_4.2.6
-parseQuasiQuoted :: Parser LispVal
-parseQuasiQuoted = do
-    char '`'
-    x &lt;- parseExpr
-    return $ List [Atom &quot;quasiquote&quot;, x]
-
-parseUnQuote :: Parser LispVal
-parseUnQuote = do
-    char ','
-    x &lt;- parseExpr
-    return $ List [Atom &quot;unquote&quot;, x]
-</code></pre>
-
-<p>Expression parser:</p>
-
-<pre><code class="language-haskell">-- |Parse an Expression
-parseExpr :: Parser LispVal
-parseExpr = try parseComplex
-        &lt;|&gt; try parseRatio
-        &lt;|&gt; try parseFloat
-        &lt;|&gt; try parseNumber
-        &lt;|&gt; try parseAtom
-        &lt;|&gt; parseString
-        &lt;|&gt; try parseBool
-        &lt;|&gt; try parseCharacter
-        &lt;|&gt; try parseQuoted
-        &lt;|&gt; try parseQuasiQuoted
-        &lt;|&gt; try parseUnQuote
-        &lt;|&gt; try parseVector
-        &lt;|&gt; try parseParens
-</code></pre>
-
-<p>The symbols <code>'expr</code>, <code>`expr</code>, and <code>,expr</code> are shorthands and are
+<span style="color:#a6e22e">parseUnQuote</span> <span style="color:#f92672">::</span> <span style="color:#66d9ef">Parser</span> <span style="color:#66d9ef">LispVal</span>
+<span style="color:#a6e22e">parseUnQuote</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">do</span>
+    char <span style="color:#e6db74">&#39;,&#39;</span>
+    x <span style="color:#f92672">&lt;-</span> parseExpr
+    return <span style="color:#f92672">$</span> <span style="color:#66d9ef">List</span> [<span style="color:#66d9ef">Atom</span> <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">unquote</span><span style="color:#e6db74">&#34;</span>, x]
+</code></pre></div><p>Expression parser:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-haskell" data-lang="haskell"><span style="color:#75715e">-- |Parse an Expression</span>
+<span style="color:#a6e22e">parseExpr</span> <span style="color:#f92672">::</span> <span style="color:#66d9ef">Parser</span> <span style="color:#66d9ef">LispVal</span>
+<span style="color:#a6e22e">parseExpr</span> <span style="color:#f92672">=</span> try parseComplex
+        <span style="color:#f92672">&lt;|&gt;</span> try parseRatio
+        <span style="color:#f92672">&lt;|&gt;</span> try parseFloat
+        <span style="color:#f92672">&lt;|&gt;</span> try parseNumber
+        <span style="color:#f92672">&lt;|&gt;</span> try parseAtom
+        <span style="color:#f92672">&lt;|&gt;</span> parseString
+        <span style="color:#f92672">&lt;|&gt;</span> try parseBool
+        <span style="color:#f92672">&lt;|&gt;</span> try parseCharacter
+        <span style="color:#f92672">&lt;|&gt;</span> try parseQuoted
+        <span style="color:#f92672">&lt;|&gt;</span> try parseQuasiQuoted
+        <span style="color:#f92672">&lt;|&gt;</span> try parseUnQuote
+        <span style="color:#f92672">&lt;|&gt;</span> try parseVector
+        <span style="color:#f92672">&lt;|&gt;</span> try parseParens
+</code></pre></div><p>The symbols <code>'expr</code>, <code> `expr</code>, and <code>,expr</code> are shorthands and are
 correspondingly transformed by the parser into the
 AST equivalent of the expressions:
 <code>(quote expr)</code>, <code>(quasiquote expr)</code> and <code>(unquote expr)</code>.
 In fact, the shorthand and list syntaxes are interchangeable. <code>unquote</code> makes sense only inside a <code>quasiquote</code>d block</p>
-
 <p>After defining the parsing rules for quoting and unquoting, it is time to define
 the corresponding evaluation rules as <code>eval</code> pattern matching cases:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-haskell" data-lang="haskell"><span style="color:#75715e">-- Evalaute a quoted expression, just return the value.</span>
+<span style="color:#a6e22e">eval</span> env (<span style="color:#66d9ef">List</span> [<span style="color:#66d9ef">Atom</span> <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">quote</span><span style="color:#e6db74">&#34;</span>, val]) <span style="color:#f92672">=</span> return val
+<span style="color:#75715e">-- ...</span>
 
-<pre><code class="language-haskell">-- Evalaute a quoted expression, just return the value.
-eval env (List [Atom &quot;quote&quot;, val]) = return val
--- ...
-
--- Evaluate quasiquotation. AKA macro expander.
--- Recursively evaluate unquote forms, or just return the items if not unquoted
-eval env (List [Atom &quot;quasiquote&quot;, form]) =
+<span style="color:#75715e">-- Evaluate quasiquotation. AKA macro expander.</span>
+<span style="color:#75715e">-- Recursively evaluate unquote forms, or just return the items if not unquoted</span>
+<span style="color:#a6e22e">eval</span> env (<span style="color:#66d9ef">List</span> [<span style="color:#66d9ef">Atom</span> <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">quasiquote</span><span style="color:#e6db74">&#34;</span>, form]) <span style="color:#f92672">=</span>
     evalUnquotes form
-    where evalUnquotes form =
-            case form of
-                List [Atom &quot;unquote&quot;, form] -&gt; eval env form
-                List items -&gt; do
-                    results &lt;- traverse evalUnquotes items
-                    return $ List results
-                _ -&gt; return form
-</code></pre>
-
-<p>Here&rsquo;s an example, showing what happens when entering quoted expressions
-in <strong>yasih</strong>&rsquo;s REPL.</p>
-
-<pre><code class="language-scheme">λ&gt; ; here, the evaluator tries to apply
-λ&gt; (1 2 3) ; 2 and 3 as arguments to a function &quot;1&quot;
-Not a function: : &quot;1&quot;
-λ&gt; ; the result is clearly not a function
-λ&gt; ; the list here is now quoted and will be treated as a literal value
-λ&gt; '(1 2 3)
-(1 2 3)
-λ&gt; `(1 2 3) ; same here but using quasiquote
-(1 2 3)
-λ&gt; `(1 2 ,(+ 4 5)) ; the unquoted expression is evaluated! (un-quoted)!
-(1 2 9)
-</code></pre>
-
-<p>After we have working quotation and quasiquotation it is time to add actual macros to the interpreter.
+    <span style="color:#66d9ef">where</span> evalUnquotes form <span style="color:#f92672">=</span>
+            <span style="color:#66d9ef">case</span> form <span style="color:#66d9ef">of</span>
+                <span style="color:#66d9ef">List</span> [<span style="color:#66d9ef">Atom</span> <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">unquote</span><span style="color:#e6db74">&#34;</span>, form] <span style="color:#f92672">-&gt;</span> eval env form
+                <span style="color:#66d9ef">List</span> items <span style="color:#f92672">-&gt;</span> <span style="color:#66d9ef">do</span>
+                    results <span style="color:#f92672">&lt;-</span> traverse evalUnquotes items
+                    return <span style="color:#f92672">$</span> <span style="color:#66d9ef">List</span> results
+                <span style="color:#66d9ef">_</span> <span style="color:#f92672">-&gt;</span> return form
+</code></pre></div><p>Here's an example, showing what happens when entering quoted expressions
+in <strong>yasih</strong>&lsquo;s REPL.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scheme" data-lang="scheme">λ&gt; <span style="color:#75715e">; here, the evaluator tries to apply</span>
+λ&gt; (<span style="color:#ae81ff">1</span> <span style="color:#ae81ff">2</span> <span style="color:#ae81ff">3</span>) <span style="color:#75715e">; 2 and 3 as arguments to a function &#34;1&#34;</span>
+Not a function: : <span style="color:#e6db74">&#34;1&#34;</span>
+λ&gt; <span style="color:#75715e">; the result is clearly not a function</span>
+λ&gt; <span style="color:#75715e">; the list here is now quoted and will be treated as a literal value</span>
+λ&gt; <span style="color:#f92672">&#39;</span>(<span style="color:#ae81ff">1</span> <span style="color:#ae81ff">2</span> <span style="color:#ae81ff">3</span>)
+(<span style="color:#ae81ff">1</span> <span style="color:#ae81ff">2</span> <span style="color:#ae81ff">3</span>)
+λ&gt; <span style="color:#f92672">`</span>(<span style="color:#ae81ff">1</span> <span style="color:#ae81ff">2</span> <span style="color:#ae81ff">3</span>) <span style="color:#75715e">; same here but using quasiquote</span>
+(<span style="color:#ae81ff">1</span> <span style="color:#ae81ff">2</span> <span style="color:#ae81ff">3</span>)
+λ&gt; <span style="color:#f92672">`</span>(<span style="color:#ae81ff">1</span> <span style="color:#ae81ff">2</span> <span style="color:#f92672">,</span>(+ <span style="color:#ae81ff">4</span> <span style="color:#ae81ff">5</span>)) <span style="color:#75715e">; the unquoted expression is evaluated! (un-quoted)!</span>
+(<span style="color:#ae81ff">1</span> <span style="color:#ae81ff">2</span> <span style="color:#ae81ff">9</span>)
+</code></pre></div><p>After we have working quotation and quasiquotation it is time to add actual macros to the interpreter.
 I had to change the expression data type by adding an <code>isMacro</code> field.</p>
-
-<pre><code class="language-haskell">-- |Lisp Value data type
-data LispVal =
-    -- Other data types here...
-    | Func {
-        isMacro :: Bool,
-        params :: [String], -- Parameters name
-        vararg :: Maybe String, -- name of a variable-length argument list
-        body :: [LispVal], -- list of expressions
-        closure :: Env -- the environment where the function was created
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-haskell" data-lang="haskell"><span style="color:#75715e">-- |Lisp Value data type</span>
+<span style="color:#66d9ef">data</span> <span style="color:#66d9ef">LispVal</span> <span style="color:#f92672">=</span>
+    <span style="color:#75715e">-- Other data types here...</span>
+    <span style="color:#f92672">|</span> <span style="color:#66d9ef">Func</span> {
+        isMacro <span style="color:#f92672">::</span> <span style="color:#66d9ef">Bool</span>,
+        params <span style="color:#f92672">::</span> [<span style="color:#66d9ef">String</span>], <span style="color:#75715e">-- Parameters name</span>
+        vararg <span style="color:#f92672">::</span> <span style="color:#66d9ef">Maybe</span> <span style="color:#66d9ef">String</span>, <span style="color:#75715e">-- name of a variable-length argument list</span>
+        body <span style="color:#f92672">::</span> [<span style="color:#66d9ef">LispVal</span>], <span style="color:#75715e">-- list of expressions</span>
+        closure <span style="color:#f92672">::</span> <span style="color:#66d9ef">Env</span> <span style="color:#75715e">-- the environment where the function was created</span>
         }
-    | IOFunc ([LispVal] -&gt; IOThrowsError LispVal) -- A dirty function that performs IO
-    | Port Handle -- Represents input and output devices
-</code></pre>
-
-<p>The important bit was changing <code>eval</code>&rsquo;s function application clause by
+    <span style="color:#f92672">|</span> <span style="color:#66d9ef">IOFunc</span> ([<span style="color:#66d9ef">LispVal</span>] <span style="color:#f92672">-&gt;</span> <span style="color:#66d9ef">IOThrowsError</span> <span style="color:#66d9ef">LispVal</span>) <span style="color:#75715e">-- A dirty function that performs IO</span>
+    <span style="color:#f92672">|</span> <span style="color:#66d9ef">Port</span> <span style="color:#66d9ef">Handle</span> <span style="color:#75715e">-- Represents input and output devices</span>
+</code></pre></div><p>The important bit was changing <code>eval</code>'s function application clause by
 checking if a called function is a macro, and if so changing
 from eager evaluation order of the arguments to a normal-order evaluation.
-Read more about evaluation models <a href="https://cs.stackexchange.com/questions/54000/is-applicative-order-and-normal-order-evaluation-models-definition-contradictor" target="_blank">here</a> (huge thanks to Rei for the link).</p>
-
-<pre><code class="language-haskell">-- Function application clause
--- Run eval recursively over args then apply func over the resulting list
-eval env (List (function : args)) = do
-    func &lt;- eval env function
-    case func of
-        Func {isMacro = True} -&gt; apply func args &gt;&gt;= eval env
-        _ -&gt; mapM (eval env) args &gt;&gt;= apply func
-</code></pre>
-
-<p>You can see that if the applied function is a macro, then <code>eval env</code> is not called over the arguments.
+Read more about evaluation models <a href="https://cs.stackexchange.com/questions/54000/is-applicative-order-and-normal-order-evaluation-models-definition-contradictor">here</a> (huge thanks to Rei for the link).</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-haskell" data-lang="haskell"><span style="color:#75715e">-- Function application clause</span>
+<span style="color:#75715e">-- Run eval recursively over args then apply func over the resulting list</span>
+<span style="color:#a6e22e">eval</span> env (<span style="color:#66d9ef">List</span> (function <span style="color:#66d9ef">:</span> args)) <span style="color:#f92672">=</span> <span style="color:#66d9ef">do</span>
+    func <span style="color:#f92672">&lt;-</span> eval env function
+    <span style="color:#66d9ef">case</span> func <span style="color:#66d9ef">of</span>
+        <span style="color:#66d9ef">Func</span> {isMacro <span style="color:#f92672">=</span> <span style="color:#66d9ef">True</span>} <span style="color:#f92672">-&gt;</span> apply func args <span style="color:#f92672">&gt;&gt;=</span> eval env
+        <span style="color:#66d9ef">_</span> <span style="color:#f92672">-&gt;</span> mapM (eval env) args <span style="color:#f92672">&gt;&gt;=</span> apply func
+</code></pre></div><p>You can see that if the applied function is a macro, then <code>eval env</code> is not called over the arguments.
 Minor changes were needed also in <code>apply</code>, just adding an <code>isMacro</code> deconstructor to the case where <code>Func</code>
-is passed as an argument. It is not needed by now inside <code>apply</code>&rsquo;s body.</p>
-
-<pre><code class="language-haskell">apply (Func isMacro params varargs body closure) args =
-    -- more code...
-</code></pre>
-
-<p>Now, it&rsquo;s time to add some helper functions in <code>Environment.hs</code> to make a macro</p>
-
-<pre><code class="language-haskell">-- |Helper functions to create function objects in IOThrowsError monad
-makeFunc :: Bool -&gt; Maybe String -&gt; Env -&gt; [LispVal] -&gt; [LispVal] -&gt; IOThrowsError LispVal
-makeFunc isMacro varargs env params body = return $ Func isMacro (map showVal params) varargs body env
-makeNormalFunc = makeFunc False Nothing
-makeVarargs = makeFunc False . Just . showVal
-makeMacro = makeFunc True Nothing
-</code></pre>
-
-<p>Finally, a <code>define-syntax</code> form can be defined to make macros.
+is passed as an argument. It is not needed by now inside <code>apply</code>'s body.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-haskell" data-lang="haskell"><span style="color:#a6e22e">apply</span> (<span style="color:#66d9ef">Func</span> isMacro params varargs body closure) args <span style="color:#f92672">=</span>
+    <span style="color:#75715e">-- more code...</span>
+</code></pre></div><p>Now, it's time to add some helper functions in <code>Environment.hs</code> to make a macro</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-haskell" data-lang="haskell"><span style="color:#75715e">-- |Helper functions to create function objects in IOThrowsError monad</span>
+<span style="color:#a6e22e">makeFunc</span> <span style="color:#f92672">::</span> <span style="color:#66d9ef">Bool</span> <span style="color:#f92672">-&gt;</span> <span style="color:#66d9ef">Maybe</span> <span style="color:#66d9ef">String</span> <span style="color:#f92672">-&gt;</span> <span style="color:#66d9ef">Env</span> <span style="color:#f92672">-&gt;</span> [<span style="color:#66d9ef">LispVal</span>] <span style="color:#f92672">-&gt;</span> [<span style="color:#66d9ef">LispVal</span>] <span style="color:#f92672">-&gt;</span> <span style="color:#66d9ef">IOThrowsError</span> <span style="color:#66d9ef">LispVal</span>
+<span style="color:#a6e22e">makeFunc</span> isMacro varargs env params body <span style="color:#f92672">=</span> return <span style="color:#f92672">$</span> <span style="color:#66d9ef">Func</span> isMacro (map showVal params) varargs body env
+<span style="color:#a6e22e">makeNormalFunc</span> <span style="color:#f92672">=</span> makeFunc <span style="color:#66d9ef">False</span> <span style="color:#66d9ef">Nothing</span>
+<span style="color:#a6e22e">makeVarargs</span> <span style="color:#f92672">=</span> makeFunc <span style="color:#66d9ef">False</span> <span style="color:#f92672">.</span> <span style="color:#66d9ef">Just</span> <span style="color:#f92672">.</span> showVal
+<span style="color:#a6e22e">makeMacro</span> <span style="color:#f92672">=</span> makeFunc <span style="color:#66d9ef">True</span> <span style="color:#66d9ef">Nothing</span>
+</code></pre></div><p>Finally, a <code>define-syntax</code> form can be defined to make macros.
 I have not yet implemented <code>syntax-rules</code> but i surely will in the next <strong>yasih</strong> updates.</p>
-
-<pre><code class="language-haskell">-- Define a macro
-eval env (List (Atom &quot;define-syntax&quot; : List (Atom var : params) : body)) =
-    makeMacro env params body &gt;&gt;= defineVar env var
-</code></pre>
-
-<p>Here&rsquo;s an example on how you can make a macro and use it as a practical construct
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-haskell" data-lang="haskell"><span style="color:#75715e">-- Define a macro</span>
+<span style="color:#a6e22e">eval</span> env (<span style="color:#66d9ef">List</span> (<span style="color:#66d9ef">Atom</span> <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">define-syntax</span><span style="color:#e6db74">&#34;</span> <span style="color:#66d9ef">:</span> <span style="color:#66d9ef">List</span> (<span style="color:#66d9ef">Atom</span> var <span style="color:#66d9ef">:</span> params) <span style="color:#66d9ef">:</span> body)) <span style="color:#f92672">=</span>
+    makeMacro env params body <span style="color:#f92672">&gt;&gt;=</span> defineVar env var
+</code></pre></div><p>Here's an example on how you can make a macro and use it as a practical construct
 for a programming language.
 Here, the <code>let</code> statement is defined as a macro that will expand to an anonymous function
 (lambda) application, in this way a closure will be made and lexical scoping will be respected,
-correctly reaching the <code>let</code> statement&rsquo;s goals. The implementation is a little sketchy and
+correctly reaching the <code>let</code> statement's goals. The implementation is a little sketchy and
 will surely get better as <code>syntax-rules</code> gets implemented.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scheme" data-lang="scheme">(<span style="color:#66d9ef">define-syntax </span>(<span style="color:#a6e22e">bind-vars</span> bindings)
+    <span style="color:#f92672">`</span>(map car bindings))
 
-<pre><code class="language-scheme">(define-syntax (bind-vars bindings)
-    `(map car bindings))
+(<span style="color:#66d9ef">define-syntax </span>(<span style="color:#a6e22e">bind-vals</span> bindings)
+    <span style="color:#f92672">`</span>(map cadr bindings))
 
-(define-syntax (bind-vals bindings)
-    `(map cadr bindings))
-
-(define-syntax (let bindings body)
-    `(apply (lambda ,(bind-vars bindings) ,body) ',(bind-vals bindings)))
-</code></pre>
-
-<pre><code class="language-scheme">(let ((x 1) (y 4)) (- (* y y) (+ 1 x)))
-; will expand to
-((lambda (x y) (- (* y y) (+ 1 x))) 1 4)
-; before being executed
-</code></pre>
-
-<p>This practice is called <code>let-over-lambda</code>.
+(<span style="color:#66d9ef">define-syntax </span>(<span style="color:#66d9ef">let </span>bindings body)
+    <span style="color:#f92672">`</span>(apply (<span style="color:#66d9ef">lambda </span><span style="color:#f92672">,</span>(<span style="color:#a6e22e">bind-vars</span> bindings) <span style="color:#f92672">,</span>body) <span style="color:#e6db74">&#39;,</span>(<span style="color:#a6e22e">bind-vals</span> bindings)))
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scheme" data-lang="scheme">(<span style="color:#66d9ef">let </span>((<span style="color:#a6e22e">x</span> <span style="color:#ae81ff">1</span>) (<span style="color:#a6e22e">y</span> <span style="color:#ae81ff">4</span>)) (- (* y y) (+ <span style="color:#ae81ff">1</span> x)))
+<span style="color:#75715e">; will expand to</span>
+((<span style="color:#66d9ef">lambda </span>(<span style="color:#a6e22e">x</span> y) (- (* y y) (+ <span style="color:#ae81ff">1</span> x))) <span style="color:#ae81ff">1</span> <span style="color:#ae81ff">4</span>)
+<span style="color:#75715e">; before being executed</span>
+</code></pre></div><p>This practice is called <code>let-over-lambda</code>.
 Some modern functional programming languages like OCaml, directly create a closure instead of
 creating an anonymous function for <code>let</code> statements;
 that practice is fairly more performant, but the execution result is identical.</p>
-
-<h2 id="some-updates-on-yasih-s-development">Some updates on yasih&rsquo;s development.</h2>
-
+<h2 id="some-updates-on-yasihs-development">Some updates on yasih's development.</h2>
 <p>A sketchy complete R5RS implementation is almost done.
 Some primitives are still missing and I will work on them in the next updates, in which I will also
 focus on adding additional features like string interpolation, stack tracing, and probably
@@ -464,109 +727,72 @@ optimization features like a garbage collector.</p>
             
             <guid>https://0x0f0f0f.github.io/posts/2019/09/learn-functional-programming-by-writing-a-scheme-in-haskell/</guid>
             <description>How to make your first functional programming language. A book review. After taking an introductory functional programming course last year I have decided to dive into Functional Programming in a challenging way.
-At the beginning of the summer I&amp;rsquo;ve asked an experienced friend some ideas for a summer project. He suggested me to implement R5RS Scheme (Revised(5) Report on the Algorithmic Language Scheme) in Haskell. Scheme is called a dialect of LISP (LIst PRocessor), a family of programming languages with a long history, famous for its fully parenthesized prefix notation.</description>
-            <content type="html"><![CDATA[
-
-<h2 id="how-to-make-your-first-functional-programming-language-a-book-review">How to make your first functional programming language. A book review.</h2>
-
+At the beginning of the summer I&#39;ve asked an experienced friend some ideas for a summer project. He suggested me to implement R5RS Scheme (Revised(5) Report on the Algorithmic Language Scheme) in Haskell. Scheme is called a dialect of LISP (LIst PRocessor), a family of programming languages with a long history, famous for its fully parenthesized prefix notation.</description>
+            <content type="html"><![CDATA[<h2 id="how-to-make-your-first-functional-programming-language-a-book-review">How to make your first functional programming language. A book review.</h2>
 <p>After taking an introductory functional programming course last year I have decided to dive into Functional Programming in a challenging way.</p>
-
-<p>At the beginning of the summer I&rsquo;ve asked an experienced friend some ideas for a summer project. He suggested me to implement <strong>R5RS Scheme</strong> (Revised(5) Report on the Algorithmic Language Scheme) in Haskell. Scheme is called a dialect of LISP (<strong>LI</strong>st <strong>PR</strong>ocessor), a family of programming languages with a long history, famous for its fully parenthesized <a href="https://en.wikipedia.org/wiki/Polish_notation" target="_blank">prefix notation</a>. LISP  showed computer scientists in the 60s the importance of <a href="https://en.wikipedia.org/wiki/Lambda_calculus" target="_blank">λ (lambda) calculus</a> and was originally specified in 1958 by John McCarthy, one of the founders of the Stanford AI Laboratory.</p>
-
-<p>I&rsquo;ve decided to call my Scheme implementation <strong>yasih</strong>, or <strong>Y</strong>et <strong>A</strong>nother <strong>S</strong>cheme <strong>I</strong>n <strong>H</strong>askell, since implementing a Scheme in Haskell is a popular exercise alongwise Computer Scientists. You can find the code in the <a href="https://github.com/0x0f0f0f/yasih" target="_blank">yasih repository</a> on my GitHub profile.</p>
-
-<p>At the time I only knew a little bit of OCaML and had some basic knowledge about λ-calculus and LISP, but I was itching for more knowledge about the internals and the history of functional programming. After a bit of googling I&rsquo;ve stumbled into the excellent book <a href="https://en.wikibooks.org/wiki/Write_Yourself_a_Scheme_in_48_Hours/" target="_blank">Write Yourself a Scheme in 48 Hours</a> and started diving into it.</p>
-
+<p>At the beginning of the summer I've asked an experienced friend some ideas for a summer project. He suggested me to implement <strong>R5RS Scheme</strong> (Revised(5) Report on the Algorithmic Language Scheme) in Haskell. Scheme is called a dialect of LISP (<strong>LI</strong>st <strong>PR</strong>ocessor), a family of programming languages with a long history, famous for its fully parenthesized <a href="https://en.wikipedia.org/wiki/Polish_notation">prefix notation</a>. LISP  showed computer scientists in the 60s the importance of <a href="https://en.wikipedia.org/wiki/Lambda_calculus">λ (lambda) calculus</a> and was originally specified in 1958 by John McCarthy, one of the founders of the Stanford AI Laboratory.</p>
+<p>I've decided to call my Scheme implementation <strong>yasih</strong>, or <strong>Y</strong>et <strong>A</strong>nother <strong>S</strong>cheme <strong>I</strong>n <strong>H</strong>askell, since implementing a Scheme in Haskell is a popular exercise alongwise Computer Scientists. You can find the code in the <a href="https://github.com/0x0f0f0f/yasih">yasih repository</a> on my GitHub profile.</p>
+<p>At the time I only knew a little bit of OCaML and had some basic knowledge about λ-calculus and LISP, but I was itching for more knowledge about the internals and the history of functional programming. After a bit of googling I've stumbled into the excellent book <a href="https://en.wikibooks.org/wiki/Write_Yourself_a_Scheme_in_48_Hours/">Write Yourself a Scheme in 48 Hours</a> and started diving into it.</p>
 <p>The book is raw, it was refined by the WikiBooks community after the original version was open sourced, hence it is still incomplete. Each chapter explains the interpreter code step by step and also presents you with some exercises. At the beginning, it goes straight to parsing and assumes that you have some (basic) functional programming background.</p>
-
-<p>Some Haskell concepts aren&rsquo;t explained clearly, while Scheme concepts are explained in much more detail. I had to do a lot of googling while reading each chapter. I also followed the <a href="https://groups.csail.mit.edu/mac/ftpdir/scheme-reports/r5rs-html/r5rs_toc.html" target="_blank">MIT R5RS spec</a> and the <a href="https://www.gnu.org/software/guile/docs/docs-1.6/guile-ref/R5RS-Index.html" target="_blank">Guile Scheme reference manual</a>. <a href="https://www.gnu.org/software/guile/" target="_blank">Guile</a> is the official scripting language of the GNU project and is a really great and fast implementation of the Scheme language. I&rsquo;ve used it in parallel to my Scheme to test the correctness of the primitives I&rsquo;ve implemented in my Scheme.</p>
-
+<p>Some Haskell concepts aren't explained clearly, while Scheme concepts are explained in much more detail. I had to do a lot of googling while reading each chapter. I also followed the <a href="https://groups.csail.mit.edu/mac/ftpdir/scheme-reports/r5rs-html/r5rs_toc.html">MIT R5RS spec</a> and the <a href="https://www.gnu.org/software/guile/docs/docs-1.6/guile-ref/R5RS-Index.html">Guile Scheme reference manual</a>. <a href="https://www.gnu.org/software/guile/">Guile</a> is the official scripting language of the GNU project and is a really great and fast implementation of the Scheme language. I've used it in parallel to my Scheme to test the correctness of the primitives I've implemented in my Scheme.</p>
 <p>A simple LISP interpreter is composed by 3 components:</p>
-
 <p>The first one, the <strong>parser</strong> is the section of interpreter that is responsible of reading each character, line-by-line, of a text file received in input (the program) and transform it into an <strong>AST</strong> (Abstract Syntax Tree). The parser also performs some syntactical correctness checks.
-Here&rsquo;s an example of parsing a typical LISP parenthesized expression using the Parsec parser combinator library in Haskell:</p>
-
-<pre><code class="language-haskell">parseExpr :: Parser LispVal
-parseExpr = do
-    expr &lt;- try parseComplex
-        &lt;|&gt; try parseRatio
-        &lt;|&gt; try parseFloat
-        &lt;|&gt; try parseNumber
-        &lt;|&gt; try parseAtom
-        &lt;|&gt; parseString
-        &lt;|&gt; try parseBool
-        &lt;|&gt; try parseCharacter
-        &lt;|&gt; try parseQuoted
-        &lt;|&gt; try parseQuasiQuoted
-        &lt;|&gt; try parseUnQuote
-        &lt;|&gt; try parseVector
-        &lt;|&gt; try parseParens
+Here's an example of parsing a typical LISP parenthesized expression using the Parsec parser combinator library in Haskell:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-haskell" data-lang="haskell"><span style="color:#a6e22e">parseExpr</span> <span style="color:#f92672">::</span> <span style="color:#66d9ef">Parser</span> <span style="color:#66d9ef">LispVal</span>
+<span style="color:#a6e22e">parseExpr</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">do</span>
+    expr <span style="color:#f92672">&lt;-</span> try parseComplex
+        <span style="color:#f92672">&lt;|&gt;</span> try parseRatio
+        <span style="color:#f92672">&lt;|&gt;</span> try parseFloat
+        <span style="color:#f92672">&lt;|&gt;</span> try parseNumber
+        <span style="color:#f92672">&lt;|&gt;</span> try parseAtom
+        <span style="color:#f92672">&lt;|&gt;</span> parseString
+        <span style="color:#f92672">&lt;|&gt;</span> try parseBool
+        <span style="color:#f92672">&lt;|&gt;</span> try parseCharacter
+        <span style="color:#f92672">&lt;|&gt;</span> try parseQuoted
+        <span style="color:#f92672">&lt;|&gt;</span> try parseQuasiQuoted
+        <span style="color:#f92672">&lt;|&gt;</span> try parseUnQuote
+        <span style="color:#f92672">&lt;|&gt;</span> try parseVector
+        <span style="color:#f92672">&lt;|&gt;</span> try parseParens
     skipMany parseComment
     return expr
-</code></pre>
-
-<p>The <strong>AST</strong> then gets evalauted by the <strong>Evaluator</strong>. The <strong>Evaluator</strong> receives in input an <strong>AST</strong> from the parser, executes semantical correctness checks (malformed forms, wrong argument numbers, unbound variables) and then recursively applies form evaluation and function calls, &ldquo;executing&rdquo; the AST expression and returning a value. Evaluation steps in λ-calculus are called β-reduction (applying functions to their arguments) and η-conversion (two functions are the same if and only if they give the same result for all arguments).</p>
-
-<p>(The <a href="https://www.flickr.com/photos/71827087@N00/124183635/" target="_blank">April 1985 issue</a> of &ldquo;bit&rdquo;, a Japanese computer science magazine, which an introduction to Common Lisp.)</p>
-
-<p><img src="/posts/images/bitcover.jpg" alt="Bit 1985 Cover" /></p>
-
-<p>An interesting fact about the classical untyped λ-calculus is that it provides a <a href="https://en.wikipedia.org/wiki/Fixed-point_combinator" target="_blank">fixed-point combinator</a> called an <strong>Y-Combinator</strong> that can be used to implement <a href="https://en.wikipedia.org/wiki/Curry%27s_paradox" target="_blank">Curry&rsquo;s Paradox</a>. It was first implemented by the logician <strong>Haskell Curry</strong> (which Haskell took its name from).</p>
-
-<p>Here&rsquo;s the Y-Combinator in pure lambda calculus notation. You can read more about <a href="https://sookocheff.com/post/fp/recursive-lambda-functions/" target="_blank">Recursion in λ-calculus</a>.</p>
-
+</code></pre></div><p>The <strong>AST</strong> then gets evalauted by the <strong>Evaluator</strong>. The <strong>Evaluator</strong> receives in input an <strong>AST</strong> from the parser, executes semantical correctness checks (malformed forms, wrong argument numbers, unbound variables) and then recursively applies form evaluation and function calls, &ldquo;executing&rdquo; the AST expression and returning a value. Evaluation steps in λ-calculus are called β-reduction (applying functions to their arguments) and η-conversion (two functions are the same if and only if they give the same result for all arguments).</p>
+<p>(The <a href="https://www.flickr.com/photos/71827087@N00/124183635/">April 1985 issue</a> of &ldquo;bit&rdquo;, a Japanese computer science magazine, which an introduction to Common Lisp.)</p>
+<p><img src="/posts/images/bitcover.jpg" alt="Bit 1985 Cover"></p>
+<p>An interesting fact about the classical untyped λ-calculus is that it provides a <a href="https://en.wikipedia.org/wiki/Fixed-point_combinator">fixed-point combinator</a> called an <strong>Y-Combinator</strong> that can be used to implement <a href="https://en.wikipedia.org/wiki/Curry%27s_paradox">Curry's Paradox</a>. It was first implemented by the logician <strong>Haskell Curry</strong> (which Haskell took its name from).</p>
+<p>Here's the Y-Combinator in pure lambda calculus notation. You can read more about <a href="https://sookocheff.com/post/fp/recursive-lambda-functions/">Recursion in λ-calculus</a>.</p>
 <pre><code>λf.(λx.(f (x x)) λx.(f (x x)))
-</code></pre>
-
-<p>Here&rsquo;s the Y-Combinator in the Scheme language</p>
-
-<pre><code class="language-lisp">(lambda (f) ((lambda (g) (g g)) 
-    (lambda (g) (f (lambda a (apply (g g) a))))))) 
-</code></pre>
-
-<p>From Wikipedia: &ldquo;Applied to a function with one variable the Y combinator usually does not terminate. More interesting results are obtained by applying the Y combinator to functions of two or more variables. The second variable may be used as a counter, or index. The resulting function behaves like a while or a for loop in an imperative language.</p>
-
+</code></pre><p>Here's the Y-Combinator in the Scheme language</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lisp" data-lang="lisp">(lambda (f) ((lambda (g) (g g)) 
+    (lambda (g) (f (lambda a (<span style="color:#a6e22e">apply</span> (g g) a))))))) 
+</code></pre></div><p>From Wikipedia: &ldquo;Applied to a function with one variable the Y combinator usually does not terminate. More interesting results are obtained by applying the Y combinator to functions of two or more variables. The second variable may be used as a counter, or index. The resulting function behaves like a while or a for loop in an imperative language.</p>
 <p>Used in this way the Y combinator implements simple recursion. In the lambda calculus it is not possible to refer to the definition of a function in a function body. Recursion may only be achieved by passing in a function as a parameter. The Y combinator demonstrates this style of programming.&rdquo;</p>
-
-<p>(Fun fact: <a href="https://news.ycombinator.com/" target="_blank">Hacker News</a> is run by Paul Graham&rsquo;s investment fund and startup incubator, Y Combinator, that takes the name from Curry&rsquo;s paradoxical Y-Combinator)</p>
-
+<p>(Fun fact: <a href="https://news.ycombinator.com/">Hacker News</a> is run by Paul Graham's investment fund and startup incubator, Y Combinator, that takes the name from Curry's paradoxical Y-Combinator)</p>
 <p>The final part of the interpreter, the <strong>REPL</strong> (Read Eval Print Loop) is the glue between the user and the interpreter. It is a simple program that reads line by line from a file or a terminal interface and evaluates each statement, prints a result and loops back to reading.</p>
-
-<p>Writing and making the evaluator was (and still is) the hardest part of making yasih Scheme. While testing a simple program, I&rsquo;ve encountered a cryptical error:</p>
-
+<p>Writing and making the evaluator was (and still is) the hardest part of making yasih Scheme. While testing a simple program, I've encountered a cryptical error:</p>
 <pre><code>unbound variable: if
-</code></pre>
-
-<p>After hours of debugging I&rsquo;ve discovered that the error was originating from the fact that I was mishandling evaluation of the <code>if</code> form, and I was lacking an <code>eval</code> pattern matching case to evaluate an <code>if</code> expression without the <code>else</code> branch.</p>
-
-<p><strong>yasih</strong> is not ready for production at all. On the roadmap there&rsquo;s finishing implementing the R5RS standard, which includes adding <code>defmacro</code>, hygienic macros and some fixes related to character and REPL line parsing.
+</code></pre><p>After hours of debugging I've discovered that the error was originating from the fact that I was mishandling evaluation of the <code>if</code> form, and I was lacking an <code>eval</code> pattern matching case to evaluate an <code>if</code> expression without the <code>else</code> branch.</p>
+<p><strong>yasih</strong> is not ready for production at all. On the roadmap there's finishing implementing the R5RS standard, which includes adding <code>defmacro</code>, hygienic macros and some fixes related to character and REPL line parsing.
 Here are some of the first examples I tested as soon as yasih reached a working status.</p>
-
 <p>Fibonacci Number</p>
-
-<pre><code class="language-lisp">(define (fib-rec n)
-  (if (&lt; n 2)
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lisp" data-lang="lisp">(define (fib-rec n)
+  (<span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">&lt;</span> n <span style="color:#ae81ff">2</span>)
       n
-      (+ (fib-rec (- n 1))
-         (fib-rec (- n 2)))))
-</code></pre>
-
-<p>Hanoi Tower Algorithm</p>
-
-<pre><code class="language-lisp">(define (hanoi n a b c)
-  (if (&gt; n 0)
+      (<span style="color:#a6e22e">+</span> (fib-rec (<span style="color:#a6e22e">-</span> n <span style="color:#ae81ff">1</span>))
+         (fib-rec (<span style="color:#a6e22e">-</span> n <span style="color:#ae81ff">2</span>)))))
+</code></pre></div><p>Hanoi Tower Algorithm</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lisp" data-lang="lisp">(define (hanoi n a b c)
+  (<span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">&gt;</span> n <span style="color:#ae81ff">0</span>)
     (begin
-      (hanoi (- n 1) a c b)
-      (display &quot;Move disk from pole &quot;)
+      (hanoi (<span style="color:#a6e22e">-</span> n <span style="color:#ae81ff">1</span>) a c b)
+      (display <span style="color:#e6db74">&#34;Move disk from pole &#34;</span>)
       (display a)
-      (display &quot; to pole &quot;)
+      (display <span style="color:#e6db74">&#34; to pole &#34;</span>)
       (display b)
       (newline)
-      (hanoi (- n 1) c b a))))
+      (hanoi (<span style="color:#a6e22e">-</span> n <span style="color:#ae81ff">1</span>) c b a))))
 
-(hanoi 4 1 2 3)
-</code></pre>
-]]></content>
+(hanoi <span style="color:#ae81ff">4</span> <span style="color:#ae81ff">1</span> <span style="color:#ae81ff">2</span> <span style="color:#ae81ff">3</span>)
+</code></pre></div>]]></content>
         </item>
         
         <item>
@@ -577,69 +803,43 @@ Here are some of the first examples I tested as soon as yasih reached a working 
             <guid>https://0x0f0f0f.github.io/posts/2019/09/building-a-raspberry-pi-3b-full-keyboard-handheld.-part-2/</guid>
             <description>After the first write-up encountered discrete success on hackernews, The Raspberry Pi 3B+ full keyboard handheld is finally ready! (A premise: it is really ugly).
 Huge thanks to Anthony DiGirolamo for providing us with the Open Sourced case and keyboard PCB ❤️
-Completing the build What was left to do in Part 1 was assembling all the components together inside the 3D-printed case. I&amp;rsquo;ve used M2.5 screws to secure all the parts together and I had to solder the wires connecting the keyboard and Adafruit Powerboost to the Pi.</description>
-            <content type="html"><![CDATA[
-
-<p>After the <a href="/posts/2019/08/building-a-raspberry-pi-3b-full-keyboard-handheld.-part-1/">first write-up</a>
-encountered discrete success on <a href="https://news.ycombinator.com/item?id=20830037" target="_blank">hackernews</a>, The Raspberry Pi 3B+ full keyboard handheld is finally ready! (A premise: it is <strong>really</strong> ugly).</p>
-
-<p>Huge thanks to Anthony DiGirolamo for providing us with the <strong>Open Sourced</strong> <a href="https://github.com/AnthonyDiGirolamo/teensy-thumb-keyboard" target="_blank">case and keyboard PCB</a> ❤️</p>
-
+Completing the build What was left to do in Part 1 was assembling all the components together inside the 3D-printed case. I&#39;ve used M2.5 screws to secure all the parts together and I had to solder the wires connecting the keyboard and Adafruit Powerboost to the Pi.</description>
+            <content type="html"><![CDATA[<p>After the <a href="/posts/2019/08/building-a-raspberry-pi-3b-full-keyboard-handheld.-part-1/">first write-up</a>
+encountered discrete success on <a href="https://news.ycombinator.com/item?id=20830037">hackernews</a>, The Raspberry Pi 3B+ full keyboard handheld is finally ready! (A premise: it is <strong>really</strong> ugly).</p>
+<p>Huge thanks to Anthony DiGirolamo for providing us with the <strong>Open Sourced</strong> <a href="https://github.com/AnthonyDiGirolamo/teensy-thumb-keyboard">case and keyboard PCB</a> ❤️</p>
 <h1 id="completing-the-build">Completing the build</h1>
-
-<p><img src="/posts/images/buildingpi1.jpeg" alt="assembling the build" /></p>
-
-<p>What was left to do in Part 1 was assembling all the components together inside the 3D-printed case. I&rsquo;ve used M2.5 screws to secure all the parts together and I had to solder the wires connecting the keyboard and <strong>Adafruit Powerboost</strong> to the Pi. I also soldered a small power switch to the Powerboost.</p>
-
+<p><img src="/posts/images/buildingpi1.jpeg" alt="assembling the build"></p>
+<p>What was left to do in Part 1 was assembling all the components together inside the 3D-printed case. I've used M2.5 screws to secure all the parts together and I had to solder the wires connecting the keyboard and <strong>Adafruit Powerboost</strong> to the Pi. I also soldered a small power switch to the Powerboost.</p>
 <p>Assembling the keyboard faceplate was tedious, a friend of mine 3D printed the components for me but the printer was not precise enough. Keycaps are kept in place by a small piece of plastic that fits through a hole in each single key, due to the printer not being precise enough hole and pins do not fit together perfectly, so some keys get stuck or are too lose.</p>
-
 <h3 id="wiring-connections">Wiring connections</h3>
-
-<p><img src="/posts/images/wiring.jpg" alt="wiring" /></p>
-
+<p><img src="/posts/images/wiring.jpg" alt="wiring"></p>
 <p>The wiring connection scheme is the following:</p>
-
 <pre><code>Rpi3B+   PowerBoost
 PP2      5V
 PP3      GND
-</code></pre>
-
-<pre><code>Rpi3B+   Teensy 3.2/LC USB Surface Pads
+</code></pre><pre><code>Rpi3B+   Teensy 3.2/LC USB Surface Pads
 PP48     GND
 PP47     D+
 PP46     D-
 PP27     VUSB
-</code></pre>
-
-<p>I&rsquo;ve restyled the original key labels by using the FreeMono font in Inkscape since the font used in the original design was not free. I had the labels printed on a PVC sticker sheet and then I manually cut and pasted the stickers on top of the 3D printed keys.
-The result is uglier than Anthony&rsquo;s <a href="https://www.thingiverse.com/thing:3209958" target="_blank">original build</a> (he got labels printed directly on the keycaps), but at least the keyboard is perfectly functional.</p>
-
-<p><img src="/posts/images/keylabelsinkscape.png" alt="key labels in inkscape" /></p>
-
+</code></pre><p>I've restyled the original key labels by using the FreeMono font in Inkscape since the font used in the original design was not free. I had the labels printed on a PVC sticker sheet and then I manually cut and pasted the stickers on top of the 3D printed keys.
+The result is uglier than Anthony's <a href="https://www.thingiverse.com/thing:3209958">original build</a> (he got labels printed directly on the keycaps), but at least the keyboard is perfectly functional.</p>
+<p><img src="/posts/images/keylabelsinkscape.png" alt="key labels in inkscape"></p>
 <h3 id="the-really-ugly-but-working-prototype">The really ugly but working prototype</h3>
-
-<p><img src="/posts/images/editorpi.jpg" alt="Text editor running on the Pi" />
-<img src="/posts/images/completepi2.jpg" alt="Completed build" /></p>
-
+<p><img src="/posts/images/editorpi.jpg" alt="Text editor running on the Pi">
+<img src="/posts/images/completepi2.jpg" alt="Completed build"></p>
 <h1 id="portable-freedom">Portable freedom!</h1>
-
 <p>One of the many good things about this device is that you have an enormous choice of Operating Systems, UIs and software to run, if you want, you can also try to run 99% Free and Open Source software on this device.
-The only caveat (as covered in part 1) is getting the Hyperpixel 4 Display <a href="https://github.com/pimoroni/hyperpixel4" target="_blank">driver</a>
+The only caveat (as covered in part 1) is getting the Hyperpixel 4 Display <a href="https://github.com/pimoroni/hyperpixel4">driver</a>
 to work, and to calibrate the touchscreen.</p>
-
-<p>My distro of choice is <a href="https://voidlinux.org" target="_blank">Void Linux</a> because of its simplicity and its excellent package manager.
+<p>My distro of choice is <a href="https://voidlinux.org">Void Linux</a> because of its simplicity and its excellent package manager.
 You may also use NOOBS and Raspbian on the handheld with ease.
-I&rsquo;m using the i3wm window manager with a configuration almost identical to my desktop build,
-since I&rsquo;m using git over ssh to sync my dotfiles repository between devices and rsync to move files around my local network.</p>
-
-<p>Anthony DiGirolamo&rsquo;s Teensy Thumb mechanical keyboard is really pleasing to use for chatting, typing and coding. There is an <a href="https://voidlinux.org/packages/" target="_blank">endless</a> number of packages that you can install on a Raspberry Pi. To install bulkier applications you may even use <strong>flatpak</strong>!</p>
-
-<p><img src="/posts/images/doompi.jpg" alt="Running Doom!" /></p>
-
+I'm using the i3wm window manager with a configuration almost identical to my desktop build,
+since I'm using git over ssh to sync my dotfiles repository between devices and rsync to move files around my local network.</p>
+<p>Anthony DiGirolamo's Teensy Thumb mechanical keyboard is really pleasing to use for chatting, typing and coding. There is an <a href="https://voidlinux.org/packages/">endless</a> number of packages that you can install on a Raspberry Pi. To install bulkier applications you may even use <strong>flatpak</strong>!</p>
+<p><img src="/posts/images/doompi.jpg" alt="Running Doom!"></p>
 <p>I have been using the device for almost three weeks now and some keys already look really worn out (or stickers have fallen off). Using stickers for the keys was not really a good choice.</p>
-
 <h3 id="what-can-i-do-with-the-handheld">What can I do with the handheld?</h3>
-
 <ul>
 <li>Browse the web, read mail and watch videos using <strong>Firefox</strong> or <strong>Chromium</strong>.</li>
 <li>Hook up the Pi to an external <strong>HDMI Screen</strong> in seconds to watch a movie at a friends house.</li>
@@ -651,30 +851,20 @@ since I&rsquo;m using git over ssh to sync my dotfiles repository between device
 <li>Chat using <strong>Telegram Desktop</strong> or an <strong>IRC Client</strong>.</li>
 <li>Edit your papers using <strong>TexStudio</strong> (through flatpak).</li>
 <li>Do maths on the go using <strong>graphing calculators</strong> and <strong>GNU Octave</strong>.</li>
-<li>Manage your appointments and to-do list using <a href="https://calcurse.org/" target="_blank">calcurse</a></li>
+<li>Manage your appointments and to-do list using <a href="https://calcurse.org/">calcurse</a></li>
 <li>Look like you came out of a 90s movie @ the hackerspace.</li>
 </ul>
-
 <h1 id="expectations">Expectations</h1>
-
 <p>After I booted up the completed handheld for the first time I was amazed.</p>
-
-<p>The battery life is great with a 2300mAh battery (I&rsquo;ve had to replace the 5Ah one because it did not fit inside the case), the build quality is fine, components are tightly packed together, the keyboard feels really clicky and typing on it is really pleasing, although it does not look good at all with sticker labels.</p>
-
+<p>The battery life is great with a 2300mAh battery (I've had to replace the 5Ah one because it did not fit inside the case), the build quality is fine, components are tightly packed together, the keyboard feels really clicky and typing on it is really pleasing, although it does not look good at all with sticker labels.</p>
 <p>I am happy to say that this project exceeded my satisfaction expectations.
 If your kid is into computer science or electronics this may be a good you can build together.
-If you want to build this you can get the V1 Teensy Thumb Board PCB on the <a href="https://www.tindie.com/products/anthonysavatar/teensy-thumb-keyboard-pcb-only/" target="_blank">tindie product page</a>. You may also order the PCB yourself from a manufacturer, detailed instructions are on the product page.</p>
-
-<p>This device is inexpensive and easy to build, and with the <a href="https://hackaday.io/project/162281-teensy-thumb-keyboard/log/164899-working-on-v2" target="_blank">v2 keyboard</a> in development (using SMD pre-soldered tactile switches and I2C bus) it may also become easier to assemble in the future. By doing some searches I have found a <a href="https://twitter.com/hashtag/hyperkeyboardpi?src=hash" target="_blank">similar handheld</a> on twitter, built with a laser cut frame and faceplate. The kit was on sale for ~65$ in Japan but the product page seems to be down. In the next version of the handheld I will try to design a different, laser cut case without keycaps to make the keyboard look and feel nicer and to make assembling the handheld easier and cheaper.</p>
-
+If you want to build this you can get the V1 Teensy Thumb Board PCB on the <a href="https://www.tindie.com/products/anthonysavatar/teensy-thumb-keyboard-pcb-only/">tindie product page</a>. You may also order the PCB yourself from a manufacturer, detailed instructions are on the product page.</p>
+<p>This device is inexpensive and easy to build, and with the <a href="https://hackaday.io/project/162281-teensy-thumb-keyboard/log/164899-working-on-v2">v2 keyboard</a> in development (using SMD pre-soldered tactile switches and I2C bus) it may also become easier to assemble in the future. By doing some searches I have found a <a href="https://twitter.com/hashtag/hyperkeyboardpi?src=hash">similar handheld</a> on twitter, built with a laser cut frame and faceplate. The kit was on sale for ~65$ in Japan but the product page seems to be down. In the next version of the handheld I will try to design a different, laser cut case without keycaps to make the keyboard look and feel nicer and to make assembling the handheld easier and cheaper.</p>
 <h3 id="the-hyper-keyboard-pi-a-similar-handheld-device-from-japan">The Hyper Keyboard Pi, a similar handheld device from japan.</h3>
-
-<p><img src="/posts/images/hyperkeyboardpi.jpg" alt="Hyper keyboard Pi" /></p>
-
+<p><img src="/posts/images/hyperkeyboardpi.jpg" alt="Hyper keyboard Pi"></p>
 <h1 id="follow-up">Follow up</h1>
-
-<p>In the next posts I&rsquo;ll:</p>
-
+<p>In the next posts I'll:</p>
 <ul>
 <li>Talk about the development of the second version of the handheld.</li>
 <li>Add the official RPI camera, a speaker and a microphone</li>
@@ -691,32 +881,22 @@ If you want to build this you can get the V1 Teensy Thumb Board PCB on the <a hr
             <pubDate>Wed, 28 Aug 2019 00:00:00 +0000</pubDate>
             
             <guid>https://0x0f0f0f.github.io/posts/2019/08/building-a-raspberry-pi-3b-full-keyboard-handheld.-part-1/</guid>
-            <description>Not really surprisingly, it is quite hard to get a mobile Linux handheld device in 2019. You either have to build your own or try to get your hands on the (discontinued) obscure ones. Would computer manufacturers sell you a device that lasts you 10 years? It is not really profitable from the seller&amp;rsquo;s point of view.
+            <description>Not really surprisingly, it is quite hard to get a mobile Linux handheld device in 2019. You either have to build your own or try to get your hands on the (discontinued) obscure ones. Would computer manufacturers sell you a device that lasts you 10 years? It is not really profitable from the seller&#39;s point of view.
 Owning a Linux handheld computer can help you detox from harmful Social Media experiences; using FOSS also means getting rid of bloatware or walled gardens like Android, iOS, MacOS or Windows.</description>
-            <content type="html"><![CDATA[
-
-<p>Not really surprisingly, it is quite hard to get a mobile Linux handheld device in 2019.
-You either have to build your own or try to get your hands on the (discontinued) <a href="https://www.reddit.com/r/linux/comments/4biamr/a_list_of_handheldpocket_linux_computers/" target="_blank">obscure ones</a>.
-Would computer manufacturers sell you a device that lasts you 10 years? It is not really profitable from the seller&rsquo;s point of view.</p>
-
+            <content type="html"><![CDATA[<p>Not really surprisingly, it is quite hard to get a mobile Linux handheld device in 2019.
+You either have to build your own or try to get your hands on the (discontinued) <a href="https://www.reddit.com/r/linux/comments/4biamr/a_list_of_handheldpocket_linux_computers/">obscure ones</a>.
+Would computer manufacturers sell you a device that lasts you 10 years? It is not really profitable from the seller's point of view.</p>
 <p>Owning a Linux handheld computer can help you detox from harmful Social Media experiences;
 using <strong>FOSS</strong> also means getting rid of bloatware or walled gardens like Android, iOS, MacOS or Windows.
 This can allow you to run top quality creative software without spending a cent, on hardware that is relatively really cheap!</p>
-
-<p>Also, if you are a daily GNU/Linux user like me this will ease integration between your devices. I&rsquo;m planning to use the same distro, Void Linux,
+<p>Also, if you are a daily GNU/Linux user like me this will ease integration between your devices. I'm planning to use the same distro, Void Linux,
 on every device I own. My desktop, my laptop and this handheld :)</p>
-
 <p>Building a General Purpose Linux Handheld can be a fun and educative experience. You also end up with a device that
 your kids, parents, friends or sysadmin can enjoy for everyday tasks.</p>
-
-<p>This build is based on the <a href="https://www.thingiverse.com/thing:3209958" target="_blank">HyperPixel 4 &amp; Raspberry Pi Handheld</a> by Anthony Di Girolamo. I still have to 3D print the keys and assemble the case and electronics all together.</p>
-
-<p><img src="/posts/images/half.png" alt="Half assembled build" /></p>
-
+<p>This build is based on the <a href="https://www.thingiverse.com/thing:3209958">HyperPixel 4 &amp; Raspberry Pi Handheld</a> by Anthony Di Girolamo. I still have to 3D print the keys and assemble the case and electronics all together.</p>
+<p><img src="/posts/images/half.png" alt="Half assembled build"></p>
 <h2 id="features">Features</h2>
-
 <p>Things that this device and smartphones can do:</p>
-
 <ul>
 <li>Taking notes</li>
 <li>Drawing</li>
@@ -724,43 +904,33 @@ your kids, parents, friends or sysadmin can enjoy for everyday tasks.</p>
 <li>Browse the internet, watch videos and listen to music</li>
 <li>Play games</li>
 </ul>
-
 <p>On the roadmap:</p>
-
 <ul>
 <li>Take pictures and record videos</li>
 <li>Calls over the internet</li>
 </ul>
-
 <p>Things the handheld can do but your smartphone cannot do very well:</p>
-
 <ul>
 <li>Use USB devices like a <strong>gamepad, full size keyboards, Wi-Fi antennas</strong>,</li>
 <li>Plug the Pi to an <strong>external HDMI screen</strong> and use it like a media center or <strong>game console emulator</strong>.</li>
 <li>Switch between <strong>multiple Free and Open Source operating systems</strong> by simply swapping the memory card.</li>
 <li>Running a <strong>modern kernel</strong> and operating system. Android smartphones, for example run an outdated 3.x kernel with a bulky Java runtime.</li>
-<li>By default, <strong>YOUR DATA IS YOURS AND NEVER LEAVES YOUR DEVICE</strong>. It also means that synchronizing files between your devices is amazing with just ssh+git: you don&rsquo;t need an external cloud anymore.</li>
+<li>By default, <strong>YOUR DATA IS YOURS AND NEVER LEAVES YOUR DEVICE</strong>. It also means that synchronizing files between your devices is amazing with just ssh+git: you don't need an external cloud anymore.</li>
 <li><code>root</code> access out of the box. <strong>You can customize everything</strong>.</li>
 <li>Having the choice between dozens of high quality <strong>both simple and advanced Desktop Environments</strong></li>
 <li>Run hundreds of <strong>programs you can read and edit</strong>, malware-free user friendly <strong>GUI apps</strong></li>
 <li>Run dozens of command line <strong>power tools</strong> and <strong>window managers</strong></li>
 <li>Run <strong>sandboxed desktop apps</strong> with <strong>flatpak</strong></li>
 </ul>
-
 <p>Things the RPI Handheld cannot do (yet!) but a smartphone can do:</p>
-
 <ul>
 <li>Phone calls, SMS and data connectivity</li>
 </ul>
-
 <p>By now the build has only the default Raspberry Pi 3 connectivity methods: WiFi and Bluetooth.
 When you are on the go you can set up an external, portable 4G Hotspot.
 You should be able to use any portable mobile data WiFi hotspot or smartphone.</p>
-
 <h1 id="hardware">Hardware</h1>
-
-<p><img src="/posts/images/board01.png" alt="Soldering and testing the keyboard" /></p>
-
+<p><img src="/posts/images/board01.png" alt="Soldering and testing the keyboard"></p>
 <ul>
 <li>Hyperpixel 4: 60FPS, 800x480 4 Inch touch screen display</li>
 <li>Raspberry Pi Model 3 B+ (Pi 4 needs a case redesign)</li>
@@ -769,91 +939,69 @@ You should be able to use any portable mobile data WiFi hotspot or smartphone.</
 <li>5000 mAh battery regulated by an Adafruit powerboost.</li>
 <li>3 usable USB and Ethernet ports</li>
 </ul>
-
-<p>I&rsquo;m building my DIY Linux Handheld basing on Anthony Di Girolamo&rsquo;s design and keyboard: <a href="https://www.thingiverse.com/thing:3209958" target="_blank">HyperPixel Handheld</a>
-and <a href="https://hackaday.io/project/162281-teensy-thumb-keyboard" target="_blank">Teensy Thumb Board</a></p>
-
-<p>I&rsquo;ve got the Teensy Thumb Board PCB from Anthony&rsquo;s <a href="https://www.tindie.com/products/anthonysavatar/teensy-thumb-keyboard-pcb-only" target="_blank">tindie page</a>.
+<p>I'm building my DIY Linux Handheld basing on Anthony Di Girolamo's design and keyboard: <a href="https://www.thingiverse.com/thing:3209958">HyperPixel Handheld</a>
+and <a href="https://hackaday.io/project/162281-teensy-thumb-keyboard">Teensy Thumb Board</a></p>
+<p>I've got the Teensy Thumb Board PCB from Anthony's <a href="https://www.tindie.com/products/anthonysavatar/teensy-thumb-keyboard-pcb-only">tindie page</a>.
 The thumb keyboard PCB was that magical piece that was missing to create an usable device.
 Single board computers, 3d printed cases and touch displays are already widely available,
 nothing though can be as smooth as using a full layout QWERTY keyboard when using an UNIX interface.</p>
-
 <p>Building and soldering the keyboard can also be a good exercise for electronics beginners thanks to through hole soldering.</p>
-
-<p><img src="/posts/images/running.png" alt="Half assembled build" /></p>
-
-<p>Pimoroni open sourced the Hyperpixel 4 Display <a href="https://github.com/pimoroni/hyperpixel4" target="_blank">driver</a> on Github.
-To install it on Void Linux I had to compile and install the <a href="http://www.airspayce.com/mikem/bcm2835/" target="_blank">BCM2835 library</a>, then
+<p><img src="/posts/images/running.png" alt="Half assembled build"></p>
+<p>Pimoroni open sourced the Hyperpixel 4 Display <a href="https://github.com/pimoroni/hyperpixel4">driver</a> on Github.
+To install it on Void Linux I had to compile and install the <a href="http://www.airspayce.com/mikem/bcm2835/">BCM2835 library</a>, then
 I had to compile, configure and install the driver manually. To reproduce the build on your Raspberry:</p>
-
 <ul>
-<li><p>Download the BCM2835 Library, build it and install it with</p>
-
-<pre><code class="language-sh">./configure
+<li>Download the BCM2835 Library, build it and install it with</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">./configure
 make
 sudo make install
-</code></pre></li>
-
-<li><p>Download the Pimoroni Hyperpixel 4 driver, <code>cd</code> into the <code>src/</code> directory and build it with</p>
-
-<pre><code class="language-sh">make build
+</code></pre></div><ul>
+<li>Download the Pimoroni Hyperpixel 4 driver, <code>cd</code> into the <code>src/</code> directory and build it with</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">make build
 make init
-</code></pre></li>
-
-<li><p>If compiled successfully, install the driver and init program with</p>
-
-<pre><code class="language-sh">cp hyperpixel4.dtbo /boot/overlays/
+</code></pre></div><ul>
+<li>If compiled successfully, install the driver and init program with</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">cp hyperpixel4.dtbo /boot/overlays/
 cp hyperpixel4-init /usr/local/bin
-</code></pre></li>
-
-<li><p>To initialize the display at boot time add a line containing <code>hyperpixel4-init</code> to <code>/etc/rc.local</code>.</p></li>
-
-<li><p>Copy the boot CONFIG_LINES from <code>install.sh</code> file in the Hyperpixel4 Driver repository to <code>/boot/config.txt</code>. Remove the quotes</p></li>
-
-<li><p>To enable rotation change the config line <code>dtoverlay=hyperpixel4</code> to <code>dtoverlay=hyperpixel4:rotate</code></p></li>
-
-<li><p>To rotate the screen 180 deg. change the config line <code>display_rotate=3</code> to <code>display_rotate=1</code></p></li>
+</code></pre></div><ul>
+<li>To initialize the display at boot time add a line containing <code>hyperpixel4-init</code> to <code>/etc/rc.local</code>.</li>
+<li>Copy the boot CONFIG_LINES from <code>install.sh</code> file in the Hyperpixel4 Driver repository to <code>/boot/config.txt</code>. Remove the quotes</li>
+<li>To enable rotation change the config line <code>dtoverlay=hyperpixel4</code> to <code>dtoverlay=hyperpixel4:rotate</code></li>
+<li>To rotate the screen 180 deg. change the config line <code>display_rotate=3</code> to <code>display_rotate=1</code></li>
 </ul>
-
-<p>Calibrating the touchscreen was a bit more tedious. I had to open an <a href="https://github.com/pimoroni/hyperpixel4/issues/22" target="_blank">issue</a> on the Hyperpixel driver repository. (shout out to <a href="https://github.com/Francesco149" target="_blank">Francesco149</a> for helping me calibrate the touch display):</p>
-
-<pre><code class="language-sh"># install evdev driver and xinput_calibrator
+<p>Calibrating the touchscreen was a bit more tedious. I had to open an <a href="https://github.com/pimoroni/hyperpixel4/issues/22">issue</a> on the Hyperpixel driver repository. (shout out to <a href="https://github.com/Francesco149">Francesco149</a> for helping me calibrate the touch display):</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh"><span style="color:#75715e"># install evdev driver and xinput_calibrator</span>
 sudo xbps-install -S xf86-input-evdev xinput_calibrator xinput
-# create xorg config folder
+<span style="color:#75715e"># create xorg config folder</span>
 sudo mkdir /etc/X11/xorg.conf.d/
-# enable 10-evdev.conf
+<span style="color:#75715e"># enable 10-evdev.conf</span>
 sudo cp /usr/share/X11/xorg.conf.d/10-evdev.conf /etc/X11/xorg.conf.d/
-# list input devices and remember the id number next to &quot;Goodix Capacitive Touchscreen&quot;
+<span style="color:#75715e"># list input devices and remember the id number next to &#34;Goodix Capacitive Touchscreen&#34;</span>
 xinput list
-# now calibrate the touchscreen and save the config to a file. 
-# replace HYPERPIXEL_ID with the number you found in the previous step
-xinput_calibrator --misclick 0 --device HYPERPIXEL_ID &gt; 99-calibration.conf.temp
-# if the display was calibrated correctly, open the config file 
-# in a text editor and remove the leading lines until the one beginning with &quot;Section&quot;
-# and remember to save the file
+<span style="color:#75715e"># now calibrate the touchscreen and save the config to a file.</span> 
+<span style="color:#75715e"># replace HYPERPIXEL_ID with the number you found in the previous step</span>
+xinput_calibrator --misclick <span style="color:#ae81ff">0</span> --device HYPERPIXEL_ID &gt; 99-calibration.conf.temp
+<span style="color:#75715e"># if the display was calibrated correctly, open the config file</span> 
+<span style="color:#75715e"># in a text editor and remove the leading lines until the one beginning with &#34;Section&#34;</span>
+<span style="color:#75715e"># and remember to save the file</span>
 nano 99-calibration.conf.temp 
-# move the configuration file under its correct directory
+<span style="color:#75715e"># move the configuration file under its correct directory</span>
 sudo mv 99-calibration.conf.temp /etc/X11/xorg.conf.d/99-calibration.conf
-</code></pre>
-
-<p>You can test the calibration by restarting Xorg or rebooting the Pi.
+</code></pre></div><p>You can test the calibration by restarting Xorg or rebooting the Pi.
 Xorg will crash if you forget to remove the instructions from <code>99-calibration.conf.temp</code></p>
-
 <h1 id="operating-systems">Operating Systems</h1>
-
 <p>The Raspberry Pi (so the Raspberry Linux Handheld) can run a variety of  Operating Systems that provide great, smooth and secure daily usage experiences.</p>
-
 <ul>
-<li><a href="https://voidlinux.org" target="_blank">void linux</a> - <a href="https://reddit.com/r/voidlinux" target="_blank">reddit community</a></li>
-<li><a href="https://alpinelinux.org/" target="_blank">alpine linux</a> - <a href="https://old.reddit.com/r/AlpineLinux/" target="_blank">reddit community</a></li>
-<li><a href="https://www.freebsd.org/" target="_blank">freebsd</a> - <a href="https://old.reddit.com/r/freebsd" target="_blank">reddit community</a></li>
-<li><a href="https://www.openbsd.org/" target="_blank">openbsd</a> - <a href="https://reddit.com/r/openbsd" target="_blank">reddit community</a></li>
+<li><a href="https://voidlinux.org">void linux</a> - <a href="https://reddit.com/r/voidlinux">reddit community</a></li>
+<li><a href="https://alpinelinux.org/">alpine linux</a> - <a href="https://old.reddit.com/r/AlpineLinux/">reddit community</a></li>
+<li><a href="https://www.freebsd.org/">freebsd</a> - <a href="https://old.reddit.com/r/freebsd">reddit community</a></li>
+<li><a href="https://www.openbsd.org/">openbsd</a> - <a href="https://reddit.com/r/openbsd">reddit community</a></li>
 </ul>
-
 <h1 id="follow-up">Follow up</h1>
-
-<p>In the next posts I&rsquo;ll:</p>
-
+<p>In the next posts I'll:</p>
 <ul>
 <li>Show the finished build</li>
 <li>Talk about software you can run on the handheld</li>
@@ -869,28 +1017,19 @@ Xorg will crash if you forget to remove the instructions from <code>99-calibrati
             
             <guid>https://0x0f0f0f.github.io/posts/2019/01/darkhttpd-youll-love-static/</guid>
             <description>darkhttpd - wiki is my favorite web server. It does one thing and it does it good: serve static files correctly.
-The overall best feature I&amp;rsquo;ve found in darkhttpd is that it is configured via command line arguments, so you can wrap the configuration of each one of your web servers into it&amp;rsquo;s runit/OpenRC service!
+The overall best feature I&#39;ve found in darkhttpd is that it is configured via command line arguments, so you can wrap the configuration of each one of your web servers into it&#39;s runit/OpenRC service!
 Running a static webserver will help you reduce overhead and lets you reduce the resource usage of your services.</description>
-            <content type="html"><![CDATA[<p><a href="https://unix4lyfe.org/darkhttpd/" target="_blank">darkhttpd</a> - <a href="https://wiki.alpinelinux.org/wiki/Darkhttpd" target="_blank">wiki</a> is my
+            <content type="html"><![CDATA[<p><a href="https://unix4lyfe.org/darkhttpd/">darkhttpd</a> - <a href="https://wiki.alpinelinux.org/wiki/Darkhttpd">wiki</a> is my
 favorite web server. It does one thing and it does it good: serve static files correctly.</p>
-
-<p>The overall best feature I&rsquo;ve found in <strong>darkhttpd</strong> is that it is configured via command line arguments, so you can wrap
-the configuration of each one of your web servers into it&rsquo;s <strong>runit/OpenRC</strong> service!</p>
-
+<p>The overall best feature I've found in <strong>darkhttpd</strong> is that it is configured via command line arguments, so you can wrap
+the configuration of each one of your web servers into it's <strong>runit/OpenRC</strong> service!</p>
 <p>Running a static webserver will help you reduce overhead and lets you reduce the resource usage of your services.</p>
-
 <p>You can easily install it by running:</p>
-
-<p><strong>In <a href="https://voidlinux.org" target="_blank">Void Linux</a>:</strong></p>
-
+<p><strong>In <a href="https://voidlinux.org">Void Linux</a>:</strong></p>
 <pre><code># xbps-install -S darkhttpd
-</code></pre>
-
-<p><strong>In <a href="https://alpinelinux.org" target="_blank">Alpine Linux</a>:</strong></p>
-
+</code></pre><p><strong>In <a href="https://alpinelinux.org">Alpine Linux</a>:</strong></p>
 <pre><code># apk add darkhttpd
-</code></pre>
-]]></content>
+</code></pre>]]></content>
         </item>
         
     </channel>
