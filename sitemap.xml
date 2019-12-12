@@ -4,7 +4,37 @@
   
   <url>
     <loc>https://0x0f0f0f.github.io/</loc>
-    <lastmod>2019-12-06T00:00:00+00:00</lastmod>
+    <lastmod>2019-12-12T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://0x0f0f0f.github.io/tags/functional-programming/</loc>
+    <lastmod>2019-12-12T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://0x0f0f0f.github.io/posts/2019/12/implementing-optional-lazy-evaluation-for-minicaml/</loc>
+    <lastmod>2019-12-12T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://0x0f0f0f.github.io/tags/minicaml/</loc>
+    <lastmod>2019-12-12T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://0x0f0f0f.github.io/tags/ocaml/</loc>
+    <lastmod>2019-12-12T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://0x0f0f0f.github.io/posts/</loc>
+    <lastmod>2019-12-12T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://0x0f0f0f.github.io/tags/</loc>
+    <lastmod>2019-12-12T00:00:00+00:00</lastmod>
   </url>
   
   <url>
@@ -23,37 +53,12 @@
   </url>
   
   <url>
-    <loc>https://0x0f0f0f.github.io/posts/</loc>
-    <lastmod>2019-12-06T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
     <loc>https://0x0f0f0f.github.io/tags/programming/</loc>
     <lastmod>2019-12-06T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://0x0f0f0f.github.io/tags/</loc>
-    <lastmod>2019-12-06T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://0x0f0f0f.github.io/tags/functional-programming/</loc>
-    <lastmod>2019-12-04T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://0x0f0f0f.github.io/tags/minicaml/</loc>
-    <lastmod>2019-12-04T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
     <loc>https://0x0f0f0f.github.io/posts/2019/12/minicaml-a-didactical-ocaml-like-functional-programming-language./</loc>
-    <lastmod>2019-12-04T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://0x0f0f0f.github.io/tags/ocaml/</loc>
     <lastmod>2019-12-04T00:00:00+00:00</lastmod>
   </url>
   
