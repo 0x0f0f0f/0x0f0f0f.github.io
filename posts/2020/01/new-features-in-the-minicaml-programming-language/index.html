@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="author"
+    content="archetypes false false false true content © 2019 — 0x0f0f0f — All rights reserved. data layouts Alessandro Cheli public true true monokai 20 ">
+<meta name="description"
+    content="In the past weeks I&#39;ve worked a lot on the minicaml programming language. In this post I&#39;m recapping all the various features I have added with their corresponding syntax. Now that the language is almost feature complete, the next releases will focus on the standard library, stability, testing, and improvements of the internals. If you are interested in programming language development, note that I am looking for contributors to help in testing and making the language more stable." />
+<meta name="keywords" content="" />
+<meta name="robots" content="noodp" />
+<link rel="canonical" href="https://0x0f0f0f.github.io/posts/2020/01/new-features-in-the-minicaml-programming-language/" />
+
+
+<title>
+    
+    New features in the minicaml programming language! :: 0x0f0f0f 
+    
+</title>
+
+
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.2.1/css/flag-icon.min.css" rel="stylesheet"
+    type="text/css">
+
+
+
+<link rel="stylesheet" href="/main.min.0d47b4686e972122bd29f0c1e3dd024a2d541cd8b1b543622520822ea6f4238a.css">
+
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/site.webmanifest">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#252627">
+<link rel="shortcut icon" href="/favicon.ico">
+<meta name="theme-color" content="#252627"><meta itemprop="name" content="New features in the minicaml programming language!">
+<meta itemprop="description" content="In the past weeks I&#39;ve worked a lot on the minicaml programming language. In this post I&#39;m recapping all the various features I have added with their corresponding syntax. Now that the language is almost feature complete, the next releases will focus on the standard library, stability, testing, and improvements of the internals. If you are interested in programming language development, note that I am looking for contributors to help in testing and making the language more stable.">
+<meta itemprop="datePublished" content="2020-01-11T00:00:00&#43;00:00" />
+<meta itemprop="dateModified" content="2020-01-11T00:00:00&#43;00:00" />
+<meta itemprop="wordCount" content="1053">
+<meta itemprop="image" content="https://0x0f0f0f.github.io"/>
+
+
+
+<meta itemprop="keywords" content="functional programming,ocaml,minicaml," /><meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://0x0f0f0f.github.io"/>
+
+<meta name="twitter:title" content="New features in the minicaml programming language!"/>
+<meta name="twitter:description" content="In the past weeks I&#39;ve worked a lot on the minicaml programming language. In this post I&#39;m recapping all the various features I have added with their corresponding syntax. Now that the language is almost feature complete, the next releases will focus on the standard library, stability, testing, and improvements of the internals. If you are interested in programming language development, note that I am looking for contributors to help in testing and making the language more stable."/>
+
+
+
+
+<meta property="article:published_time" content="2020-01-11 00:00:00 &#43;0000 UTC" />
+
+
+
+
+
+
+
+
+    </head>
+
+    <body class="dark-theme">
+        <div class="container">
+            <header class="header">
+    <span class="header__inner">
+        <a href="/" style="text-decoration: none;">
+    <div class="logo">
+        
+            <span class="logo__mark">></span>
+            <span class="logo__text">$ 0x0f0f0f</span>
+            <span class="logo__cursor"></span>
+        
+    </div>
+</a>
+
+
+        <span class="header__right">
+            
+                <nav class="menu">
+    <ul class="menu__inner"><li><a href="https://0x0f0f0f.github.io/about/">About</a></li><li><a href="https://0x0f0f0f.github.io/posts/">Posts</a></li>
+    </ul>
+</nav>
+
+                <span class="menu-trigger">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path d="M0 0h24v24H0z" fill="none"/>
+                        <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/>
+                    </svg>
+                </span>
+            
+
+            <span class="theme-toggle unselectable"><svg class="theme-toggler" width="24" height="24" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="M22 41C32.4934 41 41 32.4934 41 22C41 11.5066 32.4934 3 22
+  3C11.5066 3 3 11.5066 3 22C3 32.4934 11.5066 41 22 41ZM7 22C7
+  13.7157 13.7157 7 22 7V37C13.7157 37 7 30.2843 7 22Z"/>
+</svg>
+</span>
+        </span>
+    </span>
+</header>
+
+
+            <div class="content">
+                
+    <main class="post">
+
+        <div class="post-info">
+            <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-clock"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>5 minutes
+
+            
+
+            </p>
+        </div>
+
+        <article>
+            <h1 class="post-title"><a href="https://0x0f0f0f.github.io/posts/2020/01/new-features-in-the-minicaml-programming-language/">New features in the minicaml programming language!</a></h1>
+
+            
+
+            <div class="post-content">
+                <p>In the past weeks I've worked a lot on the
+<a href="https://github.com/0x0f0f0f/minicaml">minicaml</a> programming language. In this
+post I'm recapping all the various features I have added with their
+corresponding syntax. Now that the language is almost feature complete, the
+next releases will focus on the standard library, stability, testing, and
+improvements of the internals. If you are interested in programming language
+development, note that I am looking for contributors to help in testing and
+making the language more stable.</p>
+<h2 id="installation">Installation</h2>
+<p>To install, you need to have <code>opam</code> (OCaml's package manager) and a recent OCaml
+distribution installed on your system.
+You can install <strong>minicaml</strong> by running</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">opam install minicaml
+</code></pre></div><p><a href="https://github.com/hanslub42/rlwrap">rlwrap</a> is suggested for a readline-like
+(bash-like) keyboard interface.</p>
+<h3 id="manual-installation">Manual installation</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># clone the repository</span>
+git clone https://github.com/0x0f0f0f/minicaml
+<span style="color:#75715e"># cd into it</span>
+cd minicaml
+<span style="color:#75715e"># install dependencies</span>
+opam install dune menhir ANSITerminal cmdliner alcotest bisect_ppx
+<span style="color:#75715e"># compile</span>
+make
+<span style="color:#75715e"># test</span>
+make test
+<span style="color:#75715e"># run</span>
+make run
+<span style="color:#75715e"># rlwrap is suggested</span>
+rlwrap make run
+<span style="color:#75715e"># you can install minicaml with</span>
+make install
+<span style="color:#75715e"># run again</span>
+rlwrap minicaml
+</code></pre></div><h2 id="usage">Usage</h2>
+<p>The executable name is <code>minicaml</code>. If a file is specified as the first command
+line argument, then it will be ran as a program. If you are running a program you may want to use the flag <code>-p</code> to print the results of the expressions that are evaluated. Otherwise, if a program is not specified a REPL session will
+be opened. If the <code>minicaml</code> executable is ran with the flag <code>-v1</code>, it will show
+the AST equivalent of each submitted expression, if ran with <code>-v2</code> it will also
+show each reduction step in the evaluation.
+Use the <strong>experimental</strong> <code>-j</code> flag to compile a program to Javascript, using the
+<a href="https://ramdajs.com/">Ramda</a> library as a &ldquo;functional prelude&rdquo;, please note
+that a lot of stuff is still broken.</p>
+<p>Keep in mind that <strong>minicaml</strong> is purely functional and values
+are immutable.</p>
+<h2 id="examples">Examples</h2>
+<p>Check the <code>examples/</code> directory for some example programs.</p>
+<h2 id="features">Features</h2>
+<h3 id="arithmetics-with-full-schemelike-numeric-tower">Arithmetics with full scheme-like numeric tower</h3>
+<p>Integer division returns integers. Floating point numbers decimal part can be
+omitted if it is 0. Floating point numbers can use the power syntax using <code>e</code>.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ocaml" data-lang="ocaml">1 <span style="color:#f92672">+</span> 2 <span style="color:#f92672">+</span> 3 <span style="color:#f92672">*</span> <span style="color:#f92672">(</span>4 <span style="color:#f92672">-</span> 1<span style="color:#f92672">)</span> <span style="color:#f92672">;;</span>
+1 <span style="color:#f92672">+</span> 4<span style="color:#f92672">.</span>0 <span style="color:#f92672">-</span> 1<span style="color:#f92672">.</span> <span style="color:#f92672">/</span> 2<span style="color:#f92672">.</span>315 <span style="color:#f92672">;;</span>
+1<span style="color:#f92672">.</span>2e<span style="color:#f92672">-</span>3 <span style="color:#f92672">;;</span>
+true <span style="color:#f92672">&amp;&amp;</span> false <span style="color:#f92672">|</span><span style="color:#f92672">|</span> <span style="color:#f92672">(</span>1 <span style="color:#f92672">&lt;</span> 2<span style="color:#f92672">)</span> <span style="color:#f92672">&amp;&amp;</span> <span style="color:#f92672">(</span>1 <span style="color:#f92672">=</span> 1<span style="color:#f92672">)</span> <span style="color:#f92672">;;</span>
+</code></pre></div><h3 id="complex-numbers">Complex numbers</h3>
+<p>The <code>:+</code> and <code>:-</code> operators are used to create complex values, the floating point number
+on the left is the real part and the one on the right is the imaginary part.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ocaml" data-lang="ocaml">12<span style="color:#f92672">.</span> <span style="color:#f92672">:</span><span style="color:#f92672">+</span> 1<span style="color:#f92672">.</span>12<span style="color:#f92672">;;</span>
+0<span style="color:#f92672">.</span> <span style="color:#f92672">:</span><span style="color:#f92672">-</span> 1<span style="color:#f92672">.</span>12<span style="color:#f92672">;;</span>
+</code></pre></div><h3 id="strings-and-lists">Strings and Lists</h3>
+<p>Here is how to concatenate strings</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ocaml" data-lang="ocaml"><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">hello </span><span style="color:#e6db74">&#34;</span> <span style="color:#f92672">^</span> <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">world</span><span style="color:#e6db74">&#34;</span>
+</code></pre></div><p><code>::</code> means is the classic <code>cons</code> operator, while <code>@</code> is used for list
+concatenation as in OCaml</p>
+<pre><code>1 :: [2] @ [3]
+</code></pre><p>To convert any value to a string you can use the <code>show</code> primitive.</p>
+<h3 id="declarations">Declarations</h3>
+<p>Local declaration statements are purely functional and straightforward:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ocaml" data-lang="ocaml"><span style="color:#66d9ef">let</span> x <span style="color:#f92672">=</span> 4 <span style="color:#f92672">and</span> y <span style="color:#f92672">=</span> 1 <span style="color:#66d9ef">in</span> x <span style="color:#f92672">+</span> y
+</code></pre></div><p>Global declaration statements create new, purely functional environments in both
+programs and the REPL. Omitting <code>in</code> is syntax-sugar, subsequent blocks will
+be evaluated in the resulting new environment.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ocaml" data-lang="ocaml"><span style="color:#66d9ef">let</span> a <span style="color:#f92672">=</span> 2 <span style="color:#f92672">;;</span>
+x <span style="color:#f92672">+</span> 3 <span style="color:#f92672">;;</span>
+</code></pre></div><h3 id="functions-and-recursion">Functions and recursion</h3>
+<p>For parsing simplicity, only the OCaml anonymous function style of declaring
+functions is supported. The keyword <code>fun</code> is interchangeable with <code>lambda</code>.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ocaml" data-lang="ocaml"><span style="color:#f92672">(</span><span style="color:#66d9ef">fun</span> x <span style="color:#f92672">-&gt;</span> x <span style="color:#f92672">+</span> 1<span style="color:#f92672">)</span> 1<span style="color:#f92672">;;</span>
+<span style="color:#66d9ef">let</span> <span style="color:#66d9ef">rec</span> fib <span style="color:#f92672">=</span> <span style="color:#66d9ef">fun</span> n <span style="color:#f92672">-&gt;</span> <span style="color:#66d9ef">if</span> n <span style="color:#f92672">&lt;</span> 2 <span style="color:#66d9ef">then</span> n <span style="color:#66d9ef">else</span> <span style="color:#f92672">(</span>fib <span style="color:#f92672">(</span>n <span style="color:#f92672">-</span> 1<span style="color:#f92672">)</span><span style="color:#f92672">)</span> <span style="color:#f92672">+</span> fib <span style="color:#f92672">(</span>n <span style="color:#f92672">-</span> 2<span style="color:#f92672">)</span>
+</code></pre></div><h3 id="printing">Printing</h3>
+<p>The impure primitives <code>print</code> and <code>print_endline</code> automatically call <code>show</code> on a
+value. The difference between them is that <code>print_endline</code> automatically adds a
+newline at the end of the line.</p>
+<h3 id="haskelllike-dollar-syntax">Haskell-like dollar syntax</h3>
+<p>Too many parens?</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ocaml" data-lang="ocaml">f <span style="color:#f92672">(</span>g <span style="color:#f92672">(</span>h <span style="color:#f92672">(</span>i 1 2 3<span style="color:#f92672">)</span><span style="color:#f92672">)</span><span style="color:#f92672">)</span>
+</code></pre></div><p>Is equivalent to</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-haskell" data-lang="haskell"><span style="color:#a6e22e">f</span> <span style="color:#f92672">$</span> g <span style="color:#f92672">$</span> h <span style="color:#f92672">$</span> i <span style="color:#ae81ff">1</span> <span style="color:#ae81ff">2</span> <span style="color:#ae81ff">3</span>
+</code></pre></div><h3 id="toggle-between-pure-and-impure-environments-in-code-for-io">Toggle between pure and impure environments in code for I/O</h3>
+<p>You can choose to enable or disable impure primitives explicitely, inside an
+expression by wrapping it into the <code>pure</code> and <code>impure</code> statements. They must be
+followed by an expression. An expression contained in an <code>impure</code> statement is a
+computation that calls primitives that have side effects, such as direct memory
+access or I/O access.</p>
+<p>It is good practice to reduce the use of the <code>pure/impure</code> keywords as much as
+possible, and to avoid using it inside of function bodies. This means keeping
+your code as purely functional as you can.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ocaml" data-lang="ocaml"><span style="color:#66d9ef">let</span> bad_function <span style="color:#f92672">=</span> <span style="color:#66d9ef">fun</span> x <span style="color:#f92672">-&gt;</span>
+    impure <span style="color:#f92672">(</span>
+        <span style="color:#66d9ef">let</span> mystring <span style="color:#f92672">=</span>
+        <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">I am a bad impure function! Also: </span><span style="color:#e6db74">&#34;</span> <span style="color:#f92672">^</span> x <span style="color:#66d9ef">in</span>
+        print_endline mystring
+    <span style="color:#f92672">)</span><span style="color:#f92672">;;</span>
+
+<span style="color:#66d9ef">let</span> good_function <span style="color:#f92672">=</span> <span style="color:#66d9ef">fun</span> x <span style="color:#f92672">-&gt;</span>
+    print_endline <span style="color:#f92672">(</span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">I am a good function! Also: </span><span style="color:#e6db74">&#34;</span> <span style="color:#f92672">^</span> x<span style="color:#f92672">)</span> <span style="color:#f92672">;;</span>
+
+bad_function <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">hello!</span><span style="color:#e6db74">&#34;</span> <span style="color:#f92672">;;</span>
+<span style="color:#75715e">(*</span><span style="color:#75715e"> The above statement is causing side effects but will not error</span><span style="color:#75715e">*)</span>
+
+good_function <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">hello!</span><span style="color:#e6db74">&#34;</span> <span style="color:#f92672">;;</span>
+<span style="color:#75715e">(*</span><span style="color:#75715e"> The above will error, because it is trying to execute
+</span><span style="color:#75715e">an impure computation in a pure environment
+</span><span style="color:#75715e">Here&#39;s a good way of calling it </span><span style="color:#75715e">*)</span>
+impure <span style="color:#f92672">$</span> good_function <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">hello!</span><span style="color:#e6db74">&#34;</span> <span style="color:#f92672">;;</span>
+
+<span style="color:#75715e">(*</span><span style="color:#75715e"> You can specify that you DO NOT want to compute impure
+</span><span style="color:#75715e">expressions by using the pure statement </span><span style="color:#75715e">*)</span>
+pure <span style="color:#f92672">$</span> good_function <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">henlo world!</span><span style="color:#e6db74">&#34;</span> <span style="color:#f92672">;;</span>
+<span style="color:#75715e">(*</span><span style="color:#75715e"> The above will error because
+</span><span style="color:#75715e">it contains an impure computation</span><span style="color:#75715e">*)</span>
+pure <span style="color:#f92672">$</span> bad_function <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">ciao mondo!</span><span style="color:#e6db74">&#34;</span> <span style="color:#f92672">;;</span>
+<span style="color:#75715e">(*</span><span style="color:#75715e"> The above will error because a pure context
+</span><span style="color:#75715e">does not allow nesting an impure context inside </span><span style="color:#75715e">*)</span>
+</code></pre></div><p>A good way of structuring your code is keeping <code>pure/impure</code> statements as
+external from expressions as you can (towards the top level). By default, the
+interpreter is in a <code>uncertain</code> state, it means that it will allow the execution
+of <code>impure</code> statements</p>
+<h3 id="function-pipes-reverse-composition">Function pipes (reverse composition)</h3>
+<p>You can redirect the result of a function to the first argument of another
+function using the <code>&gt;=&gt;</code> operator.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ocaml" data-lang="ocaml"><span style="color:#66d9ef">let</span> sum_and_add_one <span style="color:#f92672">=</span> <span style="color:#f92672">(</span><span style="color:#66d9ef">fun</span> x y <span style="color:#f92672">-&gt;</span> x <span style="color:#f92672">+</span> y<span style="color:#f92672">)</span> <span style="color:#f92672">&gt;</span><span style="color:#f92672">=</span><span style="color:#f92672">&gt;</span> <span style="color:#f92672">(</span><span style="color:#66d9ef">fun</span> z <span style="color:#f92672">-&gt;</span> z <span style="color:#f92672">+</span> 1<span style="color:#f92672">)</span> <span style="color:#f92672">;;</span>
+sum_and_add_one 2 3
+<span style="color:#75715e">(*</span><span style="color:#75715e"> Will output 6, because 2 + 3 is piped into z + 1</span><span style="color:#75715e">*)</span>
+</code></pre></div><p>Yields the same result as normal composition:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ocaml" data-lang="ocaml"><span style="color:#66d9ef">let</span> my_sum <span style="color:#f92672">=</span> <span style="color:#f92672">(</span><span style="color:#66d9ef">fun</span> x y <span style="color:#f92672">-&gt;</span> x <span style="color:#f92672">+</span> y<span style="color:#f92672">)</span> <span style="color:#f92672">;;</span>
+<span style="color:#66d9ef">let</span> add_one <span style="color:#f92672">=</span> <span style="color:#f92672">(</span><span style="color:#66d9ef">fun</span> z <span style="color:#f92672">-&gt;</span> z <span style="color:#f92672">+</span> 1<span style="color:#f92672">)</span> <span style="color:#f92672">;;</span>
+add_one <span style="color:#f92672">(</span>mysum 2 3<span style="color:#f92672">)</span>
+</code></pre></div><h3 id="dictionaries">Dictionaries</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ocaml" data-lang="ocaml"><span style="color:#66d9ef">let</span> n <span style="color:#f92672">=</span> <span style="color:#f92672">{</span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">hola</span><span style="color:#e6db74">&#34;</span><span style="color:#f92672">:</span> 1<span style="color:#f92672">,</span> <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">mondo</span><span style="color:#e6db74">&#34;</span><span style="color:#f92672">:</span> 2<span style="color:#f92672">}</span> <span style="color:#f92672">;;</span>
+<span style="color:#66d9ef">let</span> m <span style="color:#f92672">=</span> insert <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">newkey</span><span style="color:#e6db74">&#34;</span> 123 n <span style="color:#f92672">;;</span>
+haskey <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">newkey</span><span style="color:#e6db74">&#34;</span> m <span style="color:#75715e">(*</span><span style="color:#75715e"> =&gt; true </span><span style="color:#75715e">*)</span>
+map <span style="color:#f92672">(</span><span style="color:#66d9ef">fun</span> x <span style="color:#f92672">-&gt;</span> x <span style="color:#f92672">+</span> 1<span style="color:#f92672">)</span> m
+<span style="color:#75715e">(*</span><span style="color:#75715e"> =&gt; {&#34;newkey&#34;:124, &#34;hola&#34;:2, &#34;mondo&#34;:3} </span><span style="color:#75715e">*)</span>
+</code></pre></div>
+            </div>
+        </article>
+
+        <hr />
+
+        <div class="post-info">
+                <p>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tag meta-icon"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7" y2="7"></line></svg><span class="tag"><a href="https://0x0f0f0f.github.io/tags/functional-programming">functional programming</a></span><span class="tag"><a href="https://0x0f0f0f.github.io/tags/ocaml">ocaml</a></span><span class="tag"><a href="https://0x0f0f0f.github.io/tags/minicaml">minicaml</a></span>
+                </p>
+
+            <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>1053 Words</p>
+
+            <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>2020-01-11 01:00 &#43;0100</p>
+        </div>
+
+        
+            <div class="pagination">
+                <div class="pagination__title">
+                    <span class="pagination__title-h"></span>
+                    <hr />
+                </div>
+
+                <div class="pagination__buttons">
+                    
+
+                    
+                        <span class="button next">
+                            <a href="https://0x0f0f0f.github.io/posts/2019/12/implementing-optional-lazy-evaluation-for-minicaml/">
+                                <span class="button__text">Implementing optional lazy evaluation for minicaml</span>
+                                <span class="button__icon">→</span>
+                            </a>
+                        </span>
+                    
+                </div>
+            </div>
+        
+
+        
+    </main>
+
+            </div>
+
+            
+                <footer class="footer">
+    <div class="footer__inner">
+        <div class="footer__content">
+            <span>&copy; 2020</span>
+            
+                <span><a href="https://0x0f0f0f.github.io">Alessandro Cheli</a></span>
+            
+            <span></span>
+            <span> <a href="https://0x0f0f0f.github.io/posts/index.xml" target="_blank" title="rss"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-rss"><path d="M4 11a9 9 0 0 1 9 9"></path><path d="M4 4a16 16 0 0 1 16 16"></path><circle cx="5" cy="19" r="1"></circle></svg></a></span>
+        </div>
+    </div>
+    <div class="footer__inner">
+        <div class="footer__content">
+
+        </div>
+    </div>
+    <div class="footer__inner">
+        <div class="footer__content">
+            <span>Powered by <a href="http://gohugo.io">Hugo</a></span>
+            <span>Like this? <a href="https://github.com/sponsors/0x0f0f0f">Sponsor on GitHub &#10084; </a></span>
+        </div>
+    </div>
+</footer>
+
+            
+        </div>
+
+        
+
+
+
+
+<script type="text/javascript" src="/bundle.min.4c3fb12a087ceed4a52cb5d57068a9795c7069617a01ca70f788052ad66e1791779e6c72686e1dc0ca13dc03b0203204b6566bb0dd1ee80de2b7ff4d8fe53db2.js" integrity="sha512-TD&#43;xKgh87tSlLLXVcGipeVxwaWF6Acpw94gFKtZuF5F3nmxyaG4dwMoT3AOwIDIEtlZrsN0e6A3it/9Nj&#43;U9sg=="></script>
+    <script>
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+        ga('create', 'UA-106198734-2', 'auto');
+        ga('send', 'pageview');
+    </script>
+
+
+
+    </body>
+</html>
