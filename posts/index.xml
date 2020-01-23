@@ -63,7 +63,7 @@ are immutable.</p>
 <h2 id="examples">Examples</h2>
 <p>Check the <code>examples/</code> directory for some example programs.</p>
 <h2 id="features">Features</h2>
-<h3 id="arithmetics-with-full-schemelike-numeric-tower">Arithmetics with full scheme-like numeric tower</h3>
+<h3 id="arithmetics-with-full-scheme-like-numeric-tower">Arithmetics with full scheme-like numeric tower</h3>
 <p>Integer division returns integers. Floating point numbers decimal part can be
 omitted if it is 0. Floating point numbers can use the power syntax using <code>e</code>.</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ocaml" data-lang="ocaml">1 <span style="color:#f92672">+</span> 2 <span style="color:#f92672">+</span> 3 <span style="color:#f92672">*</span> <span style="color:#f92672">(</span>4 <span style="color:#f92672">-</span> 1<span style="color:#f92672">)</span> <span style="color:#f92672">;;</span>
@@ -99,7 +99,7 @@ functions is supported. The keyword <code>fun</code> is interchangeable with <co
 <p>The impure primitives <code>print</code> and <code>print_endline</code> automatically call <code>show</code> on a
 value. The difference between them is that <code>print_endline</code> automatically adds a
 newline at the end of the line.</p>
-<h3 id="haskelllike-dollar-syntax">Haskell-like dollar syntax</h3>
+<h3 id="haskell-like-dollar-syntax">Haskell-like dollar syntax</h3>
 <p>Too many parens?</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ocaml" data-lang="ocaml">f <span style="color:#f92672">(</span>g <span style="color:#f92672">(</span>h <span style="color:#f92672">(</span>i 1 2 3<span style="color:#f92672">)</span><span style="color:#f92672">)</span><span style="color:#f92672">)</span>
 </code></pre></div><p>Is equivalent to</p>
@@ -397,7 +397,7 @@ harmful</a>
 use a single text editor for all of my projects. You need to have a working LaTeX
 distribution with the <code>tlmgr</code> package manager to install the packages that you
 are going to include in your files.</p>
-<h2 id="here-are-the-extension-and-config-files-im-using-for-texing-in-vscode">Here are the extension and config files I'm using for TeX-ing in VSCode:</h2>
+<h2 id="here-are-the-extension-and-config-files-im-using-for-tex-ing-in-vscode">Here are the extension and config files I'm using for TeX-ing in VSCode:</h2>
 <h3 id="extensions">Extensions:</h3>
 <ol>
 <li><a href="https://marketplace.visualstudio.com/items?itemName=James-Yu.latex-workshop">LaTeX Workshop</a>:
@@ -414,9 +414,9 @@ Show a tree of comments containing <code>TODO</code> in your code project. Reall
 Displays identifiers &amp; symbols using more aesthetically pleasing symbols.</li>
 <li>The <a href="https://marketplace.visualstudio.com/items?itemName=srcery-colors.srcery-colors">Srcery color scheme</a></li>
 </ol>
-<h3 id="writing-computer-architecture-notes-in-zenmode-vscode">Writing Computer Architecture Notes in zen-mode VSCode:</h3>
+<h3 id="writing-computer-architecture-notes-in-zen-mode-vscode">Writing Computer Architecture Notes in zen-mode VSCode:</h3>
 <p><img src="/posts/images/vscodetex1.png" alt="Writing Computer Architecture Notes in VSCode"></p>
-<h3 id="writing-probability-notes-in-zenmode-vscode">Writing Probability Notes in zen-mode VSCode:</h3>
+<h3 id="writing-probability-notes-in-zen-mode-vscode">Writing Probability Notes in zen-mode VSCode:</h3>
 <p><img src="/posts/images/vscodetex2.png" alt="Writing Probability Notes in VSCode"></p>
 <h3 id="configuration-files">Configuration Files:</h3>
 <p>Here is my <code>settings.json</code> file, with the most important section being <code>prettifySymbolsMode.substitutions</code>.
