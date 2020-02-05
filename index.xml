@@ -6,10 +6,20 @@
     <description>Recent content in 986895 on 0x0f0f0f</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 11 Jan 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 04 Feb 2020 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://0x0f0f0f.github.io/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>On Mind, Language and Machines</title>
+      <link>https://0x0f0f0f.github.io/posts/2020/02/on-mind-language-and-machines/</link>
+      <pubDate>Tue, 04 Feb 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://0x0f0f0f.github.io/posts/2020/02/on-mind-language-and-machines/</guid>
+      <description>I often find myself pondering on the incredible tool that evolution has gifted to the human species. In this essay, I will talk about many topics I find interesting in the past and future evolution of language and the intricate and incredible connections that biological processes yield with technology and mathematics.
+The Big Leap What makes us different from other animals, such as intelligent mammals that are so genotypically and biologically close to us?</description>
+    </item>
     
     <item>
       <title>New features in the minicaml programming language!</title>
@@ -128,7 +138,7 @@ Running a static webserver will help you reduce overhead and lets you reduce the
       <guid>https://0x0f0f0f.github.io/about/</guid>
       <description>I&#39;m Alessandro Cheli, Computer Science student and programmer.
 I&#39;ve worked to some full stack projects using different stacks, but I&#39;ve mostly used Node.JS for REST API back-ends and JAMstack front-ends. I&#39;ve made some arcade games and I tinker a lot with anything UNIX and electronics.
-My interests lie within Operating Systems, Logic, Functional Programming and Programming Language Theory. I&#39;m attracted to topics like Lambda Calculus, Category Theory, Group Theory, Type Theory and Human-Machine Interfaces.</description>
+My interests lie within Operating Systems, Logic, Functional Programming and Programming Language Theory. I&#39;m attracted to topics like Lambda Calculus, Category Theory, Bioinformatics Type Theory and Human-Machine Interfaces.</description>
     </item>
     
   </channel>

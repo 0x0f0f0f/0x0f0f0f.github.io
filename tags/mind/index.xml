@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>mind on 0x0f0f0f</title>
+    <link>https://0x0f0f0f.github.io/tags/mind/</link>
+    <description>Recent content in mind on 0x0f0f0f</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 04 Feb 2020 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://0x0f0f0f.github.io/tags/mind/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>On Mind, Language and Machines</title>
+      <link>https://0x0f0f0f.github.io/posts/2020/02/on-mind-language-and-machines/</link>
+      <pubDate>Tue, 04 Feb 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://0x0f0f0f.github.io/posts/2020/02/on-mind-language-and-machines/</guid>
+      <description>I often find myself pondering on the incredible tool that evolution has gifted to the human species. In this essay, I will talk about many topics I find interesting in the past and future evolution of language and the intricate and incredible connections that biological processes yield with technology and mathematics.
+The Big Leap What makes us different from other animals, such as intelligent mammals that are so genotypically and biologically close to us?</description>
+    </item>
+    
+  </channel>
+</rss>
