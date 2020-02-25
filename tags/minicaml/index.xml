@@ -17,7 +17,7 @@
       <pubDate>Sat, 11 Jan 2020 00:00:00 +0000</pubDate>
       
       <guid>https://0x0f0f0f.github.io/posts/2020/01/new-features-in-the-minicaml-programming-language/</guid>
-      <description>In the past weeks I&#39;ve worked a lot on the minicaml programming language. In this post I&#39;m recapping all the various features I have added with their corresponding syntax. Now that the language is almost feature complete, the next releases will focus on the standard library, stability, testing, and improvements of the internals. If you are interested in programming language development, note that I am looking for contributors to help in testing and making the language more stable.</description>
+      <description>In the past weeks I&amp;rsquo;ve worked a lot on the minicaml programming language. In this post I&amp;rsquo;m recapping all the various features I have added with their corresponding syntax. Now that the language is almost feature complete, the next releases will focus on the standard library, stability, testing, and improvements of the internals. If you are interested in programming language development, note that I am looking for contributors to help in testing and making the language more stable.</description>
     </item>
     
     <item>
@@ -26,7 +26,7 @@
       <pubDate>Thu, 12 Dec 2019 00:00:00 +0000</pubDate>
       
       <guid>https://0x0f0f0f.github.io/posts/2019/12/implementing-optional-lazy-evaluation-for-minicaml/</guid>
-      <description>As an experiment, I&#39;ve decided to add lazy evaluation to the didactical programming language minicaml. It have not yet implemented a cache for values that have already been evaluated. Here is how I did it.
+      <description>As an experiment, I&amp;rsquo;ve decided to add lazy evaluation to the didactical programming language minicaml. It have not yet implemented a cache for values that have already been evaluated. Here is how I did it.
 The first thing I had to do was creating an additional wrapper type that tells the evaluator if a value has already been evaluated or not, change the environment type so that it can contain both kind of values and change the &amp;ldquo;evaluation result&amp;rdquo; type so that it contains constructors for lazy functions and recursive lazy functions (see more later in the function application eval case).</description>
     </item>
     

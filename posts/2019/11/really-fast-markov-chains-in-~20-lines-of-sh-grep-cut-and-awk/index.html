@@ -131,8 +131,8 @@
 <blockquote>
 <p>A Markov chain is a stochastic model describing a sequence of possible events in which the probability of each event depends only on the state attained in the previous event.</p>
 </blockquote>
-<p>Here's a <a href="http://setosa.io/ev/markov-chains/">great article</a> introducing the concept of Markov chains. In the case of a group chat bot, each state (or node of the graph) is one of the words that was previously sent in the messages, and each probability of transition towards another state (word) is based on the frequency of the first word (transition's source state) being followed by the second one (the transition's destination state).</p>
-<p>After coding a simple Markov chain on words in Haskell, I've noticed that it was really slow and resource intensive even on a few thousand of messages. This was because the model was calculated by summing the frequency of word pairs and it was kept in memory inside of a <code>Data.Map</code> structure.</p>
+<p>Here&rsquo;s a <a href="http://setosa.io/ev/markov-chains/">great article</a> introducing the concept of Markov chains. In the case of a group chat bot, each state (or node of the graph) is one of the words that was previously sent in the messages, and each probability of transition towards another state (word) is based on the frequency of the first word (transition&rsquo;s source state) being followed by the second one (the transition&rsquo;s destination state).</p>
+<p>After coding a simple Markov chain on words in Haskell, I&rsquo;ve noticed that it was really slow and resource intensive even on a few thousand of messages. This was because the model was calculated by summing the frequency of word pairs and it was kept in memory inside of a <code>Data.Map</code> structure.</p>
 <p>Although the Haskell implementation can get much faster if optimized, my friend <a href="https://github.com/Francesco149">Francesco</a> showed me his amazing implementation of Markov chains on words made <strong>in plain sh and awk</strong>, in ~20 lines of code.\</p>
 <h3 id="markovshhttpsgithubcomfrancesco149markovsh"><a href="https://github.com/Francesco149/markov.sh">markov.sh</a></h3>
 <p>His project is split in 2 programs. The first one, <code>mrkfeed.awk</code> is a really simple <code>awk</code> program that separates words on a line into pairs of words, separated line by line.</p>
@@ -144,13 +144,13 @@
   }
   <span style="color:#66d9ef">print</span> <span style="color:#f92672">$</span><span style="color:#a6e22e">i</span>
 }
-</code></pre></div><p>For example, let's take this simple chat log (referred to as <code>chatlog.txt</code>):</p>
+</code></pre></div><p>For example, let&rsquo;s take this simple chat log (referred to as <code>chatlog.txt</code>):</p>
 <pre><code>hello everybody
 hi people
 hello people
 how are you
 how are things going
-</code></pre><p>The first step is creating a model for the Markov chain. Here's what will be into the model file when we run <code>./mrkfeed.awk &lt; chatlog.txt &gt;&gt; model.mrkdb</code>,  (piped into <code>sort</code> for readability)</p>
+</code></pre><p>The first step is creating a model for the Markov chain. Here&rsquo;s what will be into the model file when we run <code>./mrkfeed.awk &lt; chatlog.txt &gt;&gt; model.mrkdb</code>,  (piped into <code>sort</code> for readability)</p>
 <pre><code>are things
 are you
 everybody
@@ -165,11 +165,11 @@ people
 things going
 you
 </code></pre><p>The next step is generating a new random message with <code>./mrkwords.sh model.mrkdb 50 | tr '\n' ' ' &amp;&amp; echo</code></p>
-<p>At first, <code>mrkwords.sh</code> will pick a random line from the model and pick the first word of the pair as the first word of our output message. After this, it will filter the model to find what word pairs start with the first word it picked. Let's say it picked the word <code>hello</code> as the first word of the message. It will then randomly choose the second word of the message from the second element of a pair in the model that starts with the first word it chose. In this case, since it picked <code>hello</code> as the first word, it may pick one between <code>everybody</code> and <code>people</code> as the next word.
+<p>At first, <code>mrkwords.sh</code> will pick a random line from the model and pick the first word of the pair as the first word of our output message. After this, it will filter the model to find what word pairs start with the first word it picked. Let&rsquo;s say it picked the word <code>hello</code> as the first word of the message. It will then randomly choose the second word of the message from the second element of a pair in the model that starts with the first word it chose. In this case, since it picked <code>hello</code> as the first word, it may pick one between <code>everybody</code> and <code>people</code> as the next word.
 It then repeats this process by passing the last word it chose as the word to choose in the next iteration. It may be even easier to understand in terms of code than in plain words.</p>
 <p>The presence of duplicate lines in the model is what gives it the power of weighed probability, perfectly modeling the process of random extraction, making the generated models real Markov chains.
 Doing this with plain unix tools makes <code>markov.sh</code> incredibly fast, because it is sacrificing disk space by storing duplicates in exchange for a huge improvement in the complexity of the computations. Although Markov chains are often considered complex, this small shell program shines in showing the real underlying simplicity.</p>
-<p>Here's a commented version of <code>./mrkwords.sh</code></p>
+<p>Here&rsquo;s a commented version of <code>./mrkwords.sh</code></p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e">#!/bin/sh
 </span><span style="color:#75715e"></span>
 <span style="color:#75715e"># choose the first argument as the model file or try to open &#39;.mrkdb&#39;</span>

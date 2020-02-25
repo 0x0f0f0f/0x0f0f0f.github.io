@@ -7,8 +7,8 @@
 <meta name="author"
     content="archetypes false false false true content © 2019 — 0x0f0f0f — All rights reserved. data layouts Alessandro Cheli public true true monokai 20 ">
 <meta name="description"
-    content="Happy Halloween everybody, here&#39;s a little report on how I&#39;ve added a macro parser to yasih (Yet Another Scheme in Haskell), my own R5RS Scheme implementation written in Haskell.
-At first I&#39;ve had to define parsers for quote, quasiquote, and unquote and add them to the expression parser. You can learn more about how scheme quoting works in the MIT-scheme documentation.
+    content="Happy Halloween everybody, here&amp;rsquo;s a little report on how I&amp;rsquo;ve added a macro parser to yasih (Yet Another Scheme in Haskell), my own R5RS Scheme implementation written in Haskell.
+At first I&amp;rsquo;ve had to define parsers for quote, quasiquote, and unquote and add them to the expression parser. You can learn more about how scheme quoting works in the MIT-scheme documentation.
 -- |Parse a Quoted Expression &amp;#39;a parseQuoted :: Parser LispVal parseQuoted = do char &amp;#39;\&amp;#39;&amp;#39; x &amp;lt;- parseExpr return $ List [Atom &amp;#34;quote&amp;#34;, x] -- |Parse a QuasiQuoted Expression -- See https://schemers." />
 <meta name="keywords" content="" />
 <meta name="robots" content="noodp" />
@@ -39,8 +39,8 @@ At first I&#39;ve had to define parsers for quote, quasiquote, and unquote and a
 <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#252627">
 <link rel="shortcut icon" href="/favicon.ico">
 <meta name="theme-color" content="#252627"><meta itemprop="name" content="Adding a macro parser to my Scheme implementation">
-<meta itemprop="description" content="Happy Halloween everybody, here&#39;s a little report on how I&#39;ve added a macro parser to yasih (Yet Another Scheme in Haskell), my own R5RS Scheme implementation written in Haskell.
-At first I&#39;ve had to define parsers for quote, quasiquote, and unquote and add them to the expression parser. You can learn more about how scheme quoting works in the MIT-scheme documentation.
+<meta itemprop="description" content="Happy Halloween everybody, here&rsquo;s a little report on how I&rsquo;ve added a macro parser to yasih (Yet Another Scheme in Haskell), my own R5RS Scheme implementation written in Haskell.
+At first I&rsquo;ve had to define parsers for quote, quasiquote, and unquote and add them to the expression parser. You can learn more about how scheme quoting works in the MIT-scheme documentation.
 -- |Parse a Quoted Expression &#39;a parseQuoted :: Parser LispVal parseQuoted = do char &#39;\&#39;&#39; x &lt;- parseExpr return $ List [Atom &#34;quote&#34;, x] -- |Parse a QuasiQuoted Expression -- See https://schemers.">
 <meta itemprop="datePublished" content="2019-10-31T00:00:00&#43;00:00" />
 <meta itemprop="dateModified" content="2019-10-31T00:00:00&#43;00:00" />
@@ -53,8 +53,8 @@ At first I&#39;ve had to define parsers for quote, quasiquote, and unquote and a
 <meta name="twitter:image" content="https://0x0f0f0f.github.io"/>
 
 <meta name="twitter:title" content="Adding a macro parser to my Scheme implementation"/>
-<meta name="twitter:description" content="Happy Halloween everybody, here&#39;s a little report on how I&#39;ve added a macro parser to yasih (Yet Another Scheme in Haskell), my own R5RS Scheme implementation written in Haskell.
-At first I&#39;ve had to define parsers for quote, quasiquote, and unquote and add them to the expression parser. You can learn more about how scheme quoting works in the MIT-scheme documentation.
+<meta name="twitter:description" content="Happy Halloween everybody, here&rsquo;s a little report on how I&rsquo;ve added a macro parser to yasih (Yet Another Scheme in Haskell), my own R5RS Scheme implementation written in Haskell.
+At first I&rsquo;ve had to define parsers for quote, quasiquote, and unquote and add them to the expression parser. You can learn more about how scheme quoting works in the MIT-scheme documentation.
 -- |Parse a Quoted Expression &#39;a parseQuoted :: Parser LispVal parseQuoted = do char &#39;\&#39;&#39; x &lt;- parseExpr return $ List [Atom &#34;quote&#34;, x] -- |Parse a QuasiQuoted Expression -- See https://schemers."/>
 
 
@@ -130,10 +130,10 @@ At first I&#39;ve had to define parsers for quote, quasiquote, and unquote and a
             
 
             <div class="post-content">
-                <p>Happy Halloween everybody, here's a little report on how I've added a
+                <p>Happy Halloween everybody, here&rsquo;s a little report on how I&rsquo;ve added a
 macro parser to <a href="https://github.com/0x0f0f0f/yasih">yasih</a> (Yet Another Scheme in Haskell),
 my own R5RS Scheme implementation written in Haskell.</p>
-<p>At first I've had to define parsers for <code>quote</code>, <code>quasiquote</code>, and <code>unquote</code> and add them to the expression parser.
+<p>At first I&rsquo;ve had to define parsers for <code>quote</code>, <code>quasiquote</code>, and <code>unquote</code> and add them to the expression parser.
 You can learn more about how scheme quoting works <a href="https://www.gnu.org/software/mit-scheme/documentation/mit-scheme-ref/Quoting.html">in the MIT-scheme documentation</a>.</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-haskell" data-lang="haskell"><span style="color:#75715e">-- |Parse a Quoted Expression &#39;a</span>
 <span style="color:#a6e22e">parseQuoted</span> <span style="color:#f92672">::</span> <span style="color:#66d9ef">Parser</span> <span style="color:#66d9ef">LispVal</span>
@@ -193,7 +193,7 @@ the corresponding evaluation rules as <code>eval</code> pattern matching cases:<
                     results <span style="color:#f92672">&lt;-</span> traverse evalUnquotes items
                     return <span style="color:#f92672">$</span> <span style="color:#66d9ef">List</span> results
                 <span style="color:#66d9ef">_</span> <span style="color:#f92672">-&gt;</span> return form
-</code></pre></div><p>Here's an example, showing what happens when entering quoted expressions
+</code></pre></div><p>Here&rsquo;s an example, showing what happens when entering quoted expressions
 in <strong>yasih</strong>&lsquo;s REPL.</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scheme" data-lang="scheme">λ&gt; <span style="color:#75715e">; here, the evaluator tries to apply</span>
 λ&gt; (<span style="color:#ae81ff">1</span> <span style="color:#ae81ff">2</span> <span style="color:#ae81ff">3</span>) <span style="color:#75715e">; 2 and 3 as arguments to a function &#34;1&#34;</span>
@@ -236,7 +236,7 @@ Minor changes were needed also in <code>apply</code>, just adding an <code>isMac
 is passed as an argument. It is not needed by now inside <code>apply</code>'s body.</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-haskell" data-lang="haskell"><span style="color:#a6e22e">apply</span> (<span style="color:#66d9ef">Func</span> isMacro params varargs body closure) args <span style="color:#f92672">=</span>
     <span style="color:#75715e">-- more code...</span>
-</code></pre></div><p>Now, it's time to add some helper functions in <code>Environment.hs</code> to make a macro</p>
+</code></pre></div><p>Now, it&rsquo;s time to add some helper functions in <code>Environment.hs</code> to make a macro</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-haskell" data-lang="haskell"><span style="color:#75715e">-- |Helper functions to create function objects in IOThrowsError monad</span>
 <span style="color:#a6e22e">makeFunc</span> <span style="color:#f92672">::</span> <span style="color:#66d9ef">Bool</span> <span style="color:#f92672">-&gt;</span> <span style="color:#66d9ef">Maybe</span> <span style="color:#66d9ef">String</span> <span style="color:#f92672">-&gt;</span> <span style="color:#66d9ef">Env</span> <span style="color:#f92672">-&gt;</span> [<span style="color:#66d9ef">LispVal</span>] <span style="color:#f92672">-&gt;</span> [<span style="color:#66d9ef">LispVal</span>] <span style="color:#f92672">-&gt;</span> <span style="color:#66d9ef">IOThrowsError</span> <span style="color:#66d9ef">LispVal</span>
 <span style="color:#a6e22e">makeFunc</span> isMacro varargs env params body <span style="color:#f92672">=</span> return <span style="color:#f92672">$</span> <span style="color:#66d9ef">Func</span> isMacro (map showVal params) varargs body env
@@ -248,11 +248,11 @@ I have not yet implemented <code>syntax-rules</code> but i surely will in the ne
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-haskell" data-lang="haskell"><span style="color:#75715e">-- Define a macro</span>
 <span style="color:#a6e22e">eval</span> env (<span style="color:#66d9ef">List</span> (<span style="color:#66d9ef">Atom</span> <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">define-syntax</span><span style="color:#e6db74">&#34;</span> <span style="color:#66d9ef">:</span> <span style="color:#66d9ef">List</span> (<span style="color:#66d9ef">Atom</span> var <span style="color:#66d9ef">:</span> params) <span style="color:#66d9ef">:</span> body)) <span style="color:#f92672">=</span>
     makeMacro env params body <span style="color:#f92672">&gt;&gt;=</span> defineVar env var
-</code></pre></div><p>Here's an example on how you can make a macro and use it as a practical construct
+</code></pre></div><p>Here&rsquo;s an example on how you can make a macro and use it as a practical construct
 for a programming language.
 Here, the <code>let</code> statement is defined as a macro that will expand to an anonymous function
 (lambda) application, in this way a closure will be made and lexical scoping will be respected,
-correctly reaching the <code>let</code> statement's goals. The implementation is a little sketchy and
+correctly reaching the <code>let</code> statement&rsquo;s goals. The implementation is a little sketchy and
 will surely get better as <code>syntax-rules</code> gets implemented.</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-scheme" data-lang="scheme">(<span style="color:#66d9ef">define-syntax </span>(<span style="color:#a6e22e">bind-vars</span> bindings)
     <span style="color:#f92672">`</span>(map car bindings))
@@ -270,7 +270,7 @@ will surely get better as <code>syntax-rules</code> gets implemented.</p>
 Some modern functional programming languages like OCaml, directly create a closure instead of
 creating an anonymous function for <code>let</code> statements;
 that practice is fairly more performant, but the execution result is identical.</p>
-<h2 id="some-updates-on-yasihs-development">Some updates on yasih's development.</h2>
+<h2 id="some-updates-on-yasihs-development">Some updates on yasih&rsquo;s development.</h2>
 <p>A sketchy complete R5RS implementation is almost done.
 Some primitives are still missing and I will work on them in the next updates, in which I will also
 focus on adding additional features like string interpolation, stack tracing, and probably

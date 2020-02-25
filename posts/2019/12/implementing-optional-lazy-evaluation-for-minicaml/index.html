@@ -7,7 +7,7 @@
 <meta name="author"
     content="archetypes false false false true content © 2019 — 0x0f0f0f — All rights reserved. data layouts Alessandro Cheli public true true monokai 20 ">
 <meta name="description"
-    content="As an experiment, I&#39;ve decided to add lazy evaluation to the didactical programming language minicaml. It have not yet implemented a cache for values that have already been evaluated. Here is how I did it.
+    content="As an experiment, I&amp;rsquo;ve decided to add lazy evaluation to the didactical programming language minicaml. It have not yet implemented a cache for values that have already been evaluated. Here is how I did it.
 The first thing I had to do was creating an additional wrapper type that tells the evaluator if a value has already been evaluated or not, change the environment type so that it can contain both kind of values and change the &amp;ldquo;evaluation result&amp;rdquo; type so that it contains constructors for lazy functions and recursive lazy functions (see more later in the function application eval case)." />
 <meta name="keywords" content="" />
 <meta name="robots" content="noodp" />
@@ -38,7 +38,7 @@ The first thing I had to do was creating an additional wrapper type that tells t
 <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#252627">
 <link rel="shortcut icon" href="/favicon.ico">
 <meta name="theme-color" content="#252627"><meta itemprop="name" content="Implementing optional lazy evaluation for minicaml">
-<meta itemprop="description" content="As an experiment, I&#39;ve decided to add lazy evaluation to the didactical programming language minicaml. It have not yet implemented a cache for values that have already been evaluated. Here is how I did it.
+<meta itemprop="description" content="As an experiment, I&rsquo;ve decided to add lazy evaluation to the didactical programming language minicaml. It have not yet implemented a cache for values that have already been evaluated. Here is how I did it.
 The first thing I had to do was creating an additional wrapper type that tells the evaluator if a value has already been evaluated or not, change the environment type so that it can contain both kind of values and change the &ldquo;evaluation result&rdquo; type so that it contains constructors for lazy functions and recursive lazy functions (see more later in the function application eval case).">
 <meta itemprop="datePublished" content="2019-12-12T00:00:00&#43;00:00" />
 <meta itemprop="dateModified" content="2019-12-12T00:00:00&#43;00:00" />
@@ -51,7 +51,7 @@ The first thing I had to do was creating an additional wrapper type that tells t
 <meta name="twitter:image" content="https://0x0f0f0f.github.io"/>
 
 <meta name="twitter:title" content="Implementing optional lazy evaluation for minicaml"/>
-<meta name="twitter:description" content="As an experiment, I&#39;ve decided to add lazy evaluation to the didactical programming language minicaml. It have not yet implemented a cache for values that have already been evaluated. Here is how I did it.
+<meta name="twitter:description" content="As an experiment, I&rsquo;ve decided to add lazy evaluation to the didactical programming language minicaml. It have not yet implemented a cache for values that have already been evaluated. Here is how I did it.
 The first thing I had to do was creating an additional wrapper type that tells the evaluator if a value has already been evaluated or not, change the environment type so that it can contain both kind of values and change the &ldquo;evaluation result&rdquo; type so that it contains constructors for lazy functions and recursive lazy functions (see more later in the function application eval case)."/>
 
 
@@ -127,7 +127,7 @@ The first thing I had to do was creating an additional wrapper type that tells t
             
 
             <div class="post-content">
-                <p>As an experiment, I've decided to add lazy evaluation to the didactical
+                <p>As an experiment, I&rsquo;ve decided to add lazy evaluation to the didactical
 programming language <a href="https://github.com/0x0f0f0f/minicaml">minicaml</a>. It have
 not yet implemented a cache for values that have already been evaluated. Here is how I
 did it.</p>
@@ -162,9 +162,9 @@ AST expressions that have not been evaluated yet.</p>
 </code></pre></div><p>The next step was adding AST types for <code>let lazy</code> and <code>lazyfun</code> statements and
 the corresponding parser and lexer definitions.
 <code>let lazy x = (... some expression ...) in (... body expression ...)</code> binds a <code>LazyExpression</code>
-to the symbol x in the <code>body</code> expression's environment. The evaluator only
+to the symbol x in the <code>body</code> expression&rsquo;s environment. The evaluator only
 evaluates the expression bound to <code>x</code> when the symbol is encountered and used in
-the <code>let lazy</code> statement's body; while a normal <code>let</code> statement evaluates the
+the <code>let lazy</code> statement&rsquo;s body; while a normal <code>let</code> statement evaluates the
 expression assigned to <code>x</code> before evaluating the body (a practice called eager
 evaluation).</p>
 <h4 id="these-camels-are-quite-lazy">These camels are quite lazy:</h4>
