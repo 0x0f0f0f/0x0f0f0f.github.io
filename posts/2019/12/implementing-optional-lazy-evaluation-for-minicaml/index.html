@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="author"
+    content="archetypes false false false true content © 2019 — 0x0f0f0f — All rights reserved. data layouts Alessandro Cheli public true true monokai 20 ">
+<meta name="description"
+    content="As an experiment, I&amp;rsquo;ve decided to add lazy evaluation to the didactical programming language minicaml. It have not yet implemented a cache for values that have already been evaluated. Here is how I did it.
+The first thing I had to do was creating an additional wrapper type that tells the evaluator if a value has already been evaluated or not, change the environment type so that it can contain both kind of values and change the &amp;ldquo;evaluation result&amp;rdquo; type so that it contains constructors for lazy functions and recursive lazy functions (see more later in the function application eval case)." />
+<meta name="keywords" content="" />
+<meta name="robots" content="noodp" />
+<link rel="canonical" href="https://0x0f0f0f.github.io/posts/2019/12/implementing-optional-lazy-evaluation-for-minicaml/" />
+
+
+<title>
+    
+    Implementing optional lazy evaluation for minicaml :: 0x0f0f0f 
+    
+</title>
+
+
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.2.1/css/flag-icon.min.css" rel="stylesheet"
+    type="text/css">
+
+
+
+<link rel="stylesheet" href="/main.min.0d47b4686e972122bd29f0c1e3dd024a2d541cd8b1b543622520822ea6f4238a.css">
+
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/site.webmanifest">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#252627">
+<link rel="shortcut icon" href="/favicon.ico">
+<meta name="theme-color" content="#252627"><meta itemprop="name" content="Implementing optional lazy evaluation for minicaml">
+<meta itemprop="description" content="As an experiment, I&rsquo;ve decided to add lazy evaluation to the didactical programming language minicaml. It have not yet implemented a cache for values that have already been evaluated. Here is how I did it.
+The first thing I had to do was creating an additional wrapper type that tells the evaluator if a value has already been evaluated or not, change the environment type so that it can contain both kind of values and change the &ldquo;evaluation result&rdquo; type so that it contains constructors for lazy functions and recursive lazy functions (see more later in the function application eval case).">
+
+
+<meta itemprop="datePublished" content="2019-12-12T00:00:00&#43;00:00" />
+<meta itemprop="dateModified" content="2019-12-12T00:00:00&#43;00:00" />
+<meta itemprop="wordCount" content="1121">
+
+
+
+<meta itemprop="keywords" content="functional programming,ocaml,minicaml," />
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://0x0f0f0f.github.io"/>
+
+<meta name="twitter:title" content="Implementing optional lazy evaluation for minicaml"/>
+<meta name="twitter:description" content="As an experiment, I&rsquo;ve decided to add lazy evaluation to the didactical programming language minicaml. It have not yet implemented a cache for values that have already been evaluated. Here is how I did it.
+The first thing I had to do was creating an additional wrapper type that tells the evaluator if a value has already been evaluated or not, change the environment type so that it can contain both kind of values and change the &ldquo;evaluation result&rdquo; type so that it contains constructors for lazy functions and recursive lazy functions (see more later in the function application eval case)."/>
+
+
+
+
+<meta property="article:published_time" content="2019-12-12 00:00:00 &#43;0000 UTC" />
+
+
+
+
+
+
+
+
+    </head>
+
+    <body class="">
+        <div class="container">
+            <header class="header">
+    <span class="header__inner">
+        <a href="/" style="text-decoration: none;">
+    <div class="logo">
+        
+            <span class="logo__mark">></span>
+            <span class="logo__text">$ 0x0f0f0f</span>
+            <span class="logo__cursor"></span>
+        
+    </div>
+</a>
+
+
+        <span class="header__right">
+            
+                <nav class="menu">
+    <ul class="menu__inner"><li><a href="https://0x0f0f0f.github.io/about/">About</a></li><li><a href="https://0x0f0f0f.github.io/posts/">Posts</a></li><li><a href="https://github.com/sponsors/0x0f0f0f">Sponsor</a></li>
+    </ul>
+</nav>
+
+                <span class="menu-trigger">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path d="M0 0h24v24H0z" fill="none"/>
+                        <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/>
+                    </svg>
+                </span>
+            
+
+            <span class="theme-toggle"><svg class="theme-toggler" width="24" height="24" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="M22 41C32.4934 41 41 32.4934 41 22C41 11.5066 32.4934 3 22
+  3C11.5066 3 3 11.5066 3 22C3 32.4934 11.5066 41 22 41ZM7 22C7
+  13.7157 13.7157 7 22 7V37C13.7157 37 7 30.2843 7 22Z"/>
+</svg>
+</span>
+        </span>
+    </span>
+</header>
+
+
+            <div class="content">
+                
+    <main class="post">
+
+        <div class="post-info">
+            <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-clock"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>6 minutes
+
+            
+
+            </p>
+        </div>
+
+        <article>
+            <h1 class="post-title"><a href="https://0x0f0f0f.github.io/posts/2019/12/implementing-optional-lazy-evaluation-for-minicaml/">Implementing optional lazy evaluation for minicaml</a></h1>
+
+            
+
+            <div class="post-content">
+                
+
+<p>As an experiment, I&rsquo;ve decided to add lazy evaluation to the didactical
+programming language <a href="https://github.com/0x0f0f0f/minicaml" target="_blank">minicaml</a>. It have
+not yet implemented a cache for values that have already been evaluated. Here is how I
+did it.</p>
+
+<p>The first thing I had to do was creating an additional wrapper type that
+tells the evaluator if a value has already been evaluated or not, change
+the environment type so that it can contain both kind of values and change the
+&ldquo;evaluation result&rdquo; type so that it contains constructors for lazy functions and
+recursive lazy functions (see more later in the function application <code>eval</code> case).
+Notice, in <code>type_wrapper</code>, how already evaluated values are of kind <code>evt</code>
+(&ldquo;evaluated&rdquo; or &ldquo;reduced&rdquo; expression), while <code>LazyExpression</code> values are just
+AST expressions that have not been evaluated yet.</p>
+
+<pre><code class="language-ocaml">(* lib/types.ml *)
+
+(** A type that represents an evaluated (reduced) value *)
+type evt =
+    | EvtUnit
+    | EvtInt of int
+    | EvtBool of bool
+    | EvtList of evt list
+    | Closure of ide list * expr * (type_wrapper env_t)
+    | LazyClosure of ide list * expr * (type_wrapper env_t)
+    | RecClosure of ide * ide list * expr * (type_wrapper env_t)
+    | RecLazyClosure of ide * ide list * expr * (type_wrapper env_t)
+    [@@deriving show { with_path = false }]
+and type_wrapper =
+    | LazyExpression of expr
+    | AlreadyEvaluated of evt
+    [@@deriving show]
+
+(** An environment of already evaluated values  *)
+type env_type = type_wrapper env_t
+</code></pre>
+
+<p>The next step was adding AST types for <code>let lazy</code> and <code>lazyfun</code> statements and
+the corresponding parser and lexer definitions.
+<code>let lazy x = (... some expression ...) in (... body expression ...)</code> binds a <code>LazyExpression</code>
+to the symbol x in the <code>body</code> expression&rsquo;s environment. The evaluator only
+evaluates the expression bound to <code>x</code> when the symbol is encountered and used in
+the <code>let lazy</code> statement&rsquo;s body; while a normal <code>let</code> statement evaluates the
+expression assigned to <code>x</code> before evaluating the body (a practice called eager
+evaluation).</p>
+
+<h4 id="these-camels-are-quite-lazy">These camels are quite lazy:</h4>
+
+<p><img src="/posts/images/lazy-camels.jpg" alt="These camels are lazy" /></p>
+
+<p>The same thing applies to functions and their actual parameters. In eager
+evaluation (the default in minicaml), when you apply a function to some
+arguments, the arguments are evaluated before actually evaluating the function
+body (and therefore are bound to a <code>AlreadyEvaluated</code> constructor in the
+environment), while in <code>lazyfun</code> (lazily evaluated functions) the arguments are
+not evaluated until encountered in the body (and therefore they are bound to a
+<code>LazyExpression</code> constructor).</p>
+
+<pre><code class="language-ocaml">(* lib/types.ml *)
+
+(** A value identifier*)
+type ide = string
+[@@deriving show]
+
+(** The type representing Abstract Syntax Tree expressions *)
+type expr =
+    (* ... other constructors are not shown here for simplicity  ... *)
+    | Let of ide * expr * expr
+    | Letlazy of ide * expr * expr
+    | Letrec of ide * expr * expr
+    | Lambda of ide list * expr
+    | LazyLambda of ide list * expr
+    | Apply of expr * expr list
+    [@@deriving show { with_path = false }]
+</code></pre>
+
+<p>Next, I had to change the <code>lookup</code> function, which searches for bindings in the
+environment. If, for a certain symbol <code>x</code> the <code>lookup</code> function encounters an
+<code>AlreadyEvaluated</code> value in the environment, it just returns it. If it
+encounters a <code>LazyExpression</code> value it means that it has encountered a value
+that was previously defined in a <code>let lazy</code> statement or a <code>lazyfun</code> function
+application, and it has to evaluate it and return the result. This is not
+exactly efficient, since if you encounter a lazily-defined expression twice, it
+is evaluated at the time of the first encounter, and at the second encounter you
+have no way of telling that its value was already calculated if you use an
+immutable, purely functional environment; therefore you have to evaluate it
+twice, or introduce an evaluation cache. The final step is changing the
+evaluation function, so that it correctly interprets <code>LazyLambda</code>, <code>Letlazy</code>
+expressions and <code>LazyClosure</code> and <code>RecLazyClosure</code> application. Note that <code>eval</code>
+and <code>lookup</code> have now become mutually recursive and they have to be defined
+together with <code>and</code>.</p>
+
+<pre><code class="language-ocaml">(* lib/eval.ml *)
+
+let rec eval (e: expr) (env: env_type) (n: stackframe) : evt =
+    let n = push_stack n e in
+    let evaluated = (match e with
+    (* ... The rest of evaluation cases are omitted for simplicity ... *)
+    | Symbol x -&gt; lookup env x n
+    | Let (ident, value, body) -&gt;
+        eval body (bind env ident (AlreadyEvaluated (eval value env n))) n
+    | Letlazy (ident, value, body) -&gt;
+        eval body (bind env ident (LazyExpression value)) n
+    | Letrec (ident, value, body) -&gt;
+        (match value with
+            | Lambda (params, fbody) -&gt;
+                let rec_env = (bind env ident
+                    (AlreadyEvaluated (RecClosure(ident, params, fbody, env))))
+                in eval body rec_env n
+            | LazyLambda (params, fbody) -&gt;
+                let rec_env = (bind env ident
+                    (AlreadyEvaluated (RecLazyClosure(ident, params, fbody, env))))
+                in eval body rec_env n
+            | _ -&gt; raise (TypeError &quot;Cannot define recursion on non-functional values&quot;))
+    | Lambda (params,body) -&gt; Closure(params, body, env)
+    | LazyLambda (params,body) -&gt; LazyClosure(params, body, env)
+    | Apply(f, params) -&gt;
+        let closure = eval f env n  in
+        (match closure with
+        | Closure(args, body, decenv) -&gt; (* Use static scoping *)
+            let evaluated_params = List.map (fun x -&gt; eval x env n ) params in
+            let application_env = bindlist decenv args (List.map (fun x -&gt;
+                 AlreadyEvaluated x) evaluated_params)  in
+            eval body application_env n
+        | RecClosure(name, args, body, decenv) -&gt;
+            let evaluated_params = List.map (fun x -&gt; eval x env n ) params in
+            let rec_env = (bind decenv name (AlreadyEvaluated closure)) in
+            let application_env = bindlist rec_env args
+                (List.map (fun x -&gt; AlreadyEvaluated x) evaluated_params) in
+            eval body application_env n
+        | LazyClosure(args, body, decenv) -&gt;
+            let application_env = bindlist decenv args
+                (List.map (fun x -&gt; LazyExpression x) params) in
+            eval body application_env n
+        | RecLazyClosure(name, args, body, decenv) -&gt;
+            let rec_env = (bind decenv name (AlreadyEvaluated closure)) in
+            let application_env = bindlist rec_env args
+                (List.map (fun x -&gt; LazyExpression x) params) in
+            eval body application_env n
+        | _ -&gt; raise (TypeError &quot;Cannot apply a non functional value&quot;)))
+    in let depth = (match n with
+        | StackValue(d, _, _) -&gt; d
+        | EmptyStack -&gt; 0)
+    in
+    print_message ~color:T.Blue ~loc:(Nowhere)
+        &quot;Reduction at depth&quot; &quot;%d\nExpression:\t%s\nEvaluates to:\t%s\n&quot; depth (show_expr e) (show_evt evaluated);
+    evaluated;
+(* Search for a key in an environment (a (string, value) pair) *)
+and lookup (env: env_type) (ident: ide) (n: stackframe) : evt =
+    if ident = &quot;&quot; then failwith &quot;invalid identifier&quot; else
+    match env with
+    | [] -&gt; raise (UnboundVariable ident)
+    | (i, LazyExpression e) :: env_rest -&gt; if ident = i then eval e env n
+        else lookup env_rest ident n
+    | (i, AlreadyEvaluated e) :: env_rest -&gt; if ident = i then e else
+        lookup env_rest ident n
+</code></pre>
+
+<p>You can find minicaml version <code>0.2.1</code> with laziness
+<a href="https://github.com/0x0f0f0f/minicaml/releases" target="_blank">here</a>.
+Thanks to Antonio for helping me reason about implementing laziness.</p>
+
+            </div>
+        </article>
+
+        <hr />
+
+        <div class="post-info">
+                <p>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tag meta-icon"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7" y2="7"></line></svg><span class="tag"><a href="https://0x0f0f0f.github.io/tags/functional-programming">functional programming</a></span><span class="tag"><a href="https://0x0f0f0f.github.io/tags/ocaml">ocaml</a></span><span class="tag"><a href="https://0x0f0f0f.github.io/tags/minicaml">minicaml</a></span>
+                </p>
+
+            <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>1121 Words</p>
+
+            <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>2019-12-12 01:00 &#43;0100</p>
+        </div>
+
+        
+            <div class="pagination">
+                <div class="pagination__title">
+                    <span class="pagination__title-h"></span>
+                    <hr />
+                </div>
+
+                <div class="pagination__buttons">
+                    
+                        <span class="button previous">
+                            <a href="https://0x0f0f0f.github.io/posts/2020/01/new-features-in-the-minicaml-programming-language/">
+                                <span class="button__icon">←</span>
+                                <span class="button__text">New features in the minicaml programming language!</span>
+                            </a>
+                        </span>
+                    
+
+                    
+                        <span class="button next">
+                            <a href="https://0x0f0f0f.github.io/posts/2019/12/latex-notetaking-texstudio-vs.-latex-workshop-for-vs-code/">
+                                <span class="button__text">LaTeX notetaking: TeXStudio VS. LaTeX Workshop for VS Code</span>
+                                <span class="button__icon">→</span>
+                            </a>
+                        </span>
+                    
+                </div>
+            </div>
+        
+
+        
+    </main>
+
+            </div>
+
+            
+                <footer class="footer">
+    <div class="footer__inner">
+        <div class="footer__content">
+            <span>&copy; 2020</span>
+            
+                <span><a href="https://0x0f0f0f.github.io">Alessandro Cheli</a></span>
+            
+            <span></span>
+            <span> <a href="https://0x0f0f0f.github.io/posts/index.xml" target="_blank" title="rss"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-rss"><path d="M4 11a9 9 0 0 1 9 9"></path><path d="M4 4a16 16 0 0 1 16 16"></path><circle cx="5" cy="19" r="1"></circle></svg></a></span>
+        </div>
+    </div>
+    <div class="footer__inner">
+        <div class="footer__content">
+
+        </div>
+    </div>
+    <div class="footer__inner">
+        <div class="footer__content">
+            <span>Powered by <a href="http://gohugo.io">Hugo</a></span>
+            <span>Like this? <a href="https://github.com/sponsors/0x0f0f0f">Sponsor on GitHub &#10084; </a></span>
+        </div>
+    </div>
+</footer>
+
+            
+        </div>
+
+        
+
+
+
+
+<script type="text/javascript" src="/bundle.min.4c3fb12a087ceed4a52cb5d57068a9795c7069617a01ca70f788052ad66e1791779e6c72686e1dc0ca13dc03b0203204b6566bb0dd1ee80de2b7ff4d8fe53db2.js" integrity="sha512-TD&#43;xKgh87tSlLLXVcGipeVxwaWF6Acpw94gFKtZuF5F3nmxyaG4dwMoT3AOwIDIEtlZrsN0e6A3it/9Nj&#43;U9sg=="></script>
+    <script>
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+        ga('create', 'UA-106198734-2', 'auto');
+        ga('send', 'pageview');
+    </script>
+
+
+
+    </body>
+</html>

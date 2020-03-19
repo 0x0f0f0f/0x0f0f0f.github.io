@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>void on 0x0f0f0f</title>
@@ -17,7 +17,7 @@
       <pubDate>Wed, 20 Nov 2019 00:00:00 +0000</pubDate>
       
       <guid>https://0x0f0f0f.github.io/posts/2019/11/visualizing-11-years-of-contributions-to-void-linux-in-7-minutes/</guid>
-      <description>A few days ago I&#39;ve stumbled into an excellent package called gource. To test it out I&#39;ve decided to make an animated video of all the contributions that have been made since 26 September 2008 in the void-packages repository. You can see how it starts to gain traction after ~2013, and how it quickly evolves to look like a living cell. I pop out somewhere around the middle of 2019. Void Linux is an awesome, solid and lightweight indipendent distribution that uses the excellent XBPS package manager.</description>
+      <description>A few days ago I&amp;rsquo;ve stumbled into an excellent package called gource. To test it out I&amp;rsquo;ve decided to make an animated video of all the contributions that have been made since 26 September 2008 in the void-packages repository. You can see how it starts to gain traction after ~2013, and how it quickly evolves to look like a living cell. I pop out somewhere around the middle of 2019.</description>
     </item>
     
   </channel>

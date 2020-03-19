@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>ocaml on 0x0f0f0f</title>
@@ -6,10 +6,29 @@
     <description>Recent content in ocaml on 0x0f0f0f</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 04 Dec 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 11 Jan 2020 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://0x0f0f0f.github.io/tags/ocaml/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>New features in the minicaml programming language!</title>
+      <link>https://0x0f0f0f.github.io/posts/2020/01/new-features-in-the-minicaml-programming-language/</link>
+      <pubDate>Sat, 11 Jan 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://0x0f0f0f.github.io/posts/2020/01/new-features-in-the-minicaml-programming-language/</guid>
+      <description>In the past weeks I&amp;rsquo;ve worked a lot on the minicaml programming language. In this post I&amp;rsquo;m recapping all the various features I have added with their corresponding syntax. Now that the language is almost feature complete, the next releases will focus on the standard library, stability, testing, and improvements of the internals. If you are interested in programming language development, note that I am looking for contributors to help in testing and making the language more stable.</description>
+    </item>
+    
+    <item>
+      <title>Implementing optional lazy evaluation for minicaml</title>
+      <link>https://0x0f0f0f.github.io/posts/2019/12/implementing-optional-lazy-evaluation-for-minicaml/</link>
+      <pubDate>Thu, 12 Dec 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://0x0f0f0f.github.io/posts/2019/12/implementing-optional-lazy-evaluation-for-minicaml/</guid>
+      <description>As an experiment, I&amp;rsquo;ve decided to add lazy evaluation to the didactical programming language minicaml. It have not yet implemented a cache for values that have already been evaluated. Here is how I did it.
+The first thing I had to do was creating an additional wrapper type that tells the evaluator if a value has already been evaluated or not, change the environment type so that it can contain both kind of values and change the &amp;ldquo;evaluation result&amp;rdquo; type so that it contains constructors for lazy functions and recursive lazy functions (see more later in the function application eval case).</description>
+    </item>
     
     <item>
       <title>minicaml, a didactical OCaml-like functional programming language.</title>

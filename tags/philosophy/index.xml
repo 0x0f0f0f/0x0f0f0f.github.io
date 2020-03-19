@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>philosophy on 0x0f0f0f</title>
+    <link>https://0x0f0f0f.github.io/tags/philosophy/</link>
+    <description>Recent content in philosophy on 0x0f0f0f</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 18 Mar 2020 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://0x0f0f0f.github.io/tags/philosophy/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Simulating the Spread of Infectious Disease in 200 lines of C</title>
+      <link>https://0x0f0f0f.github.io/posts/2020/03/simulating-the-spread-of-infectious-disease-in-200-lines-of-c/</link>
+      <pubDate>Wed, 18 Mar 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://0x0f0f0f.github.io/posts/2020/03/simulating-the-spread-of-infectious-disease-in-200-lines-of-c/</guid>
+      <description>Greetings from Italy. I am currently quarantined in my apartment. For me and many other people this lockdown can often get motivationally debilitating when it comes to working to personal, academic or work projects. The lockdown measures taken by governments to fight off the pandemic are necessary to reduce the damage that the disease caused by the SARS-COV-2 &amp;ldquo;coronavirus&amp;rdquo; is doing to the global society. Inspired by a recent popular news article about the effectivity of containment measures during outbreaks, I wrote this small animation/simulation in a single C file (using raylib, you need it to build this project) to show what happens if you avoid moving and social contact during an epidemic.</description>
+    </item>
+    
+    <item>
+      <title>On Mind, Language and Machines</title>
+      <link>https://0x0f0f0f.github.io/posts/2020/02/on-mind-language-and-machines/</link>
+      <pubDate>Wed, 05 Feb 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://0x0f0f0f.github.io/posts/2020/02/on-mind-language-and-machines/</guid>
+      <description>I often find myself pondering on the incredible tool that evolution has gifted to the human species. In this essay, I will talk about many topics I find interesting in the past and future evolution of language and the intricate and incredible connections that biological processes yield with technology and mathematics.
+The Big Leap What makes us different from other animals, such as intelligent mammals that are so genotypically and biologically close to us?</description>
+    </item>
+    
+  </channel>
+</rss>

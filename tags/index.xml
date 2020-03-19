@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Tags on 0x0f0f0f</title>
@@ -6,10 +6,109 @@
     <description>Recent content in Tags on 0x0f0f0f</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 06 Dec 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 18 Mar 2020 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://0x0f0f0f.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>complexity</title>
+      <link>https://0x0f0f0f.github.io/tags/complexity/</link>
+      <pubDate>Wed, 18 Mar 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://0x0f0f0f.github.io/tags/complexity/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>computer-science</title>
+      <link>https://0x0f0f0f.github.io/tags/computer-science/</link>
+      <pubDate>Wed, 18 Mar 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://0x0f0f0f.github.io/tags/computer-science/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>language</title>
+      <link>https://0x0f0f0f.github.io/tags/language/</link>
+      <pubDate>Wed, 18 Mar 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://0x0f0f0f.github.io/tags/language/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>machines</title>
+      <link>https://0x0f0f0f.github.io/tags/machines/</link>
+      <pubDate>Wed, 18 Mar 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://0x0f0f0f.github.io/tags/machines/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>mathematics</title>
+      <link>https://0x0f0f0f.github.io/tags/mathematics/</link>
+      <pubDate>Wed, 18 Mar 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://0x0f0f0f.github.io/tags/mathematics/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>mind</title>
+      <link>https://0x0f0f0f.github.io/tags/mind/</link>
+      <pubDate>Wed, 18 Mar 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://0x0f0f0f.github.io/tags/mind/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>philosophy</title>
+      <link>https://0x0f0f0f.github.io/tags/philosophy/</link>
+      <pubDate>Wed, 18 Mar 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://0x0f0f0f.github.io/tags/philosophy/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>story</title>
+      <link>https://0x0f0f0f.github.io/tags/story/</link>
+      <pubDate>Tue, 25 Feb 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://0x0f0f0f.github.io/tags/story/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>functional programming</title>
+      <link>https://0x0f0f0f.github.io/tags/functional-programming/</link>
+      <pubDate>Sat, 11 Jan 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://0x0f0f0f.github.io/tags/functional-programming/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>minicaml</title>
+      <link>https://0x0f0f0f.github.io/tags/minicaml/</link>
+      <pubDate>Sat, 11 Jan 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://0x0f0f0f.github.io/tags/minicaml/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>ocaml</title>
+      <link>https://0x0f0f0f.github.io/tags/ocaml/</link>
+      <pubDate>Sat, 11 Jan 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://0x0f0f0f.github.io/tags/ocaml/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>latex</title>
@@ -35,33 +134,6 @@
       <pubDate>Fri, 06 Dec 2019 00:00:00 +0000</pubDate>
       
       <guid>https://0x0f0f0f.github.io/tags/programming/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>functional programming</title>
-      <link>https://0x0f0f0f.github.io/tags/functional-programming/</link>
-      <pubDate>Wed, 04 Dec 2019 00:00:00 +0000</pubDate>
-      
-      <guid>https://0x0f0f0f.github.io/tags/functional-programming/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>minicaml</title>
-      <link>https://0x0f0f0f.github.io/tags/minicaml/</link>
-      <pubDate>Wed, 04 Dec 2019 00:00:00 +0000</pubDate>
-      
-      <guid>https://0x0f0f0f.github.io/tags/minicaml/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>ocaml</title>
-      <link>https://0x0f0f0f.github.io/tags/ocaml/</link>
-      <pubDate>Wed, 04 Dec 2019 00:00:00 +0000</pubDate>
-      
-      <guid>https://0x0f0f0f.github.io/tags/ocaml/</guid>
       <description></description>
     </item>
     

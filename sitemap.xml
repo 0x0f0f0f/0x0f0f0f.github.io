@@ -1,15 +1,113 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
     <loc>https://0x0f0f0f.github.io/</loc>
-    <lastmod>2019-12-06T00:00:00+00:00</lastmod>
+    <lastmod>2020-03-18T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://0x0f0f0f.github.io/tags/latex/</loc>
-    <lastmod>2019-12-06T00:00:00+00:00</lastmod>
+    <loc>https://0x0f0f0f.github.io/posts/</loc>
+    <lastmod>2020-03-18T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://0x0f0f0f.github.io/posts/2020/03/simulating-the-spread-of-infectious-disease-in-200-lines-of-c/</loc>
+    <lastmod>2020-03-18T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://0x0f0f0f.github.io/tags/</loc>
+    <lastmod>2020-03-18T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://0x0f0f0f.github.io/tags/complexity/</loc>
+    <lastmod>2020-03-18T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://0x0f0f0f.github.io/tags/computer-science/</loc>
+    <lastmod>2020-03-18T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://0x0f0f0f.github.io/tags/language/</loc>
+    <lastmod>2020-03-18T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://0x0f0f0f.github.io/tags/machines/</loc>
+    <lastmod>2020-03-18T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://0x0f0f0f.github.io/tags/mathematics/</loc>
+    <lastmod>2020-03-18T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://0x0f0f0f.github.io/tags/mind/</loc>
+    <lastmod>2020-03-18T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://0x0f0f0f.github.io/tags/philosophy/</loc>
+    <lastmod>2020-03-18T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://0x0f0f0f.github.io/posts/2020/02/the-cube-a-short-story/</loc>
+    <lastmod>2020-02-25T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://0x0f0f0f.github.io/tags/story/</loc>
+    <lastmod>2020-02-25T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://0x0f0f0f.github.io/posts/2020/02/on-mind-language-and-machines/</loc>
+    <lastmod>2020-02-05T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://0x0f0f0f.github.io/posts/2020/01/new-features-in-the-minicaml-programming-language/</loc>
+    <lastmod>2020-01-11T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://0x0f0f0f.github.io/tags/functional-programming/</loc>
+    <lastmod>2020-01-11T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://0x0f0f0f.github.io/tags/minicaml/</loc>
+    <lastmod>2020-01-11T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://0x0f0f0f.github.io/tags/ocaml/</loc>
+    <lastmod>2020-01-11T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://0x0f0f0f.github.io/posts/2019/12/implementing-optional-lazy-evaluation-for-minicaml/</loc>
+    <lastmod>2019-12-12T00:00:00+00:00</lastmod>
   </url>
   
   <url>
@@ -18,33 +116,21 @@
   </url>
   
   <url>
-    <loc>https://0x0f0f0f.github.io/tags/math/</loc>
+    <loc>https://0x0f0f0f.github.io/tags/latex/</loc>
     <lastmod>2019-12-06T00:00:00+00:00</lastmod>
+    <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://0x0f0f0f.github.io/posts/</loc>
+    <loc>https://0x0f0f0f.github.io/tags/math/</loc>
     <lastmod>2019-12-06T00:00:00+00:00</lastmod>
+    <priority>0</priority>
   </url>
   
   <url>
     <loc>https://0x0f0f0f.github.io/tags/programming/</loc>
     <lastmod>2019-12-06T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://0x0f0f0f.github.io/tags/</loc>
-    <lastmod>2019-12-06T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://0x0f0f0f.github.io/tags/functional-programming/</loc>
-    <lastmod>2019-12-04T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://0x0f0f0f.github.io/tags/minicaml/</loc>
-    <lastmod>2019-12-04T00:00:00+00:00</lastmod>
+    <priority>0</priority>
   </url>
   
   <url>
@@ -53,48 +139,32 @@
   </url>
   
   <url>
-    <loc>https://0x0f0f0f.github.io/tags/ocaml/</loc>
-    <lastmod>2019-12-04T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://0x0f0f0f.github.io/tags/git/</loc>
-    <lastmod>2019-11-20T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://0x0f0f0f.github.io/tags/linux/</loc>
-    <lastmod>2019-11-20T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://0x0f0f0f.github.io/tags/video/</loc>
-    <lastmod>2019-11-20T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
     <loc>https://0x0f0f0f.github.io/posts/2019/11/visualizing-11-years-of-contributions-to-void-linux-in-7-minutes/</loc>
     <lastmod>2019-11-20T00:00:00+00:00</lastmod>
   </url>
   
   <url>
+    <loc>https://0x0f0f0f.github.io/tags/git/</loc>
+    <lastmod>2019-11-20T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://0x0f0f0f.github.io/tags/linux/</loc>
+    <lastmod>2019-11-20T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://0x0f0f0f.github.io/tags/video/</loc>
+    <lastmod>2019-11-20T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>https://0x0f0f0f.github.io/tags/void/</loc>
     <lastmod>2019-11-20T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://0x0f0f0f.github.io/tags/haskell/</loc>
-    <lastmod>2019-11-09T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://0x0f0f0f.github.io/tags/markov-chains/</loc>
-    <lastmod>2019-11-09T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://0x0f0f0f.github.io/tags/probability/</loc>
-    <lastmod>2019-11-09T00:00:00+00:00</lastmod>
+    <priority>0</priority>
   </url>
   
   <url>
@@ -103,8 +173,27 @@
   </url>
   
   <url>
+    <loc>https://0x0f0f0f.github.io/tags/haskell/</loc>
+    <lastmod>2019-11-09T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://0x0f0f0f.github.io/tags/markov-chains/</loc>
+    <lastmod>2019-11-09T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://0x0f0f0f.github.io/tags/probability/</loc>
+    <lastmod>2019-11-09T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>https://0x0f0f0f.github.io/tags/shell/</loc>
     <lastmod>2019-11-09T00:00:00+00:00</lastmod>
+    <priority>0</priority>
   </url>
   
   <url>
@@ -115,11 +204,13 @@
   <url>
     <loc>https://0x0f0f0f.github.io/tags/lisp/</loc>
     <lastmod>2019-10-31T00:00:00+00:00</lastmod>
+    <priority>0</priority>
   </url>
   
   <url>
     <loc>https://0x0f0f0f.github.io/tags/yasih/</loc>
     <lastmod>2019-10-31T00:00:00+00:00</lastmod>
+    <priority>0</priority>
   </url>
   
   <url>
@@ -145,11 +236,13 @@
   <url>
     <loc>https://0x0f0f0f.github.io/tags/foss/</loc>
     <lastmod>2019-01-31T00:00:00+00:00</lastmod>
+    <priority>0</priority>
   </url>
   
   <url>
     <loc>https://0x0f0f0f.github.io/tags/good-stuff/</loc>
     <lastmod>2019-01-31T00:00:00+00:00</lastmod>
+    <priority>0</priority>
   </url>
   
   <url>
@@ -158,6 +251,7 @@
   
   <url>
     <loc>https://0x0f0f0f.github.io/categories/</loc>
+    <priority>0</priority>
   </url>
   
 </urlset>

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>foss on 0x0f0f0f</title>
@@ -18,7 +18,7 @@
       
       <guid>https://0x0f0f0f.github.io/posts/2019/01/darkhttpd-youll-love-static/</guid>
       <description>darkhttpd - wiki is my favorite web server. It does one thing and it does it good: serve static files correctly.
-The overall best feature I&#39;ve found in darkhttpd is that it is configured via command line arguments, so you can wrap the configuration of each one of your web servers into it&#39;s runit/OpenRC service!
+The overall best feature I&amp;rsquo;ve found in darkhttpd is that it is configured via command line arguments, so you can wrap the configuration of each one of your web servers into it&amp;rsquo;s runit/OpenRC service!
 Running a static webserver will help you reduce overhead and lets you reduce the resource usage of your services.</description>
     </item>
     
