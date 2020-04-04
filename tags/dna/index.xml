@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>dna on 0x0f0f0f</title>
+    <link>https://0x0f0f0f.github.io/tags/dna/</link>
+    <description>Recent content in dna on 0x0f0f0f</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sat, 04 Apr 2020 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://0x0f0f0f.github.io/tags/dna/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>How to turn DNA into Music</title>
+      <link>https://0x0f0f0f.github.io/posts/2020/04/how-to-turn-dna-into-music/</link>
+      <pubDate>Sat, 04 Apr 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://0x0f0f0f.github.io/posts/2020/04/how-to-turn-dna-into-music/</guid>
+      <description>A Short Background I&amp;rsquo;ve been playing with bioinformatics algorithms and DNA for a while during the COVID-19 lockdown. While reading a book chapter about machine translation, a weird idea came to my mind. I wondered if I could procedurally translate DNA into music. It took me a few hours and a couple hundred lines of OCaml code to make a small program that translates FASTA files to playable MIDI files, mapped to an arbitrary music scale.</description>
+    </item>
+    
+  </channel>
+</rss>

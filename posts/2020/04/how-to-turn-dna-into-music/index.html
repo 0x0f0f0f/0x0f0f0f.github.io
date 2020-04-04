@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="author"
+    content="archetypes false false true true content © 2019 — 0x0f0f0f — All rights reserved. data layouts Alessandro Cheli public true true monokai 20 ">
+<meta name="description"
+    content="A Short Background I&amp;rsquo;ve been playing with bioinformatics algorithms and DNA for a while during the COVID-19 lockdown. While reading a book chapter about machine translation, a weird idea came to my mind. I wondered if I could procedurally translate DNA into music. It took me a few hours and a couple hundred lines of OCaml code to make a small program that translates FASTA files to playable MIDI files, mapped to an arbitrary music scale." />
+<meta name="keywords" content="" />
+<meta name="robots" content="noodp" />
+<link rel="canonical" href="https://0x0f0f0f.github.io/posts/2020/04/how-to-turn-dna-into-music/" />
+
+
+<title>
+    
+    How to turn DNA into Music :: 0x0f0f0f 
+    
+</title>
+
+
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.2.1/css/flag-icon.min.css" rel="stylesheet"
+    type="text/css">
+
+
+
+<link rel="stylesheet" href="/main.min.0d47b4686e972122bd29f0c1e3dd024a2d541cd8b1b543622520822ea6f4238a.css">
+
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/site.webmanifest">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#252627">
+<link rel="shortcut icon" href="/favicon.ico">
+<meta name="theme-color" content="#252627"><meta itemprop="name" content="How to turn DNA into Music">
+<meta itemprop="description" content="A Short Background I&rsquo;ve been playing with bioinformatics algorithms and DNA for a while during the COVID-19 lockdown. While reading a book chapter about machine translation, a weird idea came to my mind. I wondered if I could procedurally translate DNA into music. It took me a few hours and a couple hundred lines of OCaml code to make a small program that translates FASTA files to playable MIDI files, mapped to an arbitrary music scale.">
+
+
+<meta itemprop="datePublished" content="2020-04-04T00:00:00&#43;00:00" />
+<meta itemprop="dateModified" content="2020-04-04T00:00:00&#43;00:00" />
+<meta itemprop="wordCount" content="2077">
+
+
+
+<meta itemprop="keywords" content="functional programming,ocaml,minicaml,bioinformatics,dna," />
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://0x0f0f0f.github.io"/>
+
+<meta name="twitter:title" content="How to turn DNA into Music"/>
+<meta name="twitter:description" content="A Short Background I&rsquo;ve been playing with bioinformatics algorithms and DNA for a while during the COVID-19 lockdown. While reading a book chapter about machine translation, a weird idea came to my mind. I wondered if I could procedurally translate DNA into music. It took me a few hours and a couple hundred lines of OCaml code to make a small program that translates FASTA files to playable MIDI files, mapped to an arbitrary music scale."/>
+
+
+
+
+<meta property="article:published_time" content="2020-04-04 00:00:00 &#43;0000 UTC" />
+
+
+
+
+
+
+
+
+    </head>
+
+    <body class="dark-theme">
+        <div class="container">
+            <header class="header">
+    <span class="header__inner">
+        <a href="/" style="text-decoration: none;">
+    <div class="logo">
+        
+            <span class="logo__mark">></span>
+            <span class="logo__text">$ 0x0f0f0f</span>
+            <span class="logo__cursor"></span>
+        
+    </div>
+</a>
+
+
+        <span class="header__right">
+            
+                <nav class="menu">
+    <ul class="menu__inner"><li><a href="https://0x0f0f0f.github.io/about/">About</a></li><li><a href="https://0x0f0f0f.github.io/posts/">Posts</a></li><li><a href="https://github.com/sponsors/0x0f0f0f">Sponsor</a></li>
+    </ul>
+</nav>
+
+                <span class="menu-trigger">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path d="M0 0h24v24H0z" fill="none"/>
+                        <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/>
+                    </svg>
+                </span>
+            
+
+            <span class="theme-toggle"><svg class="theme-toggler" width="24" height="24" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="M22 41C32.4934 41 41 32.4934 41 22C41 11.5066 32.4934 3 22
+  3C11.5066 3 3 11.5066 3 22C3 32.4934 11.5066 41 22 41ZM7 22C7
+  13.7157 13.7157 7 22 7V37C13.7157 37 7 30.2843 7 22Z"/>
+</svg>
+</span>
+        </span>
+    </span>
+</header>
+
+
+            <div class="content">
+                
+    <main class="post">
+
+        <div class="post-info">
+            <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-clock"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>10 minutes
+
+            
+
+            </p>
+        </div>
+
+        <article>
+            <h1 class="post-title"><a href="https://0x0f0f0f.github.io/posts/2020/04/how-to-turn-dna-into-music/">How to turn DNA into Music</a></h1>
+
+            
+
+            <div class="post-content">
+                
+
+<h2 id="a-short-background">A Short Background</h2>
+
+<p>I&rsquo;ve been playing with <a href="https://rosalind.info" target="_blank">bioinformatics algorithms</a> and
+DNA for a while during the COVID-19 lockdown. While reading a book chapter about
+machine translation, a weird idea came to my mind.
+I wondered if I could <em>procedurally translate DNA into music</em>.
+It took me a few hours and a couple hundred lines of OCaml code to make
+a small program that translates <strong>FASTA</strong> files to playable MIDI files, mapped
+to an arbitrary music scale.</p>
+
+<blockquote>
+<p>In bioinformatics and biochemistry, the FASTA format is a text-based format for
+representing either nucleotide sequences or amino acid sequences, in which
+nucleotides or amino acids are represented using single-letter codes.</p>
+</blockquote>
+
+<p>The <code>dna2music</code> script reads a FASTA file from standard input and outputs an
+intermediate text file which contains sequences of notes, one by line, composed
+by their location, octave, the note played, velocity, duration and track.</p>
+
+<p>These text files can then converted to MIDI files by the handy
+<a href="https://github.com/alambicbicephale/txt2mid" target="_blank">txt2mid</a> tool, written in C++
+by <a href="https://github.com/alambicbicephale" target="_blank">Jamil Alioui</a>.</p>
+
+<h2 id="but-how-does-it-sound-like">But How Does it Sound Like?</h2>
+
+<p>Figure: A screenshot of an Ardour session where the mp3 files were recorded.
+<img src="/posts/images/ardour.png" alt="Ardour Screenshot" /></p>
+
+<p>Just to be on the Coronavirus pandemic trend, here&rsquo;s how the SARS-Cov-2 genome
+sounds like, played in D# major at 120 beats per minute through the Open Source
+<a href="https://tytel.org/helm/" target="_blank">helm</a> software synthesizer.</p>
+
+<p><audio class="player" controls  preload="none" style="width: 100%">
+    <source src="/posts/media/sarscov2.mp3" type="audio/mp3">
+</audio></p>
+
+<p>Here&rsquo;s another take, this time on a small section of the genome of Cytomegalovirus, played in C.</p>
+
+<p><audio class="player" controls  preload="none" style="width: 100%">
+    <source src="/posts/media/cytomegalovirus.mp3" type="audio/mp3">
+</audio></p>
+
+<h2 id="how-does-the-conversion-work">How does the conversion work?</h2>
+
+<p>The conversion is deterministic. This means that the same FASTA file will always
+produce the same MIDI file. I&rsquo;ve tried to partially replicate some processes
+that happen inside of living cells and then using modular arithmetics to extract
+meaningful interpretations from sequences of 1 or 4 aminoacids.</p>
+
+<p>At first, the DNA genome is read from standard input, expecting it is in the
+FASTA format. DNA genomes are written in an alphabet of 4 letters: A, C, G, T,
+which stand for adenine, cytosine, guanine and thymine. Those molecules are the
+nitrogen-containing biological compounds that form nucleosides, which in turn
+are components of nucleotides, the organic molecules, precisely monomers which form
+the DNA double helyx: a polymer.</p>
+
+<p>All the genome strings read from the FASTA file are merged into a big, single
+one:</p>
+
+<pre><code class="language-ocaml">let str = String.concat &quot;&quot; @@ sndl @@ read_fasta stdin
+</code></pre>
+
+<h2 id="the-first-semi-biological-step">The First Semi-Biological Step</h2>
+
+<p>Then, DNA is converted into RNA with a very simple function, which replaces
+the thymine symbol with the uracil symbol. In real life, this is done by an
+enzime called <a href="https://www.ncbi.nlm.nih.gov/books/NBK22085/" target="_blank">RNA polymerase</a>.
+RNAP locally opens the double-stranded DNA so that one strand of the exposed
+nucleotides can be used as a template for the synthesis of RNA in a process
+called transcription.</p>
+
+<pre><code class="language-ocaml">let rna_of_dna s = String.map (fun c -&gt; match c with
+  | 'T' -&gt; 'U'
+  | a -&gt; a ) s
+</code></pre>
+
+<p>The next step is converting the RNA into a chain of aminoacids. This is what is
+done inside of cells to produce proteins, the fundamental building blocks for
+almost everything inside all living organisms.</p>
+
+<p>From a <a href="http://rosalind.info/problems/prot/" target="_blank">rosalind problem</a> :</p>
+
+<blockquote>
+<p>Just as nucleic acids are polymers of nucleotides, proteins are chains of
+smaller molecules called amino acids; 20 amino acids commonly appear in every
+species. Just as the primary structure of a nucleic acid is given by the order
+of its nucleotides, the primary structure of a protein is the order of its amino
+acids. Some proteins are composed of several subchains called polypeptides,
+while others are formed of a single polypeptide;</p>
+</blockquote>
+
+<p>Protein synthesis and folding are <strong>very complicated topics</strong>.
+Organelles inside of cells called ribosomes take chains of messenger RNA (mRNA)
+and a helping structure called transfer RNA, and examine the mRNA in pieces of 3
+nucleotides (symbols) at a time, called <em>codons</em>. Since RNA is an &ldquo;<em>alphabet</em>&ldquo;
+of 4 symbols, there are 64 = 4^3 possible strings of length 3. Since there are
+20 aminoacids, multiple codons can encode the same aminoacid. The aminoacid
+corresponding to the currently examined codon of mRNA is the bond to the
+growing peptide chain.</p>
+
+<p>Figure: The structure of the human haemoglobin protein.
+<img src="/posts/images/haemoglobin.png" alt="Human Haemoglobin" /></p>
+
+<p>The same is done in <code>dna2music</code> to convert RNA to a sequence of aminoacids.
+There is a fundamental difference though: in biological cells, translation must
+start with the aminoacid methionine and ends when a stop codon is found (encoded
+as the character &lsquo;0&rsquo; below). The stop codon corresponds to no aminoacid, but
+encodes a release factor: a protein that stops the translation and releases the
+peptide from the ribosome. This means that translation can start at any given
+part of the genome.</p>
+
+<p>In <code>dna2music</code> instead, to produce a single track of music, the start and stop
+codons are ignored and the latter is treated as an additional imaginary
+aminoacid; the initial RNA string is trimmed to a length multiple of 3, to make
+sure that there are only valid codons. This biological heresy is to make sure
+that the resulting string is a single contiguous string of 21 aminoacids, 20
+existing in reality and a &ldquo;fictionary&rdquo; one, corresponding to stop codons.</p>
+
+<p>Here is the aminoacid conversion table:</p>
+
+<pre><code class="language-ocaml">let encode_codon_protein codon =
+  if String.length codon &lt;&gt; 3 then
+    failwith @@ codon ^ &quot; is not a valid codon&quot;
+  else match codon with
+  | &quot;AAA&quot; -&gt; 'K' | &quot;AAC&quot; -&gt; 'N' | &quot;AAG&quot; -&gt; 'K' | &quot;AAU&quot; -&gt; 'N'
+  | &quot;ACA&quot; -&gt; 'T' | &quot;ACC&quot; -&gt; 'T' | &quot;ACG&quot; -&gt; 'T' | &quot;ACU&quot; -&gt; 'T'
+  | &quot;AGA&quot; -&gt; 'R' | &quot;AGC&quot; -&gt; 'S' | &quot;AGG&quot; -&gt; 'R' | &quot;AGU&quot; -&gt; 'S'
+  | &quot;AUA&quot; -&gt; 'I' | &quot;AUC&quot; -&gt; 'I' | &quot;AUG&quot; -&gt; 'M' | &quot;AUU&quot; -&gt; 'I'
+  | &quot;CAA&quot; -&gt; 'Q' | &quot;CAC&quot; -&gt; 'H' | &quot;CAG&quot; -&gt; 'Q' | &quot;CAU&quot; -&gt; 'H'
+  | &quot;CCA&quot; -&gt; 'P' | &quot;CCC&quot; -&gt; 'P' | &quot;CCG&quot; -&gt; 'P' | &quot;CCU&quot; -&gt; 'P'
+  | &quot;CGA&quot; -&gt; 'R' | &quot;CGC&quot; -&gt; 'R' | &quot;CGG&quot; -&gt; 'R' | &quot;CGU&quot; -&gt; 'R'
+  | &quot;CUA&quot; -&gt; 'L' | &quot;CUC&quot; -&gt; 'L' | &quot;CUG&quot; -&gt; 'L' | &quot;CUU&quot; -&gt; 'L'
+  | &quot;GAA&quot; -&gt; 'E' | &quot;GAC&quot; -&gt; 'D' | &quot;GAG&quot; -&gt; 'E' | &quot;GAU&quot; -&gt; 'D'
+  | &quot;GCA&quot; -&gt; 'A' | &quot;GCC&quot; -&gt; 'A' | &quot;GCG&quot; -&gt; 'A' | &quot;GCU&quot; -&gt; 'A'
+  | &quot;GGA&quot; -&gt; 'G' | &quot;GGC&quot; -&gt; 'G' | &quot;GGG&quot; -&gt; 'G' | &quot;GGU&quot; -&gt; 'G'
+  | &quot;GUA&quot; -&gt; 'V' | &quot;GUC&quot; -&gt; 'V' | &quot;GUG&quot; -&gt; 'V' | &quot;GUU&quot; -&gt; 'V'
+  | &quot;UAC&quot; -&gt; 'Y' | &quot;UAU&quot; -&gt; 'Y' | &quot;UCA&quot; -&gt; 'S' | &quot;UCC&quot; -&gt; 'S'
+  | &quot;UCG&quot; -&gt; 'S' | &quot;UCU&quot; -&gt; 'S' | &quot;UGC&quot; -&gt; 'C' | &quot;UGG&quot; -&gt; 'W'
+  | &quot;UGU&quot; -&gt; 'C' | &quot;UUA&quot; -&gt; 'L' | &quot;UUC&quot; -&gt; 'F' | &quot;UUG&quot; -&gt; 'L'
+  | &quot;UUU&quot; -&gt; 'F' | &quot;UAG&quot; -&gt; '0' | &quot;UGA&quot; -&gt; '0' | &quot;UAA&quot; -&gt; '0'
+  | _ -&gt; failwith &quot;invalid codon&quot; ;;
+</code></pre>
+
+<h2 id="now-comes-the-music-making">Now Comes the Music Making!</h2>
+
+<p>This resulting aminoacid sequence is now a large string of an alphabet composed
+of 21 symbols, it&rsquo;s enough to turn it into music! The symbol characters are
+converted to numbers from 0 to 20, so that the string is converted to a list of
+numbers. Modular arithmetics is used to restrict these numbers in smaller
+ranges. Notes in the chromatic scale go from 0 to 11, while notes in a major or
+minor scale go from 0 to 6. For example, notes in C Major scale, <code>C D E F G A
+B</code>, can be mapped to numbers from 0 to 6. The same principle applies to all the
+major or minor scales.</p>
+
+<p>The first aminoacid in the sequence corresponds to the number of notes that will
+be played in the current bar. It is equal to the aminoacid code number modulo 16, plus
+one. This means that it can range from 1 to 16. Let&rsquo;s call this number <code>n</code>.</p>
+
+<p><code>n</code> following notes are read from the aminoacid sequence, if there are enough
+remaning aminoacids to compose them. After the notes are read, the conversion
+goes on to the next bar and reads another aminoacid that encodes again the
+number of notes <code>n</code> that will make the following bar. This mechanism makes sure
+that genomes of any length will always produce valid MIDI files that are not
+empty or cluttered with too many notes played altogether.</p>
+
+<p>Notes are created by reading 4 aminoacids at a time. The first one encodes the
+location, or the delay in 16th notes from the start of the current bar. This is
+when the note will start playing, and is converted by multiplying 60 by the
+aminoacid code modulo 16: <code>(num mod 16) * 60</code>. In MIDI format a bar is 960
+ticks, so a sixteenth note is 60 ticks long.</p>
+
+<p>The second aminoacid in a note sequence encodes the duration of the note,
+which is read in the exact same way but excluding notes of length 0: <code>((num mod 16) + 1) * 60</code>.
+The third aminoacid in the quartet encodes the octave: <code>num mod 7</code>,
+while the fourth and last aminoacid making a note sequence finally
+encodes the note. This is done in a slightly more sophisticated way.</p>
+
+<pre><code class="language-ocaml">if scale &gt;= 0 then
+    if minor then
+        autoscale_minor scale (note_in_scale_of_int note)
+    else
+        autoscale_minor scale (note_in_scale_of_int note)
+    else note_of_int note
+</code></pre>
+
+<p>If a scale is passed as a command line argument to the program, the fourth
+aminoacid in the sequence encodes a note from 0 to 6, or <code>num mod 7</code>. The
+resulting note is then mapped automatically into a scale by the
+<code>autoscale_minor</code> or <code>autoscale_major</code> functions, which return only the
+chromatic note numbers from 0 to 11 in key with the scale passed as an argument.
+If automatical mapping to a scale is disabled, the aminoacid
+just encodes a note number from 0 to 11 in the chromatic scale.
+The latter case will obviously not sound musical at all!</p>
+
+<p>Here&rsquo;s a snippet of the text file resulting from SARS-Cov-2
+genome-music conversion.</p>
+
+<pre><code>N 1920 4 6 100 840 1
+N 3120 5 8 100 60 1
+N 3720 0 6 100 900 1
+N 3960 2 6 100 600 1
+N 5640 5 14 100 360 1
+N 5340 6 14 100 480 1
+N 4800 0 8 100 960 1
+N 5040 2 16 100 900 1
+N 5340 1 8 100 180 1
+N 5640 4 8 100 960 1
+N 5640 4 6 100 900 1
+N 5700 4 9 100 60 1
+N 4800 1 11 100 600 1
+N 5160 0 13 100 840 1
+N 5820 3 8 100 960 1
+N 5760 2 8 100 960 1
+N 5820 5 16 100 240 1
+N 5760 7 6 100 360 1
+N 5760 6 16 100 900 1
+N 6660 6 8 100 120 1
+</code></pre>
+
+<p>After printing out the whole sequence of notes, the output can
+be finally redirected into a text file and converted in format MIDI
+with the tool <code>txt2mid</code>, which reads exactly that format.
+This is how note lines are printed in <code>dna2music</code>:</p>
+
+<h2 id="what-if-i-want-to-make-a-song-about-another-virus">What If I Want to Make a Song About Another Virus?</h2>
+
+<p>If you want to use this buggy tool, you can download the source code from my
+<a href="https://github.com/0x0f0f0f/dna2music" target="_blank">GitHub profile</a>.
+You can also, just as an example, download the FASTA genome of
+Cytomegalovirus (Human herpesvirus 5 strain AD169) <a href="https://www.ncbi.nlm.nih.gov/nuccore/BK000394.5?report=fasta" target="_blank">here</a>.</p>
+
+<h3 id="building">Building</h3>
+
+<p>The project only has two dependencies: <code>g++</code> and <code>ocaml</code> &gt;= 4.03.0. You need to
+build <code>txt2mid</code> first:</p>
+
+<pre><code class="language-bash">g++ txt2mid.cpp -o txt2mid
+</code></pre>
+
+<h3 id="usage">Usage</h3>
+
+<p>You can download genomes in FASTA format from the National Institutes of
+Health&rsquo;s <a href="https://www.ncbi.nlm.nih.gov/genbank/" target="_blank">GenBank</a> database,
+or from the <a href="https://genome.ucsc.edu/" target="_blank">UCSC Genome Browser</a>.
+After obtaining a FASTA file, you can pipe it into <code>dna2music</code> and
+redirect the output to a text file and then convert the text file to MIDI:</p>
+
+<pre><code class="language-bash">cat /path/to/file.fasta | ocaml dna2music.ml &gt; file.txt
+./txt2mid file.txt
+# this will automatically create the MIDI file
+</code></pre>
+
+<p><code>dna2music.ml</code> accepts two additional arguments regarding automatically mapping
+the notes to a certain key, to make the generated notes sound more musical
+altogether. If no additional argument is supplied key mapping will be skipped.</p>
+
+<p>The first additional argument is the a string containing the key (note) in which
+the music will be composed, for example <code>C</code> or <code>E</code> are valid keys. To use sharp
+or flat key use the plus and minus symbols, for example <code>C+</code> or <code>A-</code>.</p>
+
+<p>The second additional argument is if the scale should be minor or not: <code>true</code> is
+minor and <code>false</code> is major. You can omit this argument to use the major scale.
+Other scales are not implemented.
+Have fun and stay at home during the lockdown!</p>
+
+            </div>
+        </article>
+
+        <hr />
+
+        <div class="post-info">
+                <p>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tag meta-icon"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7" y2="7"></line></svg><span class="tag"><a href="https://0x0f0f0f.github.io/tags/functional-programming">functional programming</a></span><span class="tag"><a href="https://0x0f0f0f.github.io/tags/ocaml">ocaml</a></span><span class="tag"><a href="https://0x0f0f0f.github.io/tags/minicaml">minicaml</a></span><span class="tag"><a href="https://0x0f0f0f.github.io/tags/bioinformatics">bioinformatics</a></span><span class="tag"><a href="https://0x0f0f0f.github.io/tags/dna">dna</a></span>
+                </p>
+
+            <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>2077 Words</p>
+
+            <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>2020-04-04 02:00 &#43;0200</p>
+        </div>
+
+        
+            <div class="pagination">
+                <div class="pagination__title">
+                    <span class="pagination__title-h"></span>
+                    <hr />
+                </div>
+
+                <div class="pagination__buttons">
+                    
+
+                    
+                        <span class="button next">
+                            <a href="https://0x0f0f0f.github.io/posts/2020/03/simulating-the-spread-of-infectious-disease-in-200-lines-of-c/">
+                                <span class="button__text">Simulating the Spread of Infectious Disease in 200 lines of C</span>
+                                <span class="button__icon">→</span>
+                            </a>
+                        </span>
+                    
+                </div>
+            </div>
+        
+
+        
+    </main>
+
+            </div>
+
+            
+                <footer class="footer">
+    <div class="footer__inner">
+        <div class="footer__content">
+            <span>&copy; 2020</span>
+            
+                <span><a href="https://0x0f0f0f.github.io">Alessandro Cheli</a></span>
+            
+            <span></span>
+            <span> <a href="https://0x0f0f0f.github.io/posts/index.xml" target="_blank" title="rss"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-rss"><path d="M4 11a9 9 0 0 1 9 9"></path><path d="M4 4a16 16 0 0 1 16 16"></path><circle cx="5" cy="19" r="1"></circle></svg></a></span>
+        </div>
+    </div>
+    <div class="footer__inner">
+        <div class="footer__content">
+
+        </div>
+    </div>
+    <div class="footer__inner">
+        <div class="footer__content">
+            <span>Powered by <a href="http://gohugo.io">Hugo</a></span>
+            <span>Like this? <a href="https://github.com/sponsors/0x0f0f0f">Sponsor on GitHub &#10084; </a></span>
+        </div>
+    </div>
+</footer>
+
+            
+        </div>
+
+        
+
+
+
+
+<script type="text/javascript" src="/bundle.min.4c3fb12a087ceed4a52cb5d57068a9795c7069617a01ca70f788052ad66e1791779e6c72686e1dc0ca13dc03b0203204b6566bb0dd1ee80de2b7ff4d8fe53db2.js" integrity="sha512-TD&#43;xKgh87tSlLLXVcGipeVxwaWF6Acpw94gFKtZuF5F3nmxyaG4dwMoT3AOwIDIEtlZrsN0e6A3it/9Nj&#43;U9sg=="></script>
+    <script>
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+        ga('create', 'UA-106198734-2', 'auto');
+        ga('send', 'pageview');
+    </script>
+
+
+
+    </body>
+</html>

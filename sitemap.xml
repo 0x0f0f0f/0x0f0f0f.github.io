@@ -4,24 +4,59 @@
   
   <url>
     <loc>https://0x0f0f0f.github.io/</loc>
-    <lastmod>2020-03-18T00:00:00+00:00</lastmod>
+    <lastmod>2020-04-04T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://0x0f0f0f.github.io/posts/2020/04/how-to-turn-dna-into-music/</loc>
+    <lastmod>2020-04-04T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>https://0x0f0f0f.github.io/posts/</loc>
-    <lastmod>2020-03-18T00:00:00+00:00</lastmod>
+    <lastmod>2020-04-04T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://0x0f0f0f.github.io/tags/</loc>
+    <lastmod>2020-04-04T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://0x0f0f0f.github.io/tags/bioinformatics/</loc>
+    <lastmod>2020-04-04T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://0x0f0f0f.github.io/tags/dna/</loc>
+    <lastmod>2020-04-04T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://0x0f0f0f.github.io/tags/functional-programming/</loc>
+    <lastmod>2020-04-04T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://0x0f0f0f.github.io/tags/minicaml/</loc>
+    <lastmod>2020-04-04T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://0x0f0f0f.github.io/tags/ocaml/</loc>
+    <lastmod>2020-04-04T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://0x0f0f0f.github.io/posts/2020/03/simulating-the-spread-of-infectious-disease-in-200-lines-of-c/</loc>
     <lastmod>2020-03-18T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://0x0f0f0f.github.io/tags/</loc>
-    <lastmod>2020-03-18T00:00:00+00:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
@@ -85,24 +120,6 @@
   <url>
     <loc>https://0x0f0f0f.github.io/posts/2020/01/new-features-in-the-minicaml-programming-language/</loc>
     <lastmod>2020-01-11T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://0x0f0f0f.github.io/tags/functional-programming/</loc>
-    <lastmod>2020-01-11T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://0x0f0f0f.github.io/tags/minicaml/</loc>
-    <lastmod>2020-01-11T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://0x0f0f0f.github.io/tags/ocaml/</loc>
-    <lastmod>2020-01-11T00:00:00+00:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>

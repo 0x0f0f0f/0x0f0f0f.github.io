@@ -6,10 +6,55 @@
     <description>Recent content in Tags on 0x0f0f0f</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 18 Mar 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 04 Apr 2020 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://0x0f0f0f.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>bioinformatics</title>
+      <link>https://0x0f0f0f.github.io/tags/bioinformatics/</link>
+      <pubDate>Sat, 04 Apr 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://0x0f0f0f.github.io/tags/bioinformatics/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>dna</title>
+      <link>https://0x0f0f0f.github.io/tags/dna/</link>
+      <pubDate>Sat, 04 Apr 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://0x0f0f0f.github.io/tags/dna/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>functional programming</title>
+      <link>https://0x0f0f0f.github.io/tags/functional-programming/</link>
+      <pubDate>Sat, 04 Apr 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://0x0f0f0f.github.io/tags/functional-programming/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>minicaml</title>
+      <link>https://0x0f0f0f.github.io/tags/minicaml/</link>
+      <pubDate>Sat, 04 Apr 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://0x0f0f0f.github.io/tags/minicaml/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>ocaml</title>
+      <link>https://0x0f0f0f.github.io/tags/ocaml/</link>
+      <pubDate>Sat, 04 Apr 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://0x0f0f0f.github.io/tags/ocaml/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>complexity</title>
@@ -80,33 +125,6 @@
       <pubDate>Tue, 25 Feb 2020 00:00:00 +0000</pubDate>
       
       <guid>https://0x0f0f0f.github.io/tags/story/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>functional programming</title>
-      <link>https://0x0f0f0f.github.io/tags/functional-programming/</link>
-      <pubDate>Sat, 11 Jan 2020 00:00:00 +0000</pubDate>
-      
-      <guid>https://0x0f0f0f.github.io/tags/functional-programming/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>minicaml</title>
-      <link>https://0x0f0f0f.github.io/tags/minicaml/</link>
-      <pubDate>Sat, 11 Jan 2020 00:00:00 +0000</pubDate>
-      
-      <guid>https://0x0f0f0f.github.io/tags/minicaml/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>ocaml</title>
-      <link>https://0x0f0f0f.github.io/tags/ocaml/</link>
-      <pubDate>Sat, 11 Jan 2020 00:00:00 +0000</pubDate>
-      
-      <guid>https://0x0f0f0f.github.io/tags/ocaml/</guid>
       <description></description>
     </item>
     
