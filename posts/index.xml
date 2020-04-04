@@ -14,7 +14,7 @@
             <pubDate>Sat, 04 Apr 2020 00:00:00 +0000</pubDate>
             
             <guid>https://0x0f0f0f.github.io/posts/2020/04/how-to-turn-dna-into-music/</guid>
-            <description>A Short Background I&amp;rsquo;ve been playing with bioinformatics algorithms and DNA for a while during the COVID-19 lockdown. While reading a book chapter about machine translation, a weird idea came to my mind. I wondered if I could procedurally translate DNA into music. It took me a few hours and a couple hundred lines of OCaml code to make a small program that translates FASTA files to playable MIDI files, mapped to an arbitrary music scale.</description>
+            <description>A Short Background I&amp;rsquo;ve been playing with bioinformatics algorithms and DNA for a while during the COVID-19 lockdown. While reading a book chapter about machine translation, a weird idea came to my mind. I wondered if I could procedurally translate DNA into music. A few chapters later, the author also draws similarities between genes and music. It took me a few hours and a couple hundred lines of OCaml code to make a small program that translates FASTA files to playable MIDI files, mapped to an arbitrary music scale.</description>
             <content type="html"><![CDATA[
 
 <h2 id="a-short-background">A Short Background</h2>
@@ -22,7 +22,7 @@
 <p>I&rsquo;ve been playing with <a href="https://rosalind.info" target="_blank">bioinformatics algorithms</a> and
 DNA for a while during the COVID-19 lockdown. While reading a book chapter about
 machine translation, a weird idea came to my mind.
-I wondered if I could <em>procedurally translate DNA into music</em>.
+I wondered if I could <em>procedurally translate DNA into music</em>. A few chapters later, the <a href="https://en.wikipedia.org/wiki/G%C3%B6del,_Escher,_Bach" target="_blank">author</a> also draws similarities between genes and music.
 It took me a few hours and a couple hundred lines of OCaml code to make
 a small program that translates <strong>FASTA</strong> files to playable MIDI files, mapped
 to an arbitrary music scale.</p>
