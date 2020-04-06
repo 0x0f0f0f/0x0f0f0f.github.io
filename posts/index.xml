@@ -1039,10 +1039,13 @@ languages that exist throughout nature.</p>
 
 <p><img src="/posts/images/chomskyhierarchy.jpg" alt="The Chomsky Hierarchy" /></p>
 
-<p>Berwick&rsquo;s paper also poses some really interesting research questions on the topic
-* &gt; Can birds be trained to recognize truly nested dependencies, even if just of finite depth?
-* &gt; What are the neural mechanisms underlying variable song sequences in songbirds? Both human speech and birdsong involve sequentially arranged vocalizations. Are there similar neural mechanisms for the production and perception of such sequences in songbirds and humans?
-* &gt; &hellip; As a result, considerable controversy remains as to whether any non-human species can truly recognize strictly context-free patterns</p>
+<p>Berwick&rsquo;s paper also poses some really interesting research questions on the topic</p>
+
+<blockquote>
+<p>Can birds be trained to recognize truly nested dependencies, even if just of finite depth?
+What are the neural mechanisms underlying variable song sequences in songbirds? Both human speech and birdsong involve sequentially arranged vocalizations. Are there similar neural mechanisms for the production and perception of such sequences in songbirds and humans?
+&hellip; As a result, considerable controversy remains as to whether any non-human species can truly recognize strictly context-free patterns</p>
+</blockquote>
 
 <h2 id="the-cognitive-tradeoff-hypothesis">The cognitive tradeoff hypothesis</h2>
 
@@ -1172,13 +1175,16 @@ XOR gate, and basal and tuft dendritic branches, in gray background, as logical 
 regions of the brain is key for future understanding about ourselves, and consequently language
 and more intelligent artificial systems.</p>
 
-<p>From Wikipedia:
-&gt; A connectome (/kəˈnɛktoʊm/) is a comprehensive map of neural connections in the brain, and may be thought of as its &ldquo;wiring
-&gt; diagram&rdquo;. More broadly, a connectome would include the mapping of all neural connections within an organism&rsquo;s nervous system.
-&gt; The production and study of connectomes, known as connectomics, may range in scale from a detailed map of the full set of
-&gt; neurons and synapses within part or all of the nervous system of an organism to a macro scale description of the functional and
-&gt; structural connectivity between all cortical areas and subcortical structures. The term &ldquo;connectome&rdquo; is used primarily in
-&gt; scientific efforts to capture, map, and understand the organization of neural interactions within the brain.</p>
+<p>From Wikipedia:</p>
+
+<blockquote>
+<p>A connectome (/kəˈnɛktoʊm/) is a comprehensive map of neural connections in the brain, and may be thought of as its &ldquo;wiring
+diagram&rdquo;. More broadly, a connectome would include the mapping of all neural connections within an organism&rsquo;s nervous system.
+The production and study of connectomes, known as connectomics, may range in scale from a detailed map of the full set of
+neurons and synapses within part or all of the nervous system of an organism to a macro scale description of the functional and
+structural connectivity between all cortical areas and subcortical structures. The term &ldquo;connectome&rdquo; is used primarily in
+scientific efforts to capture, map, and understand the organization of neural interactions within the brain.</p>
+</blockquote>
 
 <p>Rendering of a group connectome based on 20 subjects. Anatomical fibers that constitute the white matter architecture of the human brain are visualized color-coded by traversing direction. Read more <a href="https://www.ncbi.nlm.nih.gov/pubmed/24099851" target="_blank">in this paper</a>:
 <img src="/posts/images/connectome.png" alt="Rendering of a group connectome based on 20 subjects. Anatomical fibers that constitute the white matter architecture of the human brain are visualized color-coded by traversing direction (XYZ-directions mapping to RGB colors respectively). Visualization of fibers was done using TrackVis software (www.trackvis.org)." /></p>
@@ -1220,10 +1226,11 @@ discovered.</p>
 <p>In the previous paragraphs, I have written about a neuroscientific view of language, brains and mind.
 Now, I&rsquo;d like to talk more about some of the philosophical implications of language.
 Language is fundamental in the relationship between <strong>conception</strong> and <strong>perception</strong>.
-Formally,
-&gt; Conception is the capacity, function, or process of forming or understanding ideas or abstractions or their symbols</p>
+Formally,</p>
 
 <blockquote>
+<p>Conception is the capacity, function, or process of forming or understanding ideas or abstractions or their symbols</p>
+
 <p>Perception is the organization, identification, and interpretation of sensory information in order to represent and understand
 the presented information, or the environment. All perception involves signals that go through the nervous system, which in
 turn result from physical or chemical stimulation of the sensory system</p>
@@ -1373,8 +1380,11 @@ fundamentally, <strong>deterministic, recursive and automated methods of calcula
 formal axiomatic systems</strong>.
 Computer languages are built upon really clever methods of connecting conception, perception (through human-machine
 interaction peripherals) and deductive and axiomatic reasoning. Formal systems such as <a href="https://en.wikipedia.org/wiki/Lambda_cube" target="_blank">Lambda Calculi</a> or statements such as the <a href="https://en.wikipedia.org/wiki/Structured_program_theorem" target="_blank">Böhm–Jacopini theorem</a> are noteworthy citations.
-Such as natural language, programming has the same sort of mystical feeling attached to the practice. Programming languages are:
-&gt; Full of surprises but incomplete, simple but unintelligible, recursively endless and yet so easy to tackle</p>
+Such as natural language, programming has the same sort of mystical feeling attached to the practice. Programming languages are:</p>
+
+<blockquote>
+<p>Full of surprises but incomplete, simple but unintelligible, recursively endless and yet so easy to tackle</p>
+</blockquote>
 
 <p>Nondeterministic and quantum computing are coherently related areas of research
 that are being currently explored, and coupled with computational complexity, those two
@@ -1449,16 +1459,19 @@ new ones added in vivo.</p>
 </blockquote>
 
 <p>Here&rsquo;s an excerpt from the breakthrough paper &ldquo;<em>Chemically modified guide RNAs enhance CRISPR-Cas genome
-editing in human primary cells</em>&rdquo; published in Nature Biotechnology in September 2015:
-&gt; CRISPR-Cas-mediated genome editing relies on guide RNAs that direct site-specific DNA
-&gt; cleavage facilitated by the Cas endonuclease. Here we report that chemical alterations to
-&gt; synthesized single guide RNAs (sgRNAs) enhance genome editing efficiency in human primary T
-&gt; cells and CD34+ hematopoietic stem and progenitor cells. Co-delivering chemically modified
-&gt; sgRNAs with Cas9 mRNA or protein is an efficient RNA- or ribonucleoprotein (RNP)-based
-&gt; delivery method for the CRISPR-Cas system, without the toxicity associated with DNA delivery.
-&gt; This approach is a simple and effective way to streamline the development of genome editing with
-&gt; the potential to accelerate a wide array of biotechnological and therapeutic applications of the
-&gt; CRISPR-Cas technology.</p>
+editing in human primary cells</em>&rdquo; published in Nature Biotechnology in September 2015:</p>
+
+<blockquote>
+<p>CRISPR-Cas-mediated genome editing relies on guide RNAs that direct site-specific DNA
+cleavage facilitated by the Cas endonuclease. Here we report that chemical alterations to
+synthesized single guide RNAs (sgRNAs) enhance genome editing efficiency in human primary T
+cells and CD34+ hematopoietic stem and progenitor cells. Co-delivering chemically modified
+sgRNAs with Cas9 mRNA or protein is an efficient RNA- or ribonucleoprotein (RNP)-based
+delivery method for the CRISPR-Cas system, without the toxicity associated with DNA delivery.
+This approach is a simple and effective way to streamline the development of genome editing with
+the potential to accelerate a wide array of biotechnological and therapeutic applications of the
+CRISPR-Cas technology.</p>
+</blockquote>
 
 <p>If you wish to learn more on DNA manipulation, you can read the libre text by Henry Jakubowski
 on this <a href="https://bio.libretexts.org/Bookshelves/Biochemistry/Book%3A_Biochemistry_Online_(Jakubowski)/04%3A_DNA_AND_THE_CENTRAL_DOGMA_OF_BIOLOGY/4.3%3A_The_Language_of_DNA" target="_blank">web page</a>.</p>
@@ -1472,11 +1485,14 @@ By the biological definition of &ldquo;life&rdquo;, a virus is not alive, yet we
 degree of organization and it is made of some of the same things that living organisms are made of, such as proteins
 and DNA.</p>
 
-<p>From <a href="https://en.wikipedia.org/wiki/Virus" target="_blank">Wikipedia</a>:
-&gt; The origins of viruses in the evolutionary history of life are unclear: some may have evolved from plasmids - pieces of DNA
-&gt; that
-&gt; can move between cells - while others may have evolved from bacteria. In evolution, viruses are an important means of horizontal
-&gt; gene transfer, which increases genetic diversity in a way analogous to sexual reproduction.</p>
+<p>From <a href="https://en.wikipedia.org/wiki/Virus" target="_blank">Wikipedia</a>:</p>
+
+<blockquote>
+<p>The origins of viruses in the evolutionary history of life are unclear: some may have evolved from plasmids - pieces of DNA
+that
+can move between cells - while others may have evolved from bacteria. In evolution, viruses are an important means of horizontal
+gene transfer, which increases genetic diversity in a way analogous to sexual reproduction.</p>
+</blockquote>
 
 <p>Here is the author&rsquo;s illustration of a bacteriophage, a virus that infects and replicates within bacteria and archaea. The term
 was
