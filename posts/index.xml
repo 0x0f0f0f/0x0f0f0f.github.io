@@ -5,8 +5,22 @@
         <description>Recent content in Posts on 0x0f0f0f</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>en-us</language>
-        <lastBuildDate>Sat, 04 Apr 2020 00:00:00 +0000</lastBuildDate>
+        <lastBuildDate>Fri, 19 Jun 2020 00:00:00 +0000</lastBuildDate>
         <atom:link href="https://0x0f0f0f.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+        
+        <item>
+            <title>Hyperpixel instructions updated for the Raspberry Pi Handheld.</title>
+            <link>https://0x0f0f0f.github.io/posts/2020/06/hyperpixel-instructions-updated-for-the-raspberry-pi-handheld./</link>
+            <pubDate>Fri, 19 Jun 2020 00:00:00 +0000</pubDate>
+            
+            <guid>https://0x0f0f0f.github.io/posts/2020/06/hyperpixel-instructions-updated-for-the-raspberry-pi-handheld./</guid>
+            <description>Heya, quick update! Pimoroni updated their Hyperpixel 4 display driver with a new display init script, written in pytho, I have updated the driver installation instructions for Void Linux in the blogpost.</description>
+            <content type="html"><![CDATA[<p>Heya, quick update! Pimoroni updated their Hyperpixel 4 display driver with a
+new display init script, written in pytho, I have updated the driver
+installation instructions for Void Linux in the
+<a href="/posts/2019/08/building-a-raspberry-pi-3b-full-keyboard-handheld.-part-1/">blogpost</a>.</p>
+]]></content>
+        </item>
         
         <item>
             <title>How to turn DNA into Music</title>
@@ -3097,6 +3111,8 @@ nothing though can be as smooth as using a full layout QWERTY keyboard when usin
 
 <p><img src="/posts/images/running.png" alt="Half assembled build" /></p>
 
+<h2 id="drivers">Drivers</h2>
+
 <p>Pimoroni open sourced the Hyperpixel 4 Display <a href="https://github.com/pimoroni/hyperpixel4" target="_blank">driver</a> on Github.
 To install it on Void Linux I had to compile and install the <a href="http://www.airspayce.com/mikem/bcm2835/" target="_blank">BCM2835 library</a>, then
 I had to compile, configure and install the driver manually. To reproduce the build on your Raspberry:</p>
@@ -3112,13 +3128,25 @@ sudo make install
 <li><p>Download the Pimoroni Hyperpixel 4 driver, <code>cd</code> into the <code>src/</code> directory and build it with</p>
 
 <pre><code class="language-sh">make build
-make init
+# make init OUT OF DATE! new init is written in python
 </code></pre></li>
 
-<li><p>If compiled successfully, install the driver and init program with</p>
+<li><p><em>UPDATE!</em> Pimoroni updated the driver with new scripts written in python.
+You will need the <code>python3</code>, <code>python3-devel</code> and <code>python3-pip</code> packages installed.</p>
 
-<pre><code class="language-sh">cp hyperpixel4.dtbo /boot/overlays/
-cp hyperpixel4-init /usr/local/bin
+<pre><code class="language-sh">sudo xbps-install -Su python3 python3-devel python3-pip
+</code></pre></li>
+
+<li><p>Now install the python library for accessing the GPIO pins, needed by the hyperpixel init script</p>
+
+<pre><code class="language-sh">sudo pip install RPi.GPIO
+</code></pre></li>
+
+<li><p>If compiled successfully, cd back into the hyperpixel4 directory and install the driver and init program with</p>
+
+<pre><code class="language-sh">cd ..
+cp src/hyperpixel4.dtbo /boot/overlays/
+cp dist/hyperpixel4-init /usr/local/bin
 </code></pre></li>
 
 <li><p>To initialize the display at boot time add a line containing <code>hyperpixel4-init</code> to <code>/etc/rc.local</code>.</p></li>

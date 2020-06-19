@@ -6,10 +6,19 @@
     <description>Recent content in 986895 on 0x0f0f0f</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 04 Apr 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 19 Jun 2020 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://0x0f0f0f.github.io/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Hyperpixel instructions updated for the Raspberry Pi Handheld.</title>
+      <link>https://0x0f0f0f.github.io/posts/2020/06/hyperpixel-instructions-updated-for-the-raspberry-pi-handheld./</link>
+      <pubDate>Fri, 19 Jun 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://0x0f0f0f.github.io/posts/2020/06/hyperpixel-instructions-updated-for-the-raspberry-pi-handheld./</guid>
+      <description>Heya, quick update! Pimoroni updated their Hyperpixel 4 display driver with a new display init script, written in pytho, I have updated the driver installation instructions for Void Linux in the blogpost.</description>
+    </item>
     
     <item>
       <title>How to turn DNA into Music</title>
