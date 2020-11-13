@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>986895 on 0x0f0f0f</title>
@@ -6,10 +6,16 @@
     <description>Recent content in 986895 on 0x0f0f0f</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 19 Jun 2020 00:00:00 +0000</lastBuildDate>
-    
-	<atom:link href="https://0x0f0f0f.github.io/index.xml" rel="self" type="application/rss+xml" />
-    
+    <lastBuildDate>Fri, 13 Nov 2020 00:00:00 +0000</lastBuildDate><atom:link href="https://0x0f0f0f.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Supercharge your Cloud 1 - Installing Void Linux on Hetzner VPSs</title>
+      <link>https://0x0f0f0f.github.io/posts/2020/11/supercharge-your-cloud-1-installing-void-linux-on-hetzner-vpss/</link>
+      <pubDate>Fri, 13 Nov 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://0x0f0f0f.github.io/posts/2020/11/supercharge-your-cloud-1-installing-void-linux-on-hetzner-vpss/</guid>
+      <description>Systemd sucks 1, 2, 3, 4, 5 but Hetzner Cloud rocks, and is one of my favourite VPS providers. Hetzner has been providing Debian, Arch Linux, Ubuntu and CentOS images for cloud VPS instances, but wait! They all use systemd! I have been using Void Linux for years now on mostly all of my devices. I have even built a PDA that runs Void Linux 6.
+Those days, I was building a personal cloud instance with a few servers (more details in the following write-up posts), and I ran into some very annoying issues that were directly caused by the unnecessary complexity of systemd.</description>
+    </item>
     
     <item>
       <title>Hyperpixel instructions updated for the Raspberry Pi Handheld.</title>
@@ -91,7 +97,7 @@ The first thing I had to do was creating an additional wrapper type that tells t
       <pubDate>Wed, 04 Dec 2019 00:00:00 +0000</pubDate>
       
       <guid>https://0x0f0f0f.github.io/posts/2019/12/minicaml-a-didactical-ocaml-like-functional-programming-language./</guid>
-      <description>minicaml is a small, purely functional interpreted programming language with a didactical purpose. I wrote minicaml for the Programming 2 course at the University of Pisa, taught by Professors Gianluigi Ferrari and Francesca Levi. It is based on the teachers&amp;rsquo; minicaml, an evaluation example to show how interpreters work. It is an interpreted subset of Caml, with eager evaluation and only local (let-in) declaration statements. I have added a simple parser and lexer made with menhir and ocamllex (learn more).</description>
+      <description>minicaml is a small, purely functional interpreted programming language with a didactical purpose. I wrote minicaml for the Programming 2 course at the University of Pisa, taught by Professors Gianluigi Ferrari and Francesca Levi. It is based on the teachers&#39; minicaml, an evaluation example to show how interpreters work. It is an interpreted subset of Caml, with eager evaluation and only local (let-in) declaration statements. I have added a simple parser and lexer made with menhir and ocamllex (learn more).</description>
     </item>
     
     <item>
@@ -100,7 +106,7 @@ The first thing I had to do was creating an additional wrapper type that tells t
       <pubDate>Wed, 20 Nov 2019 00:00:00 +0000</pubDate>
       
       <guid>https://0x0f0f0f.github.io/posts/2019/11/visualizing-11-years-of-contributions-to-void-linux-in-7-minutes/</guid>
-      <description>A few days ago I&amp;rsquo;ve stumbled into an excellent package called gource. To test it out I&amp;rsquo;ve decided to make an animated video of all the contributions that have been made since 26 September 2008 in the void-packages repository. You can see how it starts to gain traction after ~2013, and how it quickly evolves to look like a living cell. I pop out somewhere around the middle of 2019.</description>
+      <description>A few days ago I&amp;rsquo;ve stumbled into an excellent package called gource. To test it out I&amp;rsquo;ve decided to make an animated video of all the contributions that have been made since 26 September 2008 in the void-packages repository. You can see how it starts to gain traction after ~2013, and how it quickly evolves to look like a living cell. I pop out somewhere around the middle of 2019. Void Linux is an awesome, solid and lightweight indipendent distribution that uses the excellent XBPS package manager.</description>
     </item>
     
     <item>
@@ -121,7 +127,7 @@ The first thing I had to do was creating an additional wrapper type that tells t
       <guid>https://0x0f0f0f.github.io/posts/2019/10/adding-a-macro-parser-to-my-scheme-implementation/</guid>
       <description>Happy Halloween everybody, here&amp;rsquo;s a little report on how I&amp;rsquo;ve added a macro parser to yasih (Yet Another Scheme in Haskell), my own R5RS Scheme implementation written in Haskell.
 At first I&amp;rsquo;ve had to define parsers for quote, quasiquote, and unquote and add them to the expression parser. You can learn more about how scheme quoting works in the MIT-scheme documentation.
--- |Parse a Quoted Expression &#39;a parseQuoted :: Parser LispVal parseQuoted = do char &#39;\&#39;&#39; x &amp;lt;- parseExpr return $ List [Atom &amp;quot;quote&amp;quot;, x] -- |Parse a QuasiQuoted Expression -- See https://schemers.</description>
+-- |Parse a Quoted Expression &amp;#39;a parseQuoted :: Parser LispVal parseQuoted = do char &amp;#39;\&amp;#39;&amp;#39; x &amp;lt;- parseExpr return $ List [Atom &amp;#34;quote&amp;#34;, x] -- |Parse a QuasiQuoted Expression -- See https://schemers.</description>
     </item>
     
     <item>

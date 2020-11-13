@@ -26,7 +26,7 @@
 
 
 
-<link rel="stylesheet" href="/main.min.0d47b4686e972122bd29f0c1e3dd024a2d541cd8b1b543622520822ea6f4238a.css">
+<link rel="stylesheet" href="/main.min.892c0f338bdee1c53c5307fd8768ac9c25adbfa7e603667867601ccbe6be9b67.css">
 
 
 
@@ -38,11 +38,10 @@
 <link rel="shortcut icon" href="/favicon.ico">
 <meta name="theme-color" content="#252627"><meta itemprop="name" content="New features in the minicaml programming language!">
 <meta itemprop="description" content="In the past weeks I&rsquo;ve worked a lot on the minicaml programming language. In this post I&rsquo;m recapping all the various features I have added with their corresponding syntax. Now that the language is almost feature complete, the next releases will focus on the standard library, stability, testing, and improvements of the internals. If you are interested in programming language development, note that I am looking for contributors to help in testing and making the language more stable.">
-
-
-<meta itemprop="datePublished" content="2020-01-11T00:00:00&#43;00:00" />
-<meta itemprop="dateModified" content="2020-01-11T00:00:00&#43;00:00" />
+<meta itemprop="datePublished" content="2020-01-11T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2020-01-11T00:00:00+00:00" />
 <meta itemprop="wordCount" content="1061">
+<meta itemprop="image" content="https://0x0f0f0f.github.io"/>
 
 
 
@@ -126,220 +125,152 @@
             
 
             <div class="post-content">
-                
-
-<p>In the past weeks I&rsquo;ve worked a lot on the
-<a href="https://github.com/0x0f0f0f/minicaml" target="_blank">minicaml</a> programming language. In this
+                <p>In the past weeks I&rsquo;ve worked a lot on the
+<a href="https://github.com/0x0f0f0f/minicaml">minicaml</a> programming language. In this
 post I&rsquo;m recapping all the various features I have added with their
 corresponding syntax. Now that the language is almost feature complete, the
 next releases will focus on the standard library, stability, testing, and
 improvements of the internals. If you are interested in programming language
 development, note that I am looking for contributors to help in testing and
 making the language more stable.</p>
-
 <h2 id="installation">Installation</h2>
-
 <p>To install, you need to have <code>opam</code> (OCaml&rsquo;s package manager) and a recent OCaml
 distribution installed on your system.
 You can install <strong>minicaml</strong> by running</p>
-
-<pre><code class="language-bash">opam install minicaml
-</code></pre>
-
-<p><a href="https://github.com/hanslub42/rlwrap" target="_blank">rlwrap</a> is suggested for a readline-like
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">opam install minicaml
+</code></pre></div><p><a href="https://github.com/hanslub42/rlwrap">rlwrap</a> is suggested for a readline-like
 (bash-like) keyboard interface.</p>
-
 <h3 id="manual-installation">Manual installation</h3>
-
-<pre><code class="language-bash"># clone the repository
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># clone the repository</span>
 git clone https://github.com/0x0f0f0f/minicaml
-# cd into it
+<span style="color:#75715e"># cd into it</span>
 cd minicaml
-# install dependencies
+<span style="color:#75715e"># install dependencies</span>
 opam install dune menhir ANSITerminal cmdliner alcotest bisect_ppx
-# compile
+<span style="color:#75715e"># compile</span>
 make
-# test
+<span style="color:#75715e"># test</span>
 make test
-# run
+<span style="color:#75715e"># run</span>
 make run
-# rlwrap is suggested
+<span style="color:#75715e"># rlwrap is suggested</span>
 rlwrap make run
-# you can install minicaml with
+<span style="color:#75715e"># you can install minicaml with</span>
 make install
-# run again
+<span style="color:#75715e"># run again</span>
 rlwrap minicaml
-</code></pre>
-
-<h2 id="usage">Usage</h2>
-
+</code></pre></div><h2 id="usage">Usage</h2>
 <p>The executable name is <code>minicaml</code>. If a file is specified as the first command
 line argument, then it will be ran as a program. If you are running a program you may want to use the flag <code>-p</code> to print the results of the expressions that are evaluated. Otherwise, if a program is not specified a REPL session will
 be opened. If the <code>minicaml</code> executable is ran with the flag <code>-v1</code>, it will show
 the AST equivalent of each submitted expression, if ran with <code>-v2</code> it will also
 show each reduction step in the evaluation.
 Use the <strong>experimental</strong> <code>-j</code> flag to compile a program to Javascript, using the
-<a href="https://ramdajs.com/" target="_blank">Ramda</a> library as a &ldquo;functional prelude&rdquo;, please note
+<a href="https://ramdajs.com/">Ramda</a> library as a &ldquo;functional prelude&rdquo;, please note
 that a lot of stuff is still broken.</p>
-
 <p>Keep in mind that <strong>minicaml</strong> is purely functional and values
 are immutable.</p>
-
 <h2 id="examples">Examples</h2>
-
 <p>Check the <code>examples/</code> directory for some example programs.</p>
-
 <h2 id="features">Features</h2>
-
 <h3 id="arithmetics-with-full-scheme-like-numeric-tower">Arithmetics with full scheme-like numeric tower</h3>
-
 <p>Integer division returns integers. Floating point numbers decimal part can be
 omitted if it is 0. Floating point numbers can use the power syntax using <code>e</code>.</p>
-
-<pre><code class="language-ocaml">1 + 2 + 3 * (4 - 1) ;;
-1 + 4.0 - 1. / 2.315 ;;
-1.2e-3 ;;
-true &amp;&amp; false || (1 &lt; 2) &amp;&amp; (1 = 1) ;;
-</code></pre>
-
-<h3 id="complex-numbers">Complex numbers</h3>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ocaml" data-lang="ocaml">1 <span style="color:#f92672">+</span> 2 <span style="color:#f92672">+</span> 3 <span style="color:#f92672">*</span> <span style="color:#f92672">(</span>4 <span style="color:#f92672">-</span> 1<span style="color:#f92672">)</span> <span style="color:#f92672">;;</span>
+1 <span style="color:#f92672">+</span> 4<span style="color:#f92672">.</span>0 <span style="color:#f92672">-</span> 1<span style="color:#f92672">.</span> <span style="color:#f92672">/</span> 2<span style="color:#f92672">.</span>315 <span style="color:#f92672">;;</span>
+1<span style="color:#f92672">.</span>2e<span style="color:#f92672">-</span>3 <span style="color:#f92672">;;</span>
+true <span style="color:#f92672">&amp;&amp;</span> false <span style="color:#f92672">||</span> <span style="color:#f92672">(</span>1 <span style="color:#f92672">&lt;</span> 2<span style="color:#f92672">)</span> <span style="color:#f92672">&amp;&amp;</span> <span style="color:#f92672">(</span>1 <span style="color:#f92672">=</span> 1<span style="color:#f92672">)</span> <span style="color:#f92672">;;</span>
+</code></pre></div><h3 id="complex-numbers">Complex numbers</h3>
 <p>The <code>:+</code> and <code>:-</code> operators are used to create complex values, the floating point number
 on the left is the real part and the one on the right is the imaginary part.</p>
-
-<pre><code class="language-ocaml">12. :+ 1.12;;
-0. :- 1.12;;
-</code></pre>
-
-<h3 id="strings-and-lists">Strings and Lists</h3>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ocaml" data-lang="ocaml">12<span style="color:#f92672">.</span> <span style="color:#f92672">:+</span> 1<span style="color:#f92672">.</span>12<span style="color:#f92672">;;</span>
+0<span style="color:#f92672">.</span> <span style="color:#f92672">:-</span> 1<span style="color:#f92672">.</span>12<span style="color:#f92672">;;</span>
+</code></pre></div><h3 id="strings-and-lists">Strings and Lists</h3>
 <p>Here is how to concatenate strings</p>
-
-<pre><code class="language-ocaml">&quot;hello &quot; ^ &quot;world&quot;
-</code></pre>
-
-<p><code>::</code> means is the classic <code>cons</code> operator, while <code>@</code> is used for list
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ocaml" data-lang="ocaml"><span style="color:#e6db74">&#34;hello &#34;</span> <span style="color:#f92672">^</span> <span style="color:#e6db74">&#34;world&#34;</span>
+</code></pre></div><p><code>::</code> means is the classic <code>cons</code> operator, while <code>@</code> is used for list
 concatenation as in OCaml</p>
-
 <pre><code>1 :: [2] @ [3]
-</code></pre>
-
-<p>To convert any value to a string you can use the <code>show</code> primitive.</p>
-
+</code></pre><p>To convert any value to a string you can use the <code>show</code> primitive.</p>
 <h3 id="declarations">Declarations</h3>
-
 <p>Local declaration statements are purely functional and straightforward:</p>
-
-<pre><code class="language-ocaml">let x = 4 and y = 1 in x + y
-</code></pre>
-
-<p>Global declaration statements create new, purely functional environments in both
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ocaml" data-lang="ocaml"><span style="color:#66d9ef">let</span> x <span style="color:#f92672">=</span> 4 <span style="color:#f92672">and</span> y <span style="color:#f92672">=</span> 1 <span style="color:#66d9ef">in</span> x <span style="color:#f92672">+</span> y
+</code></pre></div><p>Global declaration statements create new, purely functional environments in both
 programs and the REPL. Omitting <code>in</code> is syntax-sugar, subsequent blocks will
 be evaluated in the resulting new environment.</p>
-
-<pre><code class="language-ocaml">let a = 2 ;;
-x + 3 ;;
-</code></pre>
-
-<h3 id="functions-and-recursion">Functions and recursion</h3>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ocaml" data-lang="ocaml"><span style="color:#66d9ef">let</span> a <span style="color:#f92672">=</span> 2 <span style="color:#f92672">;;</span>
+x <span style="color:#f92672">+</span> 3 <span style="color:#f92672">;;</span>
+</code></pre></div><h3 id="functions-and-recursion">Functions and recursion</h3>
 <p>For parsing simplicity, only the OCaml anonymous function style of declaring
 functions is supported. The keyword <code>fun</code> is interchangeable with <code>lambda</code>.</p>
-
-<pre><code class="language-ocaml">(fun x -&gt; x + 1) 1;;
-let rec fib = fun n -&gt; if n &lt; 2 then n else (fib (n - 1)) + fib (n - 2)
-</code></pre>
-
-<h3 id="printing">Printing</h3>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ocaml" data-lang="ocaml"><span style="color:#f92672">(</span><span style="color:#66d9ef">fun</span> x <span style="color:#f92672">-&gt;</span> x <span style="color:#f92672">+</span> 1<span style="color:#f92672">)</span> 1<span style="color:#f92672">;;</span>
+<span style="color:#66d9ef">let</span> <span style="color:#66d9ef">rec</span> fib <span style="color:#f92672">=</span> <span style="color:#66d9ef">fun</span> n <span style="color:#f92672">-&gt;</span> <span style="color:#66d9ef">if</span> n <span style="color:#f92672">&lt;</span> 2 <span style="color:#66d9ef">then</span> n <span style="color:#66d9ef">else</span> <span style="color:#f92672">(</span>fib <span style="color:#f92672">(</span>n <span style="color:#f92672">-</span> 1<span style="color:#f92672">))</span> <span style="color:#f92672">+</span> fib <span style="color:#f92672">(</span>n <span style="color:#f92672">-</span> 2<span style="color:#f92672">)</span>
+</code></pre></div><h3 id="printing">Printing</h3>
 <p>The impure primitives <code>print</code> and <code>print_endline</code> automatically call <code>show</code> on a
 value. The difference between them is that <code>print_endline</code> automatically adds a
 newline at the end of the line.</p>
-
 <h3 id="haskell-like-dollar-syntax">Haskell-like dollar syntax</h3>
-
 <p>Too many parens?</p>
-
-<pre><code class="language-ocaml">f (g (h (i 1 2 3)))
-</code></pre>
-
-<p>Is equivalent to</p>
-
-<pre><code class="language-haskell">f $ g $ h $ i 1 2 3
-</code></pre>
-
-<h3 id="toggle-between-pure-and-impure-environments-in-code-for-i-o">Toggle between pure and impure environments in code for I/O</h3>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ocaml" data-lang="ocaml">f <span style="color:#f92672">(</span>g <span style="color:#f92672">(</span>h <span style="color:#f92672">(</span>i 1 2 3<span style="color:#f92672">)))</span>
+</code></pre></div><p>Is equivalent to</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-haskell" data-lang="haskell"><span style="color:#a6e22e">f</span> <span style="color:#f92672">$</span> g <span style="color:#f92672">$</span> h <span style="color:#f92672">$</span> i <span style="color:#ae81ff">1</span> <span style="color:#ae81ff">2</span> <span style="color:#ae81ff">3</span>
+</code></pre></div><h3 id="toggle-between-pure-and-impure-environments-in-code-for-io">Toggle between pure and impure environments in code for I/O</h3>
 <p>You can choose to enable or disable impure primitives explicitely, inside an
 expression by wrapping it into the <code>pure</code> and <code>impure</code> statements. They must be
 followed by an expression. An expression contained in an <code>impure</code> statement is a
 computation that calls primitives that have side effects, such as direct memory
 access or I/O access.</p>
-
 <p>It is good practice to reduce the use of the <code>pure/impure</code> keywords as much as
 possible, and to avoid using it inside of function bodies. This means keeping
 your code as purely functional as you can.</p>
-
-<pre><code class="language-ocaml">let bad_function = fun x -&gt;
-    impure (
-        let mystring =
-        &quot;I am a bad impure function! Also: &quot; ^ x in
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ocaml" data-lang="ocaml"><span style="color:#66d9ef">let</span> bad_function <span style="color:#f92672">=</span> <span style="color:#66d9ef">fun</span> x <span style="color:#f92672">-&gt;</span>
+    impure <span style="color:#f92672">(</span>
+        <span style="color:#66d9ef">let</span> mystring <span style="color:#f92672">=</span>
+        <span style="color:#e6db74">&#34;I am a bad impure function! Also: &#34;</span> <span style="color:#f92672">^</span> x <span style="color:#66d9ef">in</span>
         print_endline mystring
-    );;
+    <span style="color:#f92672">);;</span>
 
-let good_function = fun x -&gt;
-    print_endline (&quot;I am a good function! Also: &quot; ^ x) ;;
+<span style="color:#66d9ef">let</span> good_function <span style="color:#f92672">=</span> <span style="color:#66d9ef">fun</span> x <span style="color:#f92672">-&gt;</span>
+    print_endline <span style="color:#f92672">(</span><span style="color:#e6db74">&#34;I am a good function! Also: &#34;</span> <span style="color:#f92672">^</span> x<span style="color:#f92672">)</span> <span style="color:#f92672">;;</span>
 
-bad_function &quot;hello!&quot; ;;
-(* The above statement is causing side effects but will not error*)
+bad_function <span style="color:#e6db74">&#34;hello!&#34;</span> <span style="color:#f92672">;;</span>
+<span style="color:#75715e">(* The above statement is causing side effects but will not error*)</span>
 
-good_function &quot;hello!&quot; ;;
-(* The above will error, because it is trying to execute
-an impure computation in a pure environment
-Here's a good way of calling it *)
-impure $ good_function &quot;hello!&quot; ;;
+good_function <span style="color:#e6db74">&#34;hello!&#34;</span> <span style="color:#f92672">;;</span>
+<span style="color:#75715e">(* The above will error, because it is trying to execute
+</span><span style="color:#75715e">an impure computation in a pure environment
+</span><span style="color:#75715e">Here&#39;s a good way of calling it *)</span>
+impure <span style="color:#f92672">$</span> good_function <span style="color:#e6db74">&#34;hello!&#34;</span> <span style="color:#f92672">;;</span>
 
-(* You can specify that you DO NOT want to compute impure
-expressions by using the pure statement *)
-pure $ good_function &quot;henlo world!&quot; ;;
-(* The above will error because
-it contains an impure computation*)
-pure $ bad_function &quot;ciao mondo!&quot; ;;
-(* The above will error because a pure context
-does not allow nesting an impure context inside *)
-</code></pre>
-
-<p>A good way of structuring your code is keeping <code>pure/impure</code> statements as
+<span style="color:#75715e">(* You can specify that you DO NOT want to compute impure
+</span><span style="color:#75715e">expressions by using the pure statement *)</span>
+pure <span style="color:#f92672">$</span> good_function <span style="color:#e6db74">&#34;henlo world!&#34;</span> <span style="color:#f92672">;;</span>
+<span style="color:#75715e">(* The above will error because
+</span><span style="color:#75715e">it contains an impure computation*)</span>
+pure <span style="color:#f92672">$</span> bad_function <span style="color:#e6db74">&#34;ciao mondo!&#34;</span> <span style="color:#f92672">;;</span>
+<span style="color:#75715e">(* The above will error because a pure context
+</span><span style="color:#75715e">does not allow nesting an impure context inside *)</span>
+</code></pre></div><p>A good way of structuring your code is keeping <code>pure/impure</code> statements as
 external from expressions as you can (towards the top level). By default, the
 interpreter is in a <code>uncertain</code> state, it means that it will allow the execution
 of <code>impure</code> statements</p>
-
 <h3 id="function-pipes-reverse-composition">Function pipes (reverse composition)</h3>
-
 <p>You can redirect the result of a function to the first argument of another
 function using the <code>&gt;=&gt;</code> operator.</p>
-
-<pre><code class="language-ocaml">let sum_and_add_one = (fun x y -&gt; x + y) &gt;=&gt; (fun z -&gt; z + 1) ;;
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ocaml" data-lang="ocaml"><span style="color:#66d9ef">let</span> sum_and_add_one <span style="color:#f92672">=</span> <span style="color:#f92672">(</span><span style="color:#66d9ef">fun</span> x y <span style="color:#f92672">-&gt;</span> x <span style="color:#f92672">+</span> y<span style="color:#f92672">)</span> <span style="color:#f92672">&gt;=&gt;</span> <span style="color:#f92672">(</span><span style="color:#66d9ef">fun</span> z <span style="color:#f92672">-&gt;</span> z <span style="color:#f92672">+</span> 1<span style="color:#f92672">)</span> <span style="color:#f92672">;;</span>
 sum_and_add_one 2 3
-(* Will output 6, because 2 + 3 is piped into z + 1*)
-</code></pre>
-
-<p>Yields the same result as normal composition:</p>
-
-<pre><code class="language-ocaml">let my_sum = (fun x y -&gt; x + y) ;;
-let add_one = (fun z -&gt; z + 1) ;;
-add_one (mysum 2 3)
-</code></pre>
-
-<h3 id="dictionaries">Dictionaries</h3>
-
-<pre><code class="language-ocaml">let n = {&quot;hola&quot;: 1, &quot;mondo&quot;: 2} ;;
-let m = insert &quot;newkey&quot; 123 n ;;
-haskey &quot;newkey&quot; m (* =&gt; true *)
-map (fun x -&gt; x + 1) m
-(* =&gt; {&quot;newkey&quot;:124, &quot;hola&quot;:2, &quot;mondo&quot;:3} *)
-</code></pre>
-
+<span style="color:#75715e">(* Will output 6, because 2 + 3 is piped into z + 1*)</span>
+</code></pre></div><p>Yields the same result as normal composition:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ocaml" data-lang="ocaml"><span style="color:#66d9ef">let</span> my_sum <span style="color:#f92672">=</span> <span style="color:#f92672">(</span><span style="color:#66d9ef">fun</span> x y <span style="color:#f92672">-&gt;</span> x <span style="color:#f92672">+</span> y<span style="color:#f92672">)</span> <span style="color:#f92672">;;</span>
+<span style="color:#66d9ef">let</span> add_one <span style="color:#f92672">=</span> <span style="color:#f92672">(</span><span style="color:#66d9ef">fun</span> z <span style="color:#f92672">-&gt;</span> z <span style="color:#f92672">+</span> 1<span style="color:#f92672">)</span> <span style="color:#f92672">;;</span>
+add_one <span style="color:#f92672">(</span>mysum 2 3<span style="color:#f92672">)</span>
+</code></pre></div><h3 id="dictionaries">Dictionaries</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ocaml" data-lang="ocaml"><span style="color:#66d9ef">let</span> n <span style="color:#f92672">=</span> <span style="color:#f92672">{</span><span style="color:#e6db74">&#34;hola&#34;</span><span style="color:#f92672">:</span> 1<span style="color:#f92672">,</span> <span style="color:#e6db74">&#34;mondo&#34;</span><span style="color:#f92672">:</span> 2<span style="color:#f92672">}</span> <span style="color:#f92672">;;</span>
+<span style="color:#66d9ef">let</span> m <span style="color:#f92672">=</span> insert <span style="color:#e6db74">&#34;newkey&#34;</span> 123 n <span style="color:#f92672">;;</span>
+haskey <span style="color:#e6db74">&#34;newkey&#34;</span> m <span style="color:#75715e">(* =&gt; true *)</span>
+map <span style="color:#f92672">(</span><span style="color:#66d9ef">fun</span> x <span style="color:#f92672">-&gt;</span> x <span style="color:#f92672">+</span> 1<span style="color:#f92672">)</span> m
+<span style="color:#75715e">(* =&gt; {&#34;newkey&#34;:124, &#34;hola&#34;:2, &#34;mondo&#34;:3} *)</span>
+</code></pre></div>
             </div>
         </article>
 

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>linux on 0x0f0f0f</title>
@@ -6,10 +6,16 @@
     <description>Recent content in linux on 0x0f0f0f</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 20 Nov 2019 00:00:00 +0000</lastBuildDate>
-    
-	<atom:link href="https://0x0f0f0f.github.io/tags/linux/index.xml" rel="self" type="application/rss+xml" />
-    
+    <lastBuildDate>Fri, 13 Nov 2020 00:00:00 +0000</lastBuildDate><atom:link href="https://0x0f0f0f.github.io/tags/linux/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Supercharge your Cloud 1 - Installing Void Linux on Hetzner VPSs</title>
+      <link>https://0x0f0f0f.github.io/posts/2020/11/supercharge-your-cloud-1-installing-void-linux-on-hetzner-vpss/</link>
+      <pubDate>Fri, 13 Nov 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://0x0f0f0f.github.io/posts/2020/11/supercharge-your-cloud-1-installing-void-linux-on-hetzner-vpss/</guid>
+      <description>Systemd sucks 1, 2, 3, 4, 5 but Hetzner Cloud rocks, and is one of my favourite VPS providers. Hetzner has been providing Debian, Arch Linux, Ubuntu and CentOS images for cloud VPS instances, but wait! They all use systemd! I have been using Void Linux for years now on mostly all of my devices. I have even built a PDA that runs Void Linux 6.
+Those days, I was building a personal cloud instance with a few servers (more details in the following write-up posts), and I ran into some very annoying issues that were directly caused by the unnecessary complexity of systemd.</description>
+    </item>
     
     <item>
       <title>Visualizing 11 years of contributions to Void Linux in 7 minutes</title>
@@ -17,7 +23,7 @@
       <pubDate>Wed, 20 Nov 2019 00:00:00 +0000</pubDate>
       
       <guid>https://0x0f0f0f.github.io/posts/2019/11/visualizing-11-years-of-contributions-to-void-linux-in-7-minutes/</guid>
-      <description>A few days ago I&amp;rsquo;ve stumbled into an excellent package called gource. To test it out I&amp;rsquo;ve decided to make an animated video of all the contributions that have been made since 26 September 2008 in the void-packages repository. You can see how it starts to gain traction after ~2013, and how it quickly evolves to look like a living cell. I pop out somewhere around the middle of 2019.</description>
+      <description>A few days ago I&amp;rsquo;ve stumbled into an excellent package called gource. To test it out I&amp;rsquo;ve decided to make an animated video of all the contributions that have been made since 26 September 2008 in the void-packages repository. You can see how it starts to gain traction after ~2013, and how it quickly evolves to look like a living cell. I pop out somewhere around the middle of 2019. Void Linux is an awesome, solid and lightweight indipendent distribution that uses the excellent XBPS package manager.</description>
     </item>
     
   </channel>

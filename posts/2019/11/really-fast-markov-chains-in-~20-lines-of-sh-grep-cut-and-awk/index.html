@@ -27,7 +27,7 @@
 
 
 
-<link rel="stylesheet" href="/main.min.0d47b4686e972122bd29f0c1e3dd024a2d541cd8b1b543622520822ea6f4238a.css">
+<link rel="stylesheet" href="/main.min.892c0f338bdee1c53c5307fd8768ac9c25adbfa7e603667867601ccbe6be9b67.css">
 
 
 
@@ -40,11 +40,10 @@
 <meta name="theme-color" content="#252627"><meta itemprop="name" content="Really fast Markov chains in ~20 lines of sh, grep, cut and awk">
 <meta itemprop="description" content="Some days ago, driven by boredom, I implemented my own Markov chains in Haskell by following this great tutorial. Markov chains can be a way of implementing really fun &ldquo;dumb&rdquo; group chat bots, that can generate new random messages that sound realistic based on the previous history of the chat. From Wikipedia:
  A Markov chain is a stochastic model describing a sequence of possible events in which the probability of each event depends only on the state attained in the previous event.">
-
-
-<meta itemprop="datePublished" content="2019-11-09T00:00:00&#43;00:00" />
-<meta itemprop="dateModified" content="2019-11-09T00:00:00&#43;00:00" />
+<meta itemprop="datePublished" content="2019-11-09T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2019-11-09T00:00:00+00:00" />
 <meta itemprop="wordCount" content="1085">
+<meta itemprop="image" content="https://0x0f0f0f.github.io"/>
 
 
 
@@ -129,45 +128,30 @@
             
 
             <div class="post-content">
-                
-
-<p>Some days ago, driven by boredom, I implemented my own Markov chains in Haskell by following this great <a href="https://dschrempf.github.io/coding/2018-02-10-markov-chains-in-haskell/" target="_blank">tutorial</a>. Markov chains can be a way of implementing really fun &ldquo;dumb&rdquo; group chat bots, that can generate new random messages that sound realistic based on the previous history of the chat. From Wikipedia:</p>
-
+                <p>Some days ago, driven by boredom, I implemented my own Markov chains in Haskell by following this great <a href="https://dschrempf.github.io/coding/2018-02-10-markov-chains-in-haskell/">tutorial</a>. Markov chains can be a way of implementing really fun &ldquo;dumb&rdquo; group chat bots, that can generate new random messages that sound realistic based on the previous history of the chat. From Wikipedia:</p>
 <blockquote>
 <p>A Markov chain is a stochastic model describing a sequence of possible events in which the probability of each event depends only on the state attained in the previous event.</p>
 </blockquote>
-
-<p>Here&rsquo;s a <a href="http://setosa.io/ev/markov-chains/" target="_blank">great article</a> introducing the concept of Markov chains. In the case of a group chat bot, each state (or node of the graph) is one of the words that was previously sent in the messages, and each probability of transition towards another state (word) is based on the frequency of the first word (transition&rsquo;s source state) being followed by the second one (the transition&rsquo;s destination state).</p>
-
+<p>Here&rsquo;s a <a href="http://setosa.io/ev/markov-chains/">great article</a> introducing the concept of Markov chains. In the case of a group chat bot, each state (or node of the graph) is one of the words that was previously sent in the messages, and each probability of transition towards another state (word) is based on the frequency of the first word (transition&rsquo;s source state) being followed by the second one (the transition&rsquo;s destination state).</p>
 <p>After coding a simple Markov chain on words in Haskell, I&rsquo;ve noticed that it was really slow and resource intensive even on a few thousand of messages. This was because the model was calculated by summing the frequency of word pairs and it was kept in memory inside of a <code>Data.Map</code> structure.</p>
-
-<p>Although the Haskell implementation can get much faster if optimized, my friend <a href="https://github.com/Francesco149" target="_blank">Francesco</a> showed me his amazing implementation of Markov chains on words made <strong>in plain sh and awk</strong>, in ~20 lines of code.</p>
-
-<h3 id="markov-sh-https-github-com-francesco149-markov-sh"><a href="https://github.com/Francesco149/markov.sh" target="_blank">markov.sh</a></h3>
-
+<p>Although the Haskell implementation can get much faster if optimized, my friend <a href="https://github.com/Francesco149">Francesco</a> showed me his amazing implementation of Markov chains on words made <strong>in plain sh and awk</strong>, in ~20 lines of code.\</p>
+<h3 id="markovshhttpsgithubcomfrancesco149markovsh"><a href="https://github.com/Francesco149/markov.sh">markov.sh</a></h3>
 <p>His project is split in 2 programs. The first one, <code>mrkfeed.awk</code> is a really simple <code>awk</code> program that separates words on a line into pairs of words, separated line by line.</p>
-
-<pre><code class="language-awk">#!/usr/bin/awk -f
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-awk" data-lang="awk"><span style="color:#75715e">#!/usr/bin/awk -f</span>
 
 {
-  for (i = 1; i &lt; NF; i++) {
-    print $i,$(i+1)
+  <span style="color:#66d9ef">for</span> (<span style="color:#a6e22e">i</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>; <span style="color:#a6e22e">i</span> <span style="color:#f92672">&lt;</span> NF; <span style="color:#a6e22e">i</span><span style="color:#f92672">++</span>) {
+    <span style="color:#66d9ef">print</span> <span style="color:#f92672">$</span><span style="color:#a6e22e">i</span>,<span style="color:#f92672">$</span>(<span style="color:#a6e22e">i</span><span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>)
   }
-  print $i
+  <span style="color:#66d9ef">print</span> <span style="color:#f92672">$</span><span style="color:#a6e22e">i</span>
 }
-</code></pre>
-
-<p>For example, let&rsquo;s take this simple chat log (referred to as <code>chatlog.txt</code>):</p>
-
+</code></pre></div><p>For example, let&rsquo;s take this simple chat log (referred to as <code>chatlog.txt</code>):</p>
 <pre><code>hello everybody
 hi people
 hello people
 how are you
 how are things going
-</code></pre>
-
-<p>The first step is creating a model for the Markov chain. Here&rsquo;s what will be into the model file when we run <code>./mrkfeed.awk &lt; chatlog.txt &gt;&gt; model.mrkdb</code>,  (piped into <code>sort</code> for readability)</p>
-
+</code></pre><p>The first step is creating a model for the Markov chain. Here&rsquo;s what will be into the model file when we run <code>./mrkfeed.awk &lt; chatlog.txt &gt;&gt; model.mrkdb</code>,  (piped into <code>sort</code> for readability)</p>
 <pre><code>are things
 are you
 everybody
@@ -181,88 +165,77 @@ people
 people
 things going
 you
-</code></pre>
-
-<p>The next step is generating a new random message with <code>./mrkwords.sh model.mrkdb 50 | tr '\n' ' ' &amp;&amp; echo</code></p>
-
+</code></pre><p>The next step is generating a new random message with <code>./mrkwords.sh model.mrkdb 50 | tr '\n' ' ' &amp;&amp; echo</code></p>
 <p>At first, <code>mrkwords.sh</code> will pick a random line from the model and pick the first word of the pair as the first word of our output message. After this, it will filter the model to find what word pairs start with the first word it picked. Let&rsquo;s say it picked the word <code>hello</code> as the first word of the message. It will then randomly choose the second word of the message from the second element of a pair in the model that starts with the first word it chose. In this case, since it picked <code>hello</code> as the first word, it may pick one between <code>everybody</code> and <code>people</code> as the next word.
 It then repeats this process by passing the last word it chose as the word to choose in the next iteration. It may be even easier to understand in terms of code than in plain words.</p>
-
 <p>The presence of duplicate lines in the model is what gives it the power of weighed probability, perfectly modeling the process of random extraction, making the generated models real Markov chains.
 Doing this with plain unix tools makes <code>markov.sh</code> incredibly fast, because it is sacrificing disk space by storing duplicates in exchange for a huge improvement in the complexity of the computations. Although Markov chains are often considered complex, this small shell program shines in showing the real underlying simplicity.</p>
-
 <p>Here&rsquo;s a commented version of <code>./mrkwords.sh</code></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e">#!/bin/sh
+</span><span style="color:#75715e"></span>
+<span style="color:#75715e"># choose the first argument as the model file or try to open &#39;.mrkdb&#39;</span>
+file<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>1<span style="color:#66d9ef">:-</span>~/.mrkdb<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>
 
-<pre><code class="language-bash">#!/bin/sh
+<span style="color:#75715e"># $n is the maximum number of remaining words (iterations)</span>
+<span style="color:#75715e"># it is the 2nd argument of this program</span>
+n<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>2<span style="color:#66d9ef">:-</span>1<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>
 
-# choose the first argument as the model file or try to open '.mrkdb'
-file=&quot;${1:-~/.mrkdb}&quot;
+<span style="color:#75715e"># if present, use $key (3rd argument) to find pairs starting</span>
+<span style="color:#75715e"># with it in the model, you may use this to force a</span>
+<span style="color:#75715e"># word as the first word of the message</span>
+key<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;</span>$3<span style="color:#e6db74">&#34;</span>
 
-# $n is the maximum number of remaining words (iterations)
-# it is the 2nd argument of this program
-n=&quot;${2:-1}&quot;
+<span style="color:#75715e"># if $key is set print it</span>
+<span style="color:#f92672">[</span> ! -z <span style="color:#e6db74">&#34;</span>$key<span style="color:#e6db74">&#34;</span> <span style="color:#f92672">]</span> <span style="color:#f92672">&amp;&amp;</span> echo <span style="color:#e6db74">&#34;</span>$key<span style="color:#e6db74">&#34;</span>
 
-# if present, use $key (3rd argument) to find pairs starting
-# with it in the model, you may use this to force a
-# word as the first word of the message
-key=&quot;$3&quot;
+<span style="color:#75715e"># the max remaining number of words cannot be equal or less to 0</span>
+<span style="color:#f92672">[</span> <span style="color:#e6db74">&#34;</span>$n<span style="color:#e6db74">&#34;</span> -le <span style="color:#ae81ff">0</span> <span style="color:#f92672">]</span> <span style="color:#f92672">&amp;&amp;</span> exit
 
-# if $key is set print it
-[ ! -z &quot;$key&quot; ] &amp;&amp; echo &quot;$key&quot;
+<span style="color:#75715e"># if key is not set, set the chosen word to the first element</span>
+<span style="color:#75715e"># of a random pair in the model</span>
+<span style="color:#66d9ef">if</span> <span style="color:#f92672">[</span> -z <span style="color:#e6db74">&#34;</span>$key<span style="color:#e6db74">&#34;</span> <span style="color:#f92672">]</span>; <span style="color:#66d9ef">then</span>
+  word<span style="color:#f92672">=</span><span style="color:#66d9ef">$(</span>shuf -n <span style="color:#ae81ff">1</span> &lt; <span style="color:#e6db74">&#34;</span>$file<span style="color:#e6db74">&#34;</span> | cut -d<span style="color:#e6db74">&#39; &#39;</span> -f1<span style="color:#66d9ef">)</span>
 
-# the max remaining number of words cannot be equal or less to 0
-[ &quot;$n&quot; -le 0 ] &amp;&amp; exit
+<span style="color:#75715e"># otherwise (key is set)</span>
+<span style="color:#66d9ef">else</span>
+    <span style="color:#75715e"># step 1, filter the model to find lines containing $key</span>
+    <span style="color:#75715e"># step 2, use awk to get only the lines in the model</span>
+    <span style="color:#75715e"># beginning with $key (the first element of the pairs)</span>
+    <span style="color:#75715e"># step 3, after filtering out the model, pick the second element of</span>
+    <span style="color:#75715e"># a random pair and set it as the value of the variable $word</span>
+  word<span style="color:#f92672">=</span><span style="color:#66d9ef">$(</span>grep -Fw <span style="color:#e6db74">&#34;</span>$key<span style="color:#e6db74">&#34;</span> &lt; <span style="color:#e6db74">&#34;</span>$file<span style="color:#e6db74">&#34;</span> |
+    awk -v key<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;</span>$key<span style="color:#e6db74">&#34;</span> <span style="color:#e6db74">&#39;$1 == key { print $0 }&#39;</span> |
+    shuf -n <span style="color:#ae81ff">1</span> | awk <span style="color:#e6db74">&#39;{ print $2 }&#39;</span><span style="color:#66d9ef">)</span> <span style="color:#f92672">||</span> exit
 
-# if key is not set, set the chosen word to the first element
-# of a random pair in the model
-if [ -z &quot;$key&quot; ]; then
-  word=$(shuf -n 1 &lt; &quot;$file&quot; | cut -d' ' -f1)
+    <span style="color:#75715e"># if $word is empty then exit this iteration</span>
+    <span style="color:#75715e"># this may also mean that the randomized step picked</span>
+    <span style="color:#75715e"># a line in the model containing only the first element</span>
+    <span style="color:#75715e"># (signaling the end of the process)</span>
+  <span style="color:#f92672">[</span> -z <span style="color:#e6db74">&#34;</span>$word<span style="color:#e6db74">&#34;</span> <span style="color:#f92672">]</span> <span style="color:#f92672">&amp;&amp;</span> exit
+<span style="color:#66d9ef">fi</span>
 
-# otherwise (key is set)
-else
-    # step 1, filter the model to find lines containing $key
-    # step 2, use awk to get only the lines in the model
-    # beginning with $key (the first element of the pairs)
-    # step 3, after filtering out the model, pick the second element of
-    # a random pair and set it as the value of the variable $word
-  word=$(grep -Fw &quot;$key&quot; &lt; &quot;$file&quot; |
-    awk -v key=&quot;$key&quot; '$1 == key { print $0 }' |
-    shuf -n 1 | awk '{ print $2 }') || exit
-
-    # if $word is empty then exit this iteration
-    # this may also mean that the randomized step picked
-    # a line in the model containing only the first element
-    # (signaling the end of the process)
-  [ -z &quot;$word&quot; ] &amp;&amp; exit
-fi
-
-# the real magic happens here. this last step is similar
-# to a recursive function call in most programming languages
-# it runs this program again, with $n decremented by 1
-# and with the chosen $word as the next iteration's $key
-exec &quot;$0&quot; &quot;$file&quot; &quot;$(( n - 1 ))&quot; &quot;$word&quot;
-</code></pre>
-
-<p>In this example it generates a random fortune, modeled from the <code>goedel</code> fortunes contained in the famous <code>fortune-mod</code> package.</p>
-
-<pre><code class="language-bash"># remove the % delimiter in the fortune file and save it as a .txt
-sed -e '/^%$/d' &lt; /usr/share/fortunes/goedel &gt;&gt; goedel.txt
-# generate the model
+<span style="color:#75715e"># the real magic happens here. this last step is similar</span>
+<span style="color:#75715e"># to a recursive function call in most programming languages</span>
+<span style="color:#75715e"># it runs this program again, with $n decremented by 1</span>
+<span style="color:#75715e"># and with the chosen $word as the next iteration&#39;s $key</span>
+exec <span style="color:#e6db74">&#34;</span>$0<span style="color:#e6db74">&#34;</span> <span style="color:#e6db74">&#34;</span>$file<span style="color:#e6db74">&#34;</span> <span style="color:#e6db74">&#34;</span><span style="color:#66d9ef">$((</span> n <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span> <span style="color:#66d9ef">))</span><span style="color:#e6db74">&#34;</span> <span style="color:#e6db74">&#34;</span>$word<span style="color:#e6db74">&#34;</span>
+</code></pre></div><p>In this example it generates a random fortune, modeled from the <code>goedel</code> fortunes contained in the famous <code>fortune-mod</code> package.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># remove the % delimiter in the fortune file and save it as a .txt</span>
+sed -e <span style="color:#e6db74">&#39;/^%$/d&#39;</span> &lt; /usr/share/fortunes/goedel &gt;&gt; goedel.txt
+<span style="color:#75715e"># generate the model</span>
 ./mrkfeed.awk &lt; goedel.txt &gt;&gt; goedelmodel.mrkdb
-# get a random fortune!
-./mrkwords.sh goedelmodel.mrkdb 50 | tr '\n' ' '
+<span style="color:#75715e"># get a random fortune!</span>
+./mrkwords.sh goedelmodel.mrkdb <span style="color:#ae81ff">50</span> | tr <span style="color:#e6db74">&#39;\n&#39;</span> <span style="color:#e6db74">&#39; &#39;</span>
 the dimensionality of computerized fortune-tellers!
-# again!
-./mrkwords.sh goedelmodel.mrkdb 50 | tr '\n' ' '
+<span style="color:#75715e"># again!</span>
+./mrkwords.sh goedelmodel.mrkdb <span style="color:#ae81ff">50</span> | tr <span style="color:#e6db74">&#39;\n&#39;</span> <span style="color:#e6db74">&#39; &#39;</span>
 the thoughts of metalanguage are still free.
-# again!
-./mrkwords.sh goedelmodel.mrkdb 50 | tr '\n' ' '
-# let's change the model by using all fortunes this time
-./mrkwords.sh fortunesmodel.mrkdb 50 | tr '\n' ' '
-low taste, and goin' insane,
-</code></pre>
-
-<p><code>markov.sh</code> is extremely fast, even on relatively large data sets (millions of lines).</p>
+<span style="color:#75715e"># again!</span>
+./mrkwords.sh goedelmodel.mrkdb <span style="color:#ae81ff">50</span> | tr <span style="color:#e6db74">&#39;\n&#39;</span> <span style="color:#e6db74">&#39; &#39;</span>
+<span style="color:#75715e"># let&#39;s change the model by using all fortunes this time</span>
+./mrkwords.sh fortunesmodel.mrkdb <span style="color:#ae81ff">50</span> | tr <span style="color:#e6db74">&#39;\n&#39;</span> <span style="color:#e6db74">&#39; &#39;</span>
+low taste, and goin<span style="color:#960050;background-color:#1e0010">&#39;</span> insane,
+</code></pre></div><p><code>markov.sh</code> is extremely fast, even on relatively large data sets (millions of lines).</p>
 
             </div>
         </article>

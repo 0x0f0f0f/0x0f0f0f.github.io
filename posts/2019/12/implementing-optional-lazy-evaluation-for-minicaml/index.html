@@ -27,7 +27,7 @@ The first thing I had to do was creating an additional wrapper type that tells t
 
 
 
-<link rel="stylesheet" href="/main.min.0d47b4686e972122bd29f0c1e3dd024a2d541cd8b1b543622520822ea6f4238a.css">
+<link rel="stylesheet" href="/main.min.892c0f338bdee1c53c5307fd8768ac9c25adbfa7e603667867601ccbe6be9b67.css">
 
 
 
@@ -40,11 +40,10 @@ The first thing I had to do was creating an additional wrapper type that tells t
 <meta name="theme-color" content="#252627"><meta itemprop="name" content="Implementing optional lazy evaluation for minicaml">
 <meta itemprop="description" content="As an experiment, I&rsquo;ve decided to add lazy evaluation to the didactical programming language minicaml. It have not yet implemented a cache for values that have already been evaluated. Here is how I did it.
 The first thing I had to do was creating an additional wrapper type that tells the evaluator if a value has already been evaluated or not, change the environment type so that it can contain both kind of values and change the &ldquo;evaluation result&rdquo; type so that it contains constructors for lazy functions and recursive lazy functions (see more later in the function application eval case).">
-
-
-<meta itemprop="datePublished" content="2019-12-12T00:00:00&#43;00:00" />
-<meta itemprop="dateModified" content="2019-12-12T00:00:00&#43;00:00" />
+<meta itemprop="datePublished" content="2019-12-12T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2019-12-12T00:00:00+00:00" />
 <meta itemprop="wordCount" content="1121">
+<meta itemprop="image" content="https://0x0f0f0f.github.io"/>
 
 
 
@@ -129,13 +128,10 @@ The first thing I had to do was creating an additional wrapper type that tells t
             
 
             <div class="post-content">
-                
-
-<p>As an experiment, I&rsquo;ve decided to add lazy evaluation to the didactical
-programming language <a href="https://github.com/0x0f0f0f/minicaml" target="_blank">minicaml</a>. It have
+                <p>As an experiment, I&rsquo;ve decided to add lazy evaluation to the didactical
+programming language <a href="https://github.com/0x0f0f0f/minicaml">minicaml</a>. It have
 not yet implemented a cache for values that have already been evaluated. Here is how I
 did it.</p>
-
 <p>The first thing I had to do was creating an additional wrapper type that
 tells the evaluator if a value has already been evaluated or not, change
 the environment type so that it can contain both kind of values and change the
@@ -144,30 +140,27 @@ recursive lazy functions (see more later in the function application <code>eval<
 Notice, in <code>type_wrapper</code>, how already evaluated values are of kind <code>evt</code>
 (&ldquo;evaluated&rdquo; or &ldquo;reduced&rdquo; expression), while <code>LazyExpression</code> values are just
 AST expressions that have not been evaluated yet.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ocaml" data-lang="ocaml"><span style="color:#75715e">(* lib/types.ml *)</span>
 
-<pre><code class="language-ocaml">(* lib/types.ml *)
+<span style="color:#75715e">(** A type that represents an evaluated (reduced) value *)</span>
+<span style="color:#66d9ef">type</span> evt <span style="color:#f92672">=</span>
+    <span style="color:#f92672">|</span> <span style="color:#a6e22e">EvtUnit</span>
+    <span style="color:#f92672">|</span> <span style="color:#a6e22e">EvtInt</span> <span style="color:#66d9ef">of</span> <span style="color:#66d9ef">int</span>
+    <span style="color:#f92672">|</span> <span style="color:#a6e22e">EvtBool</span> <span style="color:#66d9ef">of</span> <span style="color:#66d9ef">bool</span>
+    <span style="color:#f92672">|</span> <span style="color:#a6e22e">EvtList</span> <span style="color:#66d9ef">of</span> evt <span style="color:#66d9ef">list</span>
+    <span style="color:#f92672">|</span> <span style="color:#a6e22e">Closure</span> <span style="color:#66d9ef">of</span> ide <span style="color:#66d9ef">list</span> <span style="color:#f92672">*</span> expr <span style="color:#f92672">*</span> <span style="color:#f92672">(</span>type_wrapper env_t<span style="color:#f92672">)</span>
+    <span style="color:#f92672">|</span> <span style="color:#a6e22e">LazyClosure</span> <span style="color:#66d9ef">of</span> ide <span style="color:#66d9ef">list</span> <span style="color:#f92672">*</span> expr <span style="color:#f92672">*</span> <span style="color:#f92672">(</span>type_wrapper env_t<span style="color:#f92672">)</span>
+    <span style="color:#f92672">|</span> <span style="color:#a6e22e">RecClosure</span> <span style="color:#66d9ef">of</span> ide <span style="color:#f92672">*</span> ide <span style="color:#66d9ef">list</span> <span style="color:#f92672">*</span> expr <span style="color:#f92672">*</span> <span style="color:#f92672">(</span>type_wrapper env_t<span style="color:#f92672">)</span>
+    <span style="color:#f92672">|</span> <span style="color:#a6e22e">RecLazyClosure</span> <span style="color:#66d9ef">of</span> ide <span style="color:#f92672">*</span> ide <span style="color:#66d9ef">list</span> <span style="color:#f92672">*</span> expr <span style="color:#f92672">*</span> <span style="color:#f92672">(</span>type_wrapper env_t<span style="color:#f92672">)</span>
+    <span style="color:#f92672">[@@</span>deriving show <span style="color:#f92672">{</span> with_path <span style="color:#f92672">=</span> false <span style="color:#f92672">}]</span>
+<span style="color:#f92672">and</span> type_wrapper <span style="color:#f92672">=</span>
+    <span style="color:#f92672">|</span> <span style="color:#a6e22e">LazyExpression</span> <span style="color:#66d9ef">of</span> expr
+    <span style="color:#f92672">|</span> <span style="color:#a6e22e">AlreadyEvaluated</span> <span style="color:#66d9ef">of</span> evt
+    <span style="color:#f92672">[@@</span>deriving show<span style="color:#f92672">]</span>
 
-(** A type that represents an evaluated (reduced) value *)
-type evt =
-    | EvtUnit
-    | EvtInt of int
-    | EvtBool of bool
-    | EvtList of evt list
-    | Closure of ide list * expr * (type_wrapper env_t)
-    | LazyClosure of ide list * expr * (type_wrapper env_t)
-    | RecClosure of ide * ide list * expr * (type_wrapper env_t)
-    | RecLazyClosure of ide * ide list * expr * (type_wrapper env_t)
-    [@@deriving show { with_path = false }]
-and type_wrapper =
-    | LazyExpression of expr
-    | AlreadyEvaluated of evt
-    [@@deriving show]
-
-(** An environment of already evaluated values  *)
-type env_type = type_wrapper env_t
-</code></pre>
-
-<p>The next step was adding AST types for <code>let lazy</code> and <code>lazyfun</code> statements and
+<span style="color:#75715e">(** An environment of already evaluated values  *)</span>
+<span style="color:#66d9ef">type</span> env_type <span style="color:#f92672">=</span> type_wrapper env_t
+</code></pre></div><p>The next step was adding AST types for <code>let lazy</code> and <code>lazyfun</code> statements and
 the corresponding parser and lexer definitions.
 <code>let lazy x = (... some expression ...) in (... body expression ...)</code> binds a <code>LazyExpression</code>
 to the symbol x in the <code>body</code> expression&rsquo;s environment. The evaluator only
@@ -175,11 +168,8 @@ evaluates the expression bound to <code>x</code> when the symbol is encountered 
 the <code>let lazy</code> statement&rsquo;s body; while a normal <code>let</code> statement evaluates the
 expression assigned to <code>x</code> before evaluating the body (a practice called eager
 evaluation).</p>
-
 <h4 id="these-camels-are-quite-lazy">These camels are quite lazy:</h4>
-
-<p><img src="/posts/images/lazy-camels.jpg" alt="These camels are lazy" /></p>
-
+<p><img src="/posts/images/lazy-camels.jpg" alt="These camels are lazy"></p>
 <p>The same thing applies to functions and their actual parameters. In eager
 evaluation (the default in minicaml), when you apply a function to some
 arguments, the arguments are evaluated before actually evaluating the function
@@ -187,26 +177,23 @@ body (and therefore are bound to a <code>AlreadyEvaluated</code> constructor in 
 environment), while in <code>lazyfun</code> (lazily evaluated functions) the arguments are
 not evaluated until encountered in the body (and therefore they are bound to a
 <code>LazyExpression</code> constructor).</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ocaml" data-lang="ocaml"><span style="color:#75715e">(* lib/types.ml *)</span>
 
-<pre><code class="language-ocaml">(* lib/types.ml *)
+<span style="color:#75715e">(** A value identifier*)</span>
+<span style="color:#66d9ef">type</span> ide <span style="color:#f92672">=</span> <span style="color:#66d9ef">string</span>
+<span style="color:#f92672">[@@</span>deriving show<span style="color:#f92672">]</span>
 
-(** A value identifier*)
-type ide = string
-[@@deriving show]
-
-(** The type representing Abstract Syntax Tree expressions *)
-type expr =
-    (* ... other constructors are not shown here for simplicity  ... *)
-    | Let of ide * expr * expr
-    | Letlazy of ide * expr * expr
-    | Letrec of ide * expr * expr
-    | Lambda of ide list * expr
-    | LazyLambda of ide list * expr
-    | Apply of expr * expr list
-    [@@deriving show { with_path = false }]
-</code></pre>
-
-<p>Next, I had to change the <code>lookup</code> function, which searches for bindings in the
+<span style="color:#75715e">(** The type representing Abstract Syntax Tree expressions *)</span>
+<span style="color:#66d9ef">type</span> expr <span style="color:#f92672">=</span>
+    <span style="color:#75715e">(* ... other constructors are not shown here for simplicity  ... *)</span>
+    <span style="color:#f92672">|</span> <span style="color:#a6e22e">Let</span> <span style="color:#66d9ef">of</span> ide <span style="color:#f92672">*</span> expr <span style="color:#f92672">*</span> expr
+    <span style="color:#f92672">|</span> <span style="color:#a6e22e">Letlazy</span> <span style="color:#66d9ef">of</span> ide <span style="color:#f92672">*</span> expr <span style="color:#f92672">*</span> expr
+    <span style="color:#f92672">|</span> <span style="color:#a6e22e">Letrec</span> <span style="color:#66d9ef">of</span> ide <span style="color:#f92672">*</span> expr <span style="color:#f92672">*</span> expr
+    <span style="color:#f92672">|</span> <span style="color:#a6e22e">Lambda</span> <span style="color:#66d9ef">of</span> ide <span style="color:#66d9ef">list</span> <span style="color:#f92672">*</span> expr
+    <span style="color:#f92672">|</span> <span style="color:#a6e22e">LazyLambda</span> <span style="color:#66d9ef">of</span> ide <span style="color:#66d9ef">list</span> <span style="color:#f92672">*</span> expr
+    <span style="color:#f92672">|</span> <span style="color:#a6e22e">Apply</span> <span style="color:#66d9ef">of</span> expr <span style="color:#f92672">*</span> expr <span style="color:#66d9ef">list</span>
+    <span style="color:#f92672">[@@</span>deriving show <span style="color:#f92672">{</span> with_path <span style="color:#f92672">=</span> false <span style="color:#f92672">}]</span>
+</code></pre></div><p>Next, I had to change the <code>lookup</code> function, which searches for bindings in the
 environment. If, for a certain symbol <code>x</code> the <code>lookup</code> function encounters an
 <code>AlreadyEvaluated</code> value in the environment, it just returns it. If it
 encounters a <code>LazyExpression</code> value it means that it has encountered a value
@@ -221,75 +208,72 @@ evaluation function, so that it correctly interprets <code>LazyLambda</code>, <c
 expressions and <code>LazyClosure</code> and <code>RecLazyClosure</code> application. Note that <code>eval</code>
 and <code>lookup</code> have now become mutually recursive and they have to be defined
 together with <code>and</code>.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ocaml" data-lang="ocaml"><span style="color:#75715e">(* lib/eval.ml *)</span>
 
-<pre><code class="language-ocaml">(* lib/eval.ml *)
-
-let rec eval (e: expr) (env: env_type) (n: stackframe) : evt =
-    let n = push_stack n e in
-    let evaluated = (match e with
-    (* ... The rest of evaluation cases are omitted for simplicity ... *)
-    | Symbol x -&gt; lookup env x n
-    | Let (ident, value, body) -&gt;
-        eval body (bind env ident (AlreadyEvaluated (eval value env n))) n
-    | Letlazy (ident, value, body) -&gt;
-        eval body (bind env ident (LazyExpression value)) n
-    | Letrec (ident, value, body) -&gt;
-        (match value with
-            | Lambda (params, fbody) -&gt;
-                let rec_env = (bind env ident
-                    (AlreadyEvaluated (RecClosure(ident, params, fbody, env))))
-                in eval body rec_env n
-            | LazyLambda (params, fbody) -&gt;
-                let rec_env = (bind env ident
-                    (AlreadyEvaluated (RecLazyClosure(ident, params, fbody, env))))
-                in eval body rec_env n
-            | _ -&gt; raise (TypeError &quot;Cannot define recursion on non-functional values&quot;))
-    | Lambda (params,body) -&gt; Closure(params, body, env)
-    | LazyLambda (params,body) -&gt; LazyClosure(params, body, env)
-    | Apply(f, params) -&gt;
-        let closure = eval f env n  in
-        (match closure with
-        | Closure(args, body, decenv) -&gt; (* Use static scoping *)
-            let evaluated_params = List.map (fun x -&gt; eval x env n ) params in
-            let application_env = bindlist decenv args (List.map (fun x -&gt;
-                 AlreadyEvaluated x) evaluated_params)  in
+<span style="color:#66d9ef">let</span> <span style="color:#66d9ef">rec</span> eval <span style="color:#f92672">(</span>e<span style="color:#f92672">:</span> expr<span style="color:#f92672">)</span> <span style="color:#f92672">(</span>env<span style="color:#f92672">:</span> env_type<span style="color:#f92672">)</span> <span style="color:#f92672">(</span>n<span style="color:#f92672">:</span> stackframe<span style="color:#f92672">)</span> <span style="color:#f92672">:</span> evt <span style="color:#f92672">=</span>
+    <span style="color:#66d9ef">let</span> n <span style="color:#f92672">=</span> push_stack n e <span style="color:#66d9ef">in</span>
+    <span style="color:#66d9ef">let</span> evaluated <span style="color:#f92672">=</span> <span style="color:#f92672">(</span><span style="color:#66d9ef">match</span> e <span style="color:#66d9ef">with</span>
+    <span style="color:#75715e">(* ... The rest of evaluation cases are omitted for simplicity ... *)</span>
+    <span style="color:#f92672">|</span> <span style="color:#a6e22e">Symbol</span> x <span style="color:#f92672">-&gt;</span> lookup env x n
+    <span style="color:#f92672">|</span> <span style="color:#a6e22e">Let</span> <span style="color:#f92672">(</span>ident<span style="color:#f92672">,</span> <span style="color:#66d9ef">value</span><span style="color:#f92672">,</span> body<span style="color:#f92672">)</span> <span style="color:#f92672">-&gt;</span>
+        eval body <span style="color:#f92672">(</span>bind env ident <span style="color:#f92672">(</span><span style="color:#a6e22e">AlreadyEvaluated</span> <span style="color:#f92672">(</span>eval <span style="color:#66d9ef">value</span> env n<span style="color:#f92672">)))</span> n
+    <span style="color:#f92672">|</span> <span style="color:#a6e22e">Letlazy</span> <span style="color:#f92672">(</span>ident<span style="color:#f92672">,</span> <span style="color:#66d9ef">value</span><span style="color:#f92672">,</span> body<span style="color:#f92672">)</span> <span style="color:#f92672">-&gt;</span>
+        eval body <span style="color:#f92672">(</span>bind env ident <span style="color:#f92672">(</span><span style="color:#a6e22e">LazyExpression</span> <span style="color:#66d9ef">value</span><span style="color:#f92672">))</span> n
+    <span style="color:#f92672">|</span> <span style="color:#a6e22e">Letrec</span> <span style="color:#f92672">(</span>ident<span style="color:#f92672">,</span> <span style="color:#66d9ef">value</span><span style="color:#f92672">,</span> body<span style="color:#f92672">)</span> <span style="color:#f92672">-&gt;</span>
+        <span style="color:#f92672">(</span><span style="color:#66d9ef">match</span> <span style="color:#66d9ef">value</span> <span style="color:#66d9ef">with</span>
+            <span style="color:#f92672">|</span> <span style="color:#a6e22e">Lambda</span> <span style="color:#f92672">(</span>params<span style="color:#f92672">,</span> fbody<span style="color:#f92672">)</span> <span style="color:#f92672">-&gt;</span>
+                <span style="color:#66d9ef">let</span> rec_env <span style="color:#f92672">=</span> <span style="color:#f92672">(</span>bind env ident
+                    <span style="color:#f92672">(</span><span style="color:#a6e22e">AlreadyEvaluated</span> <span style="color:#f92672">(</span><span style="color:#a6e22e">RecClosure</span><span style="color:#f92672">(</span>ident<span style="color:#f92672">,</span> params<span style="color:#f92672">,</span> fbody<span style="color:#f92672">,</span> env<span style="color:#f92672">))))</span>
+                <span style="color:#66d9ef">in</span> eval body rec_env n
+            <span style="color:#f92672">|</span> <span style="color:#a6e22e">LazyLambda</span> <span style="color:#f92672">(</span>params<span style="color:#f92672">,</span> fbody<span style="color:#f92672">)</span> <span style="color:#f92672">-&gt;</span>
+                <span style="color:#66d9ef">let</span> rec_env <span style="color:#f92672">=</span> <span style="color:#f92672">(</span>bind env ident
+                    <span style="color:#f92672">(</span><span style="color:#a6e22e">AlreadyEvaluated</span> <span style="color:#f92672">(</span><span style="color:#a6e22e">RecLazyClosure</span><span style="color:#f92672">(</span>ident<span style="color:#f92672">,</span> params<span style="color:#f92672">,</span> fbody<span style="color:#f92672">,</span> env<span style="color:#f92672">))))</span>
+                <span style="color:#66d9ef">in</span> eval body rec_env n
+            <span style="color:#f92672">|</span> <span style="color:#f92672">_</span> <span style="color:#f92672">-&gt;</span> <span style="color:#66d9ef">raise</span> <span style="color:#f92672">(</span><span style="color:#a6e22e">TypeError</span> <span style="color:#e6db74">&#34;Cannot define recursion on non-functional values&#34;</span><span style="color:#f92672">))</span>
+    <span style="color:#f92672">|</span> <span style="color:#a6e22e">Lambda</span> <span style="color:#f92672">(</span>params<span style="color:#f92672">,</span>body<span style="color:#f92672">)</span> <span style="color:#f92672">-&gt;</span> <span style="color:#a6e22e">Closure</span><span style="color:#f92672">(</span>params<span style="color:#f92672">,</span> body<span style="color:#f92672">,</span> env<span style="color:#f92672">)</span>
+    <span style="color:#f92672">|</span> <span style="color:#a6e22e">LazyLambda</span> <span style="color:#f92672">(</span>params<span style="color:#f92672">,</span>body<span style="color:#f92672">)</span> <span style="color:#f92672">-&gt;</span> <span style="color:#a6e22e">LazyClosure</span><span style="color:#f92672">(</span>params<span style="color:#f92672">,</span> body<span style="color:#f92672">,</span> env<span style="color:#f92672">)</span>
+    <span style="color:#f92672">|</span> <span style="color:#a6e22e">Apply</span><span style="color:#f92672">(</span>f<span style="color:#f92672">,</span> params<span style="color:#f92672">)</span> <span style="color:#f92672">-&gt;</span>
+        <span style="color:#66d9ef">let</span> closure <span style="color:#f92672">=</span> eval f env n  <span style="color:#66d9ef">in</span>
+        <span style="color:#f92672">(</span><span style="color:#66d9ef">match</span> closure <span style="color:#66d9ef">with</span>
+        <span style="color:#f92672">|</span> <span style="color:#a6e22e">Closure</span><span style="color:#f92672">(</span>args<span style="color:#f92672">,</span> body<span style="color:#f92672">,</span> decenv<span style="color:#f92672">)</span> <span style="color:#f92672">-&gt;</span> <span style="color:#75715e">(* Use static scoping *)</span>
+            <span style="color:#66d9ef">let</span> evaluated_params <span style="color:#f92672">=</span> List.map <span style="color:#f92672">(</span><span style="color:#66d9ef">fun</span> x <span style="color:#f92672">-&gt;</span> eval x env n <span style="color:#f92672">)</span> params <span style="color:#66d9ef">in</span>
+            <span style="color:#66d9ef">let</span> application_env <span style="color:#f92672">=</span> bindlist decenv args <span style="color:#f92672">(</span>List.map <span style="color:#f92672">(</span><span style="color:#66d9ef">fun</span> x <span style="color:#f92672">-&gt;</span>
+                 <span style="color:#a6e22e">AlreadyEvaluated</span> x<span style="color:#f92672">)</span> evaluated_params<span style="color:#f92672">)</span>  <span style="color:#66d9ef">in</span>
             eval body application_env n
-        | RecClosure(name, args, body, decenv) -&gt;
-            let evaluated_params = List.map (fun x -&gt; eval x env n ) params in
-            let rec_env = (bind decenv name (AlreadyEvaluated closure)) in
-            let application_env = bindlist rec_env args
-                (List.map (fun x -&gt; AlreadyEvaluated x) evaluated_params) in
+        <span style="color:#f92672">|</span> <span style="color:#a6e22e">RecClosure</span><span style="color:#f92672">(</span>name<span style="color:#f92672">,</span> args<span style="color:#f92672">,</span> body<span style="color:#f92672">,</span> decenv<span style="color:#f92672">)</span> <span style="color:#f92672">-&gt;</span>
+            <span style="color:#66d9ef">let</span> evaluated_params <span style="color:#f92672">=</span> List.map <span style="color:#f92672">(</span><span style="color:#66d9ef">fun</span> x <span style="color:#f92672">-&gt;</span> eval x env n <span style="color:#f92672">)</span> params <span style="color:#66d9ef">in</span>
+            <span style="color:#66d9ef">let</span> rec_env <span style="color:#f92672">=</span> <span style="color:#f92672">(</span>bind decenv name <span style="color:#f92672">(</span><span style="color:#a6e22e">AlreadyEvaluated</span> closure<span style="color:#f92672">))</span> <span style="color:#66d9ef">in</span>
+            <span style="color:#66d9ef">let</span> application_env <span style="color:#f92672">=</span> bindlist rec_env args
+                <span style="color:#f92672">(</span>List.map <span style="color:#f92672">(</span><span style="color:#66d9ef">fun</span> x <span style="color:#f92672">-&gt;</span> <span style="color:#a6e22e">AlreadyEvaluated</span> x<span style="color:#f92672">)</span> evaluated_params<span style="color:#f92672">)</span> <span style="color:#66d9ef">in</span>
             eval body application_env n
-        | LazyClosure(args, body, decenv) -&gt;
-            let application_env = bindlist decenv args
-                (List.map (fun x -&gt; LazyExpression x) params) in
+        <span style="color:#f92672">|</span> <span style="color:#a6e22e">LazyClosure</span><span style="color:#f92672">(</span>args<span style="color:#f92672">,</span> body<span style="color:#f92672">,</span> decenv<span style="color:#f92672">)</span> <span style="color:#f92672">-&gt;</span>
+            <span style="color:#66d9ef">let</span> application_env <span style="color:#f92672">=</span> bindlist decenv args
+                <span style="color:#f92672">(</span>List.map <span style="color:#f92672">(</span><span style="color:#66d9ef">fun</span> x <span style="color:#f92672">-&gt;</span> <span style="color:#a6e22e">LazyExpression</span> x<span style="color:#f92672">)</span> params<span style="color:#f92672">)</span> <span style="color:#66d9ef">in</span>
             eval body application_env n
-        | RecLazyClosure(name, args, body, decenv) -&gt;
-            let rec_env = (bind decenv name (AlreadyEvaluated closure)) in
-            let application_env = bindlist rec_env args
-                (List.map (fun x -&gt; LazyExpression x) params) in
+        <span style="color:#f92672">|</span> <span style="color:#a6e22e">RecLazyClosure</span><span style="color:#f92672">(</span>name<span style="color:#f92672">,</span> args<span style="color:#f92672">,</span> body<span style="color:#f92672">,</span> decenv<span style="color:#f92672">)</span> <span style="color:#f92672">-&gt;</span>
+            <span style="color:#66d9ef">let</span> rec_env <span style="color:#f92672">=</span> <span style="color:#f92672">(</span>bind decenv name <span style="color:#f92672">(</span><span style="color:#a6e22e">AlreadyEvaluated</span> closure<span style="color:#f92672">))</span> <span style="color:#66d9ef">in</span>
+            <span style="color:#66d9ef">let</span> application_env <span style="color:#f92672">=</span> bindlist rec_env args
+                <span style="color:#f92672">(</span>List.map <span style="color:#f92672">(</span><span style="color:#66d9ef">fun</span> x <span style="color:#f92672">-&gt;</span> <span style="color:#a6e22e">LazyExpression</span> x<span style="color:#f92672">)</span> params<span style="color:#f92672">)</span> <span style="color:#66d9ef">in</span>
             eval body application_env n
-        | _ -&gt; raise (TypeError &quot;Cannot apply a non functional value&quot;)))
-    in let depth = (match n with
-        | StackValue(d, _, _) -&gt; d
-        | EmptyStack -&gt; 0)
-    in
-    print_message ~color:T.Blue ~loc:(Nowhere)
-        &quot;Reduction at depth&quot; &quot;%d\nExpression:\t%s\nEvaluates to:\t%s\n&quot; depth (show_expr e) (show_evt evaluated);
-    evaluated;
-(* Search for a key in an environment (a (string, value) pair) *)
-and lookup (env: env_type) (ident: ide) (n: stackframe) : evt =
-    if ident = &quot;&quot; then failwith &quot;invalid identifier&quot; else
-    match env with
-    | [] -&gt; raise (UnboundVariable ident)
-    | (i, LazyExpression e) :: env_rest -&gt; if ident = i then eval e env n
-        else lookup env_rest ident n
-    | (i, AlreadyEvaluated e) :: env_rest -&gt; if ident = i then e else
+        <span style="color:#f92672">|</span> <span style="color:#f92672">_</span> <span style="color:#f92672">-&gt;</span> <span style="color:#66d9ef">raise</span> <span style="color:#f92672">(</span><span style="color:#a6e22e">TypeError</span> <span style="color:#e6db74">&#34;Cannot apply a non functional value&#34;</span><span style="color:#f92672">)))</span>
+    <span style="color:#66d9ef">in</span> <span style="color:#66d9ef">let</span> depth <span style="color:#f92672">=</span> <span style="color:#f92672">(</span><span style="color:#66d9ef">match</span> n <span style="color:#66d9ef">with</span>
+        <span style="color:#f92672">|</span> <span style="color:#a6e22e">StackValue</span><span style="color:#f92672">(</span>d<span style="color:#f92672">,</span> <span style="color:#f92672">_,</span> <span style="color:#f92672">_)</span> <span style="color:#f92672">-&gt;</span> d
+        <span style="color:#f92672">|</span> <span style="color:#a6e22e">EmptyStack</span> <span style="color:#f92672">-&gt;</span> 0<span style="color:#f92672">)</span>
+    <span style="color:#66d9ef">in</span>
+    print_message <span style="color:#f92672">~</span>color<span style="color:#f92672">:</span>T.<span style="color:#a6e22e">Blue</span> <span style="color:#f92672">~</span>loc<span style="color:#f92672">:(</span><span style="color:#a6e22e">Nowhere</span><span style="color:#f92672">)</span>
+        <span style="color:#e6db74">&#34;Reduction at depth&#34;</span> <span style="color:#e6db74">&#34;%d</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">Expression:</span><span style="color:#ae81ff">\t</span><span style="color:#e6db74">%s</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">Evaluates to:</span><span style="color:#ae81ff">\t</span><span style="color:#e6db74">%s</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span> depth <span style="color:#f92672">(</span>show_expr e<span style="color:#f92672">)</span> <span style="color:#f92672">(</span>show_evt evaluated<span style="color:#f92672">);</span>
+    evaluated<span style="color:#f92672">;</span>
+<span style="color:#75715e">(* Search for a key in an environment (a (string, value) pair) *)</span>
+<span style="color:#f92672">and</span> lookup <span style="color:#f92672">(</span>env<span style="color:#f92672">:</span> env_type<span style="color:#f92672">)</span> <span style="color:#f92672">(</span>ident<span style="color:#f92672">:</span> ide<span style="color:#f92672">)</span> <span style="color:#f92672">(</span>n<span style="color:#f92672">:</span> stackframe<span style="color:#f92672">)</span> <span style="color:#f92672">:</span> evt <span style="color:#f92672">=</span>
+    <span style="color:#66d9ef">if</span> ident <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;&#34;</span> <span style="color:#66d9ef">then</span> failwith <span style="color:#e6db74">&#34;invalid identifier&#34;</span> <span style="color:#66d9ef">else</span>
+    <span style="color:#66d9ef">match</span> env <span style="color:#66d9ef">with</span>
+    <span style="color:#f92672">|</span> [] <span style="color:#f92672">-&gt;</span> <span style="color:#66d9ef">raise</span> <span style="color:#f92672">(</span><span style="color:#a6e22e">UnboundVariable</span> ident<span style="color:#f92672">)</span>
+    <span style="color:#f92672">|</span> <span style="color:#f92672">(</span>i<span style="color:#f92672">,</span> <span style="color:#a6e22e">LazyExpression</span> e<span style="color:#f92672">)</span> <span style="color:#f92672">::</span> env_rest <span style="color:#f92672">-&gt;</span> <span style="color:#66d9ef">if</span> ident <span style="color:#f92672">=</span> i <span style="color:#66d9ef">then</span> eval e env n
+        <span style="color:#66d9ef">else</span> lookup env_rest ident n
+    <span style="color:#f92672">|</span> <span style="color:#f92672">(</span>i<span style="color:#f92672">,</span> <span style="color:#a6e22e">AlreadyEvaluated</span> e<span style="color:#f92672">)</span> <span style="color:#f92672">::</span> env_rest <span style="color:#f92672">-&gt;</span> <span style="color:#66d9ef">if</span> ident <span style="color:#f92672">=</span> i <span style="color:#66d9ef">then</span> e <span style="color:#66d9ef">else</span>
         lookup env_rest ident n
-</code></pre>
-
-<p>You can find minicaml version <code>0.2.1</code> with laziness
-<a href="https://github.com/0x0f0f0f/minicaml/releases" target="_blank">here</a>.
+</code></pre></div><p>You can find minicaml version <code>0.2.1</code> with laziness
+<a href="https://github.com/0x0f0f0f/minicaml/releases">here</a>.
 Thanks to Antonio for helping me reason about implementing laziness.</p>
 
             </div>

@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="author"
+    content="archetypes false false true true content © 2019 — 0x0f0f0f — All rights reserved. data layouts Alessandro Cheli public true true monokai 20 ">
+<meta name="description"
+    content="Systemd sucks 1, 2, 3, 4, 5 but Hetzner Cloud rocks, and is one of my favourite VPS providers. Hetzner has been providing Debian, Arch Linux, Ubuntu and CentOS images for cloud VPS instances, but wait! They all use systemd! I have been using Void Linux for years now on mostly all of my devices. I have even built a PDA that runs Void Linux 6.
+Those days, I was building a personal cloud instance with a few servers (more details in the following write-up posts), and I ran into some very annoying issues that were directly caused by the unnecessary complexity of systemd." />
+<meta name="keywords" content="" />
+<meta name="robots" content="noodp" />
+<link rel="canonical" href="https://0x0f0f0f.github.io/posts/2020/11/supercharge-your-cloud-1-installing-void-linux-on-hetzner-vpss/" />
+
+
+<title>
+    
+    Supercharge your Cloud 1 - Installing Void Linux on Hetzner VPSs :: 0x0f0f0f 
+    
+</title>
+
+
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.2.1/css/flag-icon.min.css" rel="stylesheet"
+    type="text/css">
+
+
+
+<link rel="stylesheet" href="/main.min.892c0f338bdee1c53c5307fd8768ac9c25adbfa7e603667867601ccbe6be9b67.css">
+
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/site.webmanifest">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#252627">
+<link rel="shortcut icon" href="/favicon.ico">
+<meta name="theme-color" content="#252627"><meta itemprop="name" content="Supercharge your Cloud 1 - Installing Void Linux on Hetzner VPSs">
+<meta itemprop="description" content="Systemd sucks 1, 2, 3, 4, 5 but Hetzner Cloud rocks, and is one of my favourite VPS providers. Hetzner has been providing Debian, Arch Linux, Ubuntu and CentOS images for cloud VPS instances, but wait! They all use systemd! I have been using Void Linux for years now on mostly all of my devices. I have even built a PDA that runs Void Linux 6.
+Those days, I was building a personal cloud instance with a few servers (more details in the following write-up posts), and I ran into some very annoying issues that were directly caused by the unnecessary complexity of systemd.">
+<meta itemprop="datePublished" content="2020-11-13T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2020-11-13T00:00:00+00:00" />
+<meta itemprop="wordCount" content="1128">
+<meta itemprop="image" content="https://0x0f0f0f.github.io"/>
+
+
+
+<meta itemprop="keywords" content="void,linux,sysadmin,hetzner,cloud," />
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://0x0f0f0f.github.io"/>
+
+<meta name="twitter:title" content="Supercharge your Cloud 1 - Installing Void Linux on Hetzner VPSs"/>
+<meta name="twitter:description" content="Systemd sucks 1, 2, 3, 4, 5 but Hetzner Cloud rocks, and is one of my favourite VPS providers. Hetzner has been providing Debian, Arch Linux, Ubuntu and CentOS images for cloud VPS instances, but wait! They all use systemd! I have been using Void Linux for years now on mostly all of my devices. I have even built a PDA that runs Void Linux 6.
+Those days, I was building a personal cloud instance with a few servers (more details in the following write-up posts), and I ran into some very annoying issues that were directly caused by the unnecessary complexity of systemd."/>
+
+
+
+
+<meta property="article:published_time" content="2020-11-13 00:00:00 &#43;0000 UTC" />
+
+
+
+
+
+
+
+
+    </head>
+
+    <body class="dark-theme">
+        <div class="container">
+            <header class="header">
+    <span class="header__inner">
+        <a href="/" style="text-decoration: none;">
+    <div class="logo">
+        
+            <span class="logo__mark">></span>
+            <span class="logo__text">$ 0x0f0f0f</span>
+            <span class="logo__cursor"></span>
+        
+    </div>
+</a>
+
+
+        <span class="header__right">
+            
+                <nav class="menu">
+    <ul class="menu__inner"><li><a href="https://0x0f0f0f.github.io/about/">About</a></li><li><a href="https://0x0f0f0f.github.io/posts/">Posts</a></li><li><a href="https://github.com/sponsors/0x0f0f0f">Sponsor</a></li>
+    </ul>
+</nav>
+
+                <span class="menu-trigger">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path d="M0 0h24v24H0z" fill="none"/>
+                        <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/>
+                    </svg>
+                </span>
+            
+
+            <span class="theme-toggle"><svg class="theme-toggler" width="24" height="24" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="M22 41C32.4934 41 41 32.4934 41 22C41 11.5066 32.4934 3 22
+  3C11.5066 3 3 11.5066 3 22C3 32.4934 11.5066 41 22 41ZM7 22C7
+  13.7157 13.7157 7 22 7V37C13.7157 37 7 30.2843 7 22Z"/>
+</svg>
+</span>
+        </span>
+    </span>
+</header>
+
+
+            <div class="content">
+                
+    <main class="post">
+
+        <div class="post-info">
+            <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-clock"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>6 minutes
+
+            
+
+            </p>
+        </div>
+
+        <article>
+            <h1 class="post-title"><a href="https://0x0f0f0f.github.io/posts/2020/11/supercharge-your-cloud-1-installing-void-linux-on-hetzner-vpss/">Supercharge your Cloud 1 - Installing Void Linux on Hetzner VPSs</a></h1>
+
+            
+
+            <div class="post-content">
+                <p>Systemd sucks <sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>, <sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup>, <sup id="fnref:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup>, <sup id="fnref:4"><a href="#fn:4" class="footnote-ref" role="doc-noteref">4</a></sup>, <sup id="fnref:5"><a href="#fn:5" class="footnote-ref" role="doc-noteref">5</a></sup> but <a href="https://cloud.hetzner.com">Hetzner Cloud</a> rocks, and is one of my favourite VPS providers.
+Hetzner has been providing Debian, Arch Linux, Ubuntu and CentOS images for cloud VPS instances, but wait!
+They all use systemd! I have been using Void Linux for years now on mostly all of my devices. I have even
+built a PDA that runs Void Linux <sup id="fnref:6"><a href="#fn:6" class="footnote-ref" role="doc-noteref">6</a></sup>.</p>
+<p>Those days,  I was building a personal cloud instance with a few servers (more details in the following write-up posts),
+and I ran into some very annoying issues that were directly caused by the unnecessary complexity of systemd. Docker was definitely resource overkill for this task.</p>
+<p>Let&rsquo;s jump straight to the guide on how to install Void Linux on a Hetzner Cloud VPS instance.</p>
+<h2 id="rescue-mode">Rescue Mode</h2>
+<p>The first step is to create a server on your Hetzner Cloud account. Choose Ubuntu as the initial OS image choice.
+Do not add any volume or SSH key in the initial configuration wizard, as those will have to be manually managed after installing Void.
+Do not upload anything on the server. The root partition will be formatted and wiped out!</p>
+<p>After installing, turn off the server and boot in rescue mode.</p>
+<p><img src="/posts/images/hetzner1.png" alt="/posts/images/hetzner1.png"></p>
+<p>You will be provided with an username (<code>root</code>) and a password for the rescue system. Copy this password somewhere!</p>
+<p>Now is time to login into the rescue system by SSH-ing into the server, as you would normally do with the IPv4 address that Hetzner shows at the top of the server page:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">ssh root@your-server-ipv4-address
+</code></pre></div><h2 id="unpacking-the-tarball">Unpacking the tarball</h2>
+<p>Login with the password Hetzner has just provided you, and run the <code>installimage</code> script. The following menu will be shown, choose
+custom_image.</p>
+<p><img src="/posts/images/hetzner2.png" alt="/posts/images/hetzner2.png"></p>
+<p><code>installimage</code> will then open an editor with a configuration file.
+Scroll down to the line containing <code>HOSTNAME</code> and change the value to the machine hostname you are going to set later.</p>
+<p>Time to choose what image to install on the server! We will need a ROOTFS tarball of the system. I have not tested the <code>musl</code> version
+and therefore I cannot recommend to use it. The standard <code>glibc</code> version works very fine for me.</p>
+<p>Go on the Void Linux downloads repository <sup id="fnref:7"><a href="#fn:7" class="footnote-ref" role="doc-noteref">7</a></sup>, scroll down at the very end and <strong>copy the link</strong>
+of the x86_64 ROOTFS tarball. The file name will be something like this¸
+but the build date will obviously become different in the future.</p>
+<pre><code>void-x86_64-ROOTFS-20191109.tar.xz
+</code></pre><p>Be sure that the URL you have been copied looks like this:</p>
+<pre><code>https://alpha.de.repo.voidlinux.org/live/current/void-x86_64-ROOTFS-20191109.tar.xz
+</code></pre><p>Now, go back to your rescue system SSH session, where we left it at the <code>installimage</code> config editor,
+scroll down at the end of the config file, at the line starting with <code>IMAGE</code>, and paste
+the Void Linux ROOTFS tarball URL after the word <code>IMAGE</code>, on the same line, like this:</p>
+<pre><code>IMAGE https://alpha.de.repo.voidlinux.org/live/current/void-x86_64-ROOTFS-20191109.tar.xz
+</code></pre><p>You could change other settings in the config file, such as the disks partitioning,
+but for simplicity I have been sticking with the default, single root ext4 partition.</p>
+<p>Press F2 to save and then press F10 to exit. Hetzner&rsquo;s <code>installimage</code> script will format
+the <code>/dev/sda</code> and unpack the Void tarball automatically. It will probably fail at the end, but
+don&rsquo;t worry!</p>
+<h2 id="chroot-time">Chroot time!</h2>
+<p>Now, the installer will probably exit with an error.
+We should be fine if it has unpacked the tarball correctly in the <code>/dev/sda1</code> partition.
+Now check if there is an ext4 partition in there, run:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">lsblk -f
+</code></pre></div><p>Now, mount it to <code>/mnt</code>.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">mount /dev/sda1 /mnt
+</code></pre></div><p>Check if <code>/mnt/</code> contains the Void ROOTFS tarball contents.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">ls -lah /mnt
+</code></pre></div><p>The rest of the guide is pretty much the guide for installing Void from chroot <sup id="fnref:8"><a href="#fn:8" class="footnote-ref" role="doc-noteref">8</a></sup>, but is not identical!
+Some steps are different (or not needed).
+Though, I will still report the rest of the steps you need for setting up your Void VPS on Hetzner.</p>
+<p>Mount the pseudo-filesystems needed for a chroot:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh"><span style="color:#66d9ef">for</span> i in sys dev proc; <span style="color:#66d9ef">do</span> mount --rbind /$i /mnt/$i <span style="color:#f92672">&amp;&amp;</span> mount --make-rslave /mnt/$i; <span style="color:#66d9ef">done</span>
+</code></pre></div><p>Copy the DNS configuration into the new root so that XBPS can still download new packages inside the chroot:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">cp /etc/resolv.conf /mnt/etc/
+</code></pre></div><p>Chroot into the new installation:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">PS1<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;(chroot) # &#39;</span> chroot /mnt/ /bin/bash
+</code></pre></div><p>Congrats! You&rsquo;re in the chroot.</p>
+<h2 id="finishing-the-installation">Finishing the installation</h2>
+<p>Check the internet connection:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">ping voidlinux.org
+</code></pre></div><p>ROOTFS images generally contain out of date software, due to being a snapshot of the time when they were built, and do not come with a complete <code>base-system</code>. Update the package manager and install <code>base-system</code>:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">xbps-install -Su xbps
+xbps-install -u
+xbps-install base-system
+xbps-remove base-voidstrap
+</code></pre></div><p>Specify the hostname in <code>/etc/hostname</code>. Use the same one you used in the previous step when editing Hetzner <code>installimage</code>&rsquo;s config:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">echo <span style="color:#e6db74">&#39;yourhostname&#39;</span> &gt; /etc/hostname
+</code></pre></div><p>For glibc builds, generate locale files with:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">xbps-reconfigure -f glibc-locales
+</code></pre></div><p>Install your favourite text editor. I&rsquo;m ok with nano.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">xbps-install -S nano
+</code></pre></div><p>Now edit <code>/etc/fstab</code>. This is very simple <code>fstab</code> is OK. See the references <sup id="fnref:9"><a href="#fn:9" class="footnote-ref" role="doc-noteref">9</a></sup> for more.</p>
+<pre><code>proc /proc proc defaults 0 0
+/dev/sda1 / ext4 defaults,discard 0 0
+</code></pre><p>Install GRUB. Hetzner uses DOS disk partitioning.</p>
+<pre><code>xbps-install grub
+grub-install /dev/sda
+</code></pre><p>Use xbps-reconfigure(1) to ensure all installed packages are configured properly:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">xbps-reconfigure -fa
+</code></pre></div><p>Congrats! You have now installed Void on Hetzner Cloud.
+You will need a couple of config tweaks before rebooting into a working install.
+Don&rsquo;t exit from the <code>chroot</code> shell yet!</p>
+<h2 id="final-tweaks">Final tweaks</h2>
+<p>While still in the chroot, enable the <code>dhcpcd</code> service:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">ln -s /etc/sv/dhcpcd /var/service/
+</code></pre></div><p>Enable the <code>sshd</code> service for remote login through SSH.
+I suggest you also install <code>ssh-audit</code>, and check out
+the awesome SSH HARDENING GUIDES <sup id="fnref:10"><a href="#fn:10" class="footnote-ref" role="doc-noteref">10</a></sup> to ensure that
+your Void VPS is safe and sound from unwanted remote logins.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">ln -s /etc/sv/sshd /var/service/
+</code></pre></div><p>Copy your SSH public key to your local PC clipboard and save it in the VPS root account <code>authorized_keys</code> file,
+to later authorize your remote SSH login sessions.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">mkdir /root/.ssh
+nano /root/.ssh/authorized_keys
+<span style="color:#75715e"># paste your PUBLIC key in there and save</span>
+</code></pre></div><p>Change the root password</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">passwd root
+</code></pre></div><p>Add an additional user</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">useradd --shell /bin/bash voiduser
+</code></pre></div><p>Change its password</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">passwd voiduser
+</code></pre></div><p>That&rsquo;s all! Have fun with your Void Linux VPS!</p>
+<p>Now run <code>reboot</code> and login with SSH, as usual, into your fresh new Void Linux VPS!</p>
+<h2 id="additional-goodies">Additional Goodies</h2>
+<p>Uncomplicated Firewall. Don&rsquo;t enable before allowing the SSH port (change it from 22 to the port you are
+using if you changed it in your <code>sshd_config</code>) <sup id="fnref:11"><a href="#fn:11" class="footnote-ref" role="doc-noteref">11</a></sup></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">xbps-install -S ufw
+ln -s /etc/sv/ufw /var/service/ufw
+ufw allow <span style="color:#ae81ff">22</span> <span style="color:#75715e"># CHANGE THE PORT TO YOUR SSHD PORT IF IT IS NOT 22!</span>
+<span style="color:#75715e"># add all the rules you like :)</span>
+ufw enable
+</code></pre></div><p>dtach and dvtm <sup id="fnref:12"><a href="#fn:12" class="footnote-ref" role="doc-noteref">12</a></sup></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">xbps-install -S dtach
+dtach -A ~/dvtm-session -r winch dvtm
+</code></pre></div><hr>
+<section class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1" role="doc-endnote">
+<p><a href="https://suckless.org/sucks/systemd/">https://suckless.org/sucks/systemd/</a> <a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:2" role="doc-endnote">
+<p><a href="https://nosystemd.org/">https://nosystemd.org/</a> <a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:3" role="doc-endnote">
+<p>#systemdsucks on freenode! <a href="#fnref:3" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:4" role="doc-endnote">
+<p><a href="http://galexander.org/systemd_sucks.html">http://galexander.org/systemd_sucks.html</a> <a href="#fnref:4" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:5" role="doc-endnote">
+<p><a href="https://news.ycombinator.com/item?id=12589281">https://news.ycombinator.com/item?id=12589281</a> <a href="#fnref:5" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:6" role="doc-endnote">
+<p>Building a Raspberry Pi 3B+ full keyboard handheld. <a href="/posts/2019/08/building-a-raspberry-pi-3b-full-keyboard-handheld.-part-1/">Part 1</a> <a href="/posts/2019/09/building-a-raspberry-pi-3b-full-keyboard-handheld.-part-2/">Part 2</a> <a href="#fnref:6" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:7" role="doc-endnote">
+<p><a href="https://alpha.de.repo.voidlinux.org/live/current/">https://alpha.de.repo.voidlinux.org/live/current/</a> <a href="#fnref:7" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:8" role="doc-endnote">
+<p><a href="https://docs.voidlinux.org/installation/guides/chroot.html#entering-the-chroot">https://docs.voidlinux.org/installation/guides/chroot.html#entering-the-chroot</a> <a href="#fnref:8" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:9" role="doc-endnote">
+<p><a href="https://docs.voidlinux.org/installation/guides/chroot.html#configure-fstab">https://docs.voidlinux.org/installation/guides/chroot.html#configure-fstab</a> <a href="#fnref:9" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:10" role="doc-endnote">
+<p><a href="https://www.sshaudit.com/hardening_guides.html">https://www.sshaudit.com/hardening_guides.html</a> <a href="#fnref:10" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:11" role="doc-endnote">
+<p><a href="https://launchpad.net/ufw">https://launchpad.net/ufw</a> <a href="#fnref:11" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:12" role="doc-endnote">
+<p><a href="https://www.digitalocean.com/community/tutorials/how-to-use-dvtm-and-dtach-as-a-terminal-window-manager-on-an-ubuntu-vps">https://www.digitalocean.com/community/tutorials/how-to-use-dvtm-and-dtach-as-a-terminal-window-manager-on-an-ubuntu-vps</a> <a href="#fnref:12" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</section>
+
+            </div>
+        </article>
+
+        <hr />
+
+        <div class="post-info">
+                <p>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tag meta-icon"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7" y2="7"></line></svg><span class="tag"><a href="https://0x0f0f0f.github.io/tags/void">void</a></span><span class="tag"><a href="https://0x0f0f0f.github.io/tags/linux">linux</a></span><span class="tag"><a href="https://0x0f0f0f.github.io/tags/sysadmin">sysadmin</a></span><span class="tag"><a href="https://0x0f0f0f.github.io/tags/hetzner">hetzner</a></span><span class="tag"><a href="https://0x0f0f0f.github.io/tags/cloud">cloud</a></span>
+                </p>
+
+            <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>1128 Words</p>
+
+            <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>2020-11-13 01:00 &#43;0100</p>
+        </div>
+
+        
+            <div class="pagination">
+                <div class="pagination__title">
+                    <span class="pagination__title-h"></span>
+                    <hr />
+                </div>
+
+                <div class="pagination__buttons">
+                    
+
+                    
+                        <span class="button next">
+                            <a href="https://0x0f0f0f.github.io/posts/2020/06/hyperpixel-instructions-updated-for-the-raspberry-pi-handheld./">
+                                <span class="button__text">Hyperpixel instructions updated for the Raspberry Pi Handheld.</span>
+                                <span class="button__icon">→</span>
+                            </a>
+                        </span>
+                    
+                </div>
+            </div>
+        
+
+        
+    </main>
+
+            </div>
+
+            
+                <footer class="footer">
+    <div class="footer__inner">
+        <div class="footer__content">
+            <span>&copy; 2020</span>
+            
+                <span><a href="https://0x0f0f0f.github.io">Alessandro Cheli</a></span>
+            
+            <span></span>
+            <span> <a href="https://0x0f0f0f.github.io/posts/index.xml" target="_blank" title="rss"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-rss"><path d="M4 11a9 9 0 0 1 9 9"></path><path d="M4 4a16 16 0 0 1 16 16"></path><circle cx="5" cy="19" r="1"></circle></svg></a></span>
+        </div>
+    </div>
+    <div class="footer__inner">
+        <div class="footer__content">
+
+        </div>
+    </div>
+    <div class="footer__inner">
+        <div class="footer__content">
+            <span>Powered by <a href="http://gohugo.io">Hugo</a></span>
+            <span>Like this? <a href="https://github.com/sponsors/0x0f0f0f">Sponsor on GitHub &#10084; </a></span>
+        </div>
+    </div>
+</footer>
+
+            
+        </div>
+
+        
+
+
+
+
+<script type="text/javascript" src="/bundle.min.4c3fb12a087ceed4a52cb5d57068a9795c7069617a01ca70f788052ad66e1791779e6c72686e1dc0ca13dc03b0203204b6566bb0dd1ee80de2b7ff4d8fe53db2.js" integrity="sha512-TD&#43;xKgh87tSlLLXVcGipeVxwaWF6Acpw94gFKtZuF5F3nmxyaG4dwMoT3AOwIDIEtlZrsN0e6A3it/9Nj&#43;U9sg=="></script>
+    <script>
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+        ga('create', 'UA-106198734-2', 'auto');
+        ga('send', 'pageview');
+    </script>
+
+
+
+    </body>
+</html>
