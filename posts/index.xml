@@ -5,8 +5,30 @@
         <description>Recent content in Posts on 0x0f0f0f</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>en-us</language>
-        <lastBuildDate>Fri, 13 Nov 2020 00:00:00 +0000</lastBuildDate>
+        <lastBuildDate>Tue, 29 Dec 2020 00:00:00 +0000</lastBuildDate>
         <atom:link href="https://0x0f0f0f.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+        
+        <item>
+            <title>A Computability and Complexity Theory Cheat Sheet</title>
+            <link>https://0x0f0f0f.github.io/posts/2020/12/a-computability-and-complexity-theory-cheat-sheet/</link>
+            <pubDate>Tue, 29 Dec 2020 00:00:00 +0000</pubDate>
+            
+            <guid>https://0x0f0f0f.github.io/posts/2020/12/a-computability-and-complexity-theory-cheat-sheet/</guid>
+            <description>I made these two posters containing computability theory and complexity theory basic knowledge, theorems and short intuitive proofs. Although this is meant for an undergraduate computer science course, I hope these will result useful for anybody interested in the subject.
+You can find the source code in the Github Repository. Please open an issue if you find any mistake or typo!
+Click on the images to download the PDF file! Computability Theory Cheat Sheet</description>
+            <content type="html"><![CDATA[<p>I made these two posters containing computability theory and complexity theory basic knowledge, theorems and short intuitive proofs.
+Although this is meant for an undergraduate computer science course, I hope these will result useful for anybody interested in the subject.</p>
+<p>You can find the source code in the <a href="https://github.com/0x0f0f0f/computability-complexity-cheat-sheets">Github Repository</a>.
+Please open an issue if you find any mistake or typo!</p>
+<h3 id="click-on-the-images-to-download-the-pdf-file">Click on the images to download the PDF file!</h3>
+<h2 id="computability-theory-cheat-sheet">Computability Theory Cheat Sheet</h2>
+<p><a href="/posts/files/comp-cheat.pdf"><img src="/posts/images/comp-cheat.png" alt=""></a></p>
+<h2 id="complexity-theory-cheat-sheet">Complexity Theory Cheat Sheet</h2>
+<p><a href="/posts/files/cplx-cheat.pdf"><img src="/posts/images/cplx-cheat.png" alt=""></a></p>
+<p>\</p>
+]]></content>
+        </item>
         
         <item>
             <title>Supercharge your Cloud 1 - Installing Void Linux on Hetzner VPSs</title>
