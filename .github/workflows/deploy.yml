@@ -2,7 +2,7 @@ name: Build and Deploy
 on:
   push:
     branches:
-      - dev
+      - master
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
@@ -26,6 +26,7 @@ jobs:
             using Franklin;
             Pkg.activate("."); Pkg.instantiate();
             optimize()'
+    - env: 
     - name: Build and Deploy
       uses: JamesIves/github-pages-deploy-action@releases/v3
       with:
