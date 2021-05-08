@@ -1,0 +1,16 @@
+  </main>
+  <!-- CONTENT ENDS HERE -->
+    </div>  <!-- div: content container -->
+    {{ if hasmath }}
+        {{ insert foot_katex.html }}
+    {{ end }}
+    {{ if hascode }}
+        {{ insert foot_highlight.html }}
+    {{ end }}
+    <footer>
+      &copy; Abhinav Kaushlya.
+      Made with <a href="https://github.com/tlienart/Franklin.jl">Franklin.jl</a>
+      and <a href="https://julialang.org">The Julia Programming Language</a>.
+    </footer>
+  </body>
+</html>
