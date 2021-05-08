@@ -16,6 +16,9 @@ The website_* must be defined for the RSS to work
 <!-- Stuff related to the site styling -->
 @def div_content = "container"
 
+@def hasplotly = false
+
+
 <!--
 Add here files or directories that should be ignored by Franklin, otherwise
 these files might be copied and, if markdown, processed by Franklin which
