@@ -1,0 +1,93 @@
+<!doctype html> <html lang=en > <meta charset=UTF-8 > <meta name=viewport  content="width=device-width, initial-scale=1"> <link rel=stylesheet  href="/libs/highlight/style.css"> <link rel=stylesheet  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA==" crossorigin=anonymous  /> <link rel=stylesheet  href="/css/franklin.css"> <link rel=icon  href="/assets/favicon.ico"> <title>Adding a macro parser to my Scheme implementation</title> <header> <a class=title  href="/"><h2>@0x0f0f0f - Alessandro Cheli</h2></a> <nav> <a href="/">Home</a> / <a href="/blog">Blog</a> / <a href="/tag/">Tags</a> <div class=social-media > <a style="color: #000000;" href="https://github.com/0x0f0f0f"><i class="fab fa-github"></i></a> <a style="color: #000000;" href="https://twitter.com/0x0f0f0f1"><i class="fab fa-twitter"></i></a> </div> </nav> </header> <main> <div class=container ><h1>Adding a macro parser to my Scheme implementation</h1> <p>Published 31 October 2019</p> <p><b>Tags: </b><a href="/tag/functional-programming">#functional-programming</a>, <a href="/tag/haskell">#haskell</a>, <a href="/tag/lisp">#lisp</a>, <a href="/tag/yasih">#yasih</a></p><hr/> <p>Happy Halloween everybody, here&#39;s a little report on how I&#39;ve added a macro parser to <a href="https://github.com/0x0f0f0f/yasih">yasih</a> &#40;Yet Another Scheme in Haskell&#41;, my own R5RS Scheme implementation written in Haskell.</p> <p>At first I&#39;ve had to define parsers for <code>quote</code>, <code>quasiquote</code>, and <code>unquote</code> and add them to the expression parser. You can learn more about how scheme quoting works <a href="https://www.gnu.org/software/mit-scheme/documentation/mit-scheme-ref/Quoting.html">in the MIT-scheme documentation</a>.</p> <pre><code class="haskell hljs"><span class=hljs-comment >-- |Parse a Quoted Expression &#x27;a</span>
+<span class=hljs-title >parseQuoted</span> :: <span class=hljs-type >Parser</span> <span class=hljs-type >LispVal</span>
+<span class=hljs-title >parseQuoted</span> = <span class=hljs-keyword >do</span>
+    char &#x27;\&#x27;&#x27;
+    x &lt;- parseExpr
+    return $ <span class=hljs-type >List</span> [<span class=hljs-type >Atom</span> <span class=hljs-string >&quot;quote&quot;</span>, x]
+
+<span class=hljs-comment >-- |Parse a QuasiQuoted Expression</span>
+<span class=hljs-comment >-- See https://schemers.org/Documents/Standards/R5RS/HTML/r5rs-Z-H-7.html#%_sec_4.2.6</span>
+<span class=hljs-title >parseQuasiQuoted</span> :: <span class=hljs-type >Parser</span> <span class=hljs-type >LispVal</span>
+<span class=hljs-title >parseQuasiQuoted</span> = <span class=hljs-keyword >do</span>
+    char &#x27;`&#x27;
+    x &lt;- parseExpr
+    return $ <span class=hljs-type >List</span> [<span class=hljs-type >Atom</span> <span class=hljs-string >&quot;quasiquote&quot;</span>, x]
+
+<span class=hljs-title >parseUnQuote</span> :: <span class=hljs-type >Parser</span> <span class=hljs-type >LispVal</span>
+<span class=hljs-title >parseUnQuote</span> = <span class=hljs-keyword >do</span>
+    char &#x27;,&#x27;
+    x &lt;- parseExpr
+    return $ <span class=hljs-type >List</span> [<span class=hljs-type >Atom</span> <span class=hljs-string >&quot;unquote&quot;</span>, x]</code></pre> <p>Expression parser:</p> <pre><code class="haskell hljs"><span class=hljs-comment >-- |Parse an Expression</span>
+<span class=hljs-title >parseExpr</span> :: <span class=hljs-type >Parser</span> <span class=hljs-type >LispVal</span>
+<span class=hljs-title >parseExpr</span> = try parseComplex
+        &lt;|&gt; try parseRatio
+        &lt;|&gt; try parseFloat
+        &lt;|&gt; try parseNumber
+        &lt;|&gt; try parseAtom
+        &lt;|&gt; parseString
+        &lt;|&gt; try parseBool
+        &lt;|&gt; try parseCharacter
+        &lt;|&gt; try parseQuoted
+        &lt;|&gt; try parseQuasiQuoted
+        &lt;|&gt; try parseUnQuote
+        &lt;|&gt; try parseVector
+        &lt;|&gt; try parseParens</code></pre> <p>The symbols <code>&#39;expr</code>, <code>&#96;expr</code>, and <code>,expr</code> are shorthands and are correspondingly transformed by the parser into the AST equivalent of the expressions: <code>&#40;quote expr&#41;</code>, <code>&#40;quasiquote expr&#41;</code> and <code>&#40;unquote expr&#41;</code>. In fact, the shorthand and list syntaxes are interchangeable. <code>unquote</code> makes sense only inside a <code>quasiquote</code>d block</p> <p>After defining the parsing rules for quoting and unquoting, it is time to define the corresponding evaluation rules as <code>eval</code> pattern matching cases:</p> <pre><code class="haskell hljs"><span class=hljs-comment >-- Evalaute a quoted expression, just return the value.</span>
+<span class=hljs-title >eval</span> env (<span class=hljs-type >List</span> [<span class=hljs-type >Atom</span> <span class=hljs-string >&quot;quote&quot;</span>, val]) = return val
+<span class=hljs-comment >-- ...</span>
+
+<span class=hljs-comment >-- Evaluate quasiquotation. AKA macro expander.</span>
+<span class=hljs-comment >-- Recursively evaluate unquote forms, or just return the items if not unquoted</span>
+<span class=hljs-title >eval</span> env (<span class=hljs-type >List</span> [<span class=hljs-type >Atom</span> <span class=hljs-string >&quot;quasiquote&quot;</span>, form]) =
+    evalUnquotes form
+    <span class=hljs-keyword >where</span> evalUnquotes form =
+            <span class=hljs-keyword >case</span> form <span class=hljs-keyword >of</span>
+                <span class=hljs-type >List</span> [<span class=hljs-type >Atom</span> <span class=hljs-string >&quot;unquote&quot;</span>, form] -&gt; eval env form
+                <span class=hljs-type >List</span> items -&gt; <span class=hljs-keyword >do</span>
+                    results &lt;- traverse evalUnquotes items
+                    return $ <span class=hljs-type >List</span> results
+                _ -&gt; return form</code></pre> <p>Here&#39;s an example, showing what happens when entering quoted expressions in <strong>yasih</strong>&#39;s REPL.</p> <pre><code class="scheme hljs">λ&gt; ; here, the evaluator tries to apply
+λ&gt; (1 2 3) ; 2 and 3 as arguments to a function &quot;1&quot;
+Not a function: : &quot;1&quot;
+λ&gt; ; the result is clearly not a function
+λ&gt; ; the list here is now quoted and will be treated as a literal value
+λ&gt; &#x27;(1 2 3)
+(1 2 3)
+λ&gt; `(1 2 3) ; same here but using quasiquote
+(1 2 3)
+λ&gt; `(1 2 ,(+ 4 5)) ; the unquoted expression is evaluated! (un-quoted)!
+(1 2 9)</code></pre> <p>After we have working quotation and quasiquotation it is time to add actual macros to the interpreter. I had to change the expression data type by adding an <code>isMacro</code> field.</p> <pre><code class="haskell hljs"><span class=hljs-comment >-- |Lisp Value data type</span>
+<span class=hljs-class ><span class=hljs-keyword >data</span> <span class=hljs-type >LispVal</span> =</span>
+    <span class=hljs-comment >-- Other data types here...</span>
+    | <span class=hljs-type >Func</span> {
+        isMacro :: <span class=hljs-type >Bool</span>,
+        params :: [<span class=hljs-type >String</span>], <span class=hljs-comment >-- Parameters name</span>
+        vararg :: <span class=hljs-type >Maybe</span> <span class=hljs-type >String</span>, <span class=hljs-comment >-- name of a variable-length argument list</span>
+        body :: [<span class=hljs-type >LispVal</span>], <span class=hljs-comment >-- list of expressions</span>
+        closure :: <span class=hljs-type >Env</span> <span class=hljs-comment >-- the environment where the function was created</span>
+        }
+    | <span class=hljs-type >IOFunc</span> ([<span class=hljs-type >LispVal</span>] -&gt; <span class=hljs-type >IOThrowsError</span> <span class=hljs-type >LispVal</span>) <span class=hljs-comment >-- A dirty function that performs IO</span>
+    | <span class=hljs-type >Port</span> <span class=hljs-type >Handle</span> <span class=hljs-comment >-- Represents input and output devices</span></code></pre> <p>The important bit was changing <code>eval</code>&#39;s function application clause by checking if a called function is a macro, and if so changing from eager evaluation order of the arguments to a normal-order evaluation. Read more about evaluation models <a href="https://cs.stackexchange.com/questions/54000/is-applicative-order-and-normal-order-evaluation-models-definition-contradictor">here</a> &#40;huge thanks to Rei for the link&#41;.</p> <pre><code class="haskell hljs"><span class=hljs-comment >-- Function application clause</span>
+<span class=hljs-comment >-- Run eval recursively over args then apply func over the resulting list</span>
+<span class=hljs-title >eval</span> env (<span class=hljs-type >List</span> (function : args)) = <span class=hljs-keyword >do</span>
+    func &lt;- eval env function
+    <span class=hljs-keyword >case</span> func <span class=hljs-keyword >of</span>
+        <span class=hljs-type >Func</span> {isMacro = <span class=hljs-type >True</span>} -&gt; apply func args &gt;&gt;= eval env
+        _ -&gt; mapM (eval env) args &gt;&gt;= apply func</code></pre> <p>You can see that if the applied function is a macro, then <code>eval env</code> is not called over the arguments. Minor changes were needed also in <code>apply</code>, just adding an <code>isMacro</code> deconstructor to the case where <code>Func</code> is passed as an argument. It is not needed by now inside <code>apply</code>&#39;s body.</p> <pre><code class="haskell hljs"><span class=hljs-title >apply</span> (<span class=hljs-type >Func</span> isMacro params varargs body closure) args =
+    <span class=hljs-comment >-- more code...</span></code></pre> <p>Now, it&#39;s time to add some helper functions in <code>Environment.hs</code> to make a macro</p> <pre><code class="haskell hljs"><span class=hljs-comment >-- |Helper functions to create function objects in IOThrowsError monad</span>
+<span class=hljs-title >makeFunc</span> :: <span class=hljs-type >Bool</span> -&gt; <span class=hljs-type >Maybe</span> <span class=hljs-type >String</span> -&gt; <span class=hljs-type >Env</span> -&gt; [<span class=hljs-type >LispVal</span>] -&gt; [<span class=hljs-type >LispVal</span>] -&gt; <span class=hljs-type >IOThrowsError</span> <span class=hljs-type >LispVal</span>
+<span class=hljs-title >makeFunc</span> isMacro varargs env params body = return $ <span class=hljs-type >Func</span> isMacro (map showVal params) varargs body env
+<span class=hljs-title >makeNormalFunc</span> = makeFunc <span class=hljs-type >False</span> <span class=hljs-type >Nothing</span>
+<span class=hljs-title >makeVarargs</span> = makeFunc <span class=hljs-type >False</span> . <span class=hljs-type >Just</span> . showVal
+<span class=hljs-title >makeMacro</span> = makeFunc <span class=hljs-type >True</span> <span class=hljs-type >Nothing</span></code></pre> <p>Finally, a <code>define-syntax</code> form can be defined to make macros. I have not yet implemented <code>syntax-rules</code> but i surely will in the next <strong>yasih</strong> updates.</p> <pre><code class="haskell hljs"><span class=hljs-comment >-- Define a macro</span>
+<span class=hljs-title >eval</span> env (<span class=hljs-type >List</span> (<span class=hljs-type >Atom</span> <span class=hljs-string >&quot;define-syntax&quot;</span> : <span class=hljs-type >List</span> (<span class=hljs-type >Atom</span> var : params) : body)) =
+    makeMacro env params body &gt;&gt;= defineVar env var</code></pre> <p>Here&#39;s an example on how you can make a macro and use it as a practical construct for a programming language. Here, the <code>let</code> statement is defined as a macro that will expand to an anonymous function &#40;lambda&#41; application, in this way a closure will be made and lexical scoping will be respected, correctly reaching the <code>let</code> statement&#39;s goals. The implementation is a little sketchy and will surely get better as <code>syntax-rules</code> gets implemented.</p> <pre><code class="scheme hljs">(<span class=hljs-name ><span class=hljs-builtin-name >define-syntax</span></span> (<span class=hljs-name >bind-vars</span> bindings)
+    `(map car bindings))
+
+(<span class=hljs-name ><span class=hljs-builtin-name >define-syntax</span></span> (<span class=hljs-name >bind-vals</span> bindings)
+    `(map cadr bindings))
+
+(<span class=hljs-name ><span class=hljs-builtin-name >define-syntax</span></span> (<span class=hljs-name ><span class=hljs-builtin-name >let</span></span> bindings body)
+    `(apply (lambda ,(bind-vars bindings) ,body) &#x27;,(bind-vals bindings)))</code></pre> <pre><code class="scheme hljs">(<span class=hljs-name ><span class=hljs-builtin-name >let</span></span> ((<span class=hljs-name >x</span> <span class=hljs-number >1</span>) (<span class=hljs-name >y</span> <span class=hljs-number >4</span>)) (<span class=hljs-name ><span class=hljs-builtin-name >-</span></span> (<span class=hljs-name ><span class=hljs-builtin-name >*</span></span> y y) (<span class=hljs-name ><span class=hljs-builtin-name >+</span></span> <span class=hljs-number >1</span> x)))
+<span class=hljs-comment >; will expand to</span>
+((<span class=hljs-name ><span class=hljs-builtin-name >lambda</span></span> (x y) (<span class=hljs-name ><span class=hljs-builtin-name >-</span></span> (<span class=hljs-name ><span class=hljs-builtin-name >*</span></span> y y) (<span class=hljs-name ><span class=hljs-builtin-name >+</span></span> <span class=hljs-number >1</span> x))) <span class=hljs-number >1</span> <span class=hljs-number >4</span>)
+<span class=hljs-comment >; before being executed</span></code></pre> <p>This practice is called <code>let-over-lambda</code>. Some modern functional programming languages like OCaml, directly create a closure instead of creating an anonymous function for <code>let</code> statements; that practice is fairly more performant, but the execution result is identical.</p> <h2 id=some_updates_on_yasihs_development ><a href="#some_updates_on_yasihs_development" class=header-anchor >Some updates on yasih&#39;s development.</a></h2> <p>A sketchy complete R5RS implementation is almost done. Some primitives are still missing and I will work on them in the next updates, in which I will also focus on adding additional features like string interpolation, stack tracing, and probably optimization features like a garbage collector.</p> </div> </main> </div> <footer> &copy; Alessandro Cheli. Made with <a href="https://github.com/tlienart/Franklin.jl">Franklin.jl</a> and <a href="https://julialang.org">The Julia Programming Language</a>. </footer>

@@ -1,0 +1,167 @@
+<!doctype html> <html lang=en > <meta charset=UTF-8 > <meta name=viewport  content="width=device-width, initial-scale=1"> <link rel=stylesheet  href="/libs/highlight/style.css"> <link rel=stylesheet  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA==" crossorigin=anonymous  /> <link rel=stylesheet  href="/css/franklin.css"> <link rel=icon  href="/assets/favicon.ico"> <title>Supercharge your Cloud 1 - Installing Void Linux on Hetzner VPSs</title> <header> <a class=title  href="/"><h2>@0x0f0f0f - Alessandro Cheli</h2></a> <nav> <a href="/">Home</a> / <a href="/blog">Blog</a> / <a href="/tag/">Tags</a> <div class=social-media > <a style="color: #000000;" href="https://github.com/0x0f0f0f"><i class="fab fa-github"></i></a> <a style="color: #000000;" href="https://twitter.com/0x0f0f0f1"><i class="fab fa-twitter"></i></a> </div> </nav> </header> <main> <div class=container ><h1>Supercharge your Cloud 1 - Installing Void Linux on Hetzner VPSs</h1> <p>Published 13 November 2020</p> <p><b>Tags: </b><a href="/tag/void">#void</a>, <a href="/tag/linux">#linux</a>, <a href="/tag/sysadmin">#sysadmin</a>, <a href="/tag/hetzner">#hetzner</a>, <a href="/tag/cloud">#cloud</a></p><hr/> <p>Systemd sucks <sup id="fnref:sd1"><a href="#fndef:sd1" class=fnref >[1]</a></sup>, <sup id="fnref:sd2"><a href="#fndef:sd2" class=fnref >[2]</a></sup>, <sup id="fnref:sd3"><a href="#fndef:sd3" class=fnref >[3]</a></sup>, <sup id="fnref:sd4"><a href="#fndef:sd4" class=fnref >[4]</a></sup>, <sup id="fnref:sd5"><a href="#fndef:sd5" class=fnref >[5]</a></sup> but <a href="https://cloud.hetzner.com">Hetzner Cloud</a> rocks, and is one of my favourite VPS providers. Hetzner has been providing Debian, Arch Linux, Ubuntu and CentOS images for cloud VPS instances, but wait&#33; They all use systemd&#33; I have been using Void Linux for years now on mostly all of my devices. I have even built a PDA that runs Void Linux <sup id="fnref:voidpda"><a href="#fndef:voidpda" class=fnref >[6]</a></sup>.</p> <p>Those days, I was building a personal cloud instance with a few servers &#40;more details in the following write-up posts&#41;, and I ran into some very annoying issues that were directly caused by the unnecessary complexity of systemd. Docker was definitely resource overkill for this task. </p> <p>Let&#39;s jump straight to the guide on how to install Void Linux on a Hetzner Cloud VPS instance.</p> <h2 id=rescue_mode ><a href="#rescue_mode" class=header-anchor >Rescue Mode</a></h2> <p>The first step is to create a server on your Hetzner Cloud account. Choose Ubuntu as the initial OS image choice. Do not add any volume or SSH key in the initial configuration wizard, as those will have to be manually managed after installing Void. Do not upload anything on the server. The root partition will be formatted and wiped out&#33;</p> <p>After installing, turn off the server and boot in rescue mode.</p> <p><img src="/assets/images/hetzner1.png" alt="/posts/images/hetzner1.png" /></p> <p>You will be provided with an username &#40;<code>root</code>&#41; and a password for the rescue system. Copy this password somewhere&#33;</p> <p>Now is time to login into the rescue system by SSH-ing into the server, as you would normally do with the IPv4 address that Hetzner shows at the top of the server page:</p> <pre><code class="sh hljs">ssh root@your-server-ipv4-address</code></pre>
+<h2 id=unpacking_the_tarball ><a href="#unpacking_the_tarball" class=header-anchor >Unpacking the tarball</a></h2>
+<p>Login with the password Hetzner has just provided you, and run the <code>installimage</code> script. The following menu will be shown, choose custom_image.</p>
+<p><img src="/assets/images/hetzner2.png" alt="/posts/images/hetzner2.png" /></p>
+<p><code>installimage</code> will then open an editor with a configuration file. Scroll down to the line containing <code>HOSTNAME</code> and change the value to the machine hostname you are going to set later.</p>
+<p>Time to choose what image to install on the server&#33; We will need a ROOTFS tarball of the system. I have not tested the <code>musl</code> version and therefore I cannot recommend to use it. The standard <code>glibc</code> version works very fine for me.</p>
+<p>Go on the Void Linux downloads repository <sup id="fnref:voidrepo"><a href="#fndef:voidrepo" class=fnref >[7]</a></sup>, scroll down at the very end and <strong>copy the link</strong> of the x86_64 ROOTFS tarball. The file name will be something like this¸  but the build date will obviously become different in the future.</p>
+<pre><code class="julia hljs">void-x86_64-ROOTFS-<span class=hljs-number >20191109.</span>tar.xz</code></pre>
+<p>Be sure that the URL you have been copied looks like this:</p>
+<pre><code class="julia hljs">https://alpha.de.repo.voidlinux.org/live/current/void-x86_64-ROOTFS-<span class=hljs-number >20191109.</span>tar.xz</code></pre>
+<p>Now, go back to your rescue system SSH session, where we left it at the <code>installimage</code> config editor, scroll down at the end of the config file, at the line starting with <code>IMAGE</code>, and paste the Void Linux ROOTFS tarball URL after the word <code>IMAGE</code>, on the same line, like this:</p>
+<pre><code class="julia hljs">IMAGE https://alpha.de.repo.voidlinux.org/live/current/void-x86_64-ROOTFS-<span class=hljs-number >20191109.</span>tar.xz</code></pre>
+<p>You could change other settings in the config file, such as the disks partitioning,  but for simplicity I have been sticking with the default, single root ext4 partition. </p>
+<p>Press F2 to save and then press F10 to exit. Hetzner&#39;s <code>installimage</code> script will format  the <code>/dev/sda</code> and unpack the Void tarball automatically. It will probably fail at the end, but don&#39;t worry&#33; </p>
+<h2 id=chroot_time ><a href="#chroot_time" class=header-anchor >Chroot time&#33;</a></h2>
+<p>Now, the installer will probably exit with an error. We should be fine if it has unpacked the tarball correctly in the <code>/dev/sda1</code> partition. Now check if there is an ext4 partition in there, run:</p>
+<pre><code class="sh hljs">lsblk -f</code></pre>
+<p>Now, mount it to <code>/mnt</code>.</p>
+<pre><code class="sh hljs">mount /dev/sda1 /mnt</code></pre>
+<p>Check if <code>/mnt/</code> contains the Void ROOTFS tarball contents.</p>
+<pre><code class="sh hljs">ls -lah /mnt</code></pre>
+<p>The rest of the guide is pretty much the guide for installing Void from chroot <sup id="fnref:chroot"><a href="#fndef:chroot" class=fnref >[8]</a></sup>, but is not identical&#33; Some steps are different &#40;or not needed&#41;. Though, I will still report the rest of the steps you need for setting up your Void VPS on Hetzner. </p>
+<p>Mount the pseudo-filesystems needed for a chroot:</p>
+<pre><code class="sh hljs"><span class=hljs-keyword >for</span> i <span class=hljs-keyword >in</span> sys dev proc; <span class=hljs-keyword >do</span> mount --rbind /<span class=hljs-variable >$i</span> /mnt/<span class=hljs-variable >$i</span> &amp;&amp; mount --make-rslave /mnt/<span class=hljs-variable >$i</span>; <span class=hljs-keyword >done</span></code></pre>
+<p>Copy the DNS configuration into the new root so that XBPS can still download new packages inside the chroot:</p>
+<pre><code class="sh hljs">cp /etc/resolv.conf /mnt/etc/</code></pre>
+<p>Chroot into the new installation:</p>
+<pre><code class="sh hljs">PS1=<span class=hljs-string >&#x27;(chroot) # &#x27;</span> chroot /mnt/ /bin/bash</code></pre>
+<p>Congrats&#33; You&#39;re in the chroot.</p>
+<h2 id=finishing_the_installation ><a href="#finishing_the_installation" class=header-anchor >Finishing the installation</a></h2>
+<p>Check the internet connection:</p>
+<pre><code class="sh hljs">ping voidlinux.org</code></pre>
+<p>ROOTFS images generally contain out of date software, due to being a snapshot of the time when they were built, and do not come with a complete <code>base-system</code>. Update the package manager and install <code>base-system</code>:</p>
+<pre><code class="sh hljs">xbps-install -Su xbps
+xbps-install -u
+xbps-install base-system
+xbps-remove base-voidstrap</code></pre>
+<p>Specify the hostname in <code>/etc/hostname</code>. Use the same one you used in the previous step when editing Hetzner <code>installimage</code>&#39;s config:</p>
+<pre><code class="sh hljs"><span class=hljs-built_in >echo</span> <span class=hljs-string >&#x27;yourhostname&#x27;</span> &gt; /etc/hostname</code></pre>
+<p>For glibc builds, generate locale files with:</p>
+<pre><code class="sh hljs">xbps-reconfigure -f glibc-locales</code></pre>
+<p>Install your favourite text editor. I&#39;m ok with nano.</p>
+<pre><code class="sh hljs">xbps-install -S nano</code></pre>
+<p>Now edit <code>/etc/fstab</code>. This is very simple <code>fstab</code> is OK. See the references <sup id="fnref:fstab"><a href="#fndef:fstab" class=fnref >[9]</a></sup> for more.</p>
+<pre><code class="julia hljs">proc /proc proc defaults <span class=hljs-number >0</span> <span class=hljs-number >0</span>
+/dev/sda1 / ext4 defaults,discard <span class=hljs-number >0</span> <span class=hljs-number >0</span></code></pre>
+<p>Install GRUB. Hetzner uses DOS disk partitioning.</p>
+<pre><code class="julia hljs">xbps-install grub
+grub-install /dev/sda</code></pre>
+<p>Use xbps-reconfigure&#40;1&#41; to ensure all installed packages are configured properly:</p>
+<pre><code class="sh hljs">xbps-reconfigure -fa</code></pre>
+<p>Congrats&#33; You have now installed Void on Hetzner Cloud.  You will need a couple of config tweaks before rebooting into a working install. Don&#39;t exit from the <code>chroot</code> shell yet&#33;</p>
+<h2 id=final_tweaks ><a href="#final_tweaks" class=header-anchor >Final tweaks</a></h2>
+<p>While still in the chroot, enable the <code>dhcpcd</code> service:</p>
+<pre><code class="sh hljs">ln -s /etc/sv/dhcpcd /var/service/</code></pre>
+<p>Enable the <code>sshd</code> service for remote login through SSH. I suggest you also install <code>ssh-audit</code>, and check out  the awesome SSH HARDENING GUIDES <sup id="fnref:sshhard"><a href="#fndef:sshhard" class=fnref >[10]</a></sup> to ensure that your Void VPS is safe and sound from unwanted remote logins.</p>
+<pre><code class="sh hljs">ln -s /etc/sv/sshd /var/service/</code></pre>
+<p>Copy your SSH public key to your local PC clipboard and save it in the VPS root account <code>authorized_keys</code> file, to later authorize your remote SSH login sessions.</p>
+<pre><code class="sh hljs">mkdir /root/.ssh
+nano /root/.ssh/authorized_keys
+<span class=hljs-comment ># paste your PUBLIC key in there and save</span></code></pre>
+<p>Change the root password</p>
+<pre><code class="sh hljs">passwd root</code></pre>
+<p>Add an additional user</p>
+<pre><code class="sh hljs">useradd --shell /bin/bash voiduser</code></pre>
+<p>Change its password</p>
+<pre><code class="sh hljs">passwd voiduser</code></pre>
+<p>That&#39;s all&#33; Have fun with your Void Linux VPS&#33;</p>
+<p>Now run <code>reboot</code> and login with SSH, as usual, into your fresh new Void Linux VPS&#33;</p>
+<h2 id=additional_goodies ><a href="#additional_goodies" class=header-anchor >Additional Goodies</a></h2>
+<p>Uncomplicated Firewall. Don&#39;t enable before allowing the SSH port &#40;change it from 22 to the port you are  using if you changed it in your <code>sshd_config</code>&#41; <sup id="fnref:ufw"><a href="#fndef:ufw" class=fnref >[11]</a></sup></p>
+<pre><code class="sh hljs">xbps-install -S ufw
+ln -s /etc/sv/ufw /var/service/ufw
+ufw allow 22 <span class=hljs-comment ># CHANGE THE PORT TO YOUR SSHD PORT IF IT IS NOT 22!</span>
+<span class=hljs-comment ># add all the rules you like :)</span>
+ufw <span class=hljs-built_in >enable</span></code></pre>
+<p>dtach and dvtm <sup id="fnref:dtach"><a href="#fndef:dtach" class=fnref >[12]</a></sup></p>
+<pre><code class="sh hljs">xbps-install -S dtach
+dtach -A ~/dvtm-session -r winch dvtm</code></pre>
+<hr />
+<p><table class=fndef  id="fndef:dtach">
+    <tr>
+        <td class=fndef-backref ><a href="#fnref:dtach">[12]</a>
+        <td class=fndef-content >https://www.digitalocean.com/community/tutorials/how-to-use-dvtm-and-dtach-as-a-terminal-window-manager-on-an-ubuntu-vps
+    
+</table>
+<table class=fndef  id="fndef:ufw">
+    <tr>
+        <td class=fndef-backref ><a href="#fnref:ufw">[11]</a>
+        <td class=fndef-content >https://launchpad.net/ufw
+    
+</table>
+<table class=fndef  id="fndef:sshhard">
+    <tr>
+        <td class=fndef-backref ><a href="#fnref:sshhard">[10]</a>
+        <td class=fndef-content >https://www.sshaudit.com/hardening_guides.html
+    
+</table>
+<table class=fndef  id="fndef:fstab">
+    <tr>
+        <td class=fndef-backref ><a href="#fnref:fstab">[9]</a>
+        <td class=fndef-content >https://docs.voidlinux.org/installation/guides/chroot.html#configure-fstab
+    
+</table>
+<table class=fndef  id="fndef:chroot">
+    <tr>
+        <td class=fndef-backref ><a href="#fnref:chroot">[8]</a>
+        <td class=fndef-content >https://docs.voidlinux.org/installation/guides/chroot.html#entering-the-chroot
+    
+</table>
+<table class=fndef  id="fndef:voidrepo">
+    <tr>
+        <td class=fndef-backref ><a href="#fnref:voidrepo">[7]</a>
+        <td class=fndef-content >https://alpha.de.repo.voidlinux.org/live/current/
+    
+</table>
+<table class=fndef  id="fndef:sd1">
+    <tr>
+        <td class=fndef-backref ><a href="#fnref:sd1">[1]</a>
+        <td class=fndef-content >https://suckless.org/sucks/systemd/
+    
+</table>
+<table class=fndef  id="fndef:sd2">
+    <tr>
+        <td class=fndef-backref ><a href="#fnref:sd2">[2]</a>
+        <td class=fndef-content >https://nosystemd.org/
+    
+</table>
+<table class=fndef  id="fndef:sd3">
+    <tr>
+        <td class=fndef-backref ><a href="#fnref:sd3">[3]</a>
+        <td class=fndef-content >#systemdsucks on freenode&#33;
+    
+</table>
+<table class=fndef  id="fndef:sd4">
+    <tr>
+        <td class=fndef-backref ><a href="#fnref:sd4">[4]</a>
+        <td class=fndef-content >http://galexander.org/systemd_sucks.html
+    
+</table>
+<table class=fndef  id="fndef:sd5">
+    <tr>
+        <td class=fndef-backref ><a href="#fnref:sd5">[5]</a>
+        <td class=fndef-content >https://news.ycombinator.com/item?id&#61;12589281
+    
+</table>
+<table class=fndef  id="fndef:voidpda">
+    <tr>
+        <td class=fndef-backref ><a href="#fnref:voidpda">[6]</a>
+        <td class=fndef-content >Building a Raspberry Pi 3B&#43; full keyboard handheld. <a href="/posts/2019/08/building-a-raspberry-pi-3b-full-keyboard-handheld.-part-1/">Part 1</a> <a href="/posts/2019/09/building-a-raspberry-pi-3b-full-keyboard-handheld.-part-2/">Part 2</a>
+    
+</table>
+</p>
+</div>  </main>
+  
+    </div>  
+    
+    
+        
+
+
+    
+    <footer>
+      &copy; Alessandro Cheli.
+      Made with <a href="https://github.com/tlienart/Franklin.jl">Franklin.jl</a>
+      and <a href="https://julialang.org">The Julia Programming Language</a>.
+    </footer>

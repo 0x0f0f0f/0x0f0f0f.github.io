@@ -1,0 +1,85 @@
+<!doctype html> <html lang=en > <meta charset=UTF-8 > <meta name=viewport  content="width=device-width, initial-scale=1"> <link rel=stylesheet  href="/libs/highlight/style.css"> <link rel=stylesheet  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA==" crossorigin=anonymous  /> <link rel=stylesheet  href="/css/franklin.css"> <link rel=icon  href="/assets/favicon.ico"> <title>Really fast Markov chains in ~20 lines of sh, grep, cut and awk</title> <header> <a class=title  href="/"><h2>@0x0f0f0f - Alessandro Cheli</h2></a> <nav> <a href="/">Home</a> / <a href="/blog">Blog</a> / <a href="/tag/">Tags</a> <div class=social-media > <a style="color: #000000;" href="https://github.com/0x0f0f0f"><i class="fab fa-github"></i></a> <a style="color: #000000;" href="https://twitter.com/0x0f0f0f1"><i class="fab fa-twitter"></i></a> </div> </nav> </header> <main> <div class=container ><h1>Really fast Markov chains in ~20 lines of sh, grep, cut and awk</h1> <p>Published 09 November 2019</p> <p><b>Tags: </b><a href="/tag/markov-chains">#markov-chains</a>, <a href="/tag/probability">#probability</a>, <a href="/tag/haskell">#haskell</a>, <a href="/tag/shell">#shell</a></p><hr/> <p>Some days ago, driven by boredom, I implemented my own Markov chains in Haskell by following this great <a href="https://dschrempf.github.io/coding/2018-02-10-markov-chains-in-haskell/">tutorial</a>. Markov chains can be a way of implementing really fun &quot;dumb&quot; group chat bots, that can generate new random messages that sound realistic based on the previous history of the chat. From Wikipedia:</p> <blockquote> <p>A Markov chain is a stochastic model describing a sequence of possible events in which the probability of each event depends only on the state attained in the previous event.</p> </blockquote> <p>Here&#39;s a <a href="http://setosa.io/ev/markov-chains/">great article</a> introducing the concept of Markov chains. In the case of a group chat bot, each state &#40;or node of the graph&#41; is one of the words that was previously sent in the messages, and each probability of transition towards another state &#40;word&#41; is based on the frequency of the first word &#40;transition&#39;s source state&#41; being followed by the second one &#40;the transition&#39;s destination state&#41;.</p> <p>After coding a simple Markov chain on words in Haskell, I&#39;ve noticed that it was really slow and resource intensive even on a few thousand of messages. This was because the model was calculated by summing the frequency of word pairs and it was kept in memory inside of a <code>Data.Map</code> structure.</p> <p>Although the Haskell implementation can get much faster if optimized, my friend <a href="https://github.com/Francesco149">Francesco</a> showed me his amazing implementation of Markov chains on words made <strong>in plain sh and awk</strong>, in ~20 lines of code.<br /></p> <h3 id=a_hrefhttpsgithubcomfrancesco149markovshmarkovsh ><a href="#a_hrefhttpsgithubcomfrancesco149markovshmarkovsh" class=header-anchor ><a href="https://github.com/Francesco149/markov.sh">markov.sh</a></a></h3> <p>His project is split in 2 programs. The first one, <code>mrkfeed.awk</code> is a really simple <code>awk</code> program that separates words on a line into pairs of words, separated line by line.</p> <pre><code class="awk hljs"><span class=hljs-comment >#!/usr/bin/awk -f</span>
+
+{
+  <span class=hljs-keyword >for</span> (i = <span class=hljs-number >1</span>; i &lt; NF; i++) {
+    print <span class=hljs-variable >$i</span>,$(i+<span class=hljs-number >1</span>)
+  }
+  print <span class=hljs-variable >$i</span>
+}</code></pre> <p>For example, let&#39;s take this simple chat log &#40;referred to as <code>chatlog.txt</code>&#41;:</p> <pre><code class="julia hljs">hello everybody
+hi people
+hello people
+how are you
+how are things going</code></pre> <p>The first step is creating a model for the Markov chain. Here&#39;s what will be into the model file when we run <code>./mrkfeed.awk &lt; chatlog.txt &gt;&gt; model.mrkdb</code>, &#40;piped into <code>sort</code> for readability&#41;</p> <pre><code class="julia hljs">are things
+are you
+everybody
+going
+hello everybody
+hello people
+hi people
+how are
+how are
+people
+people
+things going
+you</code></pre> <p>The next step is generating a new random message with <code>./mrkwords.sh model.mrkdb 50 | tr &#39;\n&#39; &#39; &#39; &amp;&amp; echo</code></p> <p>At first, <code>mrkwords.sh</code> will pick a random line from the model and pick the first word of the pair as the first word of our output message. After this, it will filter the model to find what word pairs start with the first word it picked. Let&#39;s say it picked the word <code>hello</code> as the first word of the message. It will then randomly choose the second word of the message from the second element of a pair in the model that starts with the first word it chose. In this case, since it picked <code>hello</code> as the first word, it may pick one between <code>everybody</code> and <code>people</code> as the next word. It then repeats this process by passing the last word it chose as the word to choose in the next iteration. It may be even easier to understand in terms of code than in plain words.</p> <p>The presence of duplicate lines in the model is what gives it the power of weighed probability, perfectly modeling the process of random extraction, making the generated models real Markov chains. Doing this with plain unix tools makes <code>markov.sh</code> incredibly fast, because it is sacrificing disk space by storing duplicates in exchange for a huge improvement in the complexity of the computations. Although Markov chains are often considered complex, this small shell program shines in showing the real underlying simplicity.</p> <p>Here&#39;s a commented version of <code>./mrkwords.sh</code></p> <pre><code class="bash hljs"><span class=hljs-meta >#!/bin/sh</span>
+
+<span class=hljs-comment ># choose the first argument as the model file or try to open &#x27;.mrkdb&#x27;</span>
+file=<span class=hljs-string >&quot;<span class=hljs-variable >${1:-~/.mrkdb}</span>&quot;</span>
+
+<span class=hljs-comment ># $n is the maximum number of remaining words (iterations)</span>
+<span class=hljs-comment ># it is the 2nd argument of this program</span>
+n=<span class=hljs-string >&quot;<span class=hljs-variable >${2:-1}</span>&quot;</span>
+
+<span class=hljs-comment ># if present, use $key (3rd argument) to find pairs starting</span>
+<span class=hljs-comment ># with it in the model, you may use this to force a</span>
+<span class=hljs-comment ># word as the first word of the message</span>
+key=<span class=hljs-string >&quot;<span class=hljs-variable >$3</span>&quot;</span>
+
+<span class=hljs-comment ># if $key is set print it</span>
+[ ! -z <span class=hljs-string >&quot;<span class=hljs-variable >$key</span>&quot;</span> ] &amp;&amp; <span class=hljs-built_in >echo</span> <span class=hljs-string >&quot;<span class=hljs-variable >$key</span>&quot;</span>
+
+<span class=hljs-comment ># the max remaining number of words cannot be equal or less to 0</span>
+[ <span class=hljs-string >&quot;<span class=hljs-variable >$n</span>&quot;</span> -le 0 ] &amp;&amp; <span class=hljs-built_in >exit</span>
+
+<span class=hljs-comment ># if key is not set, set the chosen word to the first element</span>
+<span class=hljs-comment ># of a random pair in the model</span>
+<span class=hljs-keyword >if</span> [ -z <span class=hljs-string >&quot;<span class=hljs-variable >$key</span>&quot;</span> ]; <span class=hljs-keyword >then</span>
+  word=$(shuf -n 1 &lt; <span class=hljs-string >&quot;<span class=hljs-variable >$file</span>&quot;</span> | cut -d<span class=hljs-string >&#x27; &#x27;</span> -f1)
+
+<span class=hljs-comment ># otherwise (key is set)</span>
+<span class=hljs-keyword >else</span>
+    <span class=hljs-comment ># step 1, filter the model to find lines containing $key</span>
+    <span class=hljs-comment ># step 2, use awk to get only the lines in the model</span>
+    <span class=hljs-comment ># beginning with $key (the first element of the pairs)</span>
+    <span class=hljs-comment ># step 3, after filtering out the model, pick the second element of</span>
+    <span class=hljs-comment ># a random pair and set it as the value of the variable $word</span>
+  word=$(grep -Fw <span class=hljs-string >&quot;<span class=hljs-variable >$key</span>&quot;</span> &lt; <span class=hljs-string >&quot;<span class=hljs-variable >$file</span>&quot;</span> |
+    awk -v key=<span class=hljs-string >&quot;<span class=hljs-variable >$key</span>&quot;</span> <span class=hljs-string >&#x27;$1 == key { print $0 }&#x27;</span> |
+    shuf -n 1 | awk <span class=hljs-string >&#x27;{ print $2 }&#x27;</span>) || <span class=hljs-built_in >exit</span>
+
+    <span class=hljs-comment ># if $word is empty then exit this iteration</span>
+    <span class=hljs-comment ># this may also mean that the randomized step picked</span>
+    <span class=hljs-comment ># a line in the model containing only the first element</span>
+    <span class=hljs-comment ># (signaling the end of the process)</span>
+  [ -z <span class=hljs-string >&quot;<span class=hljs-variable >$word</span>&quot;</span> ] &amp;&amp; <span class=hljs-built_in >exit</span>
+<span class=hljs-keyword >fi</span>
+
+<span class=hljs-comment ># the real magic happens here. this last step is similar</span>
+<span class=hljs-comment ># to a recursive function call in most programming languages</span>
+<span class=hljs-comment ># it runs this program again, with $n decremented by 1</span>
+<span class=hljs-comment ># and with the chosen $word as the next iteration&#x27;s $key</span>
+<span class=hljs-built_in >exec</span> <span class=hljs-string >&quot;<span class=hljs-variable >$0</span>&quot;</span> <span class=hljs-string >&quot;<span class=hljs-variable >$file</span>&quot;</span> <span class=hljs-string >&quot;<span class=hljs-subst >$(( n - 1 )</span>)&quot;</span> <span class=hljs-string >&quot;<span class=hljs-variable >$word</span>&quot;</span></code></pre> <p>In this example it generates a random fortune, modeled from the <code>goedel</code> fortunes contained in the famous <code>fortune-mod</code> package.</p> <pre><code class="bash hljs"><span class=hljs-comment ># remove the % delimiter in the fortune file and save it as a .txt</span>
+sed -e <span class=hljs-string >&#x27;/^%$/d&#x27;</span> &lt; /usr/share/fortunes/goedel &gt;&gt; goedel.txt
+<span class=hljs-comment ># generate the model</span>
+./mrkfeed.awk &lt; goedel.txt &gt;&gt; goedelmodel.mrkdb
+<span class=hljs-comment ># get a random fortune!</span>
+./mrkwords.sh goedelmodel.mrkdb 50 | tr <span class=hljs-string >&#x27;\n&#x27;</span> <span class=hljs-string >&#x27; &#x27;</span>
+the dimensionality of computerized fortune-tellers!
+<span class=hljs-comment ># again!</span>
+./mrkwords.sh goedelmodel.mrkdb 50 | tr <span class=hljs-string >&#x27;\n&#x27;</span> <span class=hljs-string >&#x27; &#x27;</span>
+the thoughts of metalanguage are still free.
+<span class=hljs-comment ># again!</span>
+./mrkwords.sh goedelmodel.mrkdb 50 | tr <span class=hljs-string >&#x27;\n&#x27;</span> <span class=hljs-string >&#x27; &#x27;</span>
+<span class=hljs-comment ># let&#x27;s change the model by using all fortunes this time</span>
+./mrkwords.sh fortunesmodel.mrkdb 50 | tr <span class=hljs-string >&#x27;\n&#x27;</span> <span class=hljs-string >&#x27; &#x27;</span>
+low taste, and goin<span class=hljs-string >&#x27; insane,</span></code></pre> <p><code>markov.sh</code> is extremely fast, even on relatively large data sets &#40;millions of lines&#41;.</p> </div> </main> </div> <footer> &copy; Alessandro Cheli. Made with <a href="https://github.com/tlienart/Franklin.jl">Franklin.jl</a> and <a href="https://julialang.org">The Julia Programming Language</a>. </footer>
