@@ -6,3 +6,5 @@ node_modules/
 .vscode/
 drafts/
 _libs/highlight/styles
+Manifest.toml
+package-lock.json
