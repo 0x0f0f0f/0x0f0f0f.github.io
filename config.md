@@ -3,7 +3,7 @@ Add here global page variables to use throughout your
 website.
 The website_* must be defined for the RSS to work
 -->
-@def website_title = "@0x0f0f0f - Alessandro Cheli"
+@def website_title = "0x0f0f0f - Alessandro Cheli"
 @def website_descr = "Bits and bubbles and writings"
 @def website_url   = "https://0x0f0f0f.github.io"
 @def git_url = "https://github.com/0x0f0f0f"
