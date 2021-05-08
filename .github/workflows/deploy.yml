@@ -6,7 +6,7 @@ on:
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
-    - env: 
+    env: 
       HIDE_DRAFTS: true
     steps:
     - name: Checkout
