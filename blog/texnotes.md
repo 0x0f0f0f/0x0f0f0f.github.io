@@ -1,4 +1,5 @@
 @def title = "LaTeX notetaking: TeXStudio VS. LaTeX Workshop for VS Code"
+@def rss =  "LaTeX notetaking: TeXStudio VS. LaTeX Workshop for VS Code"
 @def published = "06 December 2019"
 @def tags = ["latex", "programming", "math"]
 

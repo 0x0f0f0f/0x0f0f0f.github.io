@@ -1,4 +1,5 @@
 @def title = "darkhttpd : you'll love static"
+@def rss =  "darkhttpd : you'll love static"
 @def published = "31 January 2019"
 @def tags = ["foss", "good-stuff"]
 

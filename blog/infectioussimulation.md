@@ -1,4 +1,5 @@
 @def title = "Simulating the Spread of Infectious Disease in 200 lines of C"
+@def rss =  "Simulating the Spread of Infectious Disease in 200 lines of C"
 @def published = "18 March 2020"
 @def tags = ["covid", "infection", "c", "simulation"]
 

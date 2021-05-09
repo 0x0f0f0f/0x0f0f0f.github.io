@@ -1,4 +1,5 @@
 @def title = "How to turn DNA into Music"
+@def rss =  "How to turn DNA into Music"
 @def published = "04 April 2020"
 @def tags = ["functional-programming", "ocaml", "minicaml", "bioinformatics", "dna"]
 

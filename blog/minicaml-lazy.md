@@ -1,4 +1,5 @@
 @def title = "Implementing optional lazy evaluation for minicaml"
+@def rss =  "Implementing optional lazy evaluation for minicaml"
 @def published = "12 December 2019"
 @def tags = ["functional-programming", "ocaml", "minicaml"]
 

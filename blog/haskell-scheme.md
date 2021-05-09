@@ -1,4 +1,5 @@
 @def title = "Learn Functional Programming by writing a Scheme in Haskell"
+@def rss =  "Learn Functional Programming by writing a Scheme in Haskell"
 @def published = "28 September 2019"
 @def tags = ["functional-programming", "haskell", "lisp", "yasih"]
 

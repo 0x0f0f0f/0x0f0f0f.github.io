@@ -1,4 +1,5 @@
 @def title = "Visualizing 11 years of contributions to Void Linux in 7 minutes"
+@def rss =  "Visualizing 11 years of contributions to Void Linux in 7 minutes"
 @def published = "20 November 2019"
 @def tags = ["void", "linux", "video", "git"]
 

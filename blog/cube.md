@@ -1,4 +1,5 @@
 @def title = "The Cube: a Short Story"
+@def rss =  "The Cube: a Short Story"
 @def published = "25 February 2020"
 @def tags = ["language", "mind", "machines", "mathematics", "story", "complexity"]
 

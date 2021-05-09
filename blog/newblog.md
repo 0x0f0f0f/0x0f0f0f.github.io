@@ -1,4 +1,5 @@
 @def title =  "New Blog with Franklin.jl"
+@def rss =   "New Blog with Franklin.jl"
 @def published = "08 May 2021"
 @def tags = ["blog", "julia"]
 

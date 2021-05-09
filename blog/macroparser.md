@@ -1,4 +1,5 @@
 @def title = "Adding a macro parser to my Scheme implementation"
+@def rss =  "Adding a macro parser to my Scheme implementation"
 @def published = "31 October 2019"
 @def tags = ["functional-programming", "haskell", "lisp", "yasih"]
 

@@ -1,4 +1,5 @@
 @def title = "Building a Raspberry Pi 3B+ full keyboard handheld. Part 2"
+@def rss =  "Building a Raspberry Pi 3B+ full keyboard handheld. Part 2"
 @def published = "27 September 2019"
 
 {{post_header}}

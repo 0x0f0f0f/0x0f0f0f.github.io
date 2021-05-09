@@ -36,6 +36,7 @@ ignore = if hidedrafts
     end
 
 navbar_items = ["Home" => "/", "Blog" => "/blog", "Tags" => "/tag/"]
+generate_rss = true
 +++
 
 <!--

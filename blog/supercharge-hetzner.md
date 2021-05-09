@@ -1,4 +1,5 @@
 @def title = "Supercharge your Cloud 1 - Installing Void Linux on Hetzner VPSs"
+@def rss =  "Supercharge your Cloud 1 - Installing Void Linux on Hetzner VPSs"
 @def published = "13 November 2020"
 @def tags = ["void", "linux", "sysadmin", "hetzner", "cloud"]
 

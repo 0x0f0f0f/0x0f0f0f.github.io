@@ -1,4 +1,5 @@
-@def title="Blog"
+@def title = "Blog"
+@def rss =  "Blog"
 
 ~~~
 <h1>Posts</h1>

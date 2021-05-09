@@ -1,4 +1,5 @@
 @def title = "minicaml, a didactical OCaml-like functional programming language."
+@def rss =  "minicaml, a didactical OCaml-like functional programming language."
 @def published = "04 December 2019"
 @def tags = ["functional-programming", "ocaml", "minicaml"]
 

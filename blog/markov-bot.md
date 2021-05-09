@@ -1,4 +1,5 @@
 @def title = "Really fast Markov chains in ~20 lines of sh, grep, cut and awk"
+@def rss =  "Really fast Markov chains in ~20 lines of sh, grep, cut and awk"
 @def published = "09 November 2019"
 @def tags = ["markov-chains", "probability", "haskell", "shell"]
 

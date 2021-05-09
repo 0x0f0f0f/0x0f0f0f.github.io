@@ -1,4 +1,5 @@
 @def title = "On Mind, Language and Machines"
+@def rss =  "On Mind, Language and Machines"
 @def published = "05 February 2020"
 @def tags = ["language", "mind", "machines", "philosophy"]
 

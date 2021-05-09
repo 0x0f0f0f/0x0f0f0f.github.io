@@ -1,4 +1,5 @@
 @def title = "Hyperpixel instructions updated for the Raspberry Pi Handheld."
+@def rss =  "Hyperpixel instructions updated for the Raspberry Pi Handheld."
 @def published = "19 June 2020"
 
 {{post_header}}

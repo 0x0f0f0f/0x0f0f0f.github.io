@@ -1,4 +1,5 @@
 @def title = "New features in the minicaml programming language!"
+@def rss =  "New features in the minicaml programming language!"
 @def published = "11 January 2020"
 @def tags = ["functional-programming", "ocaml", "minicaml"]
 

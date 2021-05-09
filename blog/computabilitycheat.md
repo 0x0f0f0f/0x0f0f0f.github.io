@@ -1,4 +1,5 @@
 @def title =  "Computability Theory and Complexity Theory Cheat Sheet"
+@def rss =   "Computability Theory and Complexity Theory Cheat Sheet"
 @def published = "29 December 2020"
 @def tags = ["maths", "computability", "complexity", "algorithms"]
 
