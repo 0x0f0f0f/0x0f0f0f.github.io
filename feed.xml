@@ -1,0 +1,403 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<rss version="2.0"
+  xmlns:content="http://purl.org/rss/1.0/modules/content/"
+  xmlns:dc="http://purl.org/dc/elements/1.1/"
+  xmlns:media="http://search.yahoo.com/mrss/"
+  xmlns:atom="http://www.w3.org/2005/Atom"
+  xmlns:georss="http://www.georss.org/georss">
+
+  <channel>
+    <title>
+      <![CDATA[  0x0f0f0f - Alessandro Cheli  ]]>
+    </title>
+    <link> https://0x0f0f0f.github.io </link>
+    <description>
+      <![CDATA[  Bits and bubbles and writings  ]]>
+    </description>
+    <atom:link
+      href="https://0x0f0f0f.github.io/feed.xml"
+      rel="self"
+      type="application/rss+xml" />
+
+
+<item>
+  <title>
+    <![CDATA[  Implementing optional lazy evaluation for minicaml  ]]>
+  </title>
+  <link> https://0x0f0f0f.github.io/blog/minicaml-lazy/index.html </link>
+  <guid> https://0x0f0f0f.github.io/blog/minicaml-lazy/index.html </guid>
+  <description>
+    <![CDATA[  Implementing optional lazy evaluation for minicaml  ]]>
+  </description>  
+    
+  <pubDate>Sun, 09 May 2021 00:00:00 +0000</pubDate>  
+  
+  
+  <atom:author>
+    <atom:name>Alessandro Cheli</atom:name>
+  </atom:author>
+        
+</item>
+
+<item>
+  <title>
+    <![CDATA[  How to turn DNA into Music  ]]>
+  </title>
+  <link> https://0x0f0f0f.github.io/blog/dnamusic/index.html </link>
+  <guid> https://0x0f0f0f.github.io/blog/dnamusic/index.html </guid>
+  <description>
+    <![CDATA[  How to turn DNA into Music  ]]>
+  </description>  
+    
+  <pubDate>Sun, 09 May 2021 00:00:00 +0000</pubDate>  
+  
+  
+  <atom:author>
+    <atom:name>Alessandro Cheli</atom:name>
+  </atom:author>
+        
+</item>
+
+<item>
+  <title>
+    <![CDATA[  Building a Raspberry Pi 3B&#43; full keyboard handheld. Part 2  ]]>
+  </title>
+  <link> https://0x0f0f0f.github.io/blog/pihandheldpart2/index.html </link>
+  <guid> https://0x0f0f0f.github.io/blog/pihandheldpart2/index.html </guid>
+  <description>
+    <![CDATA[  Building a Raspberry Pi 3B&#43; full keyboard handheld. Part 2  ]]>
+  </description>  
+    
+  <pubDate>Sun, 09 May 2021 00:00:00 +0000</pubDate>  
+  
+  
+  <atom:author>
+    <atom:name>Alessandro Cheli</atom:name>
+  </atom:author>
+        
+</item>
+
+<item>
+  <title>
+    <![CDATA[  Supercharge your Cloud 1 - Installing Void Linux on Hetzner VPSs  ]]>
+  </title>
+  <link> https://0x0f0f0f.github.io/blog/supercharge-hetzner/index.html </link>
+  <guid> https://0x0f0f0f.github.io/blog/supercharge-hetzner/index.html </guid>
+  <description>
+    <![CDATA[  Supercharge your Cloud 1 - Installing Void Linux on Hetzner VPSs  ]]>
+  </description>  
+    
+  <pubDate>Sun, 09 May 2021 00:00:00 +0000</pubDate>  
+  
+  
+  <atom:author>
+    <atom:name>Alessandro Cheli</atom:name>
+  </atom:author>
+        
+</item>
+
+<item>
+  <title>
+    <![CDATA[  Blog  ]]>
+  </title>
+  <link> https://0x0f0f0f.github.io/blog/index.html </link>
+  <guid> https://0x0f0f0f.github.io/blog/index.html </guid>
+  <description>
+    <![CDATA[  Blog  ]]>
+  </description>  
+    
+  <pubDate>Sun, 09 May 2021 00:00:00 +0000</pubDate>  
+  
+  
+  <atom:author>
+    <atom:name>Alessandro Cheli</atom:name>
+  </atom:author>
+        
+</item>
+
+<item>
+  <title>
+    <![CDATA[  Really fast Markov chains in ~20 lines of sh, grep, cut and awk  ]]>
+  </title>
+  <link> https://0x0f0f0f.github.io/blog/markov-bot/index.html </link>
+  <guid> https://0x0f0f0f.github.io/blog/markov-bot/index.html </guid>
+  <description>
+    <![CDATA[  Really fast Markov chains in ~20 lines of sh, grep, cut and awk  ]]>
+  </description>  
+    
+  <pubDate>Sun, 09 May 2021 00:00:00 +0000</pubDate>  
+  
+  
+  <atom:author>
+    <atom:name>Alessandro Cheli</atom:name>
+  </atom:author>
+        
+</item>
+
+<item>
+  <title>
+    <![CDATA[  Adding a macro parser to my Scheme implementation  ]]>
+  </title>
+  <link> https://0x0f0f0f.github.io/blog/macroparser/index.html </link>
+  <guid> https://0x0f0f0f.github.io/blog/macroparser/index.html </guid>
+  <description>
+    <![CDATA[  Adding a macro parser to my Scheme implementation  ]]>
+  </description>  
+    
+  <pubDate>Sun, 09 May 2021 00:00:00 +0000</pubDate>  
+  
+  
+  <atom:author>
+    <atom:name>Alessandro Cheli</atom:name>
+  </atom:author>
+        
+</item>
+
+<item>
+  <title>
+    <![CDATA[  minicaml, a didactical OCaml-like functional programming language.  ]]>
+  </title>
+  <link> https://0x0f0f0f.github.io/blog/minicaml/index.html </link>
+  <guid> https://0x0f0f0f.github.io/blog/minicaml/index.html </guid>
+  <description>
+    <![CDATA[  minicaml, a didactical OCaml-like functional programming language.  ]]>
+  </description>  
+    
+  <pubDate>Sun, 09 May 2021 00:00:00 +0000</pubDate>  
+  
+  
+  <atom:author>
+    <atom:name>Alessandro Cheli</atom:name>
+  </atom:author>
+        
+</item>
+
+<item>
+  <title>
+    <![CDATA[  New features in the minicaml programming language&#33;  ]]>
+  </title>
+  <link> https://0x0f0f0f.github.io/blog/minicaml-2/index.html </link>
+  <guid> https://0x0f0f0f.github.io/blog/minicaml-2/index.html </guid>
+  <description>
+    <![CDATA[  New features in the minicaml programming language&#33;  ]]>
+  </description>  
+    
+  <pubDate>Sun, 09 May 2021 00:00:00 +0000</pubDate>  
+  
+  
+  <atom:author>
+    <atom:name>Alessandro Cheli</atom:name>
+  </atom:author>
+        
+</item>
+
+<item>
+  <title>
+    <![CDATA[  The Cube: a Short Story  ]]>
+  </title>
+  <link> https://0x0f0f0f.github.io/blog/cube/index.html </link>
+  <guid> https://0x0f0f0f.github.io/blog/cube/index.html </guid>
+  <description>
+    <![CDATA[  The Cube: a Short Story  ]]>
+  </description>  
+    
+  <pubDate>Sun, 09 May 2021 00:00:00 +0000</pubDate>  
+  
+  
+  <atom:author>
+    <atom:name>Alessandro Cheli</atom:name>
+  </atom:author>
+        
+</item>
+
+<item>
+  <title>
+    <![CDATA[  Computability Theory and Complexity Theory Cheat Sheet  ]]>
+  </title>
+  <link> https://0x0f0f0f.github.io/blog/computabilitycheat/index.html </link>
+  <guid> https://0x0f0f0f.github.io/blog/computabilitycheat/index.html </guid>
+  <description>
+    <![CDATA[  Computability Theory and Complexity Theory Cheat Sheet  ]]>
+  </description>  
+    
+  <pubDate>Sun, 09 May 2021 00:00:00 +0000</pubDate>  
+  
+  
+  <atom:author>
+    <atom:name>Alessandro Cheli</atom:name>
+  </atom:author>
+        
+</item>
+
+<item>
+  <title>
+    <![CDATA[  New Blog with Franklin.jl  ]]>
+  </title>
+  <link> https://0x0f0f0f.github.io/blog/newblog/index.html </link>
+  <guid> https://0x0f0f0f.github.io/blog/newblog/index.html </guid>
+  <description>
+    <![CDATA[  New Blog with Franklin.jl  ]]>
+  </description>  
+    
+  <pubDate>Sun, 09 May 2021 00:00:00 +0000</pubDate>  
+  
+  
+  <atom:author>
+    <atom:name>Alessandro Cheli</atom:name>
+  </atom:author>
+        
+</item>
+
+<item>
+  <title>
+    <![CDATA[  Hyperpixel instructions updated for the Raspberry Pi Handheld.  ]]>
+  </title>
+  <link> https://0x0f0f0f.github.io/blog/updated-rpi-handheld-driver/index.html </link>
+  <guid> https://0x0f0f0f.github.io/blog/updated-rpi-handheld-driver/index.html </guid>
+  <description>
+    <![CDATA[  Hyperpixel instructions updated for the Raspberry Pi Handheld.  ]]>
+  </description>  
+    
+  <pubDate>Sun, 09 May 2021 00:00:00 +0000</pubDate>  
+  
+  
+  <atom:author>
+    <atom:name>Alessandro Cheli</atom:name>
+  </atom:author>
+        
+</item>
+
+<item>
+  <title>
+    <![CDATA[  Visualizing 11 years of contributions to Void Linux in 7 minutes  ]]>
+  </title>
+  <link> https://0x0f0f0f.github.io/blog/visualizing-void/index.html </link>
+  <guid> https://0x0f0f0f.github.io/blog/visualizing-void/index.html </guid>
+  <description>
+    <![CDATA[  Visualizing 11 years of contributions to Void Linux in 7 minutes  ]]>
+  </description>  
+    
+  <pubDate>Sun, 09 May 2021 00:00:00 +0000</pubDate>  
+  
+  
+  <atom:author>
+    <atom:name>Alessandro Cheli</atom:name>
+  </atom:author>
+        
+</item>
+
+<item>
+  <title>
+    <![CDATA[  Simulating the Spread of Infectious Disease in 200 lines of C  ]]>
+  </title>
+  <link> https://0x0f0f0f.github.io/blog/infectioussimulation/index.html </link>
+  <guid> https://0x0f0f0f.github.io/blog/infectioussimulation/index.html </guid>
+  <description>
+    <![CDATA[  Simulating the Spread of Infectious Disease in 200 lines of C  ]]>
+  </description>  
+    
+  <pubDate>Sun, 09 May 2021 00:00:00 +0000</pubDate>  
+  
+  
+  <atom:author>
+    <atom:name>Alessandro Cheli</atom:name>
+  </atom:author>
+        
+</item>
+
+<item>
+  <title>
+    <![CDATA[  LaTeX notetaking: TeXStudio VS. LaTeX Workshop for VS Code  ]]>
+  </title>
+  <link> https://0x0f0f0f.github.io/blog/texnotes/index.html </link>
+  <guid> https://0x0f0f0f.github.io/blog/texnotes/index.html </guid>
+  <description>
+    <![CDATA[  LaTeX notetaking: TeXStudio VS. LaTeX Workshop for VS Code  ]]>
+  </description>  
+    
+  <pubDate>Sun, 09 May 2021 00:00:00 +0000</pubDate>  
+  
+  
+  <atom:author>
+    <atom:name>Alessandro Cheli</atom:name>
+  </atom:author>
+        
+</item>
+
+<item>
+  <title>
+    <![CDATA[  Building a Raspberry Pi 3B&#43; full keyboard handheld. Part 1  ]]>
+  </title>
+  <link> https://0x0f0f0f.github.io/blog/pihandheld/index.html </link>
+  <guid> https://0x0f0f0f.github.io/blog/pihandheld/index.html </guid>
+  <description>
+    <![CDATA[  Building a Raspberry Pi 3B&#43; full keyboard handheld. Part 1  ]]>
+  </description>  
+    
+  <pubDate>Sun, 09 May 2021 00:00:00 +0000</pubDate>  
+  
+  
+  <atom:author>
+    <atom:name>Alessandro Cheli</atom:name>
+  </atom:author>
+        
+</item>
+
+<item>
+  <title>
+    <![CDATA[  Learn Functional Programming by writing a Scheme in Haskell  ]]>
+  </title>
+  <link> https://0x0f0f0f.github.io/blog/haskell-scheme/index.html </link>
+  <guid> https://0x0f0f0f.github.io/blog/haskell-scheme/index.html </guid>
+  <description>
+    <![CDATA[  Learn Functional Programming by writing a Scheme in Haskell  ]]>
+  </description>  
+    
+  <pubDate>Sun, 09 May 2021 00:00:00 +0000</pubDate>  
+  
+  
+  <atom:author>
+    <atom:name>Alessandro Cheli</atom:name>
+  </atom:author>
+        
+</item>
+
+<item>
+  <title>
+    <![CDATA[  On Mind, Language and Machines  ]]>
+  </title>
+  <link> https://0x0f0f0f.github.io/blog/mindlanguagemachines/index.html </link>
+  <guid> https://0x0f0f0f.github.io/blog/mindlanguagemachines/index.html </guid>
+  <description>
+    <![CDATA[  On Mind, Language and Machines  ]]>
+  </description>  
+    
+  <pubDate>Sun, 09 May 2021 00:00:00 +0000</pubDate>  
+  
+  
+  <atom:author>
+    <atom:name>Alessandro Cheli</atom:name>
+  </atom:author>
+        
+</item>
+
+<item>
+  <title>
+    <![CDATA[  darkhttpd : you&#39;ll love static  ]]>
+  </title>
+  <link> https://0x0f0f0f.github.io/blog/darkhttpd/index.html </link>
+  <guid> https://0x0f0f0f.github.io/blog/darkhttpd/index.html </guid>
+  <description>
+    <![CDATA[  darkhttpd : you&#39;ll love static  ]]>
+  </description>  
+    
+  <pubDate>Sun, 09 May 2021 00:00:00 +0000</pubDate>  
+  
+  
+  <atom:author>
+    <atom:name>Alessandro Cheli</atom:name>
+  </atom:author>
+        
+</item>
+</channel></rss>
