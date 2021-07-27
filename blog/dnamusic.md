@@ -36,16 +36,19 @@ Just to be on the Coronavirus pandemic trend, here's how the SARS-Cov-2 genome
 sounds like, played in D# major at 120 beats per minute through the Open Source
 [helm](https://tytel.org/helm/) software synthesizer.
 
+~~~
 <audio class="player" controls  preload="none" style="width: 100%">
-    <source src="/posts/media/sarscov2.mp3" type="audio/mp3">
+    <source src="/assets/files/sarscov2.mp3" type="audio/mp3">
 </audio>
+~~~
 
 Here's another take, this time on a small section of the genome of Cytomegalovirus, played in C.
 
+~~~
 <audio class="player" controls  preload="none" style="width: 100%">
-    <source src="/posts/media/cytomegalovirus.mp3" type="audio/mp3">
+    <source src="/assets/files/cytomegalovirus.mp3" type="audio/mp3">
 </audio>
-
+~~~
 
 
 ## How does the conversion work?
