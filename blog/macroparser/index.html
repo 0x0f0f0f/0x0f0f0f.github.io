@@ -45,17 +45,17 @@
                 <span class=hljs-type >List</span> items -&gt; <span class=hljs-keyword >do</span>
                     results &lt;- traverse evalUnquotes items
                     return $ <span class=hljs-type >List</span> results
-                _ -&gt; return form</code></pre> <p>Here&#39;s an example, showing what happens when entering quoted expressions in <strong>yasih</strong>&#39;s REPL.</p> <pre><code class="scheme hljs">λ&gt; ; here, the evaluator tries to apply
-λ&gt; (1 2 3) ; 2 and 3 as arguments to a function &quot;1&quot;
-Not a function: : &quot;1&quot;
-λ&gt; ; the result is clearly not a function
-λ&gt; ; the list here is now quoted and will be treated as a literal value
-λ&gt; &#x27;(1 2 3)
-(1 2 3)
-λ&gt; `(1 2 3) ; same here but using quasiquote
-(1 2 3)
-λ&gt; `(1 2 ,(+ 4 5)) ; the unquoted expression is evaluated! (un-quoted)!
-(1 2 9)</code></pre> <p>After we have working quotation and quasiquotation it is time to add actual macros to the interpreter. I had to change the expression data type by adding an <code>isMacro</code> field.</p> <pre><code class="haskell hljs"><span class=hljs-comment >-- |Lisp Value data type</span>
+                _ -&gt; return form</code></pre> <p>Here&#39;s an example, showing what happens when entering quoted expressions in <strong>yasih</strong>&#39;s REPL.</p> <pre><code class="scheme hljs">λ&gt; <span class=hljs-comment >; here, the evaluator tries to apply</span>
+λ&gt; (<span class=hljs-name >1</span> <span class=hljs-number >2</span> <span class=hljs-number >3</span>) <span class=hljs-comment >; 2 and 3 as arguments to a function &quot;1&quot;</span>
+Not a function: : <span class=hljs-string >&quot;1&quot;</span>
+λ&gt; <span class=hljs-comment >; the result is clearly not a function</span>
+λ&gt; <span class=hljs-comment >; the list here is now quoted and will be treated as a literal value</span>
+λ&gt; &#x27;(<span class=hljs-number >1</span> <span class=hljs-number >2</span> <span class=hljs-number >3</span>)
+(<span class=hljs-name >1</span> <span class=hljs-number >2</span> <span class=hljs-number >3</span>)
+λ&gt; `(<span class=hljs-number >1</span> <span class=hljs-number >2</span> <span class=hljs-number >3</span>) <span class=hljs-comment >; same here but using quasiquote</span>
+(<span class=hljs-name >1</span> <span class=hljs-number >2</span> <span class=hljs-number >3</span>)
+λ&gt; `(<span class=hljs-number >1</span> <span class=hljs-number >2</span> ,(+ <span class=hljs-number >4</span> <span class=hljs-number >5</span>)) <span class=hljs-comment >; the unquoted expression is evaluated! (un-quoted)!</span>
+(<span class=hljs-name >1</span> <span class=hljs-number >2</span> <span class=hljs-number >9</span>)</code></pre> <p>After we have working quotation and quasiquotation it is time to add actual macros to the interpreter. I had to change the expression data type by adding an <code>isMacro</code> field.</p> <pre><code class="haskell hljs"><span class=hljs-comment >-- |Lisp Value data type</span>
 <span class=hljs-class ><span class=hljs-keyword >data</span> <span class=hljs-type >LispVal</span> =</span>
     <span class=hljs-comment >-- Other data types here...</span>
     | <span class=hljs-type >Func</span> {
@@ -80,14 +80,14 @@ Not a function: : &quot;1&quot;
 <span class=hljs-title >makeVarargs</span> = makeFunc <span class=hljs-type >False</span> . <span class=hljs-type >Just</span> . showVal
 <span class=hljs-title >makeMacro</span> = makeFunc <span class=hljs-type >True</span> <span class=hljs-type >Nothing</span></code></pre> <p>Finally, a <code>define-syntax</code> form can be defined to make macros. I have not yet implemented <code>syntax-rules</code> but i surely will in the next <strong>yasih</strong> updates.</p> <pre><code class="haskell hljs"><span class=hljs-comment >-- Define a macro</span>
 <span class=hljs-title >eval</span> env (<span class=hljs-type >List</span> (<span class=hljs-type >Atom</span> <span class=hljs-string >&quot;define-syntax&quot;</span> : <span class=hljs-type >List</span> (<span class=hljs-type >Atom</span> var : params) : body)) =
-    makeMacro env params body &gt;&gt;= defineVar env var</code></pre> <p>Here&#39;s an example on how you can make a macro and use it as a practical construct for a programming language. Here, the <code>let</code> statement is defined as a macro that will expand to an anonymous function &#40;lambda&#41; application, in this way a closure will be made and lexical scoping will be respected, correctly reaching the <code>let</code> statement&#39;s goals. The implementation is a little sketchy and will surely get better as <code>syntax-rules</code> gets implemented.</p> <pre><code class="scheme hljs">(<span class=hljs-name ><span class=hljs-builtin-name >define-syntax</span></span> (<span class=hljs-name >bind-vars</span> bindings)
+    makeMacro env params body &gt;&gt;= defineVar env var</code></pre> <p>Here&#39;s an example on how you can make a macro and use it as a practical construct for a programming language. Here, the <code>let</code> statement is defined as a macro that will expand to an anonymous function &#40;lambda&#41; application, in this way a closure will be made and lexical scoping will be respected, correctly reaching the <code>let</code> statement&#39;s goals. The implementation is a little sketchy and will surely get better as <code>syntax-rules</code> gets implemented.</p> <pre><code class="scheme hljs">(<span class=hljs-name ><span class=hljs-built_in >define-syntax</span></span> (<span class=hljs-name >bind-vars</span> bindings)
     `(map car bindings))
 
-(<span class=hljs-name ><span class=hljs-builtin-name >define-syntax</span></span> (<span class=hljs-name >bind-vals</span> bindings)
+(<span class=hljs-name ><span class=hljs-built_in >define-syntax</span></span> (<span class=hljs-name >bind-vals</span> bindings)
     `(map cadr bindings))
 
-(<span class=hljs-name ><span class=hljs-builtin-name >define-syntax</span></span> (<span class=hljs-name ><span class=hljs-builtin-name >let</span></span> bindings body)
-    `(apply (lambda ,(bind-vars bindings) ,body) &#x27;,(bind-vals bindings)))</code></pre> <pre><code class="scheme hljs">(<span class=hljs-name ><span class=hljs-builtin-name >let</span></span> ((<span class=hljs-name >x</span> <span class=hljs-number >1</span>) (<span class=hljs-name >y</span> <span class=hljs-number >4</span>)) (<span class=hljs-name ><span class=hljs-builtin-name >-</span></span> (<span class=hljs-name ><span class=hljs-builtin-name >*</span></span> y y) (<span class=hljs-name ><span class=hljs-builtin-name >+</span></span> <span class=hljs-number >1</span> x)))
+(<span class=hljs-name ><span class=hljs-built_in >define-syntax</span></span> (<span class=hljs-name ><span class=hljs-built_in >let</span></span> bindings body)
+    `(apply (lambda ,(bind-vars bindings) ,body) &#x27;,(bind-vals bindings)))</code></pre> <pre><code class="scheme hljs">(<span class=hljs-name ><span class=hljs-built_in >let</span></span> ((<span class=hljs-name >x</span> <span class=hljs-number >1</span>) (<span class=hljs-name >y</span> <span class=hljs-number >4</span>)) (<span class=hljs-name ><span class=hljs-built_in >-</span></span> (<span class=hljs-name ><span class=hljs-built_in >*</span></span> y y) (<span class=hljs-name ><span class=hljs-built_in >+</span></span> <span class=hljs-number >1</span> x)))
 <span class=hljs-comment >; will expand to</span>
-((<span class=hljs-name ><span class=hljs-builtin-name >lambda</span></span> (x y) (<span class=hljs-name ><span class=hljs-builtin-name >-</span></span> (<span class=hljs-name ><span class=hljs-builtin-name >*</span></span> y y) (<span class=hljs-name ><span class=hljs-builtin-name >+</span></span> <span class=hljs-number >1</span> x))) <span class=hljs-number >1</span> <span class=hljs-number >4</span>)
+((<span class=hljs-name ><span class=hljs-built_in >lambda</span></span> (x y) (<span class=hljs-name ><span class=hljs-built_in >-</span></span> (<span class=hljs-name ><span class=hljs-built_in >*</span></span> y y) (<span class=hljs-name ><span class=hljs-built_in >+</span></span> <span class=hljs-number >1</span> x))) <span class=hljs-number >1</span> <span class=hljs-number >4</span>)
 <span class=hljs-comment >; before being executed</span></code></pre> <p>This practice is called <code>let-over-lambda</code>. Some modern functional programming languages like OCaml, directly create a closure instead of creating an anonymous function for <code>let</code> statements; that practice is fairly more performant, but the execution result is identical.</p> <h2 id=some_updates_on_yasihs_development ><a href="#some_updates_on_yasihs_development" class=header-anchor >Some updates on yasih&#39;s development.</a></h2> <p>A sketchy complete R5RS implementation is almost done. Some primitives are still missing and I will work on them in the next updates, in which I will also focus on adding additional features like string interpolation, stack tracing, and probably optimization features like a garbage collector.</p> </div> </main> </div> <footer> &copy; Alessandro Cheli. Made with <a href="https://github.com/tlienart/Franklin.jl">Franklin.jl</a> and <a href="https://julialang.org">The Julia Programming Language</a>. </footer>
