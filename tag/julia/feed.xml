@@ -31,7 +31,26 @@
     <![CDATA[  New Blog with Franklin.jl  ]]>
   </description>  
     
-  <pubDate>Tue, 27 Jul 2021 00:00:00 +0000</pubDate>  
+  <pubDate>Wed, 18 Aug 2021 00:00:00 +0000</pubDate>  
+  
+  
+  <atom:author>
+    <atom:name>Alessandro Cheli</atom:name>
+  </atom:author>
+        
+</item>
+
+<item>
+  <title>
+    <![CDATA[  Metatheory.jl and Julia Symbolics - GSOC 2021  ]]>
+  </title>
+  <link> https://0x0f0f0f.github.io/blog/gsoc/index.html </link>
+  <guid> https://0x0f0f0f.github.io/blog/gsoc/index.html </guid>
+  <description>
+    <![CDATA[  Metatheory.jl and Julia Symbolics - GSOC 2021  ]]>
+  </description>  
+    
+  <pubDate>Wed, 18 Aug 2021 00:00:00 +0000</pubDate>  
   
   
   <atom:author>
