@@ -23,31 +23,12 @@
 
 <item>
   <title>
-    <![CDATA[  Adding a macro parser to my Scheme implementation  ]]>
+    <![CDATA[  The Telescope  ]]>
   </title>
-  <link> https://0x0f0f0f.github.io/blog/macroparser/index.html </link>
-  <guid> https://0x0f0f0f.github.io/blog/macroparser/index.html </guid>
+  <link> https://0x0f0f0f.github.io/blog/telescope-eng/index.html </link>
+  <guid> https://0x0f0f0f.github.io/blog/telescope-eng/index.html </guid>
   <description>
-    <![CDATA[  Adding a macro parser to my Scheme implementation  ]]>
-  </description>  
-    
-  <pubDate>Wed, 22 Sep 2021 00:00:00 +0000</pubDate>  
-  
-  
-  <atom:author>
-    <atom:name>Alessandro Cheli</atom:name>
-  </atom:author>
-        
-</item>
-
-<item>
-  <title>
-    <![CDATA[  Learn Functional Programming by writing a Scheme in Haskell  ]]>
-  </title>
-  <link> https://0x0f0f0f.github.io/blog/haskell-scheme/index.html </link>
-  <guid> https://0x0f0f0f.github.io/blog/haskell-scheme/index.html </guid>
-  <description>
-    <![CDATA[  Learn Functional Programming by writing a Scheme in Haskell  ]]>
+    <![CDATA[  telescope  ]]>
   </description>  
     
   <pubDate>Wed, 22 Sep 2021 00:00:00 +0000</pubDate>  

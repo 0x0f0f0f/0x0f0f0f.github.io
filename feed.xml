@@ -31,7 +31,7 @@
     <![CDATA[  Implementing optional lazy evaluation for minicaml  ]]>
   </description>  
     
-  <pubDate>Wed, 18 Aug 2021 00:00:00 +0000</pubDate>  
+  <pubDate>Wed, 22 Sep 2021 00:00:00 +0000</pubDate>  
   
   
   <atom:author>
@@ -50,7 +50,26 @@
     <![CDATA[  How to turn DNA into Music  ]]>
   </description>  
     
-  <pubDate>Wed, 18 Aug 2021 00:00:00 +0000</pubDate>  
+  <pubDate>Wed, 22 Sep 2021 00:00:00 +0000</pubDate>  
+  
+  
+  <atom:author>
+    <atom:name>Alessandro Cheli</atom:name>
+  </atom:author>
+        
+</item>
+
+<item>
+  <title>
+    <![CDATA[  The Telescope  ]]>
+  </title>
+  <link> https://0x0f0f0f.github.io/blog/telescope-eng/index.html </link>
+  <guid> https://0x0f0f0f.github.io/blog/telescope-eng/index.html </guid>
+  <description>
+    <![CDATA[  telescope  ]]>
+  </description>  
+    
+  <pubDate>Wed, 22 Sep 2021 00:00:00 +0000</pubDate>  
   
   
   <atom:author>
@@ -69,7 +88,7 @@
     <![CDATA[  Building a Raspberry Pi 3B&#43; full keyboard handheld. Part 2  ]]>
   </description>  
     
-  <pubDate>Wed, 18 Aug 2021 00:00:00 +0000</pubDate>  
+  <pubDate>Wed, 22 Sep 2021 00:00:00 +0000</pubDate>  
   
   
   <atom:author>
@@ -88,7 +107,7 @@
     <![CDATA[  Supercharge your Cloud 1 - Installing Void Linux on Hetzner VPSs  ]]>
   </description>  
     
-  <pubDate>Wed, 18 Aug 2021 00:00:00 +0000</pubDate>  
+  <pubDate>Wed, 22 Sep 2021 00:00:00 +0000</pubDate>  
   
   
   <atom:author>
@@ -99,15 +118,15 @@
 
 <item>
   <title>
-    <![CDATA[  Blog  ]]>
+    <![CDATA[  Il Telescopio &#40;Italian Version&#41;  ]]>
   </title>
-  <link> https://0x0f0f0f.github.io/blog/index.html </link>
-  <guid> https://0x0f0f0f.github.io/blog/index.html </guid>
+  <link> https://0x0f0f0f.github.io/blog/telescope-ita/index.html </link>
+  <guid> https://0x0f0f0f.github.io/blog/telescope-ita/index.html </guid>
   <description>
-    <![CDATA[  Blog  ]]>
+    <![CDATA[  telescopio  ]]>
   </description>  
     
-  <pubDate>Wed, 18 Aug 2021 00:00:00 +0000</pubDate>  
+  <pubDate>Wed, 22 Sep 2021 00:00:00 +0000</pubDate>  
   
   
   <atom:author>
@@ -126,7 +145,7 @@
     <![CDATA[  Really fast Markov chains in ~20 lines of sh, grep, cut and awk  ]]>
   </description>  
     
-  <pubDate>Wed, 18 Aug 2021 00:00:00 +0000</pubDate>  
+  <pubDate>Wed, 22 Sep 2021 00:00:00 +0000</pubDate>  
   
   
   <atom:author>
@@ -145,7 +164,7 @@
     <![CDATA[  Adding a macro parser to my Scheme implementation  ]]>
   </description>  
     
-  <pubDate>Wed, 18 Aug 2021 00:00:00 +0000</pubDate>  
+  <pubDate>Wed, 22 Sep 2021 00:00:00 +0000</pubDate>  
   
   
   <atom:author>
@@ -164,7 +183,7 @@
     <![CDATA[  minicaml, a didactical OCaml-like functional programming language.  ]]>
   </description>  
     
-  <pubDate>Wed, 18 Aug 2021 00:00:00 +0000</pubDate>  
+  <pubDate>Wed, 22 Sep 2021 00:00:00 +0000</pubDate>  
   
   
   <atom:author>
@@ -183,7 +202,7 @@
     <![CDATA[  New features in the minicaml programming language&#33;  ]]>
   </description>  
     
-  <pubDate>Wed, 18 Aug 2021 00:00:00 +0000</pubDate>  
+  <pubDate>Wed, 22 Sep 2021 00:00:00 +0000</pubDate>  
   
   
   <atom:author>
@@ -202,7 +221,7 @@
     <![CDATA[  The Cube: a Short Story  ]]>
   </description>  
     
-  <pubDate>Wed, 18 Aug 2021 00:00:00 +0000</pubDate>  
+  <pubDate>Wed, 22 Sep 2021 00:00:00 +0000</pubDate>  
   
   
   <atom:author>
@@ -221,7 +240,7 @@
     <![CDATA[  Computability Theory and Complexity Theory Cheat Sheet  ]]>
   </description>  
     
-  <pubDate>Wed, 18 Aug 2021 00:00:00 +0000</pubDate>  
+  <pubDate>Wed, 22 Sep 2021 00:00:00 +0000</pubDate>  
   
   
   <atom:author>
@@ -240,7 +259,7 @@
     <![CDATA[  New Blog with Franklin.jl  ]]>
   </description>  
     
-  <pubDate>Wed, 18 Aug 2021 00:00:00 +0000</pubDate>  
+  <pubDate>Wed, 22 Sep 2021 00:00:00 +0000</pubDate>  
   
   
   <atom:author>
@@ -259,7 +278,7 @@
     <![CDATA[  Hyperpixel instructions updated for the Raspberry Pi Handheld.  ]]>
   </description>  
     
-  <pubDate>Wed, 18 Aug 2021 00:00:00 +0000</pubDate>  
+  <pubDate>Wed, 22 Sep 2021 00:00:00 +0000</pubDate>  
   
   
   <atom:author>
@@ -278,7 +297,7 @@
     <![CDATA[  Metatheory.jl and Julia Symbolics - GSOC 2021  ]]>
   </description>  
     
-  <pubDate>Wed, 18 Aug 2021 00:00:00 +0000</pubDate>  
+  <pubDate>Wed, 22 Sep 2021 00:00:00 +0000</pubDate>  
   
   
   <atom:author>
@@ -297,7 +316,7 @@
     <![CDATA[  Visualizing 11 years of contributions to Void Linux in 7 minutes  ]]>
   </description>  
     
-  <pubDate>Wed, 18 Aug 2021 00:00:00 +0000</pubDate>  
+  <pubDate>Wed, 22 Sep 2021 00:00:00 +0000</pubDate>  
   
   
   <atom:author>
@@ -316,7 +335,7 @@
     <![CDATA[  Simulating the Spread of Infectious Disease in 200 lines of C  ]]>
   </description>  
     
-  <pubDate>Wed, 18 Aug 2021 00:00:00 +0000</pubDate>  
+  <pubDate>Wed, 22 Sep 2021 00:00:00 +0000</pubDate>  
   
   
   <atom:author>
@@ -335,7 +354,7 @@
     <![CDATA[  LaTeX notetaking: TeXStudio VS. LaTeX Workshop for VS Code  ]]>
   </description>  
     
-  <pubDate>Wed, 18 Aug 2021 00:00:00 +0000</pubDate>  
+  <pubDate>Wed, 22 Sep 2021 00:00:00 +0000</pubDate>  
   
   
   <atom:author>
@@ -354,7 +373,7 @@
     <![CDATA[  Building a Raspberry Pi 3B&#43; full keyboard handheld. Part 1  ]]>
   </description>  
     
-  <pubDate>Wed, 18 Aug 2021 00:00:00 +0000</pubDate>  
+  <pubDate>Wed, 22 Sep 2021 00:00:00 +0000</pubDate>  
   
   
   <atom:author>
@@ -373,7 +392,7 @@
     <![CDATA[  Learn Functional Programming by writing a Scheme in Haskell  ]]>
   </description>  
     
-  <pubDate>Wed, 18 Aug 2021 00:00:00 +0000</pubDate>  
+  <pubDate>Wed, 22 Sep 2021 00:00:00 +0000</pubDate>  
   
   
   <atom:author>
@@ -392,7 +411,7 @@
     <![CDATA[  On Mind, Language and Machines  ]]>
   </description>  
     
-  <pubDate>Wed, 18 Aug 2021 00:00:00 +0000</pubDate>  
+  <pubDate>Wed, 22 Sep 2021 00:00:00 +0000</pubDate>  
   
   
   <atom:author>
@@ -411,7 +430,26 @@
     <![CDATA[  darkhttpd : you&#39;ll love static  ]]>
   </description>  
     
-  <pubDate>Wed, 18 Aug 2021 00:00:00 +0000</pubDate>  
+  <pubDate>Wed, 22 Sep 2021 00:00:00 +0000</pubDate>  
+  
+  
+  <atom:author>
+    <atom:name>Alessandro Cheli</atom:name>
+  </atom:author>
+        
+</item>
+
+<item>
+  <title>
+    <![CDATA[  Blog  ]]>
+  </title>
+  <link>  </link>
+  <guid>  </guid>
+  <description>
+    <![CDATA[  Blog  ]]>
+  </description>  
+    
+  <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>  
   
   
   <atom:author>
