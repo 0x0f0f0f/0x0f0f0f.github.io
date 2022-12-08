@@ -19,7 +19,7 @@ avid reader, digital archiver and a strong supporter of the Julia programming
 language. When I’m not at at a terminal, I love making electronic music and
 playing the guitar.
 
----
+<!-- ---
 
 Here are some of my favorite books:
 
@@ -31,7 +31,7 @@ Here are some of my favorite books:
 - The Stranger by Albert Camus
 
 
----
+--- -->
 
 
 <!-- If you want to hire me, keep in mind that I may not remember the complexity of
