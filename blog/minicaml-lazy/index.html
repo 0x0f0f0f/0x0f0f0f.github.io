@@ -1,98 +1,98 @@
-<!doctype html> <html lang=en > <meta charset=UTF-8 > <meta name=viewport  content="width=device-width, initial-scale=1"> <link rel=stylesheet  href="/libs/highlight/style.css"> <link rel=stylesheet  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA==" crossorigin=anonymous  /> <link rel=stylesheet  href="/css/franklin.css"> <link rel=icon  href="/assets/favicon.ico"> <title>Implementing optional lazy evaluation for minicaml</title> <header> <a class=title  href="/"><h2>0x0f0f0f - Alessandro Cheli</h2></a> <nav> <a href="/">Home</a> / <a href="/blog">Blog</a> / <a href="/tag/">Tags</a> <div class=social-media > <a style="color: #000000;" href="https://github.com/0x0f0f0f"><i class="fab fa-github"></i></a> <a style="color: #000000;" href="https://twitter.com/0x0f0f0f1"><i class="fab fa-twitter"></i></a> </div> </nav> </header> <main> <div class=container ><h1>Implementing optional lazy evaluation for minicaml</h1> <p>Published 12 December 2019</p> <p><b>Tags: </b><a href="/tag/functional-programming">#functional-programming</a>, <a href="/tag/ocaml">#ocaml</a>, <a href="/tag/minicaml">#minicaml</a></p><hr/> <p>As an experiment, I&#39;ve decided to add lazy evaluation to the didactical programming language <a href="https://github.com/0x0f0f0f/minicaml">minicaml</a>. It have not yet implemented a cache for values that have already been evaluated. Here is how I did it.</p> <p>The first thing I had to do was creating an additional wrapper type that tells the evaluator if a value has already been evaluated or not, change the environment type so that it can contain both kind of values and change the &quot;evaluation result&quot; type so that it contains constructors for lazy functions and recursive lazy functions &#40;see more later in the function application <code>eval</code> case&#41;. Notice, in <code>type_wrapper</code>, how already evaluated values are of kind <code>evt</code> &#40;&quot;evaluated&quot; or &quot;reduced&quot; expression&#41;, while <code>LazyExpression</code> values are just AST expressions that have not been evaluated yet.</p> <pre><code class="ocaml hljs"><span class=hljs-comment >(* lib/types.ml *)</span>
+<!doctype html> <html lang=en > <meta charset=UTF-8 > <meta name=viewport  content="width=device-width, initial-scale=1"> <link rel=stylesheet  href="/libs/highlight/style.css"> <link rel=stylesheet  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA==" crossorigin=anonymous  /> <link rel=stylesheet  href="/css/franklin.css"> <link rel=icon  href="/assets/favicon.ico"> <title>Implementing optional lazy evaluation for minicaml</title> <header> <a class=title  href="/"><h2>0x0f0f0f - Alessandro Cheli</h2></a> <nav> <a href="/">Home</a> / <a href="/blog">Blog</a> / <a href="/tag/">Tags</a> <div class=social-media > <a style="color: #000000;" href="https://github.com/0x0f0f0f"><i class="fab fa-github"></i></a> <a style="color: #000000;" href="https://twitter.com/0x0f0f0f1"><i class="fab fa-twitter"></i></a> </div> </nav> </header> <main> <div class=container ><h1>Implementing optional lazy evaluation for minicaml</h1> <p>Published 12 December 2019</p> <p><b>Tags: </b><a href="/tag/functional-programming">#functional-programming</a>, <a href="/tag/ocaml">#ocaml</a>, <a href="/tag/minicaml">#minicaml</a></p><hr/> <p>As an experiment, I&#39;ve decided to add lazy evaluation to the didactical programming language <a href="https://github.com/0x0f0f0f/minicaml">minicaml</a>. It have not yet implemented a cache for values that have already been evaluated. Here is how I did it.</p> <p>The first thing I had to do was creating an additional wrapper type that tells the evaluator if a value has already been evaluated or not, change the environment type so that it can contain both kind of values and change the &quot;evaluation result&quot; type so that it contains constructors for lazy functions and recursive lazy functions &#40;see more later in the function application <code>eval</code> case&#41;. Notice, in <code>type_wrapper</code>, how already evaluated values are of kind <code>evt</code> &#40;&quot;evaluated&quot; or &quot;reduced&quot; expression&#41;, while <code>LazyExpression</code> values are just AST expressions that have not been evaluated yet.</p> <pre><code class=language-ocaml >&#40;* lib/types.ml *&#41;
 
-<span class=hljs-comment >(** A type that represents an evaluated (reduced) value *)</span>
-<span class=hljs-keyword >type</span> evt =
-    | <span class=hljs-type >EvtUnit</span>
-    | <span class=hljs-type >EvtInt</span> <span class=hljs-keyword >of</span> <span class=hljs-built_in >int</span>
-    | <span class=hljs-type >EvtBool</span> <span class=hljs-keyword >of</span> <span class=hljs-built_in >bool</span>
-    | <span class=hljs-type >EvtList</span> <span class=hljs-keyword >of</span> evt <span class=hljs-built_in >list</span>
-    | <span class=hljs-type >Closure</span> <span class=hljs-keyword >of</span> ide <span class=hljs-built_in >list</span> * expr * (type_wrapper env_t)
-    | <span class=hljs-type >LazyClosure</span> <span class=hljs-keyword >of</span> ide <span class=hljs-built_in >list</span> * expr * (type_wrapper env_t)
-    | <span class=hljs-type >RecClosure</span> <span class=hljs-keyword >of</span> ide * ide <span class=hljs-built_in >list</span> * expr * (type_wrapper env_t)
-    | <span class=hljs-type >RecLazyClosure</span> <span class=hljs-keyword >of</span> ide * ide <span class=hljs-built_in >list</span> * expr * (type_wrapper env_t)
-    [@@deriving show { with_path = <span class=hljs-literal >false</span> }]
-<span class=hljs-keyword >and</span> type_wrapper =
-    | <span class=hljs-type >LazyExpression</span> <span class=hljs-keyword >of</span> expr
-    | <span class=hljs-type >AlreadyEvaluated</span> <span class=hljs-keyword >of</span> evt
-    [@@deriving show]
+&#40;** A type that represents an evaluated &#40;reduced&#41; value *&#41;
+type evt &#61;
+    | EvtUnit
+    | EvtInt of int
+    | EvtBool of bool
+    | EvtList of evt list
+    | Closure of ide list * expr * &#40;type_wrapper env_t&#41;
+    | LazyClosure of ide list * expr * &#40;type_wrapper env_t&#41;
+    | RecClosure of ide * ide list * expr * &#40;type_wrapper env_t&#41;
+    | RecLazyClosure of ide * ide list * expr * &#40;type_wrapper env_t&#41;
+    &#91;@@deriving show &#123; with_path &#61; false &#125;&#93;
+and type_wrapper &#61;
+    | LazyExpression of expr
+    | AlreadyEvaluated of evt
+    &#91;@@deriving show&#93;
 
-<span class=hljs-comment >(** An environment of already evaluated values  *)</span>
-<span class=hljs-keyword >type</span> env_type = type_wrapper env_t</code></pre> <p>The next step was adding AST types for <code>let lazy</code> and <code>lazyfun</code> statements and the corresponding parser and lexer definitions. <code>let lazy x &#61; &#40;... some expression ...&#41; in &#40;... body expression ...&#41;</code> binds a <code>LazyExpression</code> to the symbol x in the <code>body</code> expression&#39;s environment. The evaluator only evaluates the expression bound to <code>x</code> when the symbol is encountered and used in the <code>let lazy</code> statement&#39;s body; while a normal <code>let</code> statement evaluates the expression assigned to <code>x</code> before evaluating the body &#40;a practice called eager evaluation&#41;.</p> <h4 id=these_camels_are_quite_lazy ><a href="#these_camels_are_quite_lazy" class=header-anchor >These camels are quite lazy:</a></h4> <p><img src="/assets/images/lazy-camels.jpg" alt="These camels are lazy" /></p> <p>The same thing applies to functions and their actual parameters. In eager evaluation &#40;the default in minicaml&#41;, when you apply a function to some arguments, the arguments are evaluated before actually evaluating the function body &#40;and therefore are bound to a <code>AlreadyEvaluated</code> constructor in the environment&#41;, while in <code>lazyfun</code> &#40;lazily evaluated functions&#41; the arguments are not evaluated until encountered in the body &#40;and therefore they are bound to a <code>LazyExpression</code> constructor&#41;.</p> <pre><code class="ocaml hljs"><span class=hljs-comment >(* lib/types.ml *)</span>
+&#40;** An environment of already evaluated values  *&#41;
+type env_type &#61; type_wrapper env_t</code></pre> <p>The next step was adding AST types for <code>let lazy</code> and <code>lazyfun</code> statements and the corresponding parser and lexer definitions. <code>let lazy x &#61; &#40;... some expression ...&#41; in &#40;... body expression ...&#41;</code> binds a <code>LazyExpression</code> to the symbol x in the <code>body</code> expression&#39;s environment. The evaluator only evaluates the expression bound to <code>x</code> when the symbol is encountered and used in the <code>let lazy</code> statement&#39;s body; while a normal <code>let</code> statement evaluates the expression assigned to <code>x</code> before evaluating the body &#40;a practice called eager evaluation&#41;.</p> <h4 id=these_camels_are_quite_lazy ><a href="#these_camels_are_quite_lazy" class=header-anchor >These camels are quite lazy:</a></h4> <p><img src="/assets/images/lazy-camels.jpg" alt="These camels are lazy" /></p> <p>The same thing applies to functions and their actual parameters. In eager evaluation &#40;the default in minicaml&#41;, when you apply a function to some arguments, the arguments are evaluated before actually evaluating the function body &#40;and therefore are bound to a <code>AlreadyEvaluated</code> constructor in the environment&#41;, while in <code>lazyfun</code> &#40;lazily evaluated functions&#41; the arguments are not evaluated until encountered in the body &#40;and therefore they are bound to a <code>LazyExpression</code> constructor&#41;.</p> <pre><code class=language-ocaml >&#40;* lib/types.ml *&#41;
 
-<span class=hljs-comment >(** A value identifier*)</span>
-<span class=hljs-keyword >type</span> ide = <span class=hljs-built_in >string</span>
-[@@deriving show]
+&#40;** A value identifier*&#41;
+type ide &#61; string
+&#91;@@deriving show&#93;
 
-<span class=hljs-comment >(** The type representing Abstract Syntax Tree expressions *)</span>
-<span class=hljs-keyword >type</span> expr =
-    <span class=hljs-comment >(* ... other constructors are not shown here for simplicity  ... *)</span>
-    | <span class=hljs-type >Let</span> <span class=hljs-keyword >of</span> ide * expr * expr
-    | <span class=hljs-type >Letlazy</span> <span class=hljs-keyword >of</span> ide * expr * expr
-    | <span class=hljs-type >Letrec</span> <span class=hljs-keyword >of</span> ide * expr * expr
-    | <span class=hljs-type >Lambda</span> <span class=hljs-keyword >of</span> ide <span class=hljs-built_in >list</span> * expr
-    | <span class=hljs-type >LazyLambda</span> <span class=hljs-keyword >of</span> ide <span class=hljs-built_in >list</span> * expr
-    | <span class=hljs-type >Apply</span> <span class=hljs-keyword >of</span> expr * expr <span class=hljs-built_in >list</span>
-    [@@deriving show { with_path = <span class=hljs-literal >false</span> }]</code></pre> <p>Next, I had to change the <code>lookup</code> function, which searches for bindings in the environment. If, for a certain symbol <code>x</code> the <code>lookup</code> function encounters an <code>AlreadyEvaluated</code> value in the environment, it just returns it. If it encounters a <code>LazyExpression</code> value it means that it has encountered a value that was previously defined in a <code>let lazy</code> statement or a <code>lazyfun</code> function application, and it has to evaluate it and return the result. This is not exactly efficient, since if you encounter a lazily-defined expression twice, it is evaluated at the time of the first encounter, and at the second encounter you have no way of telling that its value was already calculated if you use an immutable, purely functional environment; therefore you have to evaluate it twice, or introduce an evaluation cache. The final step is changing the evaluation function, so that it correctly interprets <code>LazyLambda</code>, <code>Letlazy</code> expressions and <code>LazyClosure</code> and <code>RecLazyClosure</code> application. Note that <code>eval</code> and <code>lookup</code> have now become mutually recursive and they have to be defined together with <code>and</code>.</p> <pre><code class="ocaml hljs"><span class=hljs-comment >(* lib/eval.ml *)</span>
+&#40;** The type representing Abstract Syntax Tree expressions *&#41;
+type expr &#61;
+    &#40;* ... other constructors are not shown here for simplicity  ... *&#41;
+    | Let of ide * expr * expr
+    | Letlazy of ide * expr * expr
+    | Letrec of ide * expr * expr
+    | Lambda of ide list * expr
+    | LazyLambda of ide list * expr
+    | Apply of expr * expr list
+    &#91;@@deriving show &#123; with_path &#61; false &#125;&#93;</code></pre> <p>Next, I had to change the <code>lookup</code> function, which searches for bindings in the environment. If, for a certain symbol <code>x</code> the <code>lookup</code> function encounters an <code>AlreadyEvaluated</code> value in the environment, it just returns it. If it encounters a <code>LazyExpression</code> value it means that it has encountered a value that was previously defined in a <code>let lazy</code> statement or a <code>lazyfun</code> function application, and it has to evaluate it and return the result. This is not exactly efficient, since if you encounter a lazily-defined expression twice, it is evaluated at the time of the first encounter, and at the second encounter you have no way of telling that its value was already calculated if you use an immutable, purely functional environment; therefore you have to evaluate it twice, or introduce an evaluation cache. The final step is changing the evaluation function, so that it correctly interprets <code>LazyLambda</code>, <code>Letlazy</code> expressions and <code>LazyClosure</code> and <code>RecLazyClosure</code> application. Note that <code>eval</code> and <code>lookup</code> have now become mutually recursive and they have to be defined together with <code>and</code>.</p> <pre><code class=language-ocaml >&#40;* lib/eval.ml *&#41;
 
-<span class=hljs-keyword >let</span> <span class=hljs-keyword >rec</span> eval (e: expr) (env: env_type) (n: stackframe) : evt =
-    <span class=hljs-keyword >let</span> n = push_stack n e <span class=hljs-keyword >in</span>
-    <span class=hljs-keyword >let</span> evaluated = (<span class=hljs-keyword >match</span> e <span class=hljs-keyword >with</span>
-    <span class=hljs-comment >(* ... The rest of evaluation cases are omitted for simplicity ... *)</span>
-    | <span class=hljs-type >Symbol</span> x -&gt; lookup env x n
-    | <span class=hljs-type >Let</span> (ident, <span class=hljs-keyword >value</span>, body) -&gt;
-        eval body (bind env ident (<span class=hljs-type >AlreadyEvaluated</span> (eval <span class=hljs-keyword >value</span> env n))) n
-    | <span class=hljs-type >Letlazy</span> (ident, <span class=hljs-keyword >value</span>, body) -&gt;
-        eval body (bind env ident (<span class=hljs-type >LazyExpression</span> <span class=hljs-keyword >value</span>)) n
-    | <span class=hljs-type >Letrec</span> (ident, <span class=hljs-keyword >value</span>, body) -&gt;
-        (<span class=hljs-keyword >match</span> <span class=hljs-keyword >value</span> <span class=hljs-keyword >with</span>
-            | <span class=hljs-type >Lambda</span> (params, fbody) -&gt;
-                <span class=hljs-keyword >let</span> rec_env = (bind env ident
-                    (<span class=hljs-type >AlreadyEvaluated</span> (<span class=hljs-type >RecClosure</span>(ident, params, fbody, env))))
-                <span class=hljs-keyword >in</span> eval body rec_env n
-            | <span class=hljs-type >LazyLambda</span> (params, fbody) -&gt;
-                <span class=hljs-keyword >let</span> rec_env = (bind env ident
-                    (<span class=hljs-type >AlreadyEvaluated</span> (<span class=hljs-type >RecLazyClosure</span>(ident, params, fbody, env))))
-                <span class=hljs-keyword >in</span> eval body rec_env n
-            | _ -&gt; raise (<span class=hljs-type >TypeError</span> <span class=hljs-string >&quot;Cannot define recursion on non-functional values&quot;</span>))
-    | <span class=hljs-type >Lambda</span> (params,body) -&gt; <span class=hljs-type >Closure</span>(params, body, env)
-    | <span class=hljs-type >LazyLambda</span> (params,body) -&gt; <span class=hljs-type >LazyClosure</span>(params, body, env)
-    | <span class=hljs-type >Apply</span>(f, params) -&gt;
-        <span class=hljs-keyword >let</span> closure = eval f env n  <span class=hljs-keyword >in</span>
-        (<span class=hljs-keyword >match</span> closure <span class=hljs-keyword >with</span>
-        | <span class=hljs-type >Closure</span>(args, body, decenv) -&gt; <span class=hljs-comment >(* Use static scoping *)</span>
-            <span class=hljs-keyword >let</span> evaluated_params = <span class=hljs-type >List</span>.map (<span class=hljs-keyword >fun</span> x -&gt; eval x env n ) params <span class=hljs-keyword >in</span>
-            <span class=hljs-keyword >let</span> application_env = bindlist decenv args (<span class=hljs-type >List</span>.map (<span class=hljs-keyword >fun</span> x -&gt;
-                 <span class=hljs-type >AlreadyEvaluated</span> x) evaluated_params)  <span class=hljs-keyword >in</span>
+let rec eval &#40;e: expr&#41; &#40;env: env_type&#41; &#40;n: stackframe&#41; : evt &#61;
+    let n &#61; push_stack n e in
+    let evaluated &#61; &#40;match e with
+    &#40;* ... The rest of evaluation cases are omitted for simplicity ... *&#41;
+    | Symbol x -&gt; lookup env x n
+    | Let &#40;ident, value, body&#41; -&gt;
+        eval body &#40;bind env ident &#40;AlreadyEvaluated &#40;eval value env n&#41;&#41;&#41; n
+    | Letlazy &#40;ident, value, body&#41; -&gt;
+        eval body &#40;bind env ident &#40;LazyExpression value&#41;&#41; n
+    | Letrec &#40;ident, value, body&#41; -&gt;
+        &#40;match value with
+            | Lambda &#40;params, fbody&#41; -&gt;
+                let rec_env &#61; &#40;bind env ident
+                    &#40;AlreadyEvaluated &#40;RecClosure&#40;ident, params, fbody, env&#41;&#41;&#41;&#41;
+                in eval body rec_env n
+            | LazyLambda &#40;params, fbody&#41; -&gt;
+                let rec_env &#61; &#40;bind env ident
+                    &#40;AlreadyEvaluated &#40;RecLazyClosure&#40;ident, params, fbody, env&#41;&#41;&#41;&#41;
+                in eval body rec_env n
+            | _ -&gt; raise &#40;TypeError &quot;Cannot define recursion on non-functional values&quot;&#41;&#41;
+    | Lambda &#40;params,body&#41; -&gt; Closure&#40;params, body, env&#41;
+    | LazyLambda &#40;params,body&#41; -&gt; LazyClosure&#40;params, body, env&#41;
+    | Apply&#40;f, params&#41; -&gt;
+        let closure &#61; eval f env n  in
+        &#40;match closure with
+        | Closure&#40;args, body, decenv&#41; -&gt; &#40;* Use static scoping *&#41;
+            let evaluated_params &#61; List.map &#40;fun x -&gt; eval x env n &#41; params in
+            let application_env &#61; bindlist decenv args &#40;List.map &#40;fun x -&gt;
+                 AlreadyEvaluated x&#41; evaluated_params&#41;  in
             eval body application_env n
-        | <span class=hljs-type >RecClosure</span>(name, args, body, decenv) -&gt;
-            <span class=hljs-keyword >let</span> evaluated_params = <span class=hljs-type >List</span>.map (<span class=hljs-keyword >fun</span> x -&gt; eval x env n ) params <span class=hljs-keyword >in</span>
-            <span class=hljs-keyword >let</span> rec_env = (bind decenv name (<span class=hljs-type >AlreadyEvaluated</span> closure)) <span class=hljs-keyword >in</span>
-            <span class=hljs-keyword >let</span> application_env = bindlist rec_env args
-                (<span class=hljs-type >List</span>.map (<span class=hljs-keyword >fun</span> x -&gt; <span class=hljs-type >AlreadyEvaluated</span> x) evaluated_params) <span class=hljs-keyword >in</span>
+        | RecClosure&#40;name, args, body, decenv&#41; -&gt;
+            let evaluated_params &#61; List.map &#40;fun x -&gt; eval x env n &#41; params in
+            let rec_env &#61; &#40;bind decenv name &#40;AlreadyEvaluated closure&#41;&#41; in
+            let application_env &#61; bindlist rec_env args
+                &#40;List.map &#40;fun x -&gt; AlreadyEvaluated x&#41; evaluated_params&#41; in
             eval body application_env n
-        | <span class=hljs-type >LazyClosure</span>(args, body, decenv) -&gt;
-            <span class=hljs-keyword >let</span> application_env = bindlist decenv args
-                (<span class=hljs-type >List</span>.map (<span class=hljs-keyword >fun</span> x -&gt; <span class=hljs-type >LazyExpression</span> x) params) <span class=hljs-keyword >in</span>
+        | LazyClosure&#40;args, body, decenv&#41; -&gt;
+            let application_env &#61; bindlist decenv args
+                &#40;List.map &#40;fun x -&gt; LazyExpression x&#41; params&#41; in
             eval body application_env n
-        | <span class=hljs-type >RecLazyClosure</span>(name, args, body, decenv) -&gt;
-            <span class=hljs-keyword >let</span> rec_env = (bind decenv name (<span class=hljs-type >AlreadyEvaluated</span> closure)) <span class=hljs-keyword >in</span>
-            <span class=hljs-keyword >let</span> application_env = bindlist rec_env args
-                (<span class=hljs-type >List</span>.map (<span class=hljs-keyword >fun</span> x -&gt; <span class=hljs-type >LazyExpression</span> x) params) <span class=hljs-keyword >in</span>
+        | RecLazyClosure&#40;name, args, body, decenv&#41; -&gt;
+            let rec_env &#61; &#40;bind decenv name &#40;AlreadyEvaluated closure&#41;&#41; in
+            let application_env &#61; bindlist rec_env args
+                &#40;List.map &#40;fun x -&gt; LazyExpression x&#41; params&#41; in
             eval body application_env n
-        | _ -&gt; raise (<span class=hljs-type >TypeError</span> <span class=hljs-string >&quot;Cannot apply a non functional value&quot;</span>)))
-    <span class=hljs-keyword >in</span> <span class=hljs-keyword >let</span> depth = (<span class=hljs-keyword >match</span> n <span class=hljs-keyword >with</span>
-        | <span class=hljs-type >StackValue</span>(d, _, _) -&gt; d
-        | <span class=hljs-type >EmptyStack</span> -&gt; <span class=hljs-number >0</span>)
-    <span class=hljs-keyword >in</span>
-    print_message ~color:<span class=hljs-type >T</span>.<span class=hljs-type >Blue</span> ~loc:(<span class=hljs-type >Nowhere</span>)
-        <span class=hljs-string >&quot;Reduction at depth&quot;</span> <span class=hljs-string >&quot;%d\nExpression:\t%s\nEvaluates to:\t%s\n&quot;</span> depth (show_expr e) (show_evt evaluated);
+        | _ -&gt; raise &#40;TypeError &quot;Cannot apply a non functional value&quot;&#41;&#41;&#41;
+    in let depth &#61; &#40;match n with
+        | StackValue&#40;d, _, _&#41; -&gt; d
+        | EmptyStack -&gt; 0&#41;
+    in
+    print_message ~color:T.Blue ~loc:&#40;Nowhere&#41;
+        &quot;Reduction at depth&quot; &quot;&#37;d\nExpression:\t&#37;s\nEvaluates to:\t&#37;s\n&quot; depth &#40;show_expr e&#41; &#40;show_evt evaluated&#41;;
     evaluated;
-<span class=hljs-comment >(* Search for a key in an environment (a (string, value) pair) *)</span>
-<span class=hljs-keyword >and</span> lookup (env: env_type) (ident: ide) (n: stackframe) : evt =
-    <span class=hljs-keyword >if</span> ident = <span class=hljs-string >&quot;&quot;</span> <span class=hljs-keyword >then</span> failwith <span class=hljs-string >&quot;invalid identifier&quot;</span> <span class=hljs-keyword >else</span>
-    <span class=hljs-keyword >match</span> env <span class=hljs-keyword >with</span>
-    | <span class=hljs-literal >[]</span> -&gt; raise (<span class=hljs-type >UnboundVariable</span> ident)
-    | (i, <span class=hljs-type >LazyExpression</span> e) :: env_rest -&gt; <span class=hljs-keyword >if</span> ident = i <span class=hljs-keyword >then</span> eval e env n
-        <span class=hljs-keyword >else</span> lookup env_rest ident n
-    | (i, <span class=hljs-type >AlreadyEvaluated</span> e) :: env_rest -&gt; <span class=hljs-keyword >if</span> ident = i <span class=hljs-keyword >then</span> e <span class=hljs-keyword >else</span>
-        lookup env_rest ident n</code></pre> <p>You can find minicaml version <code>0.2.1</code> with laziness <a href="https://github.com/0x0f0f0f/minicaml/releases">here</a>. Thanks to Antonio for helping me reason about implementing laziness.</p> </div> </main> </div> <footer> &copy; Alessandro Cheli. Made with <a href="https://github.com/tlienart/Franklin.jl">Franklin.jl</a> and <a href="https://julialang.org">The Julia Programming Language</a>. </footer>
+&#40;* Search for a key in an environment &#40;a &#40;string, value&#41; pair&#41; *&#41;
+and lookup &#40;env: env_type&#41; &#40;ident: ide&#41; &#40;n: stackframe&#41; : evt &#61;
+    if ident &#61; &quot;&quot; then failwith &quot;invalid identifier&quot; else
+    match env with
+    | &#91;&#93; -&gt; raise &#40;UnboundVariable ident&#41;
+    | &#40;i, LazyExpression e&#41; :: env_rest -&gt; if ident &#61; i then eval e env n
+        else lookup env_rest ident n
+    | &#40;i, AlreadyEvaluated e&#41; :: env_rest -&gt; if ident &#61; i then e else
+        lookup env_rest ident n</code></pre> <p>You can find minicaml version <code>0.2.1</code> with laziness <a href="https://github.com/0x0f0f0f/minicaml/releases">here</a>. Thanks to Antonio for helping me reason about implementing laziness.</p> </div> </main> </div> <script src="/libs/highlight/highlight.pack.js"></script> <script>hljs.initHighlightingOnLoad();hljs.configure({tabReplace: ' '});</script> <footer> &copy; Alessandro Cheli. Made with <a href="https://github.com/tlienart/Franklin.jl">Franklin.jl</a> and <a href="https://julialang.org">The Julia Programming Language</a>. </footer>

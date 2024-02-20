@@ -1,23 +1,23 @@
-<!doctype html> <html lang=en > <meta charset=UTF-8 > <meta name=viewport  content="width=device-width, initial-scale=1"> <link rel=stylesheet  href="/libs/highlight/style.css"> <link rel=stylesheet  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA==" crossorigin=anonymous  /> <link rel=stylesheet  href="/css/franklin.css"> <link rel=icon  href="/assets/favicon.ico"> <title>New features in the minicaml programming language!</title> <header> <a class=title  href="/"><h2>0x0f0f0f - Alessandro Cheli</h2></a> <nav> <a href="/">Home</a> / <a href="/blog">Blog</a> / <a href="/tag/">Tags</a> <div class=social-media > <a style="color: #000000;" href="https://github.com/0x0f0f0f"><i class="fab fa-github"></i></a> <a style="color: #000000;" href="https://twitter.com/0x0f0f0f1"><i class="fab fa-twitter"></i></a> </div> </nav> </header> <main> <div class=container ><h1>New features in the minicaml programming language!</h1> <p>Published 11 January 2020</p> <p><b>Tags: </b><a href="/tag/functional-programming">#functional-programming</a>, <a href="/tag/ocaml">#ocaml</a>, <a href="/tag/minicaml">#minicaml</a></p><hr/> <p>In the past weeks I&#39;ve worked a lot on the <a href="https://github.com/0x0f0f0f/minicaml">minicaml</a> programming language. In this post I&#39;m recapping all the various features I have added with their corresponding syntax. Now that the language is almost feature complete, the next releases will focus on the standard library, stability, testing, and improvements of the internals. If you are interested in programming language development, note that I am looking for contributors to help in testing and making the language more stable.</p> <h2 id=installation ><a href="#installation" class=header-anchor >Installation</a></h2> <p>To install, you need to have <code>opam</code> &#40;OCaml&#39;s package manager&#41; and a recent OCaml distribution installed on your system. You can install <strong>minicaml</strong> by running</p> <pre><code class="bash hljs">opam install minicaml</code></pre>
+<!doctype html> <html lang=en > <meta charset=UTF-8 > <meta name=viewport  content="width=device-width, initial-scale=1"> <link rel=stylesheet  href="/libs/highlight/style.css"> <link rel=stylesheet  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA==" crossorigin=anonymous  /> <link rel=stylesheet  href="/css/franklin.css"> <link rel=icon  href="/assets/favicon.ico"> <title>New features in the minicaml programming language!</title> <header> <a class=title  href="/"><h2>0x0f0f0f - Alessandro Cheli</h2></a> <nav> <a href="/">Home</a> / <a href="/blog">Blog</a> / <a href="/tag/">Tags</a> <div class=social-media > <a style="color: #000000;" href="https://github.com/0x0f0f0f"><i class="fab fa-github"></i></a> <a style="color: #000000;" href="https://twitter.com/0x0f0f0f1"><i class="fab fa-twitter"></i></a> </div> </nav> </header> <main> <div class=container ><h1>New features in the minicaml programming language!</h1> <p>Published 11 January 2020</p> <p><b>Tags: </b><a href="/tag/functional-programming">#functional-programming</a>, <a href="/tag/ocaml">#ocaml</a>, <a href="/tag/minicaml">#minicaml</a></p><hr/> <p>In the past weeks I&#39;ve worked a lot on the <a href="https://github.com/0x0f0f0f/minicaml">minicaml</a> programming language. In this post I&#39;m recapping all the various features I have added with their corresponding syntax. Now that the language is almost feature complete, the next releases will focus on the standard library, stability, testing, and improvements of the internals. If you are interested in programming language development, note that I am looking for contributors to help in testing and making the language more stable.</p> <h2 id=installation ><a href="#installation" class=header-anchor >Installation</a></h2> <p>To install, you need to have <code>opam</code> &#40;OCaml&#39;s package manager&#41; and a recent OCaml distribution installed on your system. You can install <strong>minicaml</strong> by running</p> <pre><code class=language-bash >opam install minicaml</code></pre>
 <p><a href="https://github.com/hanslub42/rlwrap">rlwrap</a> is suggested for a readline-like &#40;bash-like&#41; keyboard interface.</p>
 <h3 id=manual_installation ><a href="#manual_installation" class=header-anchor >Manual installation</a></h3>
-<pre><code class="bash hljs"><span class=hljs-comment ># clone the repository</span>
-git <span class=hljs-built_in >clone</span> https://github.com/0x0f0f0f/minicaml
-<span class=hljs-comment ># cd into it</span>
-<span class=hljs-built_in >cd</span> minicaml
-<span class=hljs-comment ># install dependencies</span>
+<pre><code class=language-bash ># clone the repository
+git clone https://github.com/0x0f0f0f/minicaml
+# cd into it
+cd minicaml
+# install dependencies
 opam install dune menhir ANSITerminal cmdliner alcotest bisect_ppx
-<span class=hljs-comment ># compile</span>
+# compile
 make
-<span class=hljs-comment ># test</span>
-make <span class=hljs-built_in >test</span>
-<span class=hljs-comment ># run</span>
+# test
+make test
+# run
 make run
-<span class=hljs-comment ># rlwrap is suggested</span>
+# rlwrap is suggested
 rlwrap make run
-<span class=hljs-comment ># you can install minicaml with</span>
+# you can install minicaml with
 make install
-<span class=hljs-comment ># run again</span>
+# run again
 rlwrap minicaml</code></pre>
 <h2 id=usage ><a href="#usage" class=header-anchor >Usage</a></h2>
 <p>The executable name is <code>minicaml</code>. If a file is specified as the first command line argument, then it will be ran as a program. If you are running a program you may want to use the flag <code>-p</code> to print the results of the expressions that are evaluated. Otherwise, if a program is not specified a REPL session will be opened. If the <code>minicaml</code> executable is ran with the flag <code>-v1</code>, it will show the AST equivalent of each submitted expression, if ran with <code>-v2</code> it will also show each reduction step in the evaluation. Use the <strong>experimental</strong> <code>-j</code> flag to compile a program to Javascript, using the <a href="https://ramdajs.com/">Ramda</a> library as a &quot;functional prelude&quot;, please note that a lot of stuff is still broken.</p>
@@ -27,90 +27,90 @@ rlwrap minicaml</code></pre>
 <h2 id=features ><a href="#features" class=header-anchor >Features</a></h2>
 <h3 id=arithmetics_with_full_scheme-like_numeric_tower ><a href="#arithmetics_with_full_scheme-like_numeric_tower" class=header-anchor >Arithmetics with full scheme-like numeric tower</a></h3>
 <p>Integer division returns integers. Floating point numbers decimal part can be omitted if it is 0. Floating point numbers can use the power syntax using <code>e</code>.</p>
-<pre><code class="ocaml hljs"><span class=hljs-number >1</span> + <span class=hljs-number >2</span> + <span class=hljs-number >3</span> * (<span class=hljs-number >4</span> - <span class=hljs-number >1</span>) ;;
-<span class=hljs-number >1</span> + <span class=hljs-number >4.0</span> - <span class=hljs-number >1.</span> / <span class=hljs-number >2.315</span> ;;
-<span class=hljs-number >1.2e-3</span> ;;
-<span class=hljs-literal >true</span> &amp;&amp; <span class=hljs-literal >false</span> || (<span class=hljs-number >1</span> &lt; <span class=hljs-number >2</span>) &amp;&amp; (<span class=hljs-number >1</span> = <span class=hljs-number >1</span>) ;;</code></pre>
+<pre><code class=language-ocaml >1 &#43; 2 &#43; 3 * &#40;4 - 1&#41; ;;
+1 &#43; 4.0 - 1. / 2.315 ;;
+1.2e-3 ;;
+true &amp;&amp; false || &#40;1 &lt; 2&#41; &amp;&amp; &#40;1 &#61; 1&#41; ;;</code></pre>
 <h3 id=complex_numbers ><a href="#complex_numbers" class=header-anchor >Complex numbers</a></h3>
 <p>The <code>:&#43;</code> and <code>:-</code> operators are used to create complex values, the floating point number on the left is the real part and the one on the right is the imaginary part.</p>
-<pre><code class="ocaml hljs"><span class=hljs-number >12.</span> :+ <span class=hljs-number >1.12</span>;;
-<span class=hljs-number >0.</span> :- <span class=hljs-number >1.12</span>;;</code></pre>
+<pre><code class=language-ocaml >12. :&#43; 1.12;;
+0. :- 1.12;;</code></pre>
 <h3 id=strings_and_lists ><a href="#strings_and_lists" class=header-anchor >Strings and Lists</a></h3>
 <p>Here is how to concatenate strings</p>
-<pre><code class="ocaml hljs"><span class=hljs-string >&quot;hello &quot;</span> ^ <span class=hljs-string >&quot;world&quot;</span></code></pre>
+<pre><code class=language-ocaml >&quot;hello &quot; ^ &quot;world&quot;</code></pre>
 <p><code>::</code> means is the classic <code>cons</code> operator, while <code>@</code> is used for list concatenation as in OCaml</p>
-<pre><code class="julia hljs"><span class=hljs-number >1</span> :: [<span class=hljs-number >2</span>] @ [<span class=hljs-number >3</span>]</code></pre>
+<pre><code class=language-julia >1 :: &#91;2&#93; @ &#91;3&#93;</code></pre>
 <p>To convert any value to a string you can use the <code>show</code> primitive.</p>
 <h3 id=declarations ><a href="#declarations" class=header-anchor >Declarations</a></h3>
 <p>Local declaration statements are purely functional and straightforward:</p>
-<pre><code class="ocaml hljs"><span class=hljs-keyword >let</span> x = <span class=hljs-number >4</span> <span class=hljs-keyword >and</span> y = <span class=hljs-number >1</span> <span class=hljs-keyword >in</span> x + y</code></pre>
+<pre><code class=language-ocaml >let x &#61; 4 and y &#61; 1 in x &#43; y</code></pre>
 <p>Global declaration statements create new, purely functional environments in both programs and the REPL. Omitting <code>in</code> is syntax-sugar, subsequent blocks will be evaluated in the resulting new environment.</p>
-<pre><code class="ocaml hljs"><span class=hljs-keyword >let</span> a = <span class=hljs-number >2</span> ;;
-x + <span class=hljs-number >3</span> ;;</code></pre>
+<pre><code class=language-ocaml >let a &#61; 2 ;;
+x &#43; 3 ;;</code></pre>
 <h3 id=functions_and_recursion ><a href="#functions_and_recursion" class=header-anchor >Functions and recursion</a></h3>
 <p>For parsing simplicity, only the OCaml anonymous function style of declaring functions is supported. The keyword <code>fun</code> is interchangeable with <code>lambda</code>.  </p>
-<pre><code class="ocaml hljs">(<span class=hljs-keyword >fun</span> x -&gt; x + <span class=hljs-number >1</span>) <span class=hljs-number >1</span>;;
-<span class=hljs-keyword >let</span> <span class=hljs-keyword >rec</span> fib = <span class=hljs-keyword >fun</span> n -&gt; <span class=hljs-keyword >if</span> n &lt; <span class=hljs-number >2</span> <span class=hljs-keyword >then</span> n <span class=hljs-keyword >else</span> (fib (n - <span class=hljs-number >1</span>)) + fib (n - <span class=hljs-number >2</span>)</code></pre>
+<pre><code class=language-ocaml >&#40;fun x -&gt; x &#43; 1&#41; 1;;
+let rec fib &#61; fun n -&gt; if n &lt; 2 then n else &#40;fib &#40;n - 1&#41;&#41; &#43; fib &#40;n - 2&#41;</code></pre>
 <h3 id=printing ><a href="#printing" class=header-anchor >Printing</a></h3>
 <p>The impure primitives <code>print</code> and <code>print_endline</code> automatically call <code>show</code> on a value. The difference between them is that <code>print_endline</code> automatically adds a newline at the end of the line.</p>
 <h3 id=haskell-like_dollar_syntax ><a href="#haskell-like_dollar_syntax" class=header-anchor >Haskell-like dollar syntax</a></h3>
 <p>Too many parens?</p>
-<pre><code class="ocaml hljs">f (g (h (i <span class=hljs-number >1</span> <span class=hljs-number >2</span> <span class=hljs-number >3</span>)))</code></pre>
+<pre><code class=language-ocaml >f &#40;g &#40;h &#40;i 1 2 3&#41;&#41;&#41;</code></pre>
 <p>Is equivalent to</p>
-<pre><code class="haskell hljs"><span class=hljs-title >f</span> $ g $ h $ i <span class=hljs-number >1</span> <span class=hljs-number >2</span> <span class=hljs-number >3</span></code></pre>
+<pre><code class=language-haskell >f &#36; g &#36; h &#36; i 1 2 3</code></pre>
 <h3 id=toggle_between_pure_and_impure_environments_in_code_for_io ><a href="#toggle_between_pure_and_impure_environments_in_code_for_io" class=header-anchor >Toggle between pure and impure environments in code for I/O</a></h3>
 <p>You can choose to enable or disable impure primitives explicitely, inside an expression by wrapping it into the <code>pure</code> and <code>impure</code> statements. They must be followed by an expression. An expression contained in an <code>impure</code> statement is a computation that calls primitives that have side effects, such as direct memory access or I/O access.</p>
 <p>It is good practice to reduce the use of the <code>pure/impure</code> keywords as much as possible, and to avoid using it inside of function bodies. This means keeping your code as purely functional as you can.</p>
-<pre><code class="ocaml hljs"><span class=hljs-keyword >let</span> bad_function = <span class=hljs-keyword >fun</span> x -&gt;
-    impure (
-        <span class=hljs-keyword >let</span> mystring =
-        <span class=hljs-string >&quot;I am a bad impure function! Also: &quot;</span> ^ x <span class=hljs-keyword >in</span>
+<pre><code class=language-ocaml >let bad_function &#61; fun x -&gt;
+    impure &#40;
+        let mystring &#61;
+        &quot;I am a bad impure function&#33; Also: &quot; ^ x in
         print_endline mystring
-    );;
+    &#41;;;
 
-<span class=hljs-keyword >let</span> good_function = <span class=hljs-keyword >fun</span> x -&gt;
-    print_endline (<span class=hljs-string >&quot;I am a good function! Also: &quot;</span> ^ x) ;;
+let good_function &#61; fun x -&gt;
+    print_endline &#40;&quot;I am a good function&#33; Also: &quot; ^ x&#41; ;;
 
-bad_function <span class=hljs-string >&quot;hello!&quot;</span> ;;
-<span class=hljs-comment >(* The above statement is causing side effects but will not error*)</span>
+bad_function &quot;hello&#33;&quot; ;;
+&#40;* The above statement is causing side effects but will not error*&#41;
 
-good_function <span class=hljs-string >&quot;hello!&quot;</span> ;;
-<span class=hljs-comment >(* The above will error, because it is trying to execute
+good_function &quot;hello&#33;&quot; ;;
+&#40;* The above will error, because it is trying to execute
 an impure computation in a pure environment
-Here&#x27;s a good way of calling it *)</span>
-impure $ good_function <span class=hljs-string >&quot;hello!&quot;</span> ;;
+Here&#39;s a good way of calling it *&#41;
+impure &#36; good_function &quot;hello&#33;&quot; ;;
 
-<span class=hljs-comment >(* You can specify that you DO NOT want to compute impure
-expressions by using the pure statement *)</span>
-pure $ good_function <span class=hljs-string >&quot;henlo world!&quot;</span> ;;
-<span class=hljs-comment >(* The above will error because
-it contains an impure computation*)</span>
-pure $ bad_function <span class=hljs-string >&quot;ciao mondo!&quot;</span> ;;
-<span class=hljs-comment >(* The above will error because a pure context
-does not allow nesting an impure context inside *)</span></code></pre>
+&#40;* You can specify that you DO NOT want to compute impure
+expressions by using the pure statement *&#41;
+pure &#36; good_function &quot;henlo world&#33;&quot; ;;
+&#40;* The above will error because
+it contains an impure computation*&#41;
+pure &#36; bad_function &quot;ciao mondo&#33;&quot; ;;
+&#40;* The above will error because a pure context
+does not allow nesting an impure context inside *&#41;</code></pre>
 <p>A good way of structuring your code is keeping <code>pure/impure</code> statements as external from expressions as you can &#40;towards the top level&#41;. By default, the interpreter is in a <code>uncertain</code> state, it means that it will allow the execution of <code>impure</code> statements</p>
 <h3 id=function_pipes_reverse_composition ><a href="#function_pipes_reverse_composition" class=header-anchor >Function pipes &#40;reverse composition&#41;</a></h3>
 <p>You can redirect the result of a function to the first argument of another function using the <code>&gt;&#61;&gt;</code> operator.</p>
-<pre><code class="ocaml hljs"><span class=hljs-keyword >let</span> sum_and_add_one = (<span class=hljs-keyword >fun</span> x y -&gt; x + y) &gt;=&gt; (<span class=hljs-keyword >fun</span> z -&gt; z + <span class=hljs-number >1</span>) ;;
-sum_and_add_one <span class=hljs-number >2</span> <span class=hljs-number >3</span>
-<span class=hljs-comment >(* Will output 6, because 2 + 3 is piped into z + 1*)</span></code></pre>
+<pre><code class=language-ocaml >let sum_and_add_one &#61; &#40;fun x y -&gt; x &#43; y&#41; &gt;&#61;&gt; &#40;fun z -&gt; z &#43; 1&#41; ;;
+sum_and_add_one 2 3
+&#40;* Will output 6, because 2 &#43; 3 is piped into z &#43; 1*&#41;</code></pre>
 <p>Yields the same result as normal composition:</p>
-<pre><code class="ocaml hljs"><span class=hljs-keyword >let</span> my_sum = (<span class=hljs-keyword >fun</span> x y -&gt; x + y) ;;
-<span class=hljs-keyword >let</span> add_one = (<span class=hljs-keyword >fun</span> z -&gt; z + <span class=hljs-number >1</span>) ;;
-add_one (mysum <span class=hljs-number >2</span> <span class=hljs-number >3</span>)</code></pre>
+<pre><code class=language-ocaml >let my_sum &#61; &#40;fun x y -&gt; x &#43; y&#41; ;;
+let add_one &#61; &#40;fun z -&gt; z &#43; 1&#41; ;;
+add_one &#40;mysum 2 3&#41;</code></pre>
 <h3 id=dictionaries ><a href="#dictionaries" class=header-anchor >Dictionaries</a></h3>
-<pre><code class="ocaml hljs"><span class=hljs-keyword >let</span> n = {<span class=hljs-string >&quot;hola&quot;</span>: <span class=hljs-number >1</span>, <span class=hljs-string >&quot;mondo&quot;</span>: <span class=hljs-number >2</span>} ;;
-<span class=hljs-keyword >let</span> m = insert <span class=hljs-string >&quot;newkey&quot;</span> <span class=hljs-number >123</span> n ;;
-haskey <span class=hljs-string >&quot;newkey&quot;</span> m <span class=hljs-comment >(* =&gt; true *)</span>
-map (<span class=hljs-keyword >fun</span> x -&gt; x + <span class=hljs-number >1</span>) m
-<span class=hljs-comment >(* =&gt; {&quot;newkey&quot;:124, &quot;hola&quot;:2, &quot;mondo&quot;:3} *)</span></code></pre>
+<pre><code class=language-ocaml >let n &#61; &#123;&quot;hola&quot;: 1, &quot;mondo&quot;: 2&#125; ;;
+let m &#61; insert &quot;newkey&quot; 123 n ;;
+haskey &quot;newkey&quot; m &#40;* &#61;&gt; true *&#41;
+map &#40;fun x -&gt; x &#43; 1&#41; m
+&#40;* &#61;&gt; &#123;&quot;newkey&quot;:124, &quot;hola&quot;:2, &quot;mondo&quot;:3&#125; *&#41;</code></pre>
 </div>  </main>
   
     </div>  
     
     
-        
-
+        <script src="/libs/highlight/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();hljs.configure({tabReplace: '    '});</script>
 
     
     <footer>

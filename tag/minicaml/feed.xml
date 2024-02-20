@@ -9,14 +9,14 @@
 
   <channel>
     <title>
-      <![CDATA[  {{fd2rss website_title}}  ]]>
+      <![CDATA[  0x0f0f0f - Alessandro Cheli  ]]>
     </title>
-    <link> {{website_url}} </link>
+    <link> https://0x0f0f0f.github.io </link>
     <description>
-      <![CDATA[  {{fd2rss website_description}}  ]]>
+      <![CDATA[  Bits and bubbles and writings  ]]>
     </description>
     <atom:link
-      href="{{fd_rss_feed_url}}"
+      href="https://0x0f0f0f.github.io/feed.xml"
       rel="self"
       type="application/rss+xml" />
 
@@ -31,7 +31,7 @@
     <![CDATA[  Implementing optional lazy evaluation for minicaml  ]]>
   </description>  
     
-  <pubDate>Wed, 22 Sep 2021 00:00:00 +0000</pubDate>  
+  <pubDate>Tue, 20 Feb 2024 00:00:00 +0000</pubDate>  
   
   
   <atom:author>
@@ -50,7 +50,7 @@
     <![CDATA[  How to turn DNA into Music  ]]>
   </description>  
     
-  <pubDate>Wed, 22 Sep 2021 00:00:00 +0000</pubDate>  
+  <pubDate>Tue, 20 Feb 2024 00:00:00 +0000</pubDate>  
   
   
   <atom:author>
@@ -69,7 +69,7 @@
     <![CDATA[  minicaml, a didactical OCaml-like functional programming language.  ]]>
   </description>  
     
-  <pubDate>Wed, 22 Sep 2021 00:00:00 +0000</pubDate>  
+  <pubDate>Tue, 20 Feb 2024 00:00:00 +0000</pubDate>  
   
   
   <atom:author>
@@ -88,7 +88,7 @@
     <![CDATA[  New features in the minicaml programming language&#33;  ]]>
   </description>  
     
-  <pubDate>Wed, 22 Sep 2021 00:00:00 +0000</pubDate>  
+  <pubDate>Tue, 20 Feb 2024 00:00:00 +0000</pubDate>  
   
   
   <atom:author>

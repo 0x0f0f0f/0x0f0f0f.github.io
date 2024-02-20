@@ -1,8 +1,8 @@
 \begin{equation}
 \left[
 \begin{array}{cc}
-0.2812+0.8203\textit{i} & 0.6484+0.1553\textit{i} \\
-0.1504+0.8535\textit{i} & 0.04883+0.758\textit{i} \\
+0.208+0.2305\mathit{i} & 0.988+0.6606\mathit{i} \\
+0.708+0.744\mathit{i} & 0.0376+0.2285\mathit{i} \\
 \end{array}
 \right]
 \end{equation}
