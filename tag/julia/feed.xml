@@ -11,12 +11,12 @@
     <title>
       <![CDATA[  0x0f0f0f - Alessandro Cheli  ]]>
     </title>
-    <link> https://0x0f0f0f.github.io </link>
+    <link> https://chelidev </link>
     <description>
       <![CDATA[  Bits and bubbles and writings  ]]>
     </description>
     <atom:link
-      href="https://0x0f0f0f.github.io/feed.xml"
+      href="https://chelidev/feed.xml"
       rel="self"
       type="application/rss+xml" />
 
@@ -25,8 +25,8 @@
   <title>
     <![CDATA[  New Blog with Franklin.jl  ]]>
   </title>
-  <link> https://0x0f0f0f.github.io/blog/newblog/index.html </link>
-  <guid> https://0x0f0f0f.github.io/blog/newblog/index.html </guid>
+  <link> https://chelidev/blog/newblog/index.html </link>
+  <guid> https://chelidev/blog/newblog/index.html </guid>
   <description>
     <![CDATA[  New Blog with Franklin.jl  ]]>
   </description>  
@@ -44,8 +44,8 @@
   <title>
     <![CDATA[  Metatheory.jl and Julia Symbolics - GSOC 2021  ]]>
   </title>
-  <link> https://0x0f0f0f.github.io/blog/gsoc/index.html </link>
-  <guid> https://0x0f0f0f.github.io/blog/gsoc/index.html </guid>
+  <link> https://chelidev/blog/gsoc/index.html </link>
+  <guid> https://chelidev/blog/gsoc/index.html </guid>
   <description>
     <![CDATA[  Metatheory.jl and Julia Symbolics - GSOC 2021  ]]>
   </description>  

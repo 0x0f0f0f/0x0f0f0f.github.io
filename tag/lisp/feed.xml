@@ -11,12 +11,12 @@
     <title>
       <![CDATA[  0x0f0f0f - Alessandro Cheli  ]]>
     </title>
-    <link> https://0x0f0f0f.github.io </link>
+    <link> https://chelidev </link>
     <description>
       <![CDATA[  Bits and bubbles and writings  ]]>
     </description>
     <atom:link
-      href="https://0x0f0f0f.github.io/feed.xml"
+      href="https://chelidev/feed.xml"
       rel="self"
       type="application/rss+xml" />
 
@@ -25,8 +25,8 @@
   <title>
     <![CDATA[  Adding a macro parser to my Scheme implementation  ]]>
   </title>
-  <link> https://0x0f0f0f.github.io/blog/macroparser/index.html </link>
-  <guid> https://0x0f0f0f.github.io/blog/macroparser/index.html </guid>
+  <link> https://chelidev/blog/macroparser/index.html </link>
+  <guid> https://chelidev/blog/macroparser/index.html </guid>
   <description>
     <![CDATA[  Adding a macro parser to my Scheme implementation  ]]>
   </description>  
@@ -44,8 +44,8 @@
   <title>
     <![CDATA[  Learn Functional Programming by writing a Scheme in Haskell  ]]>
   </title>
-  <link> https://0x0f0f0f.github.io/blog/haskell-scheme/index.html </link>
-  <guid> https://0x0f0f0f.github.io/blog/haskell-scheme/index.html </guid>
+  <link> https://chelidev/blog/haskell-scheme/index.html </link>
+  <guid> https://chelidev/blog/haskell-scheme/index.html </guid>
   <description>
     <![CDATA[  Learn Functional Programming by writing a Scheme in Haskell  ]]>
   </description>  

@@ -11,12 +11,12 @@
     <title>
       <![CDATA[  0x0f0f0f - Alessandro Cheli  ]]>
     </title>
-    <link> https://0x0f0f0f.github.io </link>
+    <link> https://chelidev </link>
     <description>
       <![CDATA[  Bits and bubbles and writings  ]]>
     </description>
     <atom:link
-      href="https://0x0f0f0f.github.io/feed.xml"
+      href="https://chelidev/feed.xml"
       rel="self"
       type="application/rss+xml" />
 
@@ -25,8 +25,8 @@
   <title>
     <![CDATA[  The Telescope  ]]>
   </title>
-  <link> https://0x0f0f0f.github.io/blog/telescope-eng/index.html </link>
-  <guid> https://0x0f0f0f.github.io/blog/telescope-eng/index.html </guid>
+  <link> https://chelidev/blog/telescope-eng/index.html </link>
+  <guid> https://chelidev/blog/telescope-eng/index.html </guid>
   <description>
     <![CDATA[  telescope  ]]>
   </description>  
@@ -44,8 +44,8 @@
   <title>
     <![CDATA[  Il Telescopio &#40;Italian Version&#41;  ]]>
   </title>
-  <link> https://0x0f0f0f.github.io/blog/telescope-ita/index.html </link>
-  <guid> https://0x0f0f0f.github.io/blog/telescope-ita/index.html </guid>
+  <link> https://chelidev/blog/telescope-ita/index.html </link>
+  <guid> https://chelidev/blog/telescope-ita/index.html </guid>
   <description>
     <![CDATA[  telescopio  ]]>
   </description>  

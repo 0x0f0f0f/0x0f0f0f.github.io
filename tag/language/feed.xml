@@ -11,12 +11,12 @@
     <title>
       <![CDATA[  0x0f0f0f - Alessandro Cheli  ]]>
     </title>
-    <link> https://0x0f0f0f.github.io </link>
+    <link> https://chelidev </link>
     <description>
       <![CDATA[  Bits and bubbles and writings  ]]>
     </description>
     <atom:link
-      href="https://0x0f0f0f.github.io/feed.xml"
+      href="https://chelidev/feed.xml"
       rel="self"
       type="application/rss+xml" />
 
@@ -25,8 +25,8 @@
   <title>
     <![CDATA[  The Cube: a Short Story  ]]>
   </title>
-  <link> https://0x0f0f0f.github.io/blog/cube/index.html </link>
-  <guid> https://0x0f0f0f.github.io/blog/cube/index.html </guid>
+  <link> https://chelidev/blog/cube/index.html </link>
+  <guid> https://chelidev/blog/cube/index.html </guid>
   <description>
     <![CDATA[  The Cube: a Short Story  ]]>
   </description>  
@@ -44,8 +44,8 @@
   <title>
     <![CDATA[  On Mind, Language and Machines  ]]>
   </title>
-  <link> https://0x0f0f0f.github.io/blog/mindlanguagemachines/index.html </link>
-  <guid> https://0x0f0f0f.github.io/blog/mindlanguagemachines/index.html </guid>
+  <link> https://chelidev/blog/mindlanguagemachines/index.html </link>
+  <guid> https://chelidev/blog/mindlanguagemachines/index.html </guid>
   <description>
     <![CDATA[  On Mind, Language and Machines  ]]>
   </description>  

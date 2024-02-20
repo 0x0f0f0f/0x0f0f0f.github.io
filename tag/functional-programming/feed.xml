@@ -11,12 +11,12 @@
     <title>
       <![CDATA[  0x0f0f0f - Alessandro Cheli  ]]>
     </title>
-    <link> https://0x0f0f0f.github.io </link>
+    <link> https://chelidev </link>
     <description>
       <![CDATA[  Bits and bubbles and writings  ]]>
     </description>
     <atom:link
-      href="https://0x0f0f0f.github.io/feed.xml"
+      href="https://chelidev/feed.xml"
       rel="self"
       type="application/rss+xml" />
 
@@ -25,8 +25,8 @@
   <title>
     <![CDATA[  Implementing optional lazy evaluation for minicaml  ]]>
   </title>
-  <link> https://0x0f0f0f.github.io/blog/minicaml-lazy/index.html </link>
-  <guid> https://0x0f0f0f.github.io/blog/minicaml-lazy/index.html </guid>
+  <link> https://chelidev/blog/minicaml-lazy/index.html </link>
+  <guid> https://chelidev/blog/minicaml-lazy/index.html </guid>
   <description>
     <![CDATA[  Implementing optional lazy evaluation for minicaml  ]]>
   </description>  
@@ -44,8 +44,8 @@
   <title>
     <![CDATA[  How to turn DNA into Music  ]]>
   </title>
-  <link> https://0x0f0f0f.github.io/blog/dnamusic/index.html </link>
-  <guid> https://0x0f0f0f.github.io/blog/dnamusic/index.html </guid>
+  <link> https://chelidev/blog/dnamusic/index.html </link>
+  <guid> https://chelidev/blog/dnamusic/index.html </guid>
   <description>
     <![CDATA[  How to turn DNA into Music  ]]>
   </description>  
@@ -63,8 +63,8 @@
   <title>
     <![CDATA[  Adding a macro parser to my Scheme implementation  ]]>
   </title>
-  <link> https://0x0f0f0f.github.io/blog/macroparser/index.html </link>
-  <guid> https://0x0f0f0f.github.io/blog/macroparser/index.html </guid>
+  <link> https://chelidev/blog/macroparser/index.html </link>
+  <guid> https://chelidev/blog/macroparser/index.html </guid>
   <description>
     <![CDATA[  Adding a macro parser to my Scheme implementation  ]]>
   </description>  
@@ -82,8 +82,8 @@
   <title>
     <![CDATA[  minicaml, a didactical OCaml-like functional programming language.  ]]>
   </title>
-  <link> https://0x0f0f0f.github.io/blog/minicaml/index.html </link>
-  <guid> https://0x0f0f0f.github.io/blog/minicaml/index.html </guid>
+  <link> https://chelidev/blog/minicaml/index.html </link>
+  <guid> https://chelidev/blog/minicaml/index.html </guid>
   <description>
     <![CDATA[  minicaml, a didactical OCaml-like functional programming language.  ]]>
   </description>  
@@ -101,8 +101,8 @@
   <title>
     <![CDATA[  New features in the minicaml programming language&#33;  ]]>
   </title>
-  <link> https://0x0f0f0f.github.io/blog/minicaml-2/index.html </link>
-  <guid> https://0x0f0f0f.github.io/blog/minicaml-2/index.html </guid>
+  <link> https://chelidev/blog/minicaml-2/index.html </link>
+  <guid> https://chelidev/blog/minicaml-2/index.html </guid>
   <description>
     <![CDATA[  New features in the minicaml programming language&#33;  ]]>
   </description>  
@@ -120,8 +120,8 @@
   <title>
     <![CDATA[  Learn Functional Programming by writing a Scheme in Haskell  ]]>
   </title>
-  <link> https://0x0f0f0f.github.io/blog/haskell-scheme/index.html </link>
-  <guid> https://0x0f0f0f.github.io/blog/haskell-scheme/index.html </guid>
+  <link> https://chelidev/blog/haskell-scheme/index.html </link>
+  <guid> https://chelidev/blog/haskell-scheme/index.html </guid>
   <description>
     <![CDATA[  Learn Functional Programming by writing a Scheme in Haskell  ]]>
   </description>  
