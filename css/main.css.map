@@ -1,0 +1,13 @@
+{
+	"version": 3,
+	"file": "main.css",
+	"sourceRoot": "/home/sea/src/static/cheli.dev-new",
+	"sources": [
+		"assets/style/theme.sass"
+	],
+	"sourcesContent": [
+		"html {\n\tbackground-color: white; }\n\n.blog-content h1,\n.blog-content h2,\n.blog-content h3,\n.blog-content h4,\n.blog-content h5,\n.blog-content h6 {\n\tmargin-top: 2rem; }\n\n.blog-content ul {\n\tmargin-left: .75rem; }\n\n.blog-content li > p {\n\tmargin-top: 0.5rem; }\n"
+	],
+	"names": [],
+	"mappings": "AAAA,AAAA,IAAI,CAAC;EACJ,gBAAgB,EAAE,KAAK;CAAG;;AAE3B,AAAA,aAAa,CAAC,EAAE;AAChB,aAAa,CAAC,EAAE;AAChB,aAAa,CAAC,EAAE;AAChB,aAAa,CAAC,EAAE;AAChB,aAAa,CAAC,EAAE;AAChB,aAAa,CAAC,EAAE,CAAC;EAChB,UAAU,EAAE,IAAI;CAAG;;AAEpB,AAAA,aAAa,CAAC,EAAE,CAAC;EAChB,WAAW,EAAE,MAAM;CAAG;;AAEvB,AAAA,aAAa,CAAC,EAAE,GAAG,CAAC,CAAC;EACpB,UAAU,EAAE,MAAM;CAAG"
+}

@@ -1,9 +1,0 @@
-__site/
-.DS_Store
-franklin
-franklin.pub
-node_modules/
-.vscode/
-_libs/highlight/styles
-Manifest.toml
-package-lock.json

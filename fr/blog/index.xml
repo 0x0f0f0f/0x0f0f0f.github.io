@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Cultivez-vous sur ce qui compte pour vous. on Alessandro Cheli</title>
+    <link>//localhost:1313/fr/blog/</link>
+    <description>Recent content in Cultivez-vous sur ce qui compte pour vous. on Alessandro Cheli</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>fr</language>
+    <lastBuildDate>Thu, 25 Jun 2020 00:00:00 +0000</lastBuildDate>
+    <atom:link href="//localhost:1313/fr/blog/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Recette du Krabby Patty</title>
+      <link>//localhost:1313/fr/blog/krabby_patty/</link>
+      <pubDate>Thu, 25 Jun 2020 00:00:00 +0000</pubDate>
+      <guid>//localhost:1313/fr/blog/krabby_patty/</guid>
+      <description>Ingrédients : Pour 4 personnes :&#xA;Beaucoup d&amp;rsquo;amour 2 boîtes de chair de crabe 1 œuf légèrement battu Jus de 1/2 citron Chapelure 1 tomate Pain à hamburger Cornichons 1 Oignon 4 feuilles de salade Huile de friture Sel &amp;amp; poivre Pour la sauce :&#xA;Sauce Worcestershire Ketchup Moutarde Les étapes : Dans un saladier, battre 1 œuf puis ajouter la chair de crabe, la chapelure, le jus de citron, le sel et le poivre.</description>
+    </item>
+  </channel>
+</rss>
