@@ -2,18 +2,18 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Recipe on Alessandro Cheli</title>
-    <link>/tags/recipe/</link>
+    <link>http://localhost:1313/tags/recipe/</link>
     <description>Recent content in Recipe on Alessandro Cheli</description>
-    <generator>Hugo -- gohugo.io</generator>
+    <generator>Hugo</generator>
     <language>en</language>
     <lastBuildDate>Thu, 25 Jun 2020 00:00:00 +0000</lastBuildDate>
-    <atom:link href="/tags/recipe/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://localhost:1313/tags/recipe/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Krabby Patty recipe</title>
-      <link>/blog/krabby_patty/</link>
+      <link>http://localhost:1313/blog/mindlanguagemachines/</link>
       <pubDate>Thu, 25 Jun 2020 00:00:00 +0000</pubDate>
-      <guid>/blog/krabby_patty/</guid>
-      <description>Ingredients: For 4 people :&#xA;Lots of love 2 cans of crab meat 1 lightly beaten egg 1/2 lemon juice Breadcrumbs 1 tomato Hamburger bread Pickles 1 onion 4 salad leaves Frying oil Salt pepper For the sauce:&#xA;Worcestershire sauce Ketchup Mustard Steps : In a bowl, beat 1 egg then add the crabmeat, breadcrumbs, lemon juice, salt and pepper. Mix until you get a homogeneous consistency.&#xA;Then form crab pâté steaks and brown them in a pan with a drizzle of frying oil for 4 to 5 minutes on each side.</description>
+      <guid>http://localhost:1313/blog/mindlanguagemachines/</guid>
+      <description>I often find myself pondering on the incredible tool that evolution has gifted to the human species. In this essay, I will talk about many topics I find interesting in the past and future evolution of language and the intricate and incredible connections that biological processes yield with technology and mathematics.&#xA;The Big Leap What makes us different from other animals, such as intelligent mammals that are so genotypically and biologically close to us?</description>
     </item>
   </channel>
 </rss>

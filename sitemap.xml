@@ -2,14 +2,32 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://cheli.dev/about/</loc>
-  </url><url>
     <loc>https://cheli.dev/</loc>
+    <lastmod>2020-02-05T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://cheli.dev/categories/</loc>
+    <loc>https://cheli.dev/tags/language/</loc>
+    <lastmod>2020-02-05T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://cheli.dev/blog/</loc>
+    <loc>https://cheli.dev/tags/machines/</loc>
+    <lastmod>2020-02-05T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://cheli.dev/tags/mind/</loc>
+    <lastmod>2020-02-05T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://cheli.dev/blog/mindlanguagemachines/</loc>
+    <lastmod>2020-02-05T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://cheli.dev/tags/philosophy/</loc>
+    <lastmod>2020-02-05T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://cheli.dev/tags/</loc>
+    <lastmod>2020-02-05T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://cheli.dev/blog/</loc>
+    <lastmod>2020-02-05T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://cheli.dev/about/</loc>
+  </url><url>
+    <loc>https://cheli.dev/categories/</loc>
   </url>
 </urlset>
