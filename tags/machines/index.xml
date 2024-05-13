@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Machines on Alessandro Cheli</title>
+    <link>https://cheli.dev/tags/machines/</link>
+    <description>Recent content in Machines on Alessandro Cheli</description>
+    <generator>Hugo</generator>
+    <language>en</language>
+    <lastBuildDate>Wed, 05 Feb 2020 00:00:00 +0000</lastBuildDate>
+    <atom:link href="https://cheli.dev/tags/machines/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>On Mind, Language and Machines.</title>
+      <link>https://cheli.dev/blog/mindlanguagemachines/</link>
+      <pubDate>Wed, 05 Feb 2020 00:00:00 +0000</pubDate>
+      <guid>https://cheli.dev/blog/mindlanguagemachines/</guid>
+      <description>I often find myself pondering on the incredible tool that evolution has gifted to the human species. In this essay, I will talk about many topics I find interesting in the past and future evolution of language and the intricate and incredible connections that biological processes yield with technology and mathematics.&#xA;The Big Leap What makes us different from other animals, such as intelligent mammals that are so genotypically and biologically close to us?</description>
+    </item>
+  </channel>
+</rss>
